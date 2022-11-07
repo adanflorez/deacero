@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiLogin: "https://a44c-181-237-25-57.ngrok.io/oauth/login"
+  apiLogin: "http://a44c-181-237-25-57.ngrok.io/oauth/login"
 };
 
 /*

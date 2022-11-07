@@ -1,2 +1,20 @@
 <app-navbar></app-navbar>
+<ng-container *ngIf="loadingService.isLoading$ | async">
+  <div class="loading">
+    <div class="lds-default">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</ng-container>
 <router-outlet></router-outlet>
