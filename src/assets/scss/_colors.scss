@@ -1,0 +1,5 @@
+$custom-colors: (
+  "independence": $independence
+);
+
+$theme-colors: map-merge($custom-colors, $theme-colors);
