@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiLogin: "https://a44c-181-237-25-57.ngrok.io/oauth/login"
 };
 
 /*

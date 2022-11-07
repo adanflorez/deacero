@@ -12,39 +12,67 @@
     <div class="col-md-4">
       <div class="bg-bright-gray border border-secondary rounded p-3">
         <h4 class="text-independence text-center">BIENVENIDO</h4>
-        <div class="mb-3">
-          <label for="user" class="form-label">Usuario</label>
-          <input
-            type="text"
-            class="form-control"
-            id="user"
-            placeholder="Usuario"
+        <form [formGroup]="loginForm">
+          <div class="mb-3">
+            <label for="user" class="form-label">Usuario</label>
+            <input
+              type="text"
+              class="form-control"
+              id="user"
+              placeholder="Usuario"
+              formControlName="username"
+              [class.is-invalid]="
+                f['username'].invalid && f['username'].touched
+              "
+            />
+            <div
+              id="user"
+              class="invalid-feedback"
+              *ngIf="f['username'].invalid && f['username'].touched"
+            >
+              Correo no valido
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Contraseña"
+              formControlName="password"
+              [class.is-invalid]="
+                f['password'].invalid && f['password'].touched
+              "
+            />
+            <div
+              id="password"
+              class="invalid-feedback"
+              *ngIf="f['password'].invalid && f['password'].touched"
+            >
+              Campo obligatorio
+            </div>
+          </div>
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-primary"
+              type="button"
+              [disabled]="loginForm.invalid"
+              (click)="login()"
+            >
+              Entrar
+            </button>
+          </div>
+          <hr
+            class="bg-independence border-1 border-top border-independence w-100"
           />
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Contraseña</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            placeholder="Contraseña"
-          />
-        </div>
-
-        <div class="d-grid gap-2">
-          <button class="btn btn-primary" type="button">Entrar</button>
-        </div>
-        <hr
-          class="bg-independence border-1 border-top border-independence w-100"
-        />
-        <div class="d-flex flex-column mb-2">
-          <a class="ms-auto" routerLink="/forgot-password"
-            >Recuperar contraseña</a
-          >
-          <a class="ms-auto" routerLink="/forgot-password"
-            >Crear usuario</a
-          >
-        </div>
+          <div class="d-flex flex-column mb-2">
+            <a class="ms-auto" routerLink="/forgot-password"
+              >Recuperar contraseña</a
+            >
+            <a class="ms-auto" routerLink="/forgot-password">Crear usuario</a>
+          </div>
+        </form>
       </div>
     </div>
   </div>
