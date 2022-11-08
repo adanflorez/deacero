@@ -2,7 +2,7 @@
   <div class="d-flex flex-column align-items-center">
     <img
       class="img-fluid center-block mt-3"
-      style="width: 378px"
+      style="max-width: 378px"
       src="/assets/img/fundacion.png"
       alt="fundacion"
     />
@@ -11,6 +11,12 @@
   <div class="row justify-content-center">
     <div class="col-md-4">
       <div class="bg-bright-gray border border-secondary rounded p-3">
+        <app-alert
+          *ngIf="showAlert"
+          (close)="showAlert = false"
+          [message]="message"
+          [type]="alertType"
+        ></app-alert>
         <h4 class="text-independence text-center">BIENVENIDO</h4>
         <form [formGroup]="loginForm">
           <div class="mb-3">
@@ -26,7 +32,6 @@
               "
             />
             <div
-              id="user"
               class="invalid-feedback"
               *ngIf="f['username'].invalid && f['username'].touched"
             >
@@ -46,7 +51,6 @@
               "
             />
             <div
-              id="password"
               class="invalid-feedback"
               *ngIf="f['password'].invalid && f['password'].touched"
             >
@@ -67,10 +71,14 @@
             class="bg-independence border-1 border-top border-independence w-100"
           />
           <div class="d-flex flex-column mb-2">
-            <a class="ms-auto" routerLink="/forgot-password"
-              >Recuperar contraseña</a
+            <app-password-recovery class="ms-auto"></app-password-recovery>
+            <button
+              type="button"
+              class="btn btn-link ms-auto"
+              routerLink="/forgot-password"
             >
-            <a class="ms-auto" routerLink="/forgot-password">Crear usuario</a>
+              Crear usuario
+            </button>
           </div>
         </form>
       </div>
