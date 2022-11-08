@@ -6,9 +6,9 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { finalize, Observable } from 'rxjs';
-import { LoadingService } from '../loading.service';
+import { LoadingService } from '../services/loading.service';
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class LoadingInterceptor implements HttpInterceptor {
   private totalRequests = 0;
 
   constructor(private loadingService: LoadingService) {}
