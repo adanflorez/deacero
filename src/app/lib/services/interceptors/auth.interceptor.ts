@@ -11,7 +11,7 @@ import { LoadingService } from '../loading.service';
 export class AuthInterceptor implements HttpInterceptor {
   private totalRequests = 0;
 
-  constructor(private loadingService: LoadingService) { }
+  constructor(private loadingService: LoadingService) {}
 
   intercept(
     req: HttpRequest<any>,

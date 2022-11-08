@@ -1,3 +1,4 @@
+import { ValidateComponent } from './validate/validate.component';
 import { CallComponent } from './call/call.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'sign-up',
     component: SignupComponent,
+  },
+  {
+    path: 'validate',
+    component: ValidateComponent,
   },
 ];
 

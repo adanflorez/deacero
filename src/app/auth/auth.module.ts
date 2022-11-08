@@ -9,16 +9,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 import { SignupComponent } from './signup/signup.component';
 import { CallComponent } from './call/call.component';
+import { ValidateComponent } from './validate/validate.component';
 
 @NgModule({
-  declarations: [LoginComponent, PasswordRecoveryComponent, SignupComponent, CallComponent],
+  declarations: [
+    LoginComponent,
+    PasswordRecoveryComponent,
+    SignupComponent,
+    CallComponent,
+    ValidateComponent,
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     ModalModule,
-    AlertModule
+    AlertModule,
   ],
 })
 export class AuthModule {}

@@ -2,6 +2,7 @@ import { AlertType } from 'src/app/lib/enums/alert-type';
 import { AuthService } from 'src/app/lib/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,16 +15,17 @@ export class LoginComponent implements OnInit {
   message = '';
   alertType: AlertType = AlertType.Danger;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
+    localStorage.clear();
     this.initForm();
   }
 
   initForm() {
     this.loginForm = new FormGroup({
-      username: new FormControl('mschitiva68@gmail.com', Validators.email),
-      password: new FormControl('6221830535', Validators.required),
+      username: new FormControl('', Validators.email),
+      password: new FormControl('', Validators.required),
     });
   }
 
@@ -36,7 +38,8 @@ export class LoginComponent implements OnInit {
       .login(this.f['username'].value, this.f['password'].value)
       .subscribe({
         next: (res) => {
-          console.log(res);
+          localStorage.setItem('token', res.token);
+          this.router.navigate(['/home']);
         },
         error: (error) => {
           this.setAlert(
