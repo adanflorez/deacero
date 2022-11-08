@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="d-flex flex-column align-items-center">
+    <img
+      class="img-fluid center-block my-3"
+      style="max-width: 378px"
+      src="/assets/img/fundacion.png"
+      alt="fundacion"
+    />
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+        <app-alert
+          *ngIf="showAlert"
+          [type]="alertType"
+          [message]="alertMessage"
+          (close)="showAlert = false"
+        ></app-alert>
+        <h3 class="text-independence text-center">Pre - Registro de Acceso</h3>
+        <form [formGroup]="signupForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre OSC</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Nombre OSC"
+              formControlName="name"
+              [class.is-invalid]="f['name'].invalid && f['name'].touched"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="f['name'].invalid && f['name'].touched"
+            >
+              Campo obligatorio
+            </div>
+            <div class="small">- Razón social de la organización</div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Correo electrónico"
+              formControlName="email"
+              [class.is-invalid]="f['email'].invalid && f['email'].touched"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="f['email'].invalid && f['email'].touched"
+            >
+              Correo no valido
+            </div>
+            <div class="small">- El correo electronico de la organización</div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Contraseña"
+              formControlName="password"
+              [class.is-invalid]="
+                f['password'].invalid && f['password'].touched
+              "
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="f['password'].invalid && f['password'].touched"
+            >
+              Correo no valido
+            </div>
+          </div>
+          <div class="my-5 small">
+            <h6 class="text-uppercase">nota importante:</h6>
+            <p>
+              Para participar en nuestras convocatorias será importante contar
+              con un USUARIO y CONTRASEÑA que te enviaremos al correo
+              electrónico que nos estás brindando.
+            </p>
+            <p>
+              Favor de consultar tu bandeja de correo y acceder a la página de
+              acceso:
+              <a
+                href="https://convocatoriafundacion.deacero.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                >https://convocatoriafundacion.deacero.com</a
+              >
+            </p>
+          </div>
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-primary"
+              type="button"
+              [disabled]="signupForm.invalid"
+              (click)="signup()"
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
