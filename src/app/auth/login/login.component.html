@@ -71,7 +71,12 @@
             class="bg-independence border-1 border-top border-independence w-100"
           />
           <div class="d-flex flex-column mb-2">
-            <app-password-recovery class="ms-auto"></app-password-recovery>
+            <app-password-recovery
+              class="ms-auto"
+              (showAlert)="
+                setAlert($event.showAlert, $event.message, $event.alertType)
+              "
+            ></app-password-recovery>
             <button
               type="button"
               class="btn btn-link ms-auto"
