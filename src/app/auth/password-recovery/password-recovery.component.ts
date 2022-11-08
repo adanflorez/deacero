@@ -17,7 +17,7 @@ export class PasswordRecoveryComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl('mschitiva68@gmail.com', Validators.email),
+      email: new FormControl('', Validators.email),
     });
   }
 
@@ -39,6 +39,7 @@ export class PasswordRecoveryComponent implements OnInit {
           message: 'Hemos enviado un mensaje a tu correo',
           alertType: AlertType.Success,
         });
+        this.form.reset();
       },
       error: (error) => {
         this.showModal = false;
