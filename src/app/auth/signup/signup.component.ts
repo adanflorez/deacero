@@ -1,3 +1,4 @@
+import { AlertType } from 'src/app/lib/enums/alert-type';
 import { AuthService } from 'src/app/lib/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
@@ -8,6 +9,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent {
+  showAlert = false;
+  alertType: AlertType = AlertType.Danger;
+  alertMessage = '';
   signupForm!: FormGroup;
 
   constructor(private authService: AuthService) {
@@ -34,7 +38,9 @@ export class SignupComponent {
           console.log(res.data.token);
         },
         error: (error) => {
-          console.error(error.error.message);
+          this.showAlert = true;
+          this.alertMessage = error.error.message;
+          this.alertType = AlertType.Danger;
         },
       });
   }

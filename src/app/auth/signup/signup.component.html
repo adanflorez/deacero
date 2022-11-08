@@ -10,6 +10,12 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+        <app-alert
+          *ngIf="showAlert"
+          [type]="alertType"
+          [message]="alertMessage"
+          (close)="showAlert = false"
+        ></app-alert>
         <h3 class="text-independence text-center">Pre - Registro de Acceso</h3>
         <form [formGroup]="signupForm">
           <div class="mb-3">
@@ -56,7 +62,9 @@
               id="password"
               placeholder="Contraseña"
               formControlName="password"
-              [class.is-invalid]="f['password'].invalid && f['password'].touched"
+              [class.is-invalid]="
+                f['password'].invalid && f['password'].touched
+              "
             />
             <div
               class="invalid-feedback"
