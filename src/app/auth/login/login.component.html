@@ -67,10 +67,15 @@
             class="bg-independence border-1 border-top border-independence w-100"
           />
           <div class="d-flex flex-column mb-2">
-            <a class="ms-auto" routerLink="/forgot-password"
-              >Recuperar contraseña</a
+            <app-password-recovery class="ms-auto"></app-password-recovery>
+
+            <button
+              type="button"
+              class="btn btn-link ms-auto"
+              routerLink="/forgot-password"
             >
-            <a class="ms-auto" routerLink="/forgot-password">Crear usuario</a>
+              Crear usuario
+            </button>
           </div>
         </form>
       </div>
