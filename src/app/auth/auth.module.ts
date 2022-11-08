@@ -7,9 +7,10 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
+import { CallComponent } from './call/call.component';
 
 @NgModule({
-  declarations: [LoginComponent, PasswordRecoveryComponent],
+  declarations: [LoginComponent, PasswordRecoveryComponent, CallComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
