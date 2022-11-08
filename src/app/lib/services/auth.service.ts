@@ -9,8 +9,17 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   private apiLogin = environment.apiLogin;
   private apiUser = environment.apiUser;
+  private apiRegister = environment.apiRegister;
 
   constructor(private http: HttpClient) {}
+
+  signup(username: string, password: string, rfc: string) {
+    return this.http.post(this.apiRegister, {
+      correoElectronico: username,
+      rfc,
+      clave: password,
+    });
+  }
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(this.apiLogin, { username, password });
