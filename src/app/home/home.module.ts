@@ -1,17 +1,19 @@
+import { AlertModule } from './../shared/alert/alert.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
-
 @NgModule({
-  declarations: [
-    HomeComponent
-  ],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
-    HomeRoutingModule
-  ]
+    HomeRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AlertModule,
+  ],
 })
-export class HomeModule { }
+export class HomeModule {}
