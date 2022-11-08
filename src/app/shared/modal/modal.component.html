@@ -17,7 +17,7 @@
           data-bs-dismiss="modal"
           aria-label="Close"
           *ngIf="closable"
-          (click)="closeFormModal()"
+          (click)="close.emit()"
         ></button>
       </div>
       <ng-content selector="content"> </ng-content>
@@ -26,14 +26,14 @@
           type="button"
           class="btn btn-secondary"
           data-bs-dismiss="modal"
-          (click)="closeFormModal()"
+          (click)="close.emit()"
         >
           Cancelar
         </button>
         <button
           type="button"
           class="btn btn-primary"
-          (click)="closeFormModal()"
+          (click)="close.emit()"
         >
           {{ acceptLabel }}
         </button>

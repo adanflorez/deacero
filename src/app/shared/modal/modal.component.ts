@@ -35,7 +35,7 @@ export class ModalComponent implements OnInit, OnChanges {
     if (changes['show'].currentValue) {
       this.openFormModal();
     } else {
-      this.formModal.hide();
+      this.closeFormModal();
     }
   }
 
@@ -44,7 +44,6 @@ export class ModalComponent implements OnInit, OnChanges {
   }
 
   closeFormModal() {
-    this.close.emit();
     this.formModal.hide();
   }
 }
