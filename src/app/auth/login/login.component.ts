@@ -39,10 +39,18 @@ export class LoginComponent implements OnInit {
           console.log(res);
         },
         error: (error) => {
-          this.showAlert = true;
-          this.message = 'Usuario y/o contraseña erradas';
-          this.alertType = AlertType.Danger;
+          this.setAlert(
+            true,
+            'Usuario y/o contraseña erradas',
+            AlertType.Danger
+          );
         },
       });
+  }
+
+  setAlert(showAlert: boolean, message: string, alertType: AlertType) {
+    this.showAlert = showAlert;
+    this.message = message;
+    this.alertType = alertType;
   }
 }

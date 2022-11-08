@@ -1,6 +1,7 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/lib/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-password-recovery',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./password-recovery.component.scss'],
 })
 export class PasswordRecoveryComponent implements OnInit {
+  @Output() showAlert = new EventEmitter();
   showModal = false;
   form!: FormGroup;
 
@@ -15,7 +17,7 @@ export class PasswordRecoveryComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl('', Validators.email),
+      email: new FormControl('mschitiva68@gmail.com', Validators.email),
     });
   }
 
@@ -31,10 +33,21 @@ export class PasswordRecoveryComponent implements OnInit {
     if (this.form.invalid) return;
     this.authService.passwordRecovery(this.f['email'].value).subscribe({
       next: (res) => {
-        console.log(res);
+        this.showModal = false;
+        this.showAlert.emit({
+          showAlert: true,
+          message: 'Hemos enviado un mensaje a tu correo',
+          alertType: AlertType.Success,
+        });
       },
       error: (error) => {
-        console.error(error);
+        this.showModal = false;
+        this.showAlert.emit({
+          showAlert: true,
+          message:
+            'El correo no esta registrado, por favor verifica la información.',
+          alertType: AlertType.Danger,
+        });
       },
     });
   }
