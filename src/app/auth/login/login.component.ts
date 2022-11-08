@@ -1,3 +1,4 @@
+import { AlertType } from 'src/app/lib/enums/alert-type';
 import { AuthService } from 'src/app/lib/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -9,6 +10,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  showAlert = false;
+  message = '';
+  alertType: AlertType = AlertType.Danger;
 
   constructor(private authService: AuthService) {}
 
@@ -30,8 +34,15 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService
       .login(this.f['username'].value, this.f['password'].value)
-      .subscribe((res) => {
-        console.log(res);
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+        error: (error) => {
+          this.showAlert = true;
+          this.message = 'Usuario y/o contraseña erradas';
+          this.alertType = AlertType.Danger;
+        },
       });
   }
 }
