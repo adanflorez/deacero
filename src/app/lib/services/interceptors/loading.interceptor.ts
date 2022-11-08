@@ -8,7 +8,7 @@ import {
 import { finalize, Observable } from 'rxjs';
 import { LoadingService } from '../loading.service';
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class LoadingInterceptor implements HttpInterceptor {
   private totalRequests = 0;
 
   constructor(private loadingService: LoadingService) {}
