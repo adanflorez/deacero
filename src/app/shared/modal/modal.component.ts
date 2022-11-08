@@ -21,6 +21,7 @@ export class ModalComponent implements OnInit, OnChanges {
   @Input() show = false;
   @Input() acceptLabel = 'Aceptar';
   @Output() close = new EventEmitter();
+  @Output() confirm = new EventEmitter();
   formModal: any;
 
   constructor() {}
@@ -44,6 +45,6 @@ export class ModalComponent implements OnInit, OnChanges {
   }
 
   closeFormModal() {
-    this.formModal.hide();
+    this.formModal?.hide();
   }
 }
