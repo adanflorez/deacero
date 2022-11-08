@@ -1,3 +1,4 @@
+import { AlertModule } from './../shared/alert/alert.module';
 import { ModalModule } from './../shared/modal/modal.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,6 +16,7 @@ import { PasswordRecoveryComponent } from './password-recovery/password-recovery
     ReactiveFormsModule,
     FormsModule,
     ModalModule,
+    AlertModule
   ],
 })
 export class AuthModule {}
