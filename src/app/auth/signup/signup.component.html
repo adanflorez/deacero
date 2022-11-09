@@ -56,21 +56,47 @@
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">Contraseña</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              placeholder="Contraseña"
-              formControlName="password"
-              [class.is-invalid]="
-                f['password'].invalid && f['password'].touched
-              "
-            />
+            <div class="input-group">
+              <input
+                [type]="passwordFieldType"
+                class="form-control"
+                id="password"
+                placeholder="Contraseña"
+                formControlName="password"
+                [class.is-invalid]="
+                  f['password'].invalid && f['password'].touched
+                "
+                aria-describedby="button-addon2"
+              />
+              <button
+                class="btn btn-secondary"
+                type="button"
+                (click)="showHidePassword()"
+              >
+                <img
+                  height="20"
+                  [src]="'/assets/icons/' + passwordButonnIcon + '.png'"
+                  alt="lock"
+                />
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+                data-bs-html="true"
+                title="<p class='text-start'>La contraseña debe contener: <br /><br />- Mínimo 8 caracteres alfanuméricos<br /> - Al menos una letra mayúscula</p>"
+                id="button-addon2"
+              >
+                ?
+              </button>
+            </div>
             <div
-              class="invalid-feedback"
+              class="text-danger small"
               *ngIf="f['password'].invalid && f['password'].touched"
             >
-              Correo no valido
+              Contraseña no válida
             </div>
           </div>
           <div class="my-5 small">
