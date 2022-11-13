@@ -1,7 +1,7 @@
-import { AlertType } from 'src/app/lib/enums/alert-type';
-import { UserService } from './../lib/services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlertType } from 'src/app/lib/enums/alert-type';
+import { UserService } from 'src/app/lib/services/user.service';
 
 @Component({
   selector: 'app-home',

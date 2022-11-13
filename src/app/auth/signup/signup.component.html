@@ -56,7 +56,7 @@
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">Contraseña</label>
-            <div class="input-group">
+            <div class="input-group has-validation">
               <input
                 [type]="passwordFieldType"
                 class="form-control"
@@ -82,14 +82,14 @@
 
               <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-default"
                 data-bs-toggle="tooltip"
                 data-bs-placement="left"
                 data-bs-html="true"
                 title="<p class='text-start'>La contraseña debe contener: <br /><br />- Mínimo 8 caracteres alfanuméricos<br /> - Al menos una letra mayúscula</p>"
                 id="button-addon2"
               >
-                ?
+                <span class="badge rounded-pill bg-dark">?</span>
               </button>
             </div>
             <div
