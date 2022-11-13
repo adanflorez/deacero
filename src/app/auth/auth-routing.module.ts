@@ -1,3 +1,4 @@
+import { AuthComponent } from './auth.component';
 import { ValidateComponent } from './validate/validate.component';
 import { CallComponent } from './call/call.component';
 import { SignupComponent } from './signup/signup.component';
@@ -8,19 +9,30 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
-  },
-  {
-    path: 'call',
-    component: CallComponent,
-  },
-  {
-    path: 'sign-up',
-    component: SignupComponent,
-  },
-  {
-    path: 'validate',
-    component: ValidateComponent,
+    component: AuthComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+      },
+      {
+        path: 'call',
+        component: CallComponent,
+      },
+      {
+        path: 'sign-up',
+        component: SignupComponent,
+      },
+      {
+        path: 'validate',
+        component: ValidateComponent,
+      },
+    ],
   },
 ];
 

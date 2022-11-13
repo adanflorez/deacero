@@ -1,3 +1,4 @@
+import { NavbarModule } from './../shared/navbar/navbar.module';
 import { AlertModule } from './../shared/alert/alert.module';
 import { ModalModule } from './../shared/modal/modal.module';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,7 @@ import { PasswordRecoveryComponent } from './password-recovery/password-recovery
 import { SignupComponent } from './signup/signup.component';
 import { CallComponent } from './call/call.component';
 import { ValidateComponent } from './validate/validate.component';
+import { AuthComponent } from './auth.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { ValidateComponent } from './validate/validate.component';
     SignupComponent,
     CallComponent,
     ValidateComponent,
+    AuthComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +29,7 @@ import { ValidateComponent } from './validate/validate.component';
     FormsModule,
     ModalModule,
     AlertModule,
+    NavbarModule
   ],
 })
 export class AuthModule {}
