@@ -42,6 +42,19 @@ export class HomeComponent {
         Validators.pattern(ONLY_NUMBERS_PATTERN),
         Validators.maxLength(12),
       ]),
+      founder: new FormControl('', Validators.required),
+      generalManagement: new FormControl('', Validators.required),
+      operationalManagement: new FormControl('', Validators.required),
+      legalRepresentative: new FormControl('', Validators.required),
+      legalRepresentativeEmail: new FormControl('', [
+        Validators.required,
+        Validators.pattern(MULTIPLE_EMAIL_PATTERN),
+      ]),
+      operationsStartDate: new FormControl('', Validators.required),
+      incorporationsStartDate: new FormControl('', Validators.required),
+      mision: new FormControl('', Validators.required),
+      vision: new FormControl('', Validators.required),
+      ethicalValues: new FormControl('', Validators.required),
     });
   }
 
