@@ -1,3 +1,4 @@
+import { FormErrorModule } from './../../shared/form-error/form-error.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -17,6 +18,7 @@ import { AlertModule } from 'src/app/shared/alert/alert.module';
     ReactiveFormsModule,
     FormsModule,
     AlertModule,
+    FormErrorModule
   ]
 })
 export class HomeModule { }
