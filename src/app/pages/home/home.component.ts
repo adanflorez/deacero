@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  MULTIPLE_EMAIL_PATTERN,
+  ONLY_NUMBERS_PATTERN,
+} from 'src/app/lib/constants';
 import { AlertType } from 'src/app/lib/enums/alert-type';
 import { UserService } from 'src/app/lib/services/user.service';
 
@@ -8,7 +12,7 @@ import { UserService } from 'src/app/lib/services/user.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   form: FormGroup;
   showAlert = false;
   alertType: AlertType = AlertType.Danger;
@@ -16,15 +20,34 @@ export class HomeComponent implements OnInit {
 
   constructor(private userService: UserService) {
     this.form = new FormGroup({
+      tradename: new FormControl('', Validators.required),
+      businessname: new FormControl('', Validators.required),
+      rfc: new FormControl('', Validators.required),
+      phone: new FormControl('', [
+        Validators.required,
+        Validators.pattern(ONLY_NUMBERS_PATTERN),
+        Validators.maxLength(12),
+      ]),
+      emails: new FormControl('', [
+        Validators.required,
+        Validators.pattern(MULTIPLE_EMAIL_PATTERN),
+      ]),
       name: new FormControl('', Validators.required),
+      responsibleEmail: new FormControl('', [
+        Validators.required,
+        Validators.pattern(MULTIPLE_EMAIL_PATTERN),
+      ]),
+      cellphone: new FormControl('', [
+        Validators.required,
+        Validators.pattern(ONLY_NUMBERS_PATTERN),
+        Validators.maxLength(12),
+      ]),
     });
   }
 
   get f() {
     return this.form.controls;
   }
-
-  ngOnInit(): void {}
 
   update() {
     this.userService.updateOSC(this.f['name'].value).subscribe({
