@@ -6,11 +6,13 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AlertModule } from 'src/app/shared/alert/alert.module';
+import { ProductTableComponent } from './components/product-table/product-table.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    ProductTableComponent
   ],
   imports: [
     CommonModule,
