@@ -1,597 +1,547 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
-        <app-alert
-          *ngIf="showAlert"
-          [type]="alertType"
-          [message]="alertMessage"
-          (close)="showAlert = false"
-        ></app-alert>
-        <form [formGroup]="form">
-          <h2>Datos generales</h2>
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <div class="mb-3">
-                <label for="tradename" class="form-label"
-                  >Nombre comercial</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="tradename"
-                  placeholder="Nombre comercial"
-                  formControlName="tradename"
-                  [class.is-invalid]="
-                    f['tradename'].invalid && f['tradename'].touched
-                  "
-                />
-                <app-form-error [control]="f['tradename']"></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-4">
-              <div class="mb-3">
-                <label for="businessname" class="form-label"
-                  >Razón social</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="businessname"
-                  placeholder="Razón social"
-                  formControlName="businessname"
-                  [class.is-invalid]="
-                    f['businessname'].invalid && f['businessname'].touched
-                  "
-                />
-                <app-form-error [control]="f['businessname']"></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-4">
-              <div class="mb-3">
-                <label for="rfc" class="form-label">RFC</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="rfc"
-                  placeholder="RFC"
-                  formControlName="rfc"
-                  [class.is-invalid]="f['rfc'].invalid && f['rfc'].touched"
-                  (change)="validateRFC($event)"
-                />
-                <app-form-error [control]="f['rfc']"></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="phone" class="form-label">Teléfono</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="phone"
-                  placeholder="Teléfono"
-                  formControlName="phone"
-                  [class.is-invalid]="f['phone'].invalid && f['phone'].touched"
-                />
-                <app-form-error
-                  [control]="f['phone']"
-                  [errors]="{
-                    pattern: 'Solo debe ingresar números',
-                    maxLength: 'Máximo 12 caracteres'
-                  }"
-                ></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="emails" class="form-label">E-mail(s)</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="emails"
-                  placeholder="Usa ; ó , para separar los correos electrónicos"
-                  formControlName="emails"
-                  [class.is-invalid]="
-                    f['emails'].invalid && f['emails'].touched
-                  "
-                />
-                <app-form-error
-                  [control]="f['emails']"
-                  [errors]="{ pattern: 'Correos no válidos' }"
-                ></app-form-error>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <h2>Datos del responsable de procuración de fondos</h2>
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <div class="mb-3">
-                <label for="name" class="form-label">Nombre</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  placeholder="Nombre"
-                  formControlName="name"
-                  [class.is-invalid]="f['name'].invalid && f['name'].touched"
-                />
-                <app-form-error [control]="f['name']"></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-4">
-              <div class="mb-3">
-                <label for="name" class="form-label"
-                  >E-mail del responsable</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="responsibleEmail"
-                  placeholder="Usa ; ó , para separar los correos electrónicos"
-                  formControlName="responsibleEmail"
-                  [class.is-invalid]="
-                    f['responsibleEmail'].invalid &&
-                    f['responsibleEmail'].touched
-                  "
-                />
-                <app-form-error
-                  [control]="f['responsibleEmail']"
-                  [errors]="{ pattern: 'Correos no válidos' }"
-                ></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-4">
-              <div class="mb-3">
-                <label for="cellphone" class="form-label">Celular</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="cellphone"
-                  placeholder="Celular"
-                  formControlName="cellphone"
-                  [class.is-invalid]="
-                    f['cellphone'].invalid && f['cellphone'].touched
-                  "
-                />
-                <app-form-error
-                  [control]="f['cellphone']"
-                  [errors]="{
-                    pattern: 'Solo debe ingresar números',
-                    maxLength: 'Máximo 12 caracteres'
-                  }"
-                ></app-form-error>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <h2>Información organizacional</h2>
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <div class="mb-3">
-                <label for="founder" class="form-label">Fundador(a)</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="founder"
-                  placeholder="Fundador(a)"
-                  formControlName="founder"
-                  [class.is-invalid]="
-                    f['founder'].invalid && f['founder'].touched
-                  "
-                />
-                <app-form-error [control]="f['founder']"></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-4">
-              <div class="mb-3">
-                <label for="generalManagement" class="form-label"
-                  >Dirección general</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="generalManagement"
-                  placeholder="Dirección general"
-                  formControlName="generalManagement"
-                  [class.is-invalid]="
-                    f['generalManagement'].invalid &&
-                    f['generalManagement'].touched
-                  "
-                />
-                <app-form-error
-                  [control]="f['generalManagement']"
-                ></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-4">
-              <div class="mb-3">
-                <label for="operationalManagement" class="form-label"
-                  >Dirección operativa</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="operationalManagement"
-                  placeholder="Dirección operativa"
-                  formControlName="operationalManagement"
-                  [class.is-invalid]="
-                    f['operationalManagement'].invalid &&
-                    f['operationalManagement'].touched
-                  "
-                />
-                <app-form-error
-                  [control]="f['operationalManagement']"
-                ></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="legalRepresentative" class="form-label"
-                  >Representante legal</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="legalRepresentative"
-                  placeholder="Representante legal"
-                  formControlName="legalRepresentative"
-                  [class.is-invalid]="
-                    f['legalRepresentative'].invalid &&
-                    f['legalRepresentative'].touched
-                  "
-                />
-                <app-form-error
-                  [control]="f['legalRepresentative']"
-                ></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="legalRepresentativeEmail" class="form-label"
-                  >E-mail del representante legal</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="legalRepresentativeEmail"
-                  placeholder="Usa ; ó , para separar los correos electrónicos"
-                  formControlName="legalRepresentativeEmail"
-                  [class.is-invalid]="
-                    f['legalRepresentativeEmail'].invalid &&
-                    f['legalRepresentativeEmail'].touched
-                  "
-                />
-                <app-form-error
-                  [control]="f['legalRepresentativeEmail']"
-                  [errors]="{ pattern: 'Correos no válidos' }"
-                ></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="operationsStartDate" class="form-label"
-                  >Fecha de inicio de operaciones</label
-                >
-                <input
-                  type="date"
-                  class="form-control"
-                  id="operationsStartDate"
-                  placeholder="Usa ; ó , para separar los correos electrónicos"
-                  formControlName="operationsStartDate"
-                  [class.is-invalid]="
-                    f['operationsStartDate'].invalid &&
-                    f['operationsStartDate'].touched
-                  "
-                />
-                <app-form-error
-                  [control]="f['operationsStartDate']"
-                ></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="incorporationsStartDate" class="form-label"
-                  >Fecha de constitución</label
-                >
-                <input
-                  type="date"
-                  class="form-control"
-                  id="incorporationsStartDate"
-                  placeholder="Usa ; ó , para separar los correos electrónicos"
-                  formControlName="incorporationsStartDate"
-                  [class.is-invalid]="
-                    f['incorporationsStartDate'].invalid &&
-                    f['incorporationsStartDate'].touched
-                  "
-                />
-                <app-form-error
-                  [control]="f['incorporationsStartDate']"
-                ></app-form-error>
-              </div>
-            </div>
-
-            <div class="col-12 col-md-4">
-              <div class="mb-3">
-                <label for="mision" class="form-label">Misión</label>
-                <textarea
-                  class="form-control"
-                  id="mision"
-                  rows="3"
-                  formControlName="mision"
-                  [class.is-invalid]="
-                    f['mision'].invalid && f['mision'].touched
-                  "
-                ></textarea>
-                <app-form-error [control]="f['mision']"></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-4">
-              <div class="mb-3">
-                <label for="vision" class="form-label">Visión</label>
-                <textarea
-                  class="form-control"
-                  id="vision"
-                  rows="3"
-                  formControlName="vision"
-                  [class.is-invalid]="
-                    f['vision'].invalid && f['vision'].touched
-                  "
-                ></textarea>
-                <app-form-error [control]="f['vision']"></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-4">
-              <div class="mb-3">
-                <label for="ethicalValues" class="form-label">Valores</label>
-                <textarea
-                  class="form-control"
-                  id="ethicalValues"
-                  rows="3"
-                  formControlName="ethicalValues"
-                  [class.is-invalid]="
-                    f['ethicalValues'].invalid && f['ethicalValues'].touched
-                  "
-                ></textarea>
-                <app-form-error [control]="f['ethicalValues']"></app-form-error>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <h2>Sostenibilidad y alianzas estratégicas</h2>
-          <div class="row">
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="alliances" class="form-label"
-                  >En caso de pertenecer a alguna red de alianzas, escribe en
-                  cuáles.</label
-                >
-                <textarea
-                  class="form-control"
-                  id="alliances"
-                  rows="3"
-                  formControlName="alliances"
-                  [class.is-invalid]="
-                    f['alliances'].invalid && f['alliances'].touched
-                  "
-                ></textarea>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="courses" class="form-label"
-                  >Enlista los cursos de actualización a los que han asistido en
-                  el último año.
-                </label>
-                <textarea
-                  class="form-control"
-                  id="courses"
-                  rows="3"
-                  formControlName="courses"
-                  [class.is-invalid]="
-                    f['courses'].invalid && f['courses'].touched
-                  "
-                ></textarea>
-                <app-form-error [control]="f['courses']"></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="issuesToStrengthen" class="form-label"
-                  >Selecciona, ¿En cuáles de los siguientes temas te gustaría
-                  fortalecerte como organización?
-                </label>
-                <select
-                  class="form-select"
-                  aria-label="Selecciona, ¿En cuáles de los siguientes temas te gustaría
-                  fortalecerte como organización?"
-                  formControlName="issuesToStrengthen"
-                  [class.is-invalid]="
-                    f['issuesToStrengthen'].invalid &&
-                    f['issuesToStrengthen'].touched
-                  "
-                >
-                  <option value="" selected>Click para seleccionar</option>
-                  <option value="1">Gobernanza</option>
-                  <option value="2">Obligaciones fiscales</option>
-                  <option value="3">Causales de revocación</option>
-                  <option value="4">Desarrollo Institucional</option>
-                  <option value="5">Procuración de fondos</option>
-                  <option value="6">
-                    Creación de proyectos con impacto social
-                  </option>
-                  <option value="7">
-                    Generación de reportes de impacto social
-                  </option>
-                  <option value="8">Medición de impacto social</option>
-                  <option value="9">Creación de matriz de indicadores</option>
-                  <option value="10">Intervenciones efectivas</option>
-                  <option value="11">Otros</option>
-                </select>
-                <app-form-error
-                  [control]="f['issuesToStrengthen']"
-                ></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="whichTopics" class="form-label"
-                  >¿Cuáles Temas?
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="whichTopics"
-                  placeholder="¿Cuáles Temas?"
-                  formControlName="whichTopics"
-                  [class.is-invalid]="
-                    f['whichTopics'].invalid && f['whichTopics'].touched
-                  "
-                />
-                <app-form-error [control]="f['whichTopics']"></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="flexCheckDefault"
-                    formControlName="previousDonations"
-                  />
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Ha recibido previamente una donación de Fundación DEACERO
-                    A.C.
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="col-12">
-              <app-donations-table
-                *ngIf="showDonationsTable"
-              ></app-donations-table>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="mb-3">
-              <label for="strategicAlliances" class="form-label"
-                >En fundación DEACERO A.C., buscamos generar alianzas
-                estratégicas (ganar/ganar) para beneficio mutuo. A continuación,
-                enlista por lo menos 5 actividades específicas que permitan
-                lograrlo.</label
-              >
-              <textarea
-                class="form-control"
-                id="strategicAlliances"
-                rows="3"
-                formControlName="strategicAlliances"
-                [class.is-invalid]="
-                  f['strategicAlliances'].invalid &&
-                  f['strategicAlliances'].touched
-                "
-              ></textarea>
-              <app-form-error
-                [control]="f['strategicAlliances']"
-              ></app-form-error>
-            </div>
-          </div>
-          <div class="col-12">
-            <app-product-table></app-product-table>
-          </div>
-          <hr />
-          <h2>Trabajo digno</h2>
-          <div class="row">
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="whyYourOSC" class="form-label"
-                  >¿Por qué las personas quieren trabajar en tu OSC?
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="whyYourOSC"
-                  formControlName="whyYourOSC"
-                  [class.is-invalid]="
-                    f['whyYourOSC'].invalid && f['whyYourOSC'].touched
-                  "
-                />
-                <app-form-error [control]="f['whyYourOSC']"></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="whatMakesYouDifferent" class="form-label"
-                  >¿Qué te hace diferente de quienes ofrecen una propuesta de
-                  valor similar a la tuya?
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="whatMakesYouDifferent"
-                  formControlName="whatMakesYouDifferent"
-                  [class.is-invalid]="
-                    f['whatMakesYouDifferent'].invalid &&
-                    f['whatMakesYouDifferent'].touched
-                  "
-                />
-                <app-form-error
-                  [control]="f['whatMakesYouDifferent']"
-                ></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="benefitsSystem" class="form-label"
-                  >Describe el sistema de prestaciones y compensaciones para
-                  todo el personal.
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="benefitsSystem"
-                  formControlName="benefitsSystem"
-                  [class.is-invalid]="
-                    f['benefitsSystem'].invalid && f['benefitsSystem'].touched
-                  "
-                />
-                <app-form-error
-                  [control]="f['benefitsSystem']"
-                ></app-form-error>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="mb-3">
-                <label for="personalGrowth" class="form-label"
-                  >¿Cuáles opciones de crecimiento personal ofreces a tus
-                  colaboradores?
-                </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="personalGrowth"
-                  formControlName="personalGrowth"
-                  [class.is-invalid]="
-                    f['personalGrowth'].invalid && f['personalGrowth'].touched
-                  "
-                />
-                <app-form-error
-                  [control]="f['personalGrowth']"
-                ></app-form-error>
-              </div>
-            </div>
-          </div>
-
-          <button
-            class="btn btn-primary"
-            type="button"
-            [disabled]="form.invalid"
-            (click)="update()"
-          >
-            Enviar
-          </button>
-        </form>
+<div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  <app-alert
+    *ngIf="showAlert"
+    [type]="alertType"
+    [message]="alertMessage"
+    (close)="showAlert = false"
+  ></app-alert>
+  <form [formGroup]="form">
+    <h2>Datos generales</h2>
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <label for="tradename" class="form-label">Nombre comercial</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tradename"
+            placeholder="Nombre comercial"
+            formControlName="tradename"
+            [class.is-invalid]="
+              f['tradename'].invalid && f['tradename'].touched
+            "
+          />
+          <app-form-error [control]="f['tradename']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <label for="businessname" class="form-label">Razón social</label>
+          <input
+            type="text"
+            class="form-control"
+            id="businessname"
+            placeholder="Razón social"
+            formControlName="businessname"
+            [class.is-invalid]="
+              f['businessname'].invalid && f['businessname'].touched
+            "
+          />
+          <app-form-error [control]="f['businessname']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <label for="rfc" class="form-label">RFC</label>
+          <input
+            type="text"
+            class="form-control"
+            id="rfc"
+            placeholder="RFC"
+            formControlName="rfc"
+            [class.is-invalid]="f['rfc'].invalid && f['rfc'].touched"
+            (change)="validateRFC($event)"
+          />
+          <app-form-error [control]="f['rfc']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="phone" class="form-label">Teléfono</label>
+          <input
+            type="text"
+            class="form-control"
+            id="phone"
+            placeholder="Teléfono"
+            formControlName="phone"
+            [class.is-invalid]="f['phone'].invalid && f['phone'].touched"
+          />
+          <app-form-error
+            [control]="f['phone']"
+            [errors]="{
+              pattern: 'Solo debe ingresar números',
+              maxLength: 'Máximo 12 caracteres'
+            }"
+          ></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="emails" class="form-label">E-mail(s)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="emails"
+            placeholder="Usa ; ó , para separar los correos electrónicos"
+            formControlName="emails"
+            [class.is-invalid]="f['emails'].invalid && f['emails'].touched"
+          />
+          <app-form-error
+            [control]="f['emails']"
+            [errors]="{ pattern: 'Correos no válidos' }"
+          ></app-form-error>
+        </div>
       </div>
     </div>
-  </div>
+    <hr />
+    <h2>Datos del responsable de procuración de fondos</h2>
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Nombre"
+            formControlName="name"
+            [class.is-invalid]="f['name'].invalid && f['name'].touched"
+          />
+          <app-form-error [control]="f['name']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <label for="name" class="form-label">E-mail del responsable</label>
+          <input
+            type="text"
+            class="form-control"
+            id="responsibleEmail"
+            placeholder="Usa ; ó , para separar los correos electrónicos"
+            formControlName="responsibleEmail"
+            [class.is-invalid]="
+              f['responsibleEmail'].invalid && f['responsibleEmail'].touched
+            "
+          />
+          <app-form-error
+            [control]="f['responsibleEmail']"
+            [errors]="{ pattern: 'Correos no válidos' }"
+          ></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <label for="cellphone" class="form-label">Celular</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cellphone"
+            placeholder="Celular"
+            formControlName="cellphone"
+            [class.is-invalid]="
+              f['cellphone'].invalid && f['cellphone'].touched
+            "
+          />
+          <app-form-error
+            [control]="f['cellphone']"
+            [errors]="{
+              pattern: 'Solo debe ingresar números',
+              maxLength: 'Máximo 12 caracteres'
+            }"
+          ></app-form-error>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <h2>Información organizacional</h2>
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <label for="founder" class="form-label">Fundador(a)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="founder"
+            placeholder="Fundador(a)"
+            formControlName="founder"
+            [class.is-invalid]="f['founder'].invalid && f['founder'].touched"
+          />
+          <app-form-error [control]="f['founder']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <label for="generalManagement" class="form-label"
+            >Dirección general</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="generalManagement"
+            placeholder="Dirección general"
+            formControlName="generalManagement"
+            [class.is-invalid]="
+              f['generalManagement'].invalid && f['generalManagement'].touched
+            "
+          />
+          <app-form-error [control]="f['generalManagement']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <label for="operationalManagement" class="form-label"
+            >Dirección operativa</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="operationalManagement"
+            placeholder="Dirección operativa"
+            formControlName="operationalManagement"
+            [class.is-invalid]="
+              f['operationalManagement'].invalid &&
+              f['operationalManagement'].touched
+            "
+          />
+          <app-form-error
+            [control]="f['operationalManagement']"
+          ></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="legalRepresentative" class="form-label"
+            >Representante legal</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="legalRepresentative"
+            placeholder="Representante legal"
+            formControlName="legalRepresentative"
+            [class.is-invalid]="
+              f['legalRepresentative'].invalid &&
+              f['legalRepresentative'].touched
+            "
+          />
+          <app-form-error [control]="f['legalRepresentative']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="legalRepresentativeEmail" class="form-label"
+            >E-mail del representante legal</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="legalRepresentativeEmail"
+            placeholder="Usa ; ó , para separar los correos electrónicos"
+            formControlName="legalRepresentativeEmail"
+            [class.is-invalid]="
+              f['legalRepresentativeEmail'].invalid &&
+              f['legalRepresentativeEmail'].touched
+            "
+          />
+          <app-form-error
+            [control]="f['legalRepresentativeEmail']"
+            [errors]="{ pattern: 'Correos no válidos' }"
+          ></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="operationsStartDate" class="form-label"
+            >Fecha de inicio de operaciones</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            id="operationsStartDate"
+            placeholder="Usa ; ó , para separar los correos electrónicos"
+            formControlName="operationsStartDate"
+            [class.is-invalid]="
+              f['operationsStartDate'].invalid &&
+              f['operationsStartDate'].touched
+            "
+          />
+          <app-form-error [control]="f['operationsStartDate']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="incorporationsStartDate" class="form-label"
+            >Fecha de constitución</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            id="incorporationsStartDate"
+            placeholder="Usa ; ó , para separar los correos electrónicos"
+            formControlName="incorporationsStartDate"
+            [class.is-invalid]="
+              f['incorporationsStartDate'].invalid &&
+              f['incorporationsStartDate'].touched
+            "
+          />
+          <app-form-error
+            [control]="f['incorporationsStartDate']"
+          ></app-form-error>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <label for="mision" class="form-label">Misión</label>
+          <textarea
+            class="form-control"
+            id="mision"
+            rows="3"
+            formControlName="mision"
+            [class.is-invalid]="f['mision'].invalid && f['mision'].touched"
+          ></textarea>
+          <app-form-error [control]="f['mision']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <label for="vision" class="form-label">Visión</label>
+          <textarea
+            class="form-control"
+            id="vision"
+            rows="3"
+            formControlName="vision"
+            [class.is-invalid]="f['vision'].invalid && f['vision'].touched"
+          ></textarea>
+          <app-form-error [control]="f['vision']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <label for="ethicalValues" class="form-label">Valores</label>
+          <textarea
+            class="form-control"
+            id="ethicalValues"
+            rows="3"
+            formControlName="ethicalValues"
+            [class.is-invalid]="
+              f['ethicalValues'].invalid && f['ethicalValues'].touched
+            "
+          ></textarea>
+          <app-form-error [control]="f['ethicalValues']"></app-form-error>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <h2>Sostenibilidad y alianzas estratégicas</h2>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="alliances" class="form-label"
+            >En caso de pertenecer a alguna red de alianzas, escribe en
+            cuáles.</label
+          >
+          <textarea
+            class="form-control"
+            id="alliances"
+            rows="3"
+            formControlName="alliances"
+            [class.is-invalid]="
+              f['alliances'].invalid && f['alliances'].touched
+            "
+          ></textarea>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="courses" class="form-label"
+            >Enlista los cursos de actualización a los que han asistido en el
+            último año.
+          </label>
+          <textarea
+            class="form-control"
+            id="courses"
+            rows="3"
+            formControlName="courses"
+            [class.is-invalid]="f['courses'].invalid && f['courses'].touched"
+          ></textarea>
+          <app-form-error [control]="f['courses']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="issuesToStrengthen" class="form-label"
+            >Selecciona, ¿En cuáles de los siguientes temas te gustaría
+            fortalecerte como organización?
+          </label>
+          <select
+            class="form-select"
+            aria-label="Selecciona, ¿En cuáles de los siguientes temas te gustaría
+                  fortalecerte como organización?"
+            formControlName="issuesToStrengthen"
+            [class.is-invalid]="
+              f['issuesToStrengthen'].invalid && f['issuesToStrengthen'].touched
+            "
+          >
+            <option value="" selected>Click para seleccionar</option>
+            <option value="1">Gobernanza</option>
+            <option value="2">Obligaciones fiscales</option>
+            <option value="3">Causales de revocación</option>
+            <option value="4">Desarrollo Institucional</option>
+            <option value="5">Procuración de fondos</option>
+            <option value="6">Creación de proyectos con impacto social</option>
+            <option value="7">Generación de reportes de impacto social</option>
+            <option value="8">Medición de impacto social</option>
+            <option value="9">Creación de matriz de indicadores</option>
+            <option value="10">Intervenciones efectivas</option>
+            <option value="11">Otros</option>
+          </select>
+          <app-form-error [control]="f['issuesToStrengthen']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="whichTopics" class="form-label">¿Cuáles Temas? </label>
+          <input
+            type="text"
+            class="form-control"
+            id="whichTopics"
+            placeholder="¿Cuáles Temas?"
+            formControlName="whichTopics"
+            [class.is-invalid]="
+              f['whichTopics'].invalid && f['whichTopics'].touched
+            "
+          />
+          <app-form-error [control]="f['whichTopics']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="flexCheckDefault"
+              formControlName="previousDonations"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Ha recibido previamente una donación de Fundación DEACERO A.C.
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <app-donations-table *ngIf="showDonationsTable"></app-donations-table>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+        <label for="strategicAlliances" class="form-label"
+          >En fundación DEACERO A.C., buscamos generar alianzas estratégicas
+          (ganar/ganar) para beneficio mutuo. A continuación, enlista por lo
+          menos 5 actividades específicas que permitan lograrlo.</label
+        >
+        <textarea
+          class="form-control"
+          id="strategicAlliances"
+          rows="3"
+          formControlName="strategicAlliances"
+          [class.is-invalid]="
+            f['strategicAlliances'].invalid && f['strategicAlliances'].touched
+          "
+        ></textarea>
+        <app-form-error [control]="f['strategicAlliances']"></app-form-error>
+      </div>
+    </div>
+    <div class="col-12">
+      <app-product-table></app-product-table>
+    </div>
+    <hr />
+    <h2>Trabajo digno</h2>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="whyYourOSC" class="form-label"
+            >¿Por qué las personas quieren trabajar en tu OSC?
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="whyYourOSC"
+            formControlName="whyYourOSC"
+            [class.is-invalid]="
+              f['whyYourOSC'].invalid && f['whyYourOSC'].touched
+            "
+          />
+          <app-form-error [control]="f['whyYourOSC']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="whatMakesYouDifferent" class="form-label"
+            >¿Qué te hace diferente de quienes ofrecen una propuesta de valor
+            similar a la tuya?
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="whatMakesYouDifferent"
+            formControlName="whatMakesYouDifferent"
+            [class.is-invalid]="
+              f['whatMakesYouDifferent'].invalid &&
+              f['whatMakesYouDifferent'].touched
+            "
+          />
+          <app-form-error
+            [control]="f['whatMakesYouDifferent']"
+          ></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="benefitsSystem" class="form-label"
+            >Describe el sistema de prestaciones y compensaciones para todo el
+            personal.
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="benefitsSystem"
+            formControlName="benefitsSystem"
+            [class.is-invalid]="
+              f['benefitsSystem'].invalid && f['benefitsSystem'].touched
+            "
+          />
+          <app-form-error [control]="f['benefitsSystem']"></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="personalGrowth" class="form-label"
+            >¿Cuáles opciones de crecimiento personal ofreces a tus
+            colaboradores?
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="personalGrowth"
+            formControlName="personalGrowth"
+            [class.is-invalid]="
+              f['personalGrowth'].invalid && f['personalGrowth'].touched
+            "
+          />
+          <app-form-error [control]="f['personalGrowth']"></app-form-error>
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="btn btn-primary"
+      type="button"
+      [disabled]="form.invalid"
+      (click)="update()"
+    >
+      Enviar
+    </button>
+  </form>
 </div>
