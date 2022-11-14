@@ -1,1 +1,83 @@
 <h5>Donaciones recibidas</h5>
+<form [formGroup]="form">
+  <table class="table table-light table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Año</th>
+        <th scope="col">Monto</th>
+        <th scope="col">Nombre del proyecto</th>
+        <th scope="col" style="width: 50px;">*</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let donation of donations">
+        <td>{{ donation.year }}</td>
+        <td>{{ donation.amount | currency: "MXN" }}</td>
+        <td>{{ donation.proyectName }}</td>
+        <td>
+          <button
+            class="btn btn-secondary p-1"
+            (click)="removeDonation(donation.id)"
+          >
+            <img height="18" src="/assets/icons/trash.png" alt="trash" />
+          </button>
+        </td>
+      </tr>
+
+      <ng-container *ngIf="showForm">
+        <tr>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              id="year"
+              placeholder="Año"
+              formControlName="year"
+              [class.is-invalid]="f['year'].invalid && f['year'].touched"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              id="amount"
+              placeholder="Monto"
+              formControlName="amount"
+              [class.is-invalid]="f['amount'].invalid && f['amount'].touched"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              id="proyectName"
+              placeholder="Proyecto"
+              formControlName="proyectName"
+            />
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="6">
+            <button
+              class="btn btn-primary"
+              (click)="addDonation()"
+              [disabled]="!validForm"
+            >
+              Guardar
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+
+      <tr *ngIf="!showForm">
+        <td colspan="6">
+          <button class="btn btn-primary" (click)="showFormOnTable()">
+            Agregar donación
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
