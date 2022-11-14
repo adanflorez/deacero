@@ -17,6 +17,7 @@ export class HomeComponent {
   showAlert = false;
   alertType: AlertType = AlertType.Danger;
   alertMessage = '';
+  showDonationsTable = false;
 
   constructor(private userService: UserService) {
     this.form = new FormGroup({
@@ -78,6 +79,10 @@ export class HomeComponent {
       this.f['whichTopics'].disable();
       this.f['whichTopics'].reset();
     });
+    this.form.get('previousDonations')?.valueChanges.subscribe((val) => {
+      this.showDonationsTable = val;
+    });
+    this.showDonationsTable = this.f.previousDonations.value;
   }
 
   get f() {
