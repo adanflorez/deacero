@@ -11,7 +11,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  updateOSC(osc: string): Observable<any> {
-    return this.http.put(`${this.apiOSC}`, { razonSocial: osc });
+  updateOSC(form: any): Observable<any> {
+    return this.http.put(`${this.apiOSC}`, form);
   }
 }

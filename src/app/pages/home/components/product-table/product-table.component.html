@@ -1,0 +1,105 @@
+<h5>Productos</h5>
+<form [formGroup]="form">
+  <table class="table table-light table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Descripción del producto</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Disponibilidad</th>
+        <th scope="col">Temporada</th>
+        <th scope="col">Fotografía de producto</th>
+        <th scope="col">*</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.description }}</td>
+        <td>{{ product.price | currency: "MXN" }}</td>
+        <td>{{ product.available }}</td>
+        <td>{{ product.season }}</td>
+        <td>{{ product.photo }}</td>
+        <td>
+          <button class="btn btn-secondary p-1" (click)="removeProduct(product.id)">
+            <img height="18" src="/assets/icons/trash.png" alt="trash" />
+          </button>
+        </td>
+      </tr>
+
+      <ng-container *ngIf="showForm">
+        <tr>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              id="description"
+              placeholder="Descripción"
+              formControlName="description"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              id="price"
+              placeholder="Precio"
+              formControlName="price"
+              [class.is-invalid]="f['price'].invalid && f['price'].touched"
+            />
+          </td>
+          <td>
+            <select
+              class="form-select"
+              aria-label="Selecciona, ¿En cuáles de los siguientes temas te gustaría
+                  fortalecerte como organización?"
+              formControlName="available"
+            >
+              <option value="" selected>Click para seleccionar</option>
+              <option value="Permanente">Permanente</option>
+              <option value="De temporada">De temporada</option>
+              <option value="Días festivos">Días festivos</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              id="season"
+              placeholder="Temporada"
+              formControlName="season"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              id="photo"
+              placeholder="https://..."
+              formControlName="photo"
+            />
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="6">
+            <button
+              class="btn btn-primary"
+              (click)="addProduct()"
+              [disabled]="!validForm"
+            >
+              Guardar
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+
+      <tr *ngIf="!showForm">
+        <td colspan="6">
+          <button class="btn btn-primary" (click)="showFormOnTable()">
+            Agregar producto
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>

@@ -1,0 +1,53 @@
+<ng-container
+  [ngTemplateOutlet]="formError"
+  [ngTemplateOutletContext]="{
+    validation: 'required',
+    message: errors?.required || 'Campo obligatorio',
+    control: control
+  }"
+></ng-container>
+<ng-container
+  [ngTemplateOutlet]="formError"
+  [ngTemplateOutletContext]="{
+    validation: 'email',
+    message: errors?.email || 'Correo no valido',
+    control: control
+  }"
+></ng-container>
+<ng-container
+  [ngTemplateOutlet]="formError"
+  [ngTemplateOutletContext]="{
+    validation: 'pattern',
+    message: errors?.pattern || 'No cumple con los requisitos',
+    control: control
+  }"
+></ng-container>
+<ng-container
+  [ngTemplateOutlet]="formError"
+  [ngTemplateOutletContext]="{
+    validation: 'maxlength',
+    message: errors?.maxLength || 'Se excedió la cantidad maxima de caracteres',
+    control: control
+  }"
+></ng-container>
+<ng-container
+[ngTemplateOutlet]="formError"
+[ngTemplateOutletContext]="{
+  validation: 'invalidRFC',
+  message: errors?.invalidRFC || 'RFC no valido',
+  control: control
+}"
+></ng-container>
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <span class="text-danger small" role="alert"> - {{ message }} </span>
+    <br />
+  </ng-container>
+</ng-template>
