@@ -1,5 +1,6 @@
+import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Product {
@@ -25,7 +26,7 @@ export class ProductTableComponent {
   constructor() {
     this.form = new FormGroup({
       description: new FormControl(''),
-      price: new FormControl(''),
+      price: new FormControl('', Validators.pattern(ONLY_NUMBERS_PATTERN)),
       available: new FormControl(''),
       season: new FormControl(''),
       photo: new FormControl(''),
@@ -33,7 +34,7 @@ export class ProductTableComponent {
     this.form.valueChanges.subscribe((values) => {
       const { description, price, available, season, photo } = values;
       if (description || price || available || season || photo) {
-        this.validForm = true;
+        this.validForm = this.form.valid && true;
         return;
       }
       this.validForm = false;
@@ -56,5 +57,9 @@ export class ProductTableComponent {
 
   removeProduct(id: string) {
     this.products = this.products.filter((product) => product.id !== id);
+  }
+
+  get f() {
+    return this.form.controls;
   }
 }

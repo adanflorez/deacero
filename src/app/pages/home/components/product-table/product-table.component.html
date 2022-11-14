@@ -14,7 +14,7 @@
     <tbody>
       <tr *ngFor="let product of products">
         <td>{{ product.description }}</td>
-        <td>{{ product.price }}</td>
+        <td>{{ product.price | currency: "MXN" }}</td>
         <td>{{ product.available }}</td>
         <td>{{ product.season }}</td>
         <td>{{ product.photo }}</td>
@@ -39,6 +39,7 @@
               id="price"
               placeholder="Precio"
               formControlName="price"
+              [class.is-invalid]="f['price'].invalid && f['price'].touched"
             />
           </td>
           <td>
