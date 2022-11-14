@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <table class="table table-light">
+  <table class="table table-light table-bordered">
     <thead>
       <tr>
         <th scope="col">Descripción del producto</th>
@@ -7,7 +7,7 @@
         <th scope="col">Disponibilidad</th>
         <th scope="col">Temporada</th>
         <th scope="col">Fotografía de producto</th>
-        <th scope="col"></th>
+        <th scope="col">*</th>
       </tr>
     </thead>
 
@@ -18,7 +18,11 @@
         <td>{{ product.available }}</td>
         <td>{{ product.season }}</td>
         <td>{{ product.photo }}</td>
-        <td><button (click)="removeProduct(product.id)">E</button></td>
+        <td>
+          <button class="btn btn-secondary p-1" (click)="removeProduct(product.id)">
+            <img height="18" src="/assets/icons/trash.png" alt="trash" />
+          </button>
+        </td>
       </tr>
 
       <ng-container *ngIf="showForm">
