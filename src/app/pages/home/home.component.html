@@ -319,13 +319,10 @@
                   rows="3"
                   formControlName="mision"
                   [class.is-invalid]="
-                    f['mision'].invalid &&
-                    f['mision'].touched
+                    f['mision'].invalid && f['mision'].touched
                   "
                 ></textarea>
-                <app-form-error
-                  [control]="f['mision']"
-                ></app-form-error>
+                <app-form-error [control]="f['mision']"></app-form-error>
               </div>
             </div>
             <div class="col-12 col-md-4">
@@ -337,13 +334,10 @@
                   rows="3"
                   formControlName="vision"
                   [class.is-invalid]="
-                    f['vision'].invalid &&
-                    f['vision'].touched
+                    f['vision'].invalid && f['vision'].touched
                   "
                 ></textarea>
-                <app-form-error
-                  [control]="f['vision']"
-                ></app-form-error>
+                <app-form-error [control]="f['vision']"></app-form-error>
               </div>
             </div>
             <div class="col-12 col-md-4">
@@ -355,26 +349,238 @@
                   rows="3"
                   formControlName="ethicalValues"
                   [class.is-invalid]="
-                    f['ethicalValues'].invalid &&
-                    f['ethicalValues'].touched
+                    f['ethicalValues'].invalid && f['ethicalValues'].touched
                   "
                 ></textarea>
+                <app-form-error [control]="f['ethicalValues']"></app-form-error>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <h2>Sostenibilidad y alianzas estratégicas</h2>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="alliances" class="form-label"
+                  >En caso de pertenecer a alguna red de alianzas, escribe en
+                  cuáles.</label
+                >
+                <textarea
+                  class="form-control"
+                  id="alliances"
+                  rows="3"
+                  formControlName="alliances"
+                  [class.is-invalid]="
+                    f['alliances'].invalid && f['alliances'].touched
+                  "
+                ></textarea>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="courses" class="form-label"
+                  >Enlista los cursos de actualización a los que han asistido en
+                  el último año.
+                </label>
+                <textarea
+                  class="form-control"
+                  id="courses"
+                  rows="3"
+                  formControlName="courses"
+                  [class.is-invalid]="
+                    f['courses'].invalid && f['courses'].touched
+                  "
+                ></textarea>
+                <app-form-error [control]="f['courses']"></app-form-error>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="courses" class="form-label"
+                  >Selecciona, ¿En cuáles de los siguientes temas te gustaría
+                  fortalecerte como organización?
+                </label>
+                <select
+                  class="form-select"
+                  aria-label="Selecciona, ¿En cuáles de los siguientes temas te gustaría
+                  fortalecerte como organización?"
+                  formControlName="issuesToStrengthen"
+                  [class.is-invalid]="
+                    f['issuesToStrengthen'].invalid &&
+                    f['issuesToStrengthen'].touched
+                  "
+                >
+                  <option value="" selected>Click para seleccionar</option>
+                  <option value="1">Gobernanza</option>
+                  <option value="2">Obligaciones fiscales</option>
+                  <option value="3">Causales de revocación</option>
+                  <option value="4">Desarrollo Institucional</option>
+                  <option value="5">Procuración de fondos</option>
+                  <option value="6">
+                    Creación de proyectos con impacto social
+                  </option>
+                  <option value="7">
+                    Generación de reportes de impacto social
+                  </option>
+                  <option value="8">Medición de impacto social</option>
+                  <option value="9">Creación de matriz de indicadores</option>
+                  <option value="10">Intervenciones efectivas</option>
+                  <option value="11">Otros</option>
+                </select>
                 <app-form-error
-                  [control]="f['ethicalValues']"
+                  [control]="f['issuesToStrengthen']"
                 ></app-form-error>
               </div>
             </div>
-
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="whichTopics" class="form-label"
+                  >¿Cuáles Temas?
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="whichTopics"
+                  placeholder="¿Cuáles Temas?"
+                  formControlName="whichTopics"
+                  [class.is-invalid]="
+                    f['whichTopics'].invalid && f['whichTopics'].touched
+                  "
+                />
+                <app-form-error [control]="f['whichTopics']"></app-form-error>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="flexCheckDefault"
+                    formControlName="previousDonations"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Ha recibido previamente una donación de Fundación DEACERO
+                    A.C.
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="mb-3">
+              <label for="strategicAlliances" class="form-label"
+                >En fundación DEACERO A.C., buscamos generar alianzas
+                estratégicas (ganar/ganar) para beneficio mutuo. A continuación,
+                enlista por lo menos 5 actividades específicas que permitan
+                lograrlo.</label
+              >
+              <textarea
+                class="form-control"
+                id="strategicAlliances"
+                rows="3"
+                formControlName="strategicAlliances"
+                [class.is-invalid]="
+                  f['strategicAlliances'].invalid &&
+                  f['strategicAlliances'].touched
+                "
+              ></textarea>
+              <app-form-error
+                [control]="f['strategicAlliances']"
+              ></app-form-error>
+            </div>
+          </div>
+          <hr />
+          <h2>Trabajo digno</h2>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="whyYourOSC" class="form-label"
+                  >¿Por qué las personas quieren trabajar en tu OSC?
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="whyYourOSC"
+                  formControlName="whyYourOSC"
+                  [class.is-invalid]="
+                    f['whyYourOSC'].invalid && f['whyYourOSC'].touched
+                  "
+                />
+                <app-form-error [control]="f['whyYourOSC']"></app-form-error>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="whatMakesYouDifferent" class="form-label"
+                  >¿Qué te hace diferente de quienes ofrecen una propuesta de
+                  valor similar a la tuya?
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="whatMakesYouDifferent"
+                  formControlName="whatMakesYouDifferent"
+                  [class.is-invalid]="
+                    f['whatMakesYouDifferent'].invalid &&
+                    f['whatMakesYouDifferent'].touched
+                  "
+                />
+                <app-form-error
+                  [control]="f['whatMakesYouDifferent']"
+                ></app-form-error>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="benefitsSystem" class="form-label"
+                  >Describe el sistema de prestaciones y compensaciones para
+                  todo el personal.
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="benefitsSystem"
+                  formControlName="benefitsSystem"
+                  [class.is-invalid]="
+                    f['benefitsSystem'].invalid && f['benefitsSystem'].touched
+                  "
+                />
+                <app-form-error
+                  [control]="f['benefitsSystem']"
+                ></app-form-error>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="personalGrowth" class="form-label"
+                  >¿Cuáles opciones de crecimiento personal ofreces a tus
+                  colaboradores?
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="personalGrowth"
+                  formControlName="personalGrowth"
+                  [class.is-invalid]="
+                    f['personalGrowth'].invalid && f['personalGrowth'].touched
+                  "
+                />
+                <app-form-error
+                  [control]="f['personalGrowth']"
+                ></app-form-error>
+              </div>
+            </div>
           </div>
 
-          <!-- <button
+          <button
             class="btn btn-primary"
             type="button"
             [disabled]="form.invalid"
             (click)="update()"
           >
             Enviar
-          </button> -->
+          </button>
         </form>
       </div>
     </div>

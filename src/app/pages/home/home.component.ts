@@ -55,6 +55,28 @@ export class HomeComponent {
       mision: new FormControl('', Validators.required),
       vision: new FormControl('', Validators.required),
       ethicalValues: new FormControl('', Validators.required),
+      alliances: new FormControl(''),
+      courses: new FormControl('', Validators.required),
+      issuesToStrengthen: new FormControl('', Validators.required),
+      whichTopics: new FormControl(
+        { value: '', disabled: true },
+        Validators.required
+      ),
+      previousDonations: new FormControl(false, Validators.required),
+      strategicAlliances: new FormControl('', Validators.required),
+      whyYourOSC: new FormControl('', Validators.required),
+      whatMakesYouDifferent: new FormControl('', Validators.required),
+      benefitsSystem: new FormControl('', Validators.required),
+      personalGrowth: new FormControl('', Validators.required),
+    });
+
+    this.form.get('issuesToStrengthen')?.valueChanges.subscribe((res) => {
+      if (res === '11') {
+        this.f['whichTopics'].enable();
+        return;
+      }
+      this.f['whichTopics'].disable();
+      this.f['whichTopics'].reset();
     });
   }
 
