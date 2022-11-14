@@ -1,5 +1,5 @@
 import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -22,6 +22,7 @@ export class ProductTableComponent {
   showForm = false;
   products: Product[] = [];
   validForm = false;
+  @Output() productsList = new EventEmitter();
 
   constructor() {
     this.form = new FormGroup({
@@ -53,10 +54,12 @@ export class ProductTableComponent {
       ...this.form.value,
     });
     this.form.reset();
+    this.productsList.emit(this.products);
   }
 
   removeProduct(id: string) {
     this.products = this.products.filter((product) => product.id !== id);
+    this.productsList.emit(this.products);
   }
 
   get f() {

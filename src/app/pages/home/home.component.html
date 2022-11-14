@@ -431,7 +431,10 @@
         </div>
       </div>
       <div class="col-12">
-        <app-donations-table *ngIf="showDonationsTable"></app-donations-table>
+        <app-donations-table
+          *ngIf="showDonationsTable"
+          (donationsList)="donations = $event"
+        ></app-donations-table>
       </div>
     </div>
     <div class="col-12">
@@ -454,7 +457,7 @@
       </div>
     </div>
     <div class="col-12">
-      <app-product-table></app-product-table>
+      <app-product-table (productsList)="products = $event"></app-product-table>
     </div>
     <hr />
     <h2>Trabajo digno</h2>

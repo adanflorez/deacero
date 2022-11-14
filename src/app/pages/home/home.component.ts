@@ -18,6 +18,8 @@ export class HomeComponent {
   alertType: AlertType = AlertType.Danger;
   alertMessage = '';
   showDonationsTable = false;
+  products = [];
+  donations = [];
 
   constructor(private userService: UserService) {
     this.form = new FormGroup({
@@ -81,6 +83,7 @@ export class HomeComponent {
     });
     this.form.get('previousDonations')?.valueChanges.subscribe((val) => {
       this.showDonationsTable = val;
+      this.donations = [];
     });
     this.showDonationsTable = this.f.previousDonations.value;
   }
@@ -119,12 +122,14 @@ export class HomeComponent {
       diferenciasDeTuOsc: this.f.whatMakesYouDifferent.value,
       OSCdescripcion: this.f.benefitsSystem.value,
       crecimientoPersonal: this.f.personalGrowth.value,
+      product: this.products,
+      donation: this.donations,
     };
     this.userService.updateOSC(form).subscribe({
       next: (res) => {
         this.form.reset();
         this.showAlert = true;
-        this.alertMessage = 'Nombre actualizado';
+        this.alertMessage = 'Información de OSC actualizada';
         this.alertType = AlertType.Success;
       },
       error: () => {

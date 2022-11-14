@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
 import { v4 as uuidv4 } from 'uuid';
@@ -19,6 +19,7 @@ export class DonationsTableComponent {
   showForm = false;
   donations: Donation[] = [];
   validForm = false;
+  @Output() donationsList = new EventEmitter();
 
   constructor() {
     this.form = new FormGroup({
@@ -50,11 +51,13 @@ export class DonationsTableComponent {
       id: uuidv4(),
       ...this.form.value,
     });
+    this.donationsList.emit(this.donations);
     this.form.reset();
   }
 
   removeDonation(id: string) {
     this.donations = this.donations.filter((donation) => donation.id !== id);
+    this.donationsList.emit(this.donations);
   }
 
   get f() {
