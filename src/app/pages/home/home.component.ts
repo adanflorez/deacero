@@ -62,7 +62,7 @@ export class HomeComponent {
         { value: '', disabled: true },
         Validators.required
       ),
-      previousDonations: new FormControl(false, Validators.required),
+      previousDonations: new FormControl(true, Validators.required),
       strategicAlliances: new FormControl('', Validators.required),
       whyYourOSC: new FormControl('', Validators.required),
       whatMakesYouDifferent: new FormControl('', Validators.required),
@@ -85,7 +85,37 @@ export class HomeComponent {
   }
 
   update() {
-    this.userService.updateOSC(this.f['name'].value).subscribe({
+    const form = {
+      nombreComercial: this.f.tradename.value,
+      razonSocial: this.f.businessname.value,
+      rfc: this.f.rfc.value,
+      telefono: this.f.phone.value,
+      email: this.f.emails.value,
+      nombre: this.f.name.value,
+      emailDelResponsable: this.f.responsibleEmail.value,
+      celular: this.f.cellphone.value,
+      fundador: this.f.founder.value,
+      direccionGeneral: this.f.generalManagement.value,
+      direccionOperativa: this.f.operationalManagement.value,
+      representanteLegal: this.f.legalRepresentative.value,
+      emailDelRepresentanteLegal: this.f.legalRepresentativeEmail.value,
+      fechaInicioOperaciones: this.f.operationsStartDate.value,
+      fechaDeConstitucion: this.f.incorporationsStartDate.value,
+      mision: this.f.mision.value,
+      vision: this.f.vision.value,
+      valores: this.f.ethicalValues.value,
+      redDeAlianzas: this.f.alliances.value,
+      listaCursosDeActualizacion: this.f.courses.value,
+      temasAFortalecer: this.f.issuesToStrengthen.value,
+      temasDescripcion: this.f.whichTopics.value,
+      recibioUnaDonacion: this.f.previousDonations.value,
+      actividadesEspecificasFDA: this.f.strategicAlliances.value,
+      porqueTrabajarEnTuOSC: this.f.whyYourOSC.value,
+      diferenciasDeTuOsc: this.f.whatMakesYouDifferent.value,
+      OSCdescripcion: this.f.benefitsSystem.value,
+      crecimientoPersonal: this.f.personalGrowth.value,
+    };
+    this.userService.updateOSC(form).subscribe({
       next: (res) => {
         this.form.reset();
         this.showAlert = true;
