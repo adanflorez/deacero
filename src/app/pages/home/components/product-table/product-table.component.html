@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <table class="table">
+  <table class="table table-light">
     <thead>
       <tr>
         <th scope="col">Descripción del producto</th>
@@ -7,6 +7,18 @@
         <th scope="col">Disponibilidad</th>
         <th scope="col">Temporada</th>
         <th scope="col">Fotografía de producto</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.available }}</td>
+        <td>{{ product.season }}</td>
+        <td>{{ product.photo }}</td>
+        <td><button (click)="removeProduct(product.id)">E</button></td>
       </tr>
 
       <ng-container *ngIf="showForm">
@@ -30,13 +42,6 @@
             />
           </td>
           <td>
-            <!-- <input
-              type="text"
-              class="form-control"
-              id="available"
-              placeholder="Disponibilidad"
-              formControlName="available"
-            /> -->
             <select
               class="form-select"
               aria-label="Selecciona, ¿En cuáles de los siguientes temas te gustaría
@@ -44,9 +49,9 @@
               formControlName="available"
             >
               <option value="" selected>Click para seleccionar</option>
-              <option value="1">Permanente</option>
-              <option value="2">De temporada</option>
-              <option value="3">Días festivos</option>
+              <option value="Permanente">Permanente</option>
+              <option value="De temporada">De temporada</option>
+              <option value="Días festivos">Días festivos</option>
             </select>
           </td>
           <td>
@@ -63,26 +68,32 @@
               type="text"
               class="form-control"
               id="photo"
-              placeholder="Foto"
+              placeholder="https://..."
               formControlName="photo"
             />
           </td>
+          <td></td>
         </tr>
         <tr>
-          <td colspan="5">
-            <button class="btn btn-primary" (click)="addProduct()">
+          <td colspan="6">
+            <button
+              class="btn btn-primary"
+              (click)="addProduct()"
+              [disabled]="!validForm"
+            >
               Guardar
             </button>
           </td>
         </tr>
       </ng-container>
+
       <tr *ngIf="!showForm">
-        <td colspan="5">
+        <td colspan="6">
           <button class="btn btn-primary" (click)="showFormOnTable()">
             Agregar producto
           </button>
         </td>
       </tr>
-    </thead>
+    </tbody>
   </table>
 </form>
