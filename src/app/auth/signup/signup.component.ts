@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PASSWORD_PATERN } from 'src/app/lib/constants';
+import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
 
 declare var window: any;
 
@@ -21,15 +22,20 @@ export class SignupComponent implements OnInit {
   passwordButonnIcon = 'lock';
 
   constructor(private authService: AuthService, private router: Router) {
-    this.signupForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.pattern(PASSWORD_PATERN),
-      ]),
-    });
+    this.signupForm = new FormGroup(
+      {
+        name: new FormControl('', Validators.required),
+        email: new FormControl('', [Validators.email, Validators.required]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.pattern(PASSWORD_PATERN),
+        ]),
+        confirmPassword: new FormControl('', Validators.required),
+      },
+      [CustomValidators.MatchValidator('password', 'confirmPassword')]
+    );
   }
+
   ngOnInit(): void {
     var tooltipTriggerList = [].slice.call(
       document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -41,6 +47,13 @@ export class SignupComponent implements OnInit {
 
   get f() {
     return this.signupForm.controls;
+  }
+
+  get passwordMatchError() {
+    return (
+      this.signupForm.getError('mismatch') &&
+      this.signupForm.get('confirmPassword')?.touched
+    );
   }
 
   signup() {
