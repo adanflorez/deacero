@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  apiLogin: 'https://24e1-181-237-25-57.ngrok.io/oauth/login',
-  apiUser: 'https://24e1-181-237-25-57.ngrok.io/user',
-  apiRegister: 'https://24e1-181-237-25-57.ngrok.io/register/',
+  apiLogin: 'http://44.228.61.3:8080/oauth/login',
+  apiUser: 'http://44.228.61.3:8080/user',
+  apiRegister: 'http://44.228.61.3:8080/register/',
+  apiOSC: 'http://44.228.61.3:8080/osc/',
 };

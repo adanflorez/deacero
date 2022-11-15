@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         error: (error) => {
           this.setAlert(
             true,
-            'Usuario y/o contraseña erradas',
+            'Usuario y/o contraseña incorrecto',
             AlertType.Danger
           );
         },
