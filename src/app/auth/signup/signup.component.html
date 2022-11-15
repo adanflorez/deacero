@@ -26,14 +26,12 @@
               id="name"
               placeholder="Razón social"
               formControlName="name"
-              [class.is-invalid]="f['name'].invalid && f['name'].touched"
+              [class.is-invalid]="
+                f['name'].invalid && (f['name'].dirty || f['name'].touched)
+              "
+              (change)="validateRFC($event)"
             />
-            <div
-              class="invalid-feedback"
-              *ngIf="f['name'].invalid && f['name'].touched"
-            >
-              Campo obligatorio
-            </div>
+            <app-form-error [control]="f['name']"></app-form-error>
             <div class="small">- Razón social de la organización</div>
           </div>
           <div class="mb-3">

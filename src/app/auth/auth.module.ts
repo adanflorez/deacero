@@ -1,3 +1,4 @@
+import { FormErrorModule } from './../shared/form-error/form-error.module';
 import { NavbarModule } from './../shared/navbar/navbar.module';
 import { AlertModule } from './../shared/alert/alert.module';
 import { ModalModule } from './../shared/modal/modal.module';
@@ -29,7 +30,8 @@ import { AuthComponent } from './auth.component';
     FormsModule,
     ModalModule,
     AlertModule,
-    NavbarModule
+    NavbarModule,
+    FormErrorModule,
   ],
 })
 export class AuthModule {}

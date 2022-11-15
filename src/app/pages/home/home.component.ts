@@ -34,8 +34,8 @@ export class HomeComponent implements OnInit {
     this.userService.getOSC().subscribe((res) => {
       console.log(res);
       this.oscData = res.data;
-      this.products = res.data.product;
-      this.donations = res.data.donation;
+      this.products = res.data.product || [];
+      this.donations = res.data.donation || [];
       this.initForm();
       this.loading = false;
     });
