@@ -19,12 +19,12 @@
         <h3 class="text-independence text-center">Pre - Registro de Acceso</h3>
         <form [formGroup]="signupForm">
           <div class="mb-3">
-            <label for="name" class="form-label">Nombre OSC</label>
+            <label for="name" class="form-label">Razón social</label>
             <input
               type="text"
               class="form-control"
               id="name"
-              placeholder="Nombre OSC"
+              placeholder="Razón social"
               formControlName="name"
               [class.is-invalid]="f['name'].invalid && f['name'].touched"
             />
