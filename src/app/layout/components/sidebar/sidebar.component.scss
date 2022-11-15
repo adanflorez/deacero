@@ -2,4 +2,10 @@
   position: fixed;
   top: 66.75px;
   bottom: 0;
+  width: 230px;
+  display: flex;
+
+  @media (max-width: 576px) {
+    display: none;
+  }
 }

@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiLogin: 'http://44.228.61.3:8080/oauth/login',
-  apiUser: 'http://44.228.61.3:8080/user',
-  apiRegister: 'http://44.228.61.3:8080/register/',
-  apiOSC: 'http://44.228.61.3:8080/osc/',
+  apiLogin: 'https://fc91-181-237-13-170.ngrok.io/oauth/login',
+  apiUser: 'https://fc91-181-237-13-170.ngrok.io/user',
+  apiRegister: 'https://fc91-181-237-13-170.ngrok.io/register/',
+  apiOSC: 'https://fc91-181-237-13-170.ngrok.io/osc/',
 };
 
 /*
