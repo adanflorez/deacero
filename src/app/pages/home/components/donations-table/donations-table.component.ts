@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
 import { v4 as uuidv4 } from 'uuid';
@@ -17,8 +17,8 @@ interface Donation {
 export class DonationsTableComponent {
   form: FormGroup;
   showForm = false;
-  donations: Donation[] = [];
   validForm = false;
+  @Input() donations: Donation[] = [];
   @Output() donationsList = new EventEmitter();
 
   constructor() {

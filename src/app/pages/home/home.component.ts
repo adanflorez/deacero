@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   MULTIPLE_EMAIL_PATTERN,
@@ -12,7 +12,7 @@ import { UserService } from 'src/app/lib/services/user.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   form: FormGroup;
   showAlert = false;
   alertType: AlertType = AlertType.Danger;
@@ -20,57 +20,122 @@ export class HomeComponent {
   showDonationsTable = false;
   products = [];
   donations = [];
+  loading = false;
+  oscData: any = {};
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.getOSC();
+  }
+
+  getOSC() {
+    this.loading = true;
+    this.userService.getOSC().subscribe((res) => {
+      console.log(res);
+      this.oscData = res.data;
+      this.products = res.data.product;
+      this.donations = res.data.donation;
+      this.initForm();
+      this.loading = false;
+    });
+  }
+
+  initForm() {
     this.form = new FormGroup({
-      tradename: new FormControl('', Validators.required),
-      businessname: new FormControl('', Validators.required),
-      rfc: new FormControl('', Validators.required),
-      phone: new FormControl('', [
-        Validators.required,
-        Validators.pattern(ONLY_NUMBERS_PATTERN),
-        Validators.maxLength(12),
-      ]),
-      emails: new FormControl('', [
-        Validators.required,
-        Validators.pattern(MULTIPLE_EMAIL_PATTERN),
-      ]),
-      name: new FormControl('', Validators.required),
-      responsibleEmail: new FormControl('', [
-        Validators.required,
-        Validators.pattern(MULTIPLE_EMAIL_PATTERN),
-      ]),
-      cellphone: new FormControl('', [
-        Validators.required,
-        Validators.pattern(ONLY_NUMBERS_PATTERN),
-        Validators.maxLength(12),
-      ]),
-      founder: new FormControl('', Validators.required),
-      generalManagement: new FormControl('', Validators.required),
-      operationalManagement: new FormControl('', Validators.required),
-      legalRepresentative: new FormControl('', Validators.required),
-      legalRepresentativeEmail: new FormControl('', [
-        Validators.required,
-        Validators.pattern(MULTIPLE_EMAIL_PATTERN),
-      ]),
-      operationsStartDate: new FormControl('', Validators.required),
-      incorporationsStartDate: new FormControl('', Validators.required),
-      mision: new FormControl('', Validators.required),
-      vision: new FormControl('', Validators.required),
-      ethicalValues: new FormControl('', Validators.required),
-      alliances: new FormControl(''),
-      courses: new FormControl('', Validators.required),
-      issuesToStrengthen: new FormControl('', Validators.required),
-      whichTopics: new FormControl(
-        { value: '', disabled: true },
+      tradename: new FormControl(
+        this.oscData.nombreComercial,
         Validators.required
       ),
-      previousDonations: new FormControl(true, Validators.required),
-      strategicAlliances: new FormControl('', Validators.required),
-      whyYourOSC: new FormControl('', Validators.required),
-      whatMakesYouDifferent: new FormControl('', Validators.required),
-      benefitsSystem: new FormControl('', Validators.required),
-      personalGrowth: new FormControl('', Validators.required),
+      businessname: new FormControl(
+        this.oscData.razonSocial,
+        Validators.required
+      ),
+      rfc: new FormControl(this.oscData.rfc, Validators.required),
+      phone: new FormControl(this.oscData.telefono, [
+        Validators.required,
+        Validators.pattern(ONLY_NUMBERS_PATTERN),
+        Validators.maxLength(12),
+      ]),
+      emails: new FormControl(this.oscData.email, [
+        Validators.required,
+        Validators.pattern(MULTIPLE_EMAIL_PATTERN),
+      ]),
+      name: new FormControl(this.oscData.nombre, Validators.required),
+      responsibleEmail: new FormControl(this.oscData.emailDelResponsable, [
+        Validators.required,
+        Validators.pattern(MULTIPLE_EMAIL_PATTERN),
+      ]),
+      cellphone: new FormControl(this.oscData.celular, [
+        Validators.required,
+        Validators.pattern(ONLY_NUMBERS_PATTERN),
+        Validators.maxLength(12),
+      ]),
+      founder: new FormControl(this.oscData.fundador, Validators.required),
+      generalManagement: new FormControl(
+        this.oscData.direccionGeneral,
+        Validators.required
+      ),
+      operationalManagement: new FormControl(
+        this.oscData.direccionOperativa,
+        Validators.required
+      ),
+      legalRepresentative: new FormControl(
+        this.oscData.representanteLegal,
+        Validators.required
+      ),
+      legalRepresentativeEmail: new FormControl(
+        this.oscData.emailDelRepresentanteLegal,
+        [Validators.required, Validators.pattern(MULTIPLE_EMAIL_PATTERN)]
+      ),
+      operationsStartDate: new FormControl(
+        this.oscData.fechaInicioOperaciones,
+        Validators.required
+      ),
+      incorporationsStartDate: new FormControl(
+        this.oscData.fechaDeConstitucion,
+        Validators.required
+      ),
+      mision: new FormControl(this.oscData.mision, Validators.required),
+      vision: new FormControl(this.oscData.vision, Validators.required),
+      ethicalValues: new FormControl(this.oscData.valores, Validators.required),
+      alliances: new FormControl(this.oscData.redDeAlianzas),
+      courses: new FormControl(
+        this.oscData.listaCursosDeActualizacion,
+        Validators.required
+      ),
+      issuesToStrengthen: new FormControl(
+        this.oscData.temasAFortalecer,
+        Validators.required
+      ),
+      whichTopics: new FormControl(
+        { value: this.oscData.temasDescripcion, disabled: true },
+        Validators.required
+      ),
+      previousDonations: new FormControl(
+        this.oscData.recibioUnaDonacion || true,
+        Validators.required
+      ),
+      strategicAlliances: new FormControl(
+        this.oscData.actividadesEspecificasFDA,
+        Validators.required
+      ),
+      whyYourOSC: new FormControl(
+        this.oscData.porqueTrabajarEnTuOSC,
+        Validators.required
+      ),
+      whatMakesYouDifferent: new FormControl(
+        this.oscData.diferenciasDeTuOsc,
+        Validators.required
+      ),
+      benefitsSystem: new FormControl(
+        this.oscData.descripcionOSC,
+        Validators.required
+      ),
+      personalGrowth: new FormControl(
+        this.oscData.crecimientoPersonal,
+        Validators.required
+      ),
     });
 
     this.form.get('issuesToStrengthen')?.valueChanges.subscribe((res) => {
@@ -120,7 +185,7 @@ export class HomeComponent {
       actividadesEspecificasFDA: this.f.strategicAlliances.value,
       porqueTrabajarEnTuOSC: this.f.whyYourOSC.value,
       diferenciasDeTuOsc: this.f.whatMakesYouDifferent.value,
-      OSCdescripcion: this.f.benefitsSystem.value,
+      descripcionOSC: this.f.benefitsSystem.value,
       crecimientoPersonal: this.f.personalGrowth.value,
       product: this.products,
       donation: this.donations,
@@ -137,6 +202,7 @@ export class HomeComponent {
         this.alertMessage = 'Error al actualizar';
         this.alertType = AlertType.Danger;
       },
+      complete: () => this.getOSC(),
     });
   }
 

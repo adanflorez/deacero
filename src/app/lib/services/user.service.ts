@@ -14,4 +14,8 @@ export class UserService {
   updateOSC(form: any): Observable<any> {
     return this.http.put(`${this.apiOSC}`, form);
   }
+
+  getOSC(): Observable<any> {
+    return this.http.get(`${this.apiOSC}`);
+  }
 }

@@ -1,5 +1,5 @@
 import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -20,8 +20,8 @@ interface Product {
 export class ProductTableComponent {
   form: FormGroup;
   showForm = false;
-  products: Product[] = [];
   validForm = false;
+  @Input() products: Product[] = [];
   @Output() productsList = new EventEmitter();
 
   constructor() {

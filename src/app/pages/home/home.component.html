@@ -1,4 +1,7 @@
-<div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+<div
+  *ngIf="!loading"
+  class="bg-bright-gray border border-secondary rounded p-3 mb-4"
+>
   <app-alert
     *ngIf="showAlert"
     [type]="alertType"
@@ -433,6 +436,7 @@
       <div class="col-12">
         <app-donations-table
           *ngIf="showDonationsTable"
+          [donations]="donations"
           (donationsList)="donations = $event"
         ></app-donations-table>
       </div>
@@ -457,7 +461,10 @@
       </div>
     </div>
     <div class="col-12">
-      <app-product-table (productsList)="products = $event"></app-product-table>
+      <app-product-table
+        (productsList)="products = $event"
+        [products]="products"
+      ></app-product-table>
     </div>
     <hr />
     <h2>Trabajo digno</h2>
