@@ -1,4 +1,8 @@
 #content {
   margin-top: 66.75px;
   margin-left: 230px;
+
+  @media (max-width: 576px) {
+    margin-left: 0;
+  }
 }

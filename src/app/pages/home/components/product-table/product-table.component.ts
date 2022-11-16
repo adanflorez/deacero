@@ -28,7 +28,7 @@ export class ProductTableComponent {
     this.form = new FormGroup({
       description: new FormControl(''),
       price: new FormControl('', Validators.pattern(ONLY_NUMBERS_PATTERN)),
-      available: new FormControl(''),
+      available: new FormControl(null),
       season: new FormControl(''),
       photo: new FormControl(''),
     });
