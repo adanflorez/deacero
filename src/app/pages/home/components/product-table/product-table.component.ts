@@ -23,6 +23,8 @@ export class ProductTableComponent {
   validForm = false;
   @Input() products: Product[] = [];
   @Output() productsList = new EventEmitter();
+  productToEdit: Product;
+  isEditMode = false;
 
   constructor() {
     this.form = new FormGroup({
@@ -62,7 +64,40 @@ export class ProductTableComponent {
     this.productsList.emit(this.products);
   }
 
+  loadProductInFields(id: string) {
+    const products = this.products.filter((product) => product.id === id);
+    this.productToEdit = products[0];
+    const { description, price, available, season, photo } = products[0];
+    this.form.setValue({
+      description,
+      price,
+      available,
+      season,
+      photo,
+    });
+    this.showForm = true;
+    this.isEditMode = true;
+  }
+
+  editProduct() {
+    this.productToEdit = { ...this.productToEdit, ...this.form.value };
+    this.products = this.products.filter(
+      (product) => product.id !== this.productToEdit.id
+    );
+    this.products.push(this.productToEdit);
+    this.productsList.emit(this.products);
+    this.showForm = false;
+    this.isEditMode = false;
+    this.form.reset();
+  }
+
   get f() {
     return this.form.controls;
+  }
+
+  cancelEdit() {
+    this.showForm = false;
+    this.isEditMode = false;
+    this.form.reset();
   }
 }
