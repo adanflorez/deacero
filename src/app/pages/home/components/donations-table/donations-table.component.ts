@@ -20,6 +20,8 @@ export class DonationsTableComponent {
   validForm = false;
   @Input() donations: Donation[] = [];
   @Output() donationsList = new EventEmitter();
+  donationToEdit: Donation;
+  isEditMode = false;
 
   constructor() {
     this.form = new FormGroup({
@@ -62,5 +64,36 @@ export class DonationsTableComponent {
 
   get f() {
     return this.form.controls;
+  }
+
+  loadDonationInFields(id: string) {
+    const donations = this.donations.filter((donation) => donation.id === id);
+    this.donationToEdit = donations[0];
+    const { year, amount, proyectName } = donations[0];
+    this.form.setValue({
+      year,
+      amount,
+      proyectName,
+    });
+    this.showForm = true;
+    this.isEditMode = true;
+  }
+
+  editDonation() {
+    this.donationToEdit = { ...this.donationToEdit, ...this.form.value };
+    this.donations = this.donations.filter(
+      (donation) => donation.id !== this.donationToEdit.id
+    );
+    this.donations.push(this.donationToEdit);
+    this.donationsList.emit(this.donations);
+    this.showForm = false;
+    this.isEditMode = false;
+    this.form.reset();
+  }
+
+  cancelEdit() {
+    this.showForm = false;
+    this.isEditMode = false;
+    this.form.reset();
   }
 }
