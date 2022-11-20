@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiLogin: 'https://118a-181-237-13-170.ngrok.io/oauth/login',
-  apiUser: 'https://118a-181-237-13-170.ngrok.io/user',
-  apiRegister: 'https://118a-181-237-13-170.ngrok.io/register/',
-  apiOSC: 'https://118a-181-237-13-170.ngrok.io/osc/',
+  apiLogin: 'https://fab8-181-237-13-170.ngrok.io/oauth/login',
+  apiUser: 'https://fab8-181-237-13-170.ngrok.io/user',
+  apiRegister: 'https://fab8-181-237-13-170.ngrok.io/register/',
+  apiOSC: 'https://fab8-181-237-13-170.ngrok.io/osc/',
 };
 
 /*

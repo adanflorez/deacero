@@ -474,15 +474,15 @@
           <label for="whyYourOSC" class="form-label"
             >¿Por qué las personas quieren trabajar en tu OSC?
           </label>
-          <input
-            type="text"
+          <textarea
+            rows="3"
             class="form-control"
             id="whyYourOSC"
             formControlName="whyYourOSC"
             [class.is-invalid]="
               f['whyYourOSC'].invalid && f['whyYourOSC'].touched
             "
-          />
+          ></textarea>
           <app-form-error [control]="f['whyYourOSC']"></app-form-error>
         </div>
       </div>
@@ -492,8 +492,8 @@
             >¿Qué te hace diferente de quienes ofrecen una propuesta de valor
             similar a la tuya?
           </label>
-          <input
-            type="text"
+          <textarea
+            rows="3"
             class="form-control"
             id="whatMakesYouDifferent"
             formControlName="whatMakesYouDifferent"
@@ -501,7 +501,7 @@
               f['whatMakesYouDifferent'].invalid &&
               f['whatMakesYouDifferent'].touched
             "
-          />
+          ></textarea>
           <app-form-error
             [control]="f['whatMakesYouDifferent']"
           ></app-form-error>
@@ -513,15 +513,15 @@
             >Describe el sistema de prestaciones y compensaciones para todo el
             personal.
           </label>
-          <input
-            type="text"
+          <textarea
+            rows="3"
             class="form-control"
             id="benefitsSystem"
             formControlName="benefitsSystem"
             [class.is-invalid]="
               f['benefitsSystem'].invalid && f['benefitsSystem'].touched
             "
-          />
+          ></textarea>
           <app-form-error [control]="f['benefitsSystem']"></app-form-error>
         </div>
       </div>
@@ -531,15 +531,15 @@
             >¿Cuáles opciones de crecimiento personal ofreces a tus
             colaboradores?
           </label>
-          <input
-            type="text"
-            class="form-control"
+          <textarea
             id="personalGrowth"
+            rows="3"
+            class="form-control"
             formControlName="personalGrowth"
             [class.is-invalid]="
               f['personalGrowth'].invalid && f['personalGrowth'].touched
             "
-          />
+          ></textarea>
           <app-form-error [control]="f['personalGrowth']"></app-form-error>
         </div>
       </div>
@@ -551,7 +551,7 @@
       [disabled]="form.invalid"
       (click)="update()"
     >
-      Enviar
+      Guardar
     </button>
   </form>
 </div>

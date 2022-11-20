@@ -67,7 +67,7 @@
               <button
                 class="btn btn-secondary"
                 type="button"
-                (click)="showHidePassword()"
+                (click)="showHidePassword(1)"
               >
                 <img
                   height="20"
@@ -98,17 +98,31 @@
             <div class="small">- Asigna una contraseña a tu cuenta</div>
           </div>
           <div class="mb-3">
-            <input
-              type="password"
-              class="form-control"
-              id="confirmPassword"
-              placeholder="Confirma tu contraseña"
-              formControlName="confirmPassword"
-              [class.is-invalid]="passwordMatchError"
-            />
-            <div *ngIf="passwordMatchError" class="invalid-feedback">
-              Las contraseñas no coinciden
+            <div class="input-group has-validation">
+              <input
+                [type]="confirmPasswordFieldType"
+                class="form-control"
+                id="confirmPassword"
+                placeholder="Confirma tu contraseña"
+                formControlName="confirmPassword"
+                [class.is-invalid]="passwordMatchError"
+              />
+              <button
+                class="btn btn-secondary"
+                type="button"
+                (click)="showHidePassword(2)"
+              >
+                <img
+                  height="20"
+                  [src]="'/assets/icons/' + confirmPasswordButonnIcon + '.png'"
+                  alt="lock"
+                />
+              </button>
+              <div *ngIf="passwordMatchError" class="invalid-feedback">
+                Las contraseñas no coinciden
+              </div>
             </div>
+            <div class="small">- Vuelva a repetir la contraseña</div>
           </div>
 
           <div class="my-5 small">
