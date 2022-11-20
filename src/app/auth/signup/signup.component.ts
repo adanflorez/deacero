@@ -19,7 +19,9 @@ export class SignupComponent implements OnInit {
   alertMessage = '';
   signupForm!: FormGroup;
   passwordFieldType = 'password';
+  confirmPasswordFieldType = 'password';
   passwordButonnIcon = 'lock';
+  confirmPasswordButonnIcon = 'lock';
 
   constructor(private authService: AuthService, private router: Router) {
     this.signupForm = new FormGroup(
@@ -76,14 +78,24 @@ export class SignupComponent implements OnInit {
       });
   }
 
-  showHidePassword(): void {
-    if (this.passwordFieldType === 'password') {
-      this.passwordFieldType = 'text';
-      this.passwordButonnIcon = 'unlock';
-      return;
+  showHidePassword(field: number): void {
+    if (field === 1) {
+      if (this.passwordFieldType === 'password') {
+        this.passwordFieldType = 'text';
+        this.passwordButonnIcon = 'unlock';
+        return;
+      }
+      this.passwordFieldType = 'password';
+      this.passwordButonnIcon = 'lock';
+    } else {
+      if (this.confirmPasswordFieldType === 'password') {
+        this.confirmPasswordFieldType = 'text';
+        this.confirmPasswordButonnIcon = 'unlock';
+        return;
+      }
+      this.confirmPasswordFieldType = 'password';
+      this.confirmPasswordButonnIcon = 'lock';
     }
-    this.passwordFieldType = 'password';
-    this.passwordButonnIcon = 'lock';
   }
 
   validateRFC(input: any) {

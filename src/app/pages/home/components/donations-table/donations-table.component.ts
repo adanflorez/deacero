@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
+import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Donation {
@@ -28,6 +29,7 @@ export class DonationsTableComponent {
       year: new FormControl('', [
         Validators.pattern(ONLY_NUMBERS_PATTERN),
         Validators.maxLength(4),
+        CustomValidators.MaxDate()
       ]),
       amount: new FormControl('', Validators.pattern(ONLY_NUMBERS_PATTERN)),
       proyectName: new FormControl(''),

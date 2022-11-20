@@ -51,7 +51,10 @@ export class HomeComponent implements OnInit {
         this.oscData.razonSocial,
         Validators.required
       ),
-      rfc: new FormControl(this.oscData.rfc, Validators.required),
+      rfc: new FormControl(
+        { value: this.oscData.rfc, disabled: true },
+        Validators.required
+      ),
       phone: new FormControl(this.oscData.telefono, [
         Validators.required,
         Validators.pattern(ONLY_NUMBERS_PATTERN),

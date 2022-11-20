@@ -11,4 +11,11 @@ export class CustomValidators {
         : null;
     };
   }
+
+  static MaxDate(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const currentYear = new Date().getFullYear();
+      return Number(control.value) > currentYear ? { maxDate: true } : null;
+    };
+  }
 }
