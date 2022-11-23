@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
 import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
 import { v4 as uuidv4 } from 'uuid';
@@ -16,20 +17,20 @@ interface Donation {
   styleUrls: ['./donations-table.component.scss'],
 })
 export class DonationsTableComponent {
-  form: FormGroup;
-  showForm = false;
-  validForm = false;
   @Input() donations: Donation[] = [];
   @Output() donationsList = new EventEmitter();
+  form: FormGroup;
+  validForm = false;
   donationToEdit: Donation;
   isEditMode = false;
+  closeResult = '';
 
-  constructor() {
+  constructor(private modalService: NgbModal) {
     this.form = new FormGroup({
       year: new FormControl('', [
         Validators.pattern(ONLY_NUMBERS_PATTERN),
         Validators.maxLength(4),
-        CustomValidators.MaxDate()
+        CustomValidators.MaxDate(),
       ]),
       amount: new FormControl('', Validators.pattern(ONLY_NUMBERS_PATTERN)),
       proyectName: new FormControl(''),
@@ -44,13 +45,8 @@ export class DonationsTableComponent {
     });
   }
 
-  showFormOnTable() {
-    this.showForm = true;
-  }
-
   addDonation() {
     if (!this.validForm) return;
-    this.showForm = false;
     this.donations.push({
       id: uuidv4(),
       ...this.form.value,
@@ -68,7 +64,7 @@ export class DonationsTableComponent {
     return this.form.controls;
   }
 
-  loadDonationInFields(id: string) {
+  loadDonationInFields(id: string, modal: any) {
     const donations = this.donations.filter((donation) => donation.id === id);
     this.donationToEdit = donations[0];
     const { year, amount, proyectName } = donations[0];
@@ -77,8 +73,8 @@ export class DonationsTableComponent {
       amount,
       proyectName,
     });
-    this.showForm = true;
     this.isEditMode = true;
+    this.open(modal);
   }
 
   editDonation() {
@@ -88,14 +84,28 @@ export class DonationsTableComponent {
     );
     this.donations.push(this.donationToEdit);
     this.donationsList.emit(this.donations);
-    this.showForm = false;
     this.isEditMode = false;
     this.form.reset();
   }
 
   cancelEdit() {
-    this.showForm = false;
     this.isEditMode = false;
     this.form.reset();
+  }
+
+  open(content: any) {
+    this.modalService
+      .open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        backdrop: 'static',
+      })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.form.reset();
+        }
+      );
   }
 }

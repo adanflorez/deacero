@@ -1,30 +1,86 @@
 <h5>Productos</h5>
-<form [formGroup]="form">
-  <div class="d-none d-md-flex">
-    <table class="table table-light table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">Descripción del producto</th>
-          <th scope="col">Precio</th>
-          <th scope="col">Disponibilidad</th>
-          <th scope="col">Temporada</th>
-          <th scope="col">Fotografía de producto</th>
-          <th scope="col" style="width: 100px">*</th>
-        </tr>
-      </thead>
+<div class="d-none d-md-flex">
+  <table class="table table-light table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Descripción del producto</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Disponibilidad</th>
+        <th scope="col">Temporada</th>
+        <th scope="col">Fotografía de producto</th>
+        <th scope="col">*</th>
+      </tr>
+    </thead>
 
-      <tbody>
-        <tr *ngFor="let product of products">
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.description }}</td>
+        <td>{{ product.price | currency: "MXN" }}</td>
+        <td>{{ product.available }}</td>
+        <td>{{ product.season }}</td>
+        <td style="max-width: 150px">
+          <div class="row">
+            <div class="col-12 text-truncate">
+              {{ product.photo }}
+            </div>
+          </div>
+        </td>
+        <td>
+          <ng-container *ngIf="!isEditMode">
+            <button
+              class="btn btn-secondary p-1 me-2"
+              (click)="loadProductInFields(product.id, modal)"
+            >
+              <img height="18" src="/assets/icons/edit.png" alt="edit" />
+            </button>
+            <button
+              class="btn btn-secondary p-1"
+              (click)="removeProduct(product.id)"
+            >
+              <img height="18" src="/assets/icons/trash.png" alt="trash" />
+            </button>
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="6">
+          <button class="btn btn-primary" (click)="open(modal)">
+            Agregar producto
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="d-flex d-md-none">
+  <table class="table table-light table-bordered">
+    <tbody>
+      <ng-container *ngFor="let product of products">
+        <tr>
           <td>{{ product.description }}</td>
+        </tr>
+        <tr>
           <td>{{ product.price | currency: "MXN" }}</td>
+        </tr>
+        <tr>
           <td>{{ product.available }}</td>
+        </tr>
+        <tr>
           <td>{{ product.season }}</td>
-          <td>{{ product.photo }}</td>
+        </tr>
+        <tr>
+          <td style="max-width: 150px">
+            <div class="row">
+              <div class="col-12 text-truncate">{{ product.photo }}</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
           <td>
             <ng-container *ngIf="!isEditMode">
               <button
                 class="btn btn-secondary p-1 me-2"
-                (click)="loadProductInFields(product.id)"
+                (click)="loadProductInFields(product.id, modal)"
               >
                 <img height="18" src="/assets/icons/edit.png" alt="edit" />
               </button>
@@ -37,225 +93,123 @@
             </ng-container>
           </td>
         </tr>
+        <tr style="height: 10px" class="bg-gray"></tr>
+      </ng-container>
+      <tr>
+        <td colspan="6">
+          <button class="btn btn-primary" (click)="open(modal)">
+            Agregar producto
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-        <ng-container *ngIf="showForm">
-          <tr>
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                id="description"
-                placeholder="Descripción"
-                formControlName="description"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                id="price"
-                placeholder="Precio"
-                formControlName="price"
-                [class.is-invalid]="f['price'].invalid && f['price'].touched"
-              />
-            </td>
-            <td>
-              <select class="form-select" formControlName="available">
-                <option selected>Click para seleccionar</option>
-                <option value="Permanente">Permanente</option>
-                <option value="De temporada">De temporada</option>
-                <option value="Días festivos">Días festivos</option>
-              </select>
-            </td>
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                id="season"
-                placeholder="Temporada"
-                formControlName="season"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                id="photo"
-                placeholder="https://..."
-                formControlName="photo"
-              />
-            </td>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="6">
-              <button
-                *ngIf="!isEditMode"
-                class="btn btn-primary me-2"
-                (click)="addProduct()"
-                [disabled]="!validForm"
-              >
-                Guardar
-              </button>
-              <ng-container *ngIf="isEditMode">
-                <button
-                  class="btn btn-primary me-2"
-                  (click)="editProduct()"
-                  [disabled]="!validForm"
-                >
-                  Editar
-                </button>
-                <button class="btn btn-secondary" (click)="cancelEdit()">
-                  Cancelar
-                </button>
-              </ng-container>
-            </td>
-          </tr>
-        </ng-container>
-
-        <tr *ngIf="!showForm">
-          <td colspan="6">
-            <button class="btn btn-primary" (click)="showFormOnTable()">
-              Agregar producto
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Producto</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
   </div>
-  <div class="d-flex d-md-none">
-    <table class="table table-light table-bordered">
-      <tbody>
-        <ng-container *ngFor="let product of products">
-          <tr>
-            <td>{{ product.description }}</td>
-          </tr>
-          <tr>
-            <td>{{ product.price | currency: "MXN" }}</td>
-          </tr>
-          <tr>
-            <td>{{ product.available }}</td>
-          </tr>
-          <tr>
-            <td>{{ product.season }}</td>
-          </tr>
-          <tr>
-            <td>{{ product.photo }}</td>
-          </tr>
-          <tr>
-            <td>
-              <ng-container *ngIf="!isEditMode">
-                <button
-                  class="btn btn-secondary p-1 me-2"
-                  (click)="loadProductInFields(product.id)"
-                >
-                  <img height="18" src="/assets/icons/edit.png" alt="edit" />
-                </button>
-                <button
-                  class="btn btn-secondary p-1"
-                  (click)="removeProduct(product.id)"
-                >
-                  <img height="18" src="/assets/icons/trash.png" alt="trash" />
-                </button>
-              </ng-container>
-            </td>
-          </tr>
-          <tr style="height: 10px" class="bg-gray"></tr>
+  <div class="modal-body">
+    <form [formGroup]="form" class="px-4">
+      <label class="form-label" for="description">Descripción</label>
+      <input
+        type="text"
+        class="form-control mb-4"
+        id="description"
+        placeholder="Descripción"
+        formControlName="description"
+      />
+      <label class="form-label" for="price">Precio</label>
+      <input
+        type="text"
+        class="form-control mb-4"
+        id="price"
+        placeholder="Precio"
+        formControlName="price"
+        [class.is-invalid]="f['price'].invalid && f['price'].touched"
+      />
+      <label class="form-label" for="available">Disponibilidad</label>
+      <select
+        class="form-select mb-4"
+        formControlName="available"
+        id="available"
+      >
+        <option selected>Click para seleccionar</option>
+        <option value="Permanente">Permanente</option>
+        <option value="De temporada">De temporada</option>
+        <option value="Días festivos">Días festivos</option>
+      </select>
+      <label class="form-label" for="season">Temporada</label>
+      <input
+        type="text"
+        class="form-control mb-4"
+        id="season"
+        placeholder="Temporada"
+        formControlName="season"
+      />
+      <div class="mb-3">
+        <label class="form-label" for="photo">Fotografía del producto</label>
+        <ng-container *ngIf="!(photoUrl | async); else photo">
+          <input
+            class="form-control"
+            type="file"
+            id="photo"
+            (change)="uploadPhoto($event)"
+          />
         </ng-container>
-        <ng-container *ngIf="showForm">
-          <tr>
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                id="description"
-                placeholder="Descripción"
-                formControlName="description"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                id="price"
-                placeholder="Precio"
-                formControlName="price"
-                [class.is-invalid]="f['price'].invalid && f['price'].touched"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <select
-                class="form-select"
-                aria-label="Selecciona, ¿En cuáles de los siguientes temas te gustaría
-                    fortalecerte como organización?"
-                formControlName="available"
-              >
-                <option selected>Click para seleccionar</option>
-                <option value="Permanente">Permanente</option>
-                <option value="De temporada">De temporada</option>
-                <option value="Días festivos">Días festivos</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                id="season"
-                placeholder="Temporada"
-                formControlName="season"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="text"
-                class="form-control"
-                id="photo"
-                placeholder="https://..."
-                formControlName="photo"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button
-                *ngIf="!isEditMode"
-                class="btn btn-primary me-2"
-                (click)="addProduct()"
-                [disabled]="!validForm"
-              >
-                Guardar
-              </button>
-              <ng-container *ngIf="isEditMode">
-                <button
-                  class="btn btn-primary me-2"
-                  (click)="editProduct()"
-                  [disabled]="!validForm"
-                >
-                  Editar
-                </button>
-                <button class="btn btn-secondary" (click)="cancelEdit()">
-                  Cancelar
-                </button>
-              </ng-container>
-            </td>
-          </tr>
-        </ng-container>
-        <tr *ngIf="!showForm">
-          <td colspan="6">
-            <button class="btn btn-primary" (click)="showFormOnTable()">
-              Agregar producto
+        <ng-template #photo>
+          <div class="input-group mb-4">
+            <input
+              type="text"
+              class="form-control"
+              id="photo"
+              placeholder="https://..."
+              formControlName="photo"
+              readonly
+            />
+            <button
+              class="btn btn-secondary p-1"
+              (click)="photoUrl.next(undefined); f.photo.setValue('')"
+            >
+              <img height="18" src="/assets/icons/trash.png" alt="trash" />
             </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          </div>
+        </ng-template>
+      </div>
+    </form>
   </div>
-</form>
+  <div class="modal-footer">
+    <button
+      class="btn btn-secondary me-2"
+      (click)="cancelEdit(); modal.close()"
+    >
+      Cancelar
+    </button>
+    <ng-container *ngIf="isEditMode; else save">
+      <button
+        class="btn btn-primary"
+        (click)="editProduct(); modal.close()"
+        [disabled]="!validForm"
+      >
+        Editar
+      </button>
+    </ng-container>
+    <ng-template #save>
+      <button
+        *ngIf="!isEditMode"
+        class="btn btn-primary"
+        (click)="addProduct(); modal.close()"
+        [disabled]="!validForm"
+      >
+        Guardar
+      </button>
+    </ng-template>
+  </div>
+</ng-template>

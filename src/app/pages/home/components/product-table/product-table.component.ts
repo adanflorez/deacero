@@ -1,7 +1,10 @@
+import { BehaviorSubject } from 'rxjs';
+import { MultimediaService } from './../../../../lib/services/multimedia.service';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 interface Product {
   id: string;
@@ -18,15 +21,21 @@ interface Product {
   styleUrls: ['./product-table.component.scss'],
 })
 export class ProductTableComponent {
-  form: FormGroup;
-  showForm = false;
-  validForm = false;
   @Input() products: Product[] = [];
   @Output() productsList = new EventEmitter();
+  form: FormGroup;
+  validForm = false;
   productToEdit: Product;
   isEditMode = false;
+  closeResult = '';
+  photoUrl: BehaviorSubject<string | undefined> = new BehaviorSubject<
+    string | undefined
+  >(undefined);
 
-  constructor() {
+  constructor(
+    private modalService: NgbModal,
+    private multimediaService: MultimediaService
+  ) {
     this.form = new FormGroup({
       description: new FormControl(''),
       price: new FormControl('', Validators.pattern(ONLY_NUMBERS_PATTERN)),
@@ -44,13 +53,8 @@ export class ProductTableComponent {
     });
   }
 
-  showFormOnTable() {
-    this.showForm = true;
-  }
-
   addProduct() {
     if (!this.validForm) return;
-    this.showForm = false;
     this.products.push({
       id: uuidv4(),
       ...this.form.value,
@@ -64,7 +68,7 @@ export class ProductTableComponent {
     this.productsList.emit(this.products);
   }
 
-  loadProductInFields(id: string) {
+  loadProductInFields(id: string, modal: any) {
     const products = this.products.filter((product) => product.id === id);
     this.productToEdit = products[0];
     const { description, price, available, season, photo } = products[0];
@@ -75,8 +79,8 @@ export class ProductTableComponent {
       season,
       photo,
     });
-    this.showForm = true;
     this.isEditMode = true;
+    this.open(modal);
   }
 
   editProduct() {
@@ -86,7 +90,6 @@ export class ProductTableComponent {
     );
     this.products.push(this.productToEdit);
     this.productsList.emit(this.products);
-    this.showForm = false;
     this.isEditMode = false;
     this.form.reset();
   }
@@ -96,8 +99,39 @@ export class ProductTableComponent {
   }
 
   cancelEdit() {
-    this.showForm = false;
     this.isEditMode = false;
     this.form.reset();
+  }
+
+  open(content: any) {
+    this.modalService
+      .open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        backdrop: 'static',
+      })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.form.reset();
+        }
+      );
+  }
+
+  uploadPhoto(e: Event) {
+    const formData = new FormData();
+    formData.append('file', (e.target as HTMLInputElement).files![0]);
+    this.multimediaService.upload(formData).subscribe({
+      next: (res) => {
+        this.photoUrl.next(res.data);
+      },
+      error: (error) => console.error(error),
+      complete: () => {
+        this.photoUrl.asObservable().subscribe((res) => {
+          this.f.photo.setValue(res);
+        });
+      },
+    });
   }
 }
