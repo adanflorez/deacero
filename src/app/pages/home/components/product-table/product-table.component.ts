@@ -22,7 +22,6 @@ export class ProductTableComponent {
   @Input() products: Product[] = [];
   @Output() productsList = new EventEmitter();
   form: FormGroup;
-  showForm = false;
   validForm = false;
   productToEdit: Product;
   isEditMode = false;
@@ -46,13 +45,8 @@ export class ProductTableComponent {
     });
   }
 
-  showFormOnTable() {
-    this.showForm = true;
-  }
-
   addProduct() {
     if (!this.validForm) return;
-    this.showForm = false;
     this.products.push({
       id: uuidv4(),
       ...this.form.value,
@@ -77,7 +71,6 @@ export class ProductTableComponent {
       season,
       photo,
     });
-    this.showForm = true;
     this.isEditMode = true;
     this.open(modal);
   }
@@ -89,7 +82,6 @@ export class ProductTableComponent {
     );
     this.products.push(this.productToEdit);
     this.productsList.emit(this.products);
-    this.showForm = false;
     this.isEditMode = false;
     this.form.reset();
   }
@@ -99,7 +91,6 @@ export class ProductTableComponent {
   }
 
   cancelEdit() {
-    this.showForm = false;
     this.isEditMode = false;
     this.form.reset();
   }

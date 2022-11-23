@@ -1,25 +1,71 @@
 <h5>Productos</h5>
-<form>
-  <div class="d-none d-md-flex">
-    <table class="table table-light table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">Descripción del producto</th>
-          <th scope="col">Precio</th>
-          <th scope="col">Disponibilidad</th>
-          <th scope="col">Temporada</th>
-          <th scope="col">Fotografía de producto</th>
-          <th scope="col" style="width: 100px">*</th>
-        </tr>
-      </thead>
+<div class="d-none d-md-flex">
+  <table class="table table-light table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Descripción del producto</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Disponibilidad</th>
+        <th scope="col">Temporada</th>
+        <th scope="col">Fotografía de producto</th>
+        <th scope="col" style="width: 100px">*</th>
+      </tr>
+    </thead>
 
-      <tbody>
-        <tr *ngFor="let product of products">
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.description }}</td>
+        <td>{{ product.price | currency: "MXN" }}</td>
+        <td>{{ product.available }}</td>
+        <td>{{ product.season }}</td>
+        <td>{{ product.photo }}</td>
+        <td>
+          <ng-container *ngIf="!isEditMode">
+            <button
+              class="btn btn-secondary p-1 me-2"
+              (click)="loadProductInFields(product.id, modal)"
+            >
+              <img height="18" src="/assets/icons/edit.png" alt="edit" />
+            </button>
+            <button
+              class="btn btn-secondary p-1"
+              (click)="removeProduct(product.id)"
+            >
+              <img height="18" src="/assets/icons/trash.png" alt="trash" />
+            </button>
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="6">
+          <button class="btn btn-primary" (click)="open(modal)">
+            Agregar producto
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="d-flex d-md-none">
+  <table class="table table-light table-bordered">
+    <tbody>
+      <ng-container *ngFor="let product of products">
+        <tr>
           <td>{{ product.description }}</td>
+        </tr>
+        <tr>
           <td>{{ product.price | currency: "MXN" }}</td>
+        </tr>
+        <tr>
           <td>{{ product.available }}</td>
+        </tr>
+        <tr>
           <td>{{ product.season }}</td>
+        </tr>
+        <tr>
           <td>{{ product.photo }}</td>
+        </tr>
+        <tr>
           <td>
             <ng-container *ngIf="!isEditMode">
               <button
@@ -37,66 +83,18 @@
             </ng-container>
           </td>
         </tr>
-        <tr *ngIf="!showForm">
-          <td colspan="6">
-            <button class="btn btn-primary" (click)="open(modal)">
-              Agregar producto
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="d-flex d-md-none">
-    <table class="table table-light table-bordered">
-      <tbody>
-        <ng-container *ngFor="let product of products">
-          <tr>
-            <td>{{ product.description }}</td>
-          </tr>
-          <tr>
-            <td>{{ product.price | currency: "MXN" }}</td>
-          </tr>
-          <tr>
-            <td>{{ product.available }}</td>
-          </tr>
-          <tr>
-            <td>{{ product.season }}</td>
-          </tr>
-          <tr>
-            <td>{{ product.photo }}</td>
-          </tr>
-          <tr>
-            <td>
-              <ng-container *ngIf="!isEditMode">
-                <button
-                  class="btn btn-secondary p-1 me-2"
-                  (click)="loadProductInFields(product.id, modal)"
-                >
-                  <img height="18" src="/assets/icons/edit.png" alt="edit" />
-                </button>
-                <button
-                  class="btn btn-secondary p-1"
-                  (click)="removeProduct(product.id)"
-                >
-                  <img height="18" src="/assets/icons/trash.png" alt="trash" />
-                </button>
-              </ng-container>
-            </td>
-          </tr>
-          <tr style="height: 10px" class="bg-gray"></tr>
-        </ng-container>
-        <tr *ngIf="!showForm">
-          <td colspan="6">
-            <button class="btn btn-primary" (click)="open(modal)">
-              Agregar producto
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</form>
+        <tr style="height: 10px" class="bg-gray"></tr>
+      </ng-container>
+      <tr>
+        <td colspan="6">
+          <button class="btn btn-primary" (click)="open(modal)">
+            Agregar producto
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <ng-template #modal let-modal>
   <div class="modal-header">
