@@ -1,3 +1,5 @@
+import { BehaviorSubject } from 'rxjs';
+import { MultimediaService } from './../../../../lib/services/multimedia.service';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -26,8 +28,14 @@ export class ProductTableComponent {
   productToEdit: Product;
   isEditMode = false;
   closeResult = '';
+  photoUrl: BehaviorSubject<string | undefined> = new BehaviorSubject<
+    string | undefined
+  >(undefined);
 
-  constructor(private modalService: NgbModal) {
+  constructor(
+    private modalService: NgbModal,
+    private multimediaService: MultimediaService
+  ) {
     this.form = new FormGroup({
       description: new FormControl(''),
       price: new FormControl('', Validators.pattern(ONLY_NUMBERS_PATTERN)),
@@ -109,5 +117,21 @@ export class ProductTableComponent {
           this.form.reset();
         }
       );
+  }
+
+  uploadPhoto(e: Event) {
+    const formData = new FormData();
+    formData.append('file', (e.target as HTMLInputElement).files![0]);
+    this.multimediaService.upload(formData).subscribe({
+      next: (res) => {
+        this.photoUrl.next(res.data);
+      },
+      error: (error) => console.error(error),
+      complete: () => {
+        this.photoUrl.asObservable().subscribe((res) => {
+          this.f.photo.setValue(res);
+        });
+      },
+    });
   }
 }

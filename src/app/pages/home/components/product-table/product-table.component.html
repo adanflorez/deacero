@@ -8,7 +8,7 @@
         <th scope="col">Disponibilidad</th>
         <th scope="col">Temporada</th>
         <th scope="col">Fotografía de producto</th>
-        <th scope="col" style="width: 100px">*</th>
+        <th scope="col">*</th>
       </tr>
     </thead>
 
@@ -18,7 +18,13 @@
         <td>{{ product.price | currency: "MXN" }}</td>
         <td>{{ product.available }}</td>
         <td>{{ product.season }}</td>
-        <td>{{ product.photo }}</td>
+        <td style="max-width: 150px">
+          <div class="row">
+            <div class="col-12 text-truncate">
+              {{ product.photo }}
+            </div>
+          </div>
+        </td>
         <td>
           <ng-container *ngIf="!isEditMode">
             <button
@@ -63,7 +69,11 @@
           <td>{{ product.season }}</td>
         </tr>
         <tr>
-          <td>{{ product.photo }}</td>
+          <td style="max-width: 150px">
+            <div class="row">
+              <div class="col-12 text-truncate">{{ product.photo }}</div>
+            </div>
+          </td>
         </tr>
         <tr>
           <td>
@@ -144,14 +154,35 @@
         placeholder="Temporada"
         formControlName="season"
       />
-      <label class="form-label" for="photo">Fotografía del producto</label>
-      <input
-        type="text"
-        class="form-control mb-4"
-        id="photo"
-        placeholder="https://..."
-        formControlName="photo"
-      />
+      <div class="mb-3">
+        <label class="form-label" for="photo">Fotografía del producto</label>
+        <ng-container *ngIf="!(photoUrl | async); else photo">
+          <input
+            class="form-control"
+            type="file"
+            id="photo"
+            (change)="uploadPhoto($event)"
+          />
+        </ng-container>
+        <ng-template #photo>
+          <div class="input-group mb-4">
+            <input
+              type="text"
+              class="form-control"
+              id="photo"
+              placeholder="https://..."
+              formControlName="photo"
+              readonly
+            />
+            <button
+              class="btn btn-secondary p-1"
+              (click)="photoUrl.next(undefined); f.photo.setValue('')"
+            >
+              <img height="18" src="/assets/icons/trash.png" alt="trash" />
+            </button>
+          </div>
+        </ng-template>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
