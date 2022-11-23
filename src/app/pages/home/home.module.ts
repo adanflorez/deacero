@@ -9,6 +9,7 @@ import { AlertModule } from 'src/app/shared/alert/alert.module';
 import { ProductTableComponent } from './components/product-table/product-table.component';
 import { DonationsTableComponent } from './components/donations-table/donations-table.component';
 
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DonationsTableComponent } from './components/donations-table/donations-
     ReactiveFormsModule,
     FormsModule,
     AlertModule,
-    FormErrorModule
+    FormErrorModule,
+    NgbModalModule
   ]
 })
 export class HomeModule { }
