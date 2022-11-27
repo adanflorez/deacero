@@ -1,13 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Member from 'src/app/lib/models/member.model';
 import { v4 as uuidv4 } from 'uuid';
-
-interface Member {
-  id: string;
-  name: string;
-  position: string;
-}
 
 @Component({
   selector: 'app-members',
