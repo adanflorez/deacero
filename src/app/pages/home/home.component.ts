@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
   getOSC() {
     this.loading = true;
     this.userService.getOSC().subscribe((res) => {
-      console.log(res);
       this.oscData = res.data;
       this.products = res.data.product || [];
       this.donations = res.data.donation || [];
