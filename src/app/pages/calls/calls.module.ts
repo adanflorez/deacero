@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NgxMaskModule } from 'ngx-mask';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { CallsRoutingModule } from './calls-routing.module';
 import { CallsComponent } from './calls.component';
@@ -19,6 +20,7 @@ import { RemunerationTableComponent } from './components/remuneration-table/remu
     ReactiveFormsModule,
     FormErrorModule,
     NgxMaskModule.forChild(),
+    NgSelectModule,
   ],
 })
 export class CallsModule {}

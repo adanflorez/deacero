@@ -25,6 +25,8 @@ export class CallsComponent {
         Validators.pattern(ONLY_NUMBERS_PATTERN),
       ]),
       remunerationQuestion: new FormControl(true),
+      projectName: new FormControl(null, [Validators.required]),
+      category: new FormControl('', Validators.required),
     });
   }
 

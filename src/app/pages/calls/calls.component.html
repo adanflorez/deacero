@@ -77,6 +77,65 @@
         ></app-remuneration-table>
       </div>
     </div>
+    <hr />
+    <h2 class="mb-3">Datos generales del proyecto</h2>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="projectName" class="form-label"
+            >Nombre del proyecto</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="projectName"
+            placeholder="Nombre del proyecto"
+            formControlName="projectName"
+            [class.is-invalid]="
+              f['projectName'].invalid && f['projectName'].touched
+            "
+          />
+          <app-form-error [control]="f['projectName']"></app-form-error>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="category" class="form-label">Categoría</label>
+        <ng-select #category labelForId="category" formControlName="category">
+          <ng-option value="">Click para seleccionar</ng-option>
+          <ng-option value="1">Alimentación</ng-option>
+          <ng-option value="2">Asistencia jurídica</ng-option>
+          <ng-option value="3">Asistencia o rehabilitación médica</ng-option>
+          <ng-option value="4"
+            >Atención a grupos sociales con discapacidad</ng-option
+          >
+          <ng-option value="5">Becas</ng-option>
+          <ng-option value="6">Defensa y promoción de los DH</ng-option>
+          <ng-option value="7">Desarrollo comunidades indígenas.</ng-option>
+          <ng-option value="8">Desarrollo Institucional</ng-option>
+          <ng-option value="9">Desarrollo urbano</ng-option>
+          <ng-option value="10"
+            >Detonación de oportunidades para la resiliencia
+            económica.</ng-option
+          >
+          <ng-option value="11">Ecología</ng-option>
+          <ng-option value="12">Educación</ng-option>
+          <ng-option value="13">Empoderamiento social</ng-option>
+          <ng-option value="14">Equipamiento</ng-option>
+          <ng-option value="15">Fomento educativo</ng-option>
+          <ng-option value="16">Inclusión</ng-option>
+          <ng-option value="17">Infraestructura</ng-option>
+          <ng-option value="18">Medio ambiente</ng-option>
+          <ng-option value="19">Nutrición</ng-option>
+          <ng-option value="20">Óptimo desarrollo infantil.</ng-option>
+          <ng-option value="21">Orientación social</ng-option>
+          <ng-option value="22">Participación ciudadana.</ng-option>
+          <ng-option value="23">Promoción y difusión cultural</ng-option>
+          <ng-option value="24">Reinserción social</ng-option>
+          <ng-option value="25">Salud mental.</ng-option>
+        </ng-select>
+        <app-form-error [control]="f['category']"></app-form-error>
+      </div>
+    </div>
     <button
       class="btn btn-primary"
       type="button"
