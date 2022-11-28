@@ -54,7 +54,9 @@
     <h2 class="mb-3">Remuneraciones</h2>
     <div class="row">
       <div class="col-12">
-        <app-remuneration-table></app-remuneration-table>
+        <app-remuneration-table
+          (onChange)="remunerations = $event"
+        ></app-remuneration-table>
       </div>
     </div>
     <button

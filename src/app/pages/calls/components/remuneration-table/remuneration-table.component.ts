@@ -1,7 +1,7 @@
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TableComponent } from 'src/app/lib/models/table.model';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import Remuneration from 'src/app/lib/models/remuneration.model';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -21,7 +21,22 @@ export class RemunerationTableComponent
   isEditMode: boolean;
   recordToEdit: Remuneration;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal) {
+    this.form = new FormGroup({
+      position: new FormControl(''),
+      schema: new FormControl(''),
+      financialRemuneration: new FormControl(''),
+    });
+
+    this.form.valueChanges.subscribe((values) => {
+      const { schema, position, financialRemuneration } = values;
+      if (schema || position || financialRemuneration) {
+        this.validForm = this.form.valid && true;
+        return;
+      }
+      this.validForm = false;
+    });
+  }
 
   get f() {
     return this.form.controls;

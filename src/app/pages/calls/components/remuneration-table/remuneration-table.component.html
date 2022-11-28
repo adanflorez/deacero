@@ -96,7 +96,23 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="form" class="px-4">
-      <label for="name" class="form-label">Nombre</label>
+      <label for="position" class="form-label">Puesto</label>
+      <input
+        type="text"
+        class="form-control mb-4"
+        id="position"
+        placeholder="Puesto"
+        formControlName="position"
+      />
+      <label class="form-label" for="schema">Esquema</label>
+      <select class="form-select mb-4" formControlName="schema" id="schema">
+        <option selected value="">Click para seleccionar</option>
+        <option value="Sueldos y salarios">Sueldos y salarios</option>
+        <option value="Asalariados">Asalariados</option>
+        <option value="Honorarios">Honorarios</option>
+        <option value="Mixtos">Mixtos</option>
+      </select>
+      <!-- <label for="name" class="form-label">Nombre</label>
       <input
         type="text"
         class="form-control mb-4"
@@ -104,16 +120,7 @@
         placeholder="Nombre"
         formControlName="name"
         [class.is-invalid]="f['name'].invalid && f['name'].touched"
-      />
-      <label for="position" class="form-label">Puesto</label>
-      <input
-        type="text"
-        class="form-control mb-4"
-        id="position"
-        placeholder="Posición"
-        formControlName="position"
-        [class.is-invalid]="f['position'].invalid && f['position'].touched"
-      />
+      /> -->
     </form>
   </div>
   <div class="modal-footer">

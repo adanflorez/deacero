@@ -1,7 +1,8 @@
-import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
 import Member from 'src/app/lib/models/member.model';
+import Remuneration from 'src/app/lib/models/remuneration.model';
 
 @Component({
   selector: 'app-calls',
@@ -11,6 +12,7 @@ import Member from 'src/app/lib/models/member.model';
 export class CallsComponent {
   form: FormGroup;
   members: Member[] = [];
+  remunerations: Remuneration[] = [];
 
   constructor() {
     this.form = new FormGroup({
@@ -32,5 +34,6 @@ export class CallsComponent {
   save() {
     console.log(this.form.value);
     console.log(this.members);
+    console.log(this.remunerations);
   }
 }
