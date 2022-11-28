@@ -1,6 +1,6 @@
 import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import Member from 'src/app/lib/models/member.model';
 
 @Component({
@@ -8,7 +8,7 @@ import Member from 'src/app/lib/models/member.model';
   templateUrl: './calls.component.html',
   styleUrls: ['./calls.component.scss'],
 })
-export class CallsComponent implements OnInit {
+export class CallsComponent {
   form: FormGroup;
   members: Member[] = [];
 
@@ -24,8 +24,6 @@ export class CallsComponent implements OnInit {
       ]),
     });
   }
-
-  ngOnInit(): void {}
 
   get f() {
     return this.form.controls;

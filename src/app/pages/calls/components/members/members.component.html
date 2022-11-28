@@ -9,7 +9,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let member of members">
+      <tr *ngFor="let member of records">
         <td>{{ member.name }}</td>
         <td>{{ member.position }}</td>
         <td>
@@ -42,7 +42,7 @@
 <div class="d-flex d-md-none">
   <table class="table table-light table-bordered">
     <tbody>
-      <ng-container *ngFor="let member of members">
+      <ng-container *ngFor="let member of records">
         <tr>
           <td>{{ member.name }}</td>
         </tr>

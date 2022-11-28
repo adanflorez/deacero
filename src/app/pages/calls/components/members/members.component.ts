@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Member from 'src/app/lib/models/member.model';
+import { TableComponent } from 'src/app/lib/models/table.model';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -9,14 +10,14 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.scss'],
 })
-export class MembersComponent implements OnInit {
-  @Input() members: Member[] = [];
+export class MembersComponent implements TableComponent<Member> {
+  @Input() records: Member[] = [];
   @Output() recordsList = new EventEmitter();
   form: FormGroup;
   validForm = false;
   closeResult = '';
   isEditMode = false;
-  memberToEdit: Member;
+  recordToEdit: Member;
 
   constructor(private modalService: NgbModal) {
     this.form = new FormGroup({
@@ -32,22 +33,19 @@ export class MembersComponent implements OnInit {
       this.validForm = false;
     });
   }
-
-  ngOnInit(): void {}
-
-  removeRecord(id: string) {
-    this.members = this.members.filter((member) => member.id !== id);
-    this.recordsList.emit(this.members);
-  }
-
   get f() {
     return this.form.controls;
   }
 
+  removeRecord(id: string) {
+    this.records = this.records.filter((record) => record.id !== id);
+    this.recordsList.emit(this.records);
+  }
+
   loadRecordInFields(id: string, modal: any) {
-    const members = this.members.filter((member) => member.id === id);
-    this.memberToEdit = members[0];
-    const { name, position } = members[0];
+    const records = this.records.filter((record) => record.id === id);
+    this.recordToEdit = records[0];
+    const { name, position } = records[0];
     this.form.setValue({
       name,
       position,
@@ -74,21 +72,21 @@ export class MembersComponent implements OnInit {
 
   addRecord() {
     if (!this.validForm) return;
-    this.members.push({
+    this.records.push({
       id: uuidv4(),
       ...this.form.value,
     });
-    this.recordsList.emit(this.members);
+    this.recordsList.emit(this.records);
     this.form.reset();
   }
 
   editRecord() {
-    this.memberToEdit = { ...this.memberToEdit, ...this.form.value };
-    this.members = this.members.filter(
-      (donation) => donation.id !== this.memberToEdit.id
+    this.recordToEdit = { ...this.recordToEdit, ...this.form.value };
+    this.records = this.records.filter(
+      (record) => record.id !== this.recordToEdit.id
     );
-    this.members.push(this.memberToEdit);
-    this.recordsList.emit(this.members);
+    this.records.push(this.recordToEdit);
+    this.recordsList.emit(this.records);
     this.isEditMode = false;
     this.form.reset();
   }

@@ -6,9 +6,10 @@ import { CommonModule } from '@angular/common';
 import { CallsRoutingModule } from './calls-routing.module';
 import { CallsComponent } from './calls.component';
 import { MembersComponent } from './components/members/members.component';
+import { RemunerationTableComponent } from './components/remuneration-table/remuneration-table.component';
 
 @NgModule({
-  declarations: [CallsComponent, MembersComponent],
+  declarations: [CallsComponent, MembersComponent, RemunerationTableComponent],
   imports: [
     CommonModule,
     CallsRoutingModule,
