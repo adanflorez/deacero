@@ -8,9 +8,17 @@ import { AppComponent } from './app.component';
 import { LoadingInterceptor } from './lib/interceptors/loading.interceptor';
 import { TokenInterceptor } from './lib/interceptors/token.interceptor';
 
+import { NgxMaskModule } from 'ngx-mask';
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, NavbarModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NavbarModule,
+    HttpClientModule,
+    NgxMaskModule.forRoot(),
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
