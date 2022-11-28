@@ -13,7 +13,7 @@
       <tr *ngFor="let record of records">
         <td>{{ record.position }}</td>
         <td>{{ record.schema }}</td>
-        <td>{{ record.financialRemuneration }}</td>
+        <td>{{ record.financialRemuneration | currency: "MXN" }}</td>
         <td>
           <ng-container *ngIf="!isEditMode">
             <button
@@ -52,7 +52,7 @@
           <td>{{ record.schema }}</td>
         </tr>
         <tr>
-          <td>{{ record.financialRemuneration }}</td>
+          <td>{{ record.financialRemuneration | currency: "MXN" }}</td>
         </tr>
         <tr>
           <td>
@@ -112,15 +112,19 @@
         <option value="Honorarios">Honorarios</option>
         <option value="Mixtos">Mixtos</option>
       </select>
-      <!-- <label for="name" class="form-label">Nombre</label>
+      <label for="financialRemuneration" class="form-label"
+        >Remuneración económica</label
+      >
       <input
         type="text"
         class="form-control mb-4"
-        id="name"
-        placeholder="Nombre"
-        formControlName="name"
-        [class.is-invalid]="f['name'].invalid && f['name'].touched"
-      /> -->
+        id="financialRemuneration"
+        placeholder="Remuneración económica"
+        formControlName="financialRemuneration"
+        mask="separator.2"
+        thousandSeparator="."
+        prefix="MX$ "
+      />
     </form>
   </div>
   <div class="modal-footer">
