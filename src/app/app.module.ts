@@ -9,6 +9,7 @@ import { LoadingInterceptor } from './lib/interceptors/loading.interceptor';
 import { TokenInterceptor } from './lib/interceptors/token.interceptor';
 
 import { NgxMaskModule } from 'ngx-mask';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { NgxMaskModule } from 'ngx-mask';
     NavbarModule,
     HttpClientModule,
     NgxMaskModule.forRoot(),
+    NgbModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },

@@ -80,6 +80,19 @@ export class CallsComponent implements OnDestroy {
         Validators.pattern(ONLY_NUMBERS_PATTERN),
         Validators.maxLength(12),
       ]),
+      whichProblem: new FormControl('', Validators.required),
+      generalObjective: new FormControl('', Validators.required),
+      numberOfBeneficiaries: new FormControl('', Validators.required),
+      collaborationWithOtherOrganizations: new FormControl(
+        true,
+        Validators.required
+      ),
+      collaboratorsAnswer: new FormControl('', Validators.required),
+      populationsConditionsBefore: new FormControl('', Validators.required),
+      populationsConditionsAfter: new FormControl('', Validators.required),
+      promoteSocialImprovement: new FormControl('', Validators.required),
+      startDate: new FormControl('', Validators.required),
+      endDate: new FormControl('', Validators.required),
     });
   }
 
