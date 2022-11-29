@@ -91,7 +91,20 @@ export class CallsComponent implements OnDestroy {
     },
   ];
 
+  locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
+
   constructor() {
+    this.initForm();
+    this.handleCategory();
+    this.handleLocation();
+    this.handleAboutCall();
+  }
+
+  get f() {
+    return this.form.controls;
+  }
+
+  initForm() {
     this.form = new FormGroup({
       meetings: new FormControl(null, [
         Validators.required,
@@ -117,15 +130,17 @@ export class CallsComponent implements OnDestroy {
       urbanDevelopment: new FormControl(''),
       professionalizationProcess: new FormControl(''),
       opportunityGeneration: new FormControl(''),
+      locationQuestion: new FormControl(true),
+      street: new FormControl('', Validators.required),
+      colony: new FormControl('', Validators.required),
+      town: new FormControl('', Validators.required),
+      state: new FormControl('', Validators.required),
+      postalCode: new FormControl('', Validators.required),
+      video: new FormControl('', Validators.required),
+      daysAndHours: new FormControl('', Validators.required),
+      aboutCall: new FormControl('', Validators.required),
+      whichMedia: new FormControl(''),
     });
-    const sub = this.form
-      .get('category')
-      ?.valueChanges.subscribe(() => this.changeCategory());
-    this.unsubscribe.push(sub!);
-  }
-
-  get f() {
-    return this.form.controls;
   }
 
   save() {
@@ -205,6 +220,44 @@ export class CallsComponent implements OnDestroy {
     this.groups.map((group) => {
       this.form.get(group)?.setValidators(Validators.required);
     });
+  }
+
+  handleCategory() {
+    const sub = this.form
+      .get('category')
+      ?.valueChanges.subscribe(() => this.changeCategory());
+    this.unsubscribe.push(sub!);
+  }
+
+  handleLocation() {
+    const locationQuestionSub = this.form
+      .get('locationQuestion')
+      ?.valueChanges.subscribe((res) => {
+        if (res) {
+          this.locationFields.map((field) => {
+            this.form.get(field)?.setValidators(Validators.required);
+          });
+        } else {
+          console.log('apagado');
+          this.locationFields.map((field) => {
+            this.form.get(field)?.clearValidators();
+            this.form.get(field)?.reset();
+          });
+        }
+      });
+    this.unsubscribe.push(locationQuestionSub!);
+  }
+
+  handleAboutCall() {
+    const sub = this.form.get('aboutCall')?.valueChanges.subscribe((res) => {
+      if (res == 3) {
+        this.form.get('whichMedia')?.setValidators(Validators.required);
+      } else {
+        this.form.get('whichMedia')?.clearValidators();
+        this.form.get('whichMedia')?.reset();
+      }
+    });
+    this.unsubscribe.push(sub!);
   }
 
   ngOnDestroy(): void {
