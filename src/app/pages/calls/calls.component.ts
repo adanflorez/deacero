@@ -1,7 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ONLY_NUMBERS_PATTERN, RATING } from 'src/app/lib/constants';
+import {
+  MULTIPLE_EMAIL_PATTERN,
+  ONLY_NUMBERS_PATTERN,
+  RATING,
+} from 'src/app/lib/constants';
 import Member from 'src/app/lib/models/member.model';
 import Remuneration from 'src/app/lib/models/remuneration.model';
 
@@ -66,6 +70,16 @@ export class CallsComponent implements OnDestroy {
       daysAndHours: new FormControl('', Validators.required),
       aboutCall: new FormControl('', Validators.required),
       whichMedia: new FormControl(''),
+      responsibleName: new FormControl('', Validators.required),
+      emails: new FormControl('', [
+        Validators.required,
+        Validators.pattern(MULTIPLE_EMAIL_PATTERN),
+      ]),
+      phone: new FormControl('', [
+        Validators.required,
+        Validators.pattern(ONLY_NUMBERS_PATTERN),
+        Validators.maxLength(12),
+      ]),
     });
   }
 
