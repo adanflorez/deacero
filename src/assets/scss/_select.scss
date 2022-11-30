@@ -1,0 +1,25 @@
+.ng-select.ng-select-single .ng-select-container {
+  height: 33.5px;
+}
+
+.ng-select .ng-select-container {
+  color: #333;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  min-height: 33.5px;
+  align-items: center;
+}
+
+/* Border Color */
+.ng-select.ng-invalid.ng-touched .ng-select-container {
+  border-color: #dc3545;
+}
+/* Arrow Color */
+.ng-select.ng-invalid.ng-touched .ng-arrow-wrapper .ng-arrow {
+  border-color: #dc3545 transparent transparent;
+}
+/* Placeholder Color */
+.ng-select.ng-invalid.ng-touched .ng-select-container .ng-placeholder {
+  color: #dc3545;
+}

@@ -7,5 +7,12 @@
 @import "colors";
 @import "buttons";
 @import "labels";
+@import "toggle";
+@import "select";
 // 4. Include bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
+
+
+.cursor-pointer {
+  cursor: pointer;
+}

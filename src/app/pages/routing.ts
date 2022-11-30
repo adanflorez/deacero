@@ -7,6 +7,11 @@ const Routing: Routes = [
       import('./home/home.module').then((m) => m.HomeModule),
   },
   {
+    path: 'calls',
+    loadChildren: () =>
+      import('./calls/calls.module').then((m) => m.CallsModule),
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full',
