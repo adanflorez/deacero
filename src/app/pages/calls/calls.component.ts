@@ -46,6 +46,8 @@ export class CallsComponent implements OnInit, OnDestroy {
   ];
 
   contributions: ProjectBudget[] = [];
+  conversions: ProjectBudget[] = [];
+  donations: ProjectBudget[] = [];
 
   constructor() {
     this.initForm();

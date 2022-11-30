@@ -2043,10 +2043,14 @@
     <hr />
     <h2 class="mb-3">Presupuesto del proyecto</h2>
     <h6>Contribución de la organización</h6>
-    <app-budget-table
-      (onChange)="contributions = $event"
-    ></app-budget-table>
-
+    <app-budget-table (onChange)="contributions = $event"></app-budget-table>
+    <hr />
+    <h6>Conversión</h6>
+    <app-budget-table (onChange)="conversions = $event"></app-budget-table>
+    <hr />
+    <h6>Donativo Fundación DEACERO</h6>
+    <app-budget-table (onChange)="donations = $event"></app-budget-table>
+    <hr />
     <h2 *ngIf="f['category'].value" class="mb-3">
       Con la implementación del proyecto, ¿Cual consideras que será el beneficio
       para la comunidad en...
