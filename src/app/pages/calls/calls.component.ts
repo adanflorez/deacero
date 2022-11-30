@@ -1,8 +1,9 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {
   MULTIPLE_EMAIL_PATTERN,
+  OBJECTIVES,
   ONLY_NUMBERS_PATTERN,
   RATING,
 } from 'src/app/lib/constants';
@@ -14,7 +15,7 @@ import Remuneration from 'src/app/lib/models/remuneration.model';
   templateUrl: './calls.component.html',
   styleUrls: ['./calls.component.scss'],
 })
-export class CallsComponent implements OnDestroy {
+export class CallsComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
   form: FormGroup;
   members: Member[] = [];
@@ -22,19 +23,44 @@ export class CallsComponent implements OnDestroy {
   groups: string[] = [];
   rating = RATING;
   locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
+  objectivesOptions = OBJECTIVES
+
+  objectivesFields = [
+    'povertyEnd',
+    'zeroHunger',
+    'healthAndWellness',
+    'qualityEducation',
+    'genderEquality',
+    'cleanWater',
+    'affordableEnergy',
+    'decentWork',
+    'industry',
+    'reducingInequalities',
+    'cities',
+    'production',
+    'climateAction',
+    'underwaterLife',
+    'terrestrialEcosystemLife',
+    'peace',
+    'alliances',
+  ];
 
   constructor() {
     this.initForm();
+  }
+
+  ngOnInit(): void {
     this.handleCategory();
     this.handleLocation();
     this.handleAboutCall();
+    this.handleObjectives();
   }
 
   get f() {
     return this.form.controls;
   }
 
-  initForm() {
+  private initForm() {
     this.form = new FormGroup({
       meetings: new FormControl(null, [
         Validators.required,
@@ -93,6 +119,24 @@ export class CallsComponent implements OnDestroy {
       promoteSocialImprovement: new FormControl('', Validators.required),
       startDate: new FormControl('', Validators.required),
       endDate: new FormControl('', Validators.required),
+      objectives: new FormControl('', Validators.required),
+      povertyEnd: new FormControl(''),
+      zeroHunger: new FormControl(''),
+      healthAndWellness: new FormControl(''),
+      qualityEducation: new FormControl(''),
+      genderEquality: new FormControl(''),
+      cleanWater: new FormControl(''),
+      affordableEnergy: new FormControl(''),
+      decentWork: new FormControl(''),
+      industry: new FormControl(''),
+      reducingInequalities: new FormControl(''),
+      cities: new FormControl(''),
+      production: new FormControl(''),
+      climateAction: new FormControl(''),
+      underwaterLife: new FormControl(''),
+      terrestrialEcosystemLife: new FormControl(''),
+      peace: new FormControl(''),
+      alliances: new FormControl(''),
     });
   }
 
@@ -102,7 +146,7 @@ export class CallsComponent implements OnDestroy {
     console.log(this.remunerations);
   }
 
-  changeCategory() {
+  private changeCategory() {
     // Reset previous controls
     this.resetPreviousRatings();
     switch (Number(this.f.category.value)) {
@@ -162,27 +206,27 @@ export class CallsComponent implements OnDestroy {
     this.setValidatorsToRating();
   }
 
-  resetPreviousRatings() {
+  private resetPreviousRatings() {
     this.groups.map((group) => {
       this.form.get(group)?.clearValidators();
       this.form.get(group)?.reset();
     });
   }
 
-  setValidatorsToRating() {
+  private setValidatorsToRating() {
     this.groups.map((group) => {
       this.form.get(group)?.setValidators(Validators.required);
     });
   }
 
-  handleCategory() {
+  private handleCategory() {
     const sub = this.form
       .get('category')
       ?.valueChanges.subscribe(() => this.changeCategory());
     this.unsubscribe.push(sub!);
   }
 
-  handleLocation() {
+  private handleLocation() {
     const locationQuestionSub = this.form
       .get('locationQuestion')
       ?.valueChanges.subscribe((res) => {
@@ -191,7 +235,6 @@ export class CallsComponent implements OnDestroy {
             this.form.get(field)?.setValidators(Validators.required);
           });
         } else {
-          console.log('apagado');
           this.locationFields.map((field) => {
             this.form.get(field)?.clearValidators();
             this.form.get(field)?.reset();
@@ -201,7 +244,7 @@ export class CallsComponent implements OnDestroy {
     this.unsubscribe.push(locationQuestionSub!);
   }
 
-  handleAboutCall() {
+  private handleAboutCall() {
     const sub = this.form.get('aboutCall')?.valueChanges.subscribe((res) => {
       if (res == 3) {
         this.form.get('whichMedia')?.setValidators(Validators.required);
@@ -211,6 +254,27 @@ export class CallsComponent implements OnDestroy {
       }
     });
     this.unsubscribe.push(sub!);
+  }
+
+  private handleObjectives() {
+    this.resetObjectivesValidators();
+    const sub = this.form.get('objectives')?.valueChanges.subscribe((val) => {
+      this.objectivesOptions.map((_, index) => {
+        if (val.includes(this.objectivesOptions[index])) {
+          this.form
+            .get(this.objectivesFields[index])
+            ?.setValidators(Validators.required);
+        }
+      });
+    });
+    this.unsubscribe.push(sub!);
+  }
+
+  private resetObjectivesValidators() {
+    this.objectivesFields.map((obj) => {
+      this.form.get(obj)?.clearValidators();
+      this.form.get(obj)?.reset();
+    });
   }
 
   ngOnDestroy(): void {
