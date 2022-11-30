@@ -10,9 +10,15 @@ import { CallsRoutingModule } from './calls-routing.module';
 import { CallsComponent } from './calls.component';
 import { MembersComponent } from './components/members/members.component';
 import { RemunerationTableComponent } from './components/remuneration-table/remuneration-table.component';
+import { ContributionTableComponent } from './components/contribution-table/contribution-table.component';
 
 @NgModule({
-  declarations: [CallsComponent, MembersComponent, RemunerationTableComponent],
+  declarations: [
+    CallsComponent,
+    MembersComponent,
+    RemunerationTableComponent,
+    ContributionTableComponent,
+  ],
   imports: [
     CommonModule,
     CallsRoutingModule,

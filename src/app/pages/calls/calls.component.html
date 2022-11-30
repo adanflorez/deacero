@@ -570,8 +570,6 @@
     </div>
     <hr />
     <h2 class="mb-3">Objetivos y metas ODS</h2>
-    <hr />
-
     <div class="row">
       <div class="col-12 col-md-6">
         <div class="mb-3">
@@ -2041,6 +2039,13 @@
         </div>
       </div>
     </div>
+
+    <hr />
+    <h2 class="mb-3">Presupuesto del proyecto</h2>
+    <h6>Contribución de la organización</h6>
+    <app-contribution-table
+      (onChange)="contributions = $event"
+    ></app-contribution-table>
 
     <h2 *ngIf="f['category'].value" class="mb-3">
       Con la implementación del proyecto, ¿Cual consideras que será el beneficio

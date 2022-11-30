@@ -8,6 +8,7 @@ import {
   RATING,
 } from 'src/app/lib/constants';
 import Member from 'src/app/lib/models/member.model';
+import ProjectBudget from 'src/app/lib/models/project-budget.model';
 import Remuneration from 'src/app/lib/models/remuneration.model';
 
 @Component({
@@ -23,8 +24,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   groups: string[] = [];
   rating = RATING;
   locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
-  objectivesOptions = OBJECTIVES
-
+  objectivesOptions = OBJECTIVES;
   objectivesFields = [
     'povertyEnd',
     'zeroHunger',
@@ -44,6 +44,8 @@ export class CallsComponent implements OnInit, OnDestroy {
     'peace',
     'alliances',
   ];
+
+  contributions: ProjectBudget[] = [];
 
   constructor() {
     this.initForm();
