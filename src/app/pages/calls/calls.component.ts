@@ -6,6 +6,7 @@ import {
   OBJECTIVES,
   ONLY_NUMBERS_PATTERN,
   RATING,
+  URL_PATTERN,
 } from 'src/app/lib/constants';
 import Member from 'src/app/lib/models/member.model';
 import ProjectBudget from 'src/app/lib/models/project-budget.model';
@@ -22,6 +23,32 @@ export class CallsComponent implements OnInit, OnDestroy {
   members: Member[] = [];
   remunerations: Remuneration[] = [];
   groups: string[] = [];
+  categories = [
+    'Alimentación',
+    'Asistencia jurídica',
+    'Asistencia o rehabilitación médica',
+    'Atención a grupos sociales con discapacidad',
+    'Becas',
+    'Defensa y promoción de los DH',
+    'Desarrollo comunidades indígenas.',
+    'Desarrollo Institucional',
+    'Desarrollo urbano',
+    'Detonación de oportunidades para la resiliencia económica.',
+    'Ecología',
+    'Educación',
+    'Empoderamiento social',
+    'Equipamiento',
+    'Fomento educativo',
+    'Inclusión',
+    'Infraestructura',
+    'Medio ambiente',
+    'Nutrición',
+    'Orientación social',
+    'Participación ciudadana.',
+    'Promoción y difusión cultural',
+    'Reinserción social',
+    'Salud mental',
+  ];
   rating = RATING;
   locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
   objectivesOptions = OBJECTIVES;
@@ -141,27 +168,27 @@ export class CallsComponent implements OnInit, OnDestroy {
       terrestrialEcosystemLife: new FormControl(''),
       peace: new FormControl(''),
       alliances: new FormControl(''),
+      facebook: new FormControl('', [Validators.pattern(URL_PATTERN)]),
+      instagram: new FormControl('', [Validators.pattern(URL_PATTERN)]),
+      linkedin: new FormControl('', [Validators.pattern(URL_PATTERN)]),
+      twitter: new FormControl('', [Validators.pattern(URL_PATTERN)]),
+      tiktok: new FormControl('', [Validators.pattern(URL_PATTERN)]),
+      youtube: new FormControl('', [Validators.pattern(URL_PATTERN)]),
     });
-  }
-
-  save() {
-    console.log(this.form.value);
-    console.log(this.members);
-    console.log(this.remunerations);
   }
 
   private changeCategory() {
     // Reset previous controls
     this.resetPreviousRatings();
-    switch (Number(this.f.category.value)) {
-      case 1:
-      case 3:
-      case 4:
-      case 16:
-      case 19:
-      case 20:
-      case 24:
-      case 25:
+    switch (this.f.category.value) {
+      case this.categories[0]:
+      case this.categories[2]:
+      case this.categories[3]:
+      case this.categories[15]:
+      case this.categories[18]:
+      case this.categories[19]:
+      case this.categories[23]:
+      case this.categories[24]:
         this.groups = [
           'livingConditions',
           'lifeQuality',
@@ -171,19 +198,19 @@ export class CallsComponent implements OnInit, OnDestroy {
           'resilienceBuilding',
         ];
         break;
-      case 2:
-      case 5:
-      case 6:
-      case 7:
-      case 9:
-      case 11:
-      case 12:
-      case 13:
-      case 15:
-      case 18:
-      case 21:
-      case 22:
-      case 23:
+      case this.categories[1]:
+      case this.categories[4]:
+      case this.categories[5]:
+      case this.categories[6]:
+      case this.categories[8]:
+      case this.categories[10]:
+      case this.categories[11]:
+      case this.categories[12]:
+      case this.categories[14]:
+      case this.categories[17]:
+      case this.categories[20]:
+      case this.categories[21]:
+      case this.categories[22]:
         this.groups = [
           'socialBackwardness',
           'capacityBuilding',
@@ -191,10 +218,10 @@ export class CallsComponent implements OnInit, OnDestroy {
           'sustainabilityProcesses',
         ];
         break;
-      case 8:
-      case 10:
-      case 14:
-      case 17:
+      case this.categories[7]:
+      case this.categories[9]:
+      case this.categories[13]:
+      case this.categories[16]:
         this.groups = [
           'statusImprovement',
           'urbanDevelopment',
@@ -283,5 +310,172 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
+  }
+
+  save() {
+    const {
+      meetings,
+      renewalFrequency,
+      remunerationQuestion,
+      projectName,
+      category,
+      locationQuestion,
+      street,
+      colony,
+      town,
+      state,
+      postalCode,
+      video,
+      daysAndHours,
+      aboutCall,
+      whichMedia,
+      responsibleName,
+      emails,
+      phone,
+      whichProblem,
+      generalObjective,
+      numberOfBeneficiaries,
+      collaborationWithOtherOrganizations,
+      collaboratorsAnswer,
+      populationsConditionsBefore,
+      populationsConditionsAfter,
+      promoteSocialImprovement,
+      startDate,
+      endDate,
+      objectives,
+      povertyEnd,
+      zeroHunger,
+      healthAndWellness,
+      qualityEducation,
+      genderEquality,
+      cleanWater,
+      affordableEnergy,
+      decentWork,
+      industry,
+      reducingInequalities,
+      cities,
+      production,
+      climateAction,
+      underwaterLife,
+      terrestrialEcosystemLife,
+      peace,
+      alliances,
+      livingConditions,
+      lifeQuality,
+      capacityBuilding,
+      supportType,
+      supportScope,
+      resilienceBuilding,
+      socialBackwardness,
+      communitySense,
+      sustainabilityProcesses,
+      statusImprovement,
+      urbanDevelopment,
+      professionalizationProcess,
+      opportunityGeneration,
+      facebook,
+      instagram,
+      linkedin,
+      twitter,
+      tiktok,
+      youtube,
+    } = this.form.value;
+
+    const body = {
+      governingBody: {
+        membersOfTheGoverning: this.members,
+        numberOfMeetingsPerYear: meetings,
+        boardRenewalFrequency: renewalFrequency,
+      },
+      remunerations: {
+        workInYourOrganizationIsPaid: remunerationQuestion,
+        tableRemunerations: this.remunerations,
+      },
+      generalProjectData: {
+        projectName: projectName,
+        category: [category],
+      },
+      location: {
+        locationIsVirtual: locationQuestion,
+        streetAndNumber: street,
+        colony: colony,
+        municipality: town,
+        status: state,
+        postalCode: postalCode,
+        urlProyect: video,
+        daysAndHoursOfAttention: daysAndHours,
+        howDidYouFindOutAboutTheCall: [aboutCall],
+        whichMeans: whichMedia,
+      },
+      projectManager: {
+        responsibleName: responsibleName,
+        emailOfTheProjectManager: emails,
+        cellPhoneOfTheProjectManager: phone,
+      },
+      projectDevelopment: {
+        socialProblem: whichProblem,
+        generalObjective: generalObjective,
+        numberOfBeneficiaries: numberOfBeneficiaries,
+        receiveCollaboration: collaborationWithOtherOrganizations,
+        which: collaboratorsAnswer,
+        currentPopulation: populationsConditionsBefore,
+        conditionsAfterTheIntervention: populationsConditionsAfter,
+        socialBetterment: promoteSocialImprovement,
+      },
+      validity: {
+        startDate,
+        endDate,
+      },
+      objectivesAndGoals: {
+        sustainableDevelopmentGoals: objectives,
+        endOfPoverty: povertyEnd,
+        zeroHunger: zeroHunger,
+        healthAndWellness: healthAndWellness,
+        qualityEducation: qualityEducation,
+        genderEquality: genderEquality,
+        cleanWaterAndSanitation: cleanWater,
+        affordableEnergy: affordableEnergy,
+        decentWorkAndEconomicGrowth: decentWork,
+        industry: industry,
+        reductionOfInequality: reducingInequalities,
+        sustainableCitiesandCommunities: cities,
+        responsibleProductionAndConsumption: production,
+        climateAction: climateAction,
+        submarineLife: underwaterLife,
+        lifeOfTerrestrialEcosystems: terrestrialEcosystemLife,
+        peaceAndJustice: peace,
+        alliancesToAchieveObjectives: alliances,
+      },
+      projectBudget: {
+        organizationContribution: this.contributions,
+        jointVenture: this.conversions,
+        donationDeaceroFoundation: this.donations,
+      },
+      selfAppraisal: {
+        improveLivingConditions: livingConditions,
+        improvementInQualityOfLife: lifeQuality,
+        selfManagementSkills: capacityBuilding,
+        supportType: supportType,
+        scopeOfSupport: supportScope,
+        resilienceBuilding: resilienceBuilding,
+        socialLag: socialBackwardness,
+        developmentOfCapacitiesForSelfManagement: capacityBuilding,
+        developmentOfSenseOfCommunity: communitySense,
+        sustainabilityProcess: sustainabilityProcesses,
+        improvementInTheStateOfTheOrganization: statusImprovement,
+        urbanDevelopment: urbanDevelopment,
+        professionalizationProcess: professionalizationProcess,
+        generationOfOpportunities: opportunityGeneration,
+      },
+      communication: {
+        facebook: facebook,
+        instagram: instagram,
+        linkedln: linkedin,
+        twitter: twitter,
+        tiktok: tiktok,
+        youtube: youtube,
+      },
+    };
+    console.log(body);
   }
 }

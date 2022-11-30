@@ -102,36 +102,9 @@
         <label for="category" class="form-label">Categoría</label>
         <ng-select #category labelForId="category" formControlName="category">
           <ng-option value="">Click para seleccionar</ng-option>
-          <ng-option value="1">Alimentación</ng-option>
-          <ng-option value="2">Asistencia jurídica</ng-option>
-          <ng-option value="3">Asistencia o rehabilitación médica</ng-option>
-          <ng-option value="4"
-            >Atención a grupos sociales con discapacidad</ng-option
-          >
-          <ng-option value="5">Becas</ng-option>
-          <ng-option value="6">Defensa y promoción de los DH</ng-option>
-          <ng-option value="7">Desarrollo comunidades indígenas.</ng-option>
-          <ng-option value="8">Desarrollo Institucional</ng-option>
-          <ng-option value="9">Desarrollo urbano</ng-option>
-          <ng-option value="10"
-            >Detonación de oportunidades para la resiliencia
-            económica.</ng-option
-          >
-          <ng-option value="11">Ecología</ng-option>
-          <ng-option value="12">Educación</ng-option>
-          <ng-option value="13">Empoderamiento social</ng-option>
-          <ng-option value="14">Equipamiento</ng-option>
-          <ng-option value="15">Fomento educativo</ng-option>
-          <ng-option value="16">Inclusión</ng-option>
-          <ng-option value="17">Infraestructura</ng-option>
-          <ng-option value="18">Medio ambiente</ng-option>
-          <ng-option value="19">Nutrición</ng-option>
-          <ng-option value="20">Óptimo desarrollo infantil.</ng-option>
-          <ng-option value="21">Orientación social</ng-option>
-          <ng-option value="22">Participación ciudadana.</ng-option>
-          <ng-option value="23">Promoción y difusión cultural</ng-option>
-          <ng-option value="24">Reinserción social</ng-option>
-          <ng-option value="25">Salud mental.</ng-option>
+          <ng-option [value]="category" *ngFor="let category of categories">{{
+            category
+          }}</ng-option>
         </ng-select>
         <app-form-error [control]="f['category']"></app-form-error>
       </div>
@@ -282,17 +255,17 @@
             "
           >
             <option value="" selected>Click para seleccionar</option>
-            <option value="1">Amigo/a</option>
-            <option value="2">Facebook/Instagram</option>
-            <option value="3">Otro</option>
-            <option value="4">Página web</option>
-            <option value="5">Whatsapp</option>
+            <option value="Amigo/a">Amigo/a</option>
+            <option value="Facebook/Instagram">Facebook/Instagram</option>
+            <option value="Otro">Otro</option>
+            <option value="Página web">Página web</option>
+            <option value="Whatsapp">Whatsapp</option>
           </select>
           <app-form-error [control]="f['aboutCall']"></app-form-error>
         </div>
       </div>
       <div class="col-12 col-md-6">
-        <div *ngIf="f['aboutCall'].value == '3'" class="mb-3">
+        <div *ngIf="f['aboutCall'].value == 'Otro'" class="mb-3">
           <label for="whichMedia" class="form-label">¿Cuál medio?</label>
           <input
             type="text"
@@ -2035,6 +2008,159 @@
             [multiple]="true"
             [hideSelected]="true"
           >
+            <ng-option
+              value="17.1 Fortalecer la movilización de recursos internos, incluso mediante la prestación de apoyo internacional a los países en desarrollo, con el fin de mejorar la capacidad nacional para recaudar ingresos fiscales y de otra índole"
+              >17.1 Fortalecer la movilización de recursos internos, incluso
+              mediante la prestación de apoyo internacional a los países en
+              desarrollo, con el fin de mejorar la capacidad nacional para
+              recaudar ingresos fiscales y de otra índole</ng-option
+            >
+            <ng-option
+              value="17.2 Velar por que los países desarrollados cumplan plenamente sus compromisos en relación con la asistencia oficial para el desarrollo, incluido el compromiso de numerosos países desarrollados de alcanzar el objetivo de destinar el 0,7% del ingreso nacional bruto a la asistencia oficial para el desarrollo de los países en desarrollo y entre el 0,15% y el 0,20% del ingreso nacional bruto a la asistencia oficial para el desarrollo de los países menos adelantados; se alienta a los proveedores de asistencia oficial para el desarrollo a que consideren la posibilidad de fijar una meta para destinar al menos el 0,20% del ingreso nacional bruto a la asistencia oficial para el desarrollo de los países menos adelantados"
+              >17.2 Velar por que los países desarrollados cumplan plenamente
+              sus compromisos en relación con la asistencia oficial para el
+              desarrollo, incluido el compromiso de numerosos países
+              desarrollados de alcanzar el objetivo de destinar el 0,7% del
+              ingreso nacional bruto a la asistencia oficial para el desarrollo
+              de los países en desarrollo y entre el 0,15% y el 0,20% del
+              ingreso nacional bruto a la asistencia oficial para el desarrollo
+              de los países menos adelantados; se alienta a los proveedores de
+              asistencia oficial para el desarrollo a que consideren la
+              posibilidad de fijar una meta para destinar al menos el 0,20% del
+              ingreso nacional bruto a la asistencia oficial para el desarrollo
+              de los países menos adelantados</ng-option
+            >
+            <ng-option
+              value="17.3 Movilizar recursos financieros adicionales de múltiples fuentes para los países en desarrollo"
+              >17.3 Movilizar recursos financieros adicionales de múltiples
+              fuentes para los países en desarrollo</ng-option
+            >
+            <ng-option
+              value="17.4 Ayudar a los países en desarrollo a lograr la sostenibilidad de la deuda a largo plazo con políticas coordinadas orientadas a fomentar la financiación, el alivio y la reestructuración de la deuda, según proceda, y hacer frente a la deuda externa de los países pobres muy endeudados a fin de reducir el endeudamiento excesivo"
+              >17.4 Ayudar a los países en desarrollo a lograr la sostenibilidad
+              de la deuda a largo plazo con políticas coordinadas orientadas a
+              fomentar la financiación, el alivio y la reestructuración de la
+              deuda, según proceda, y hacer frente a la deuda externa de los
+              países pobres muy endeudados a fin de reducir el endeudamiento
+              excesivo</ng-option
+            >
+            <ng-option
+              value="17.5 Adoptar y aplicar sistemas de promoción de las inversiones en favor de los países menos adelantados"
+              >17.5 Adoptar y aplicar sistemas de promoción de las inversiones
+              en favor de los países menos adelantados</ng-option
+            >
+            <ng-option
+              value="17.6 Mejorar la cooperación regional e internacional Norte-Sur, Sur-Sur y triangular en materia de ciencia, tecnología e innovación y el acceso a estas, y aumentar el intercambio de conocimientos en condiciones mutuamente convenidas, incluso mejorando la coordinación entre los mecanismos existentes, en particular a nivel de las Naciones Unidas, y mediante un mecanismo mundial de facilitación de la tecnología"
+              >17.6 Mejorar la cooperación regional e internacional Norte-Sur,
+              Sur-Sur y triangular en materia de ciencia, tecnología e
+              innovación y el acceso a estas, y aumentar el intercambio de
+              conocimientos en condiciones mutuamente convenidas, incluso
+              mejorando la coordinación entre los mecanismos existentes, en
+              particular a nivel de las Naciones Unidas, y mediante un mecanismo
+              mundial de facilitación de la tecnología</ng-option
+            >
+            <ng-option
+              value="17.7 Promover el desarrollo de tecnologías ecológicamente racionales y su transferencia, divulgación y difusión a los países en desarrollo en condiciones favorables, incluso en condiciones concesionarias y preferenciales, según lo convenido de mutuo acuerdo"
+              >17.7 Promover el desarrollo de tecnologías ecológicamente
+              racionales y su transferencia, divulgación y difusión a los países
+              en desarrollo en condiciones favorables, incluso en condiciones
+              concesionarias y preferenciales, según lo convenido de mutuo
+              acuerdo</ng-option
+            >
+            <ng-option
+              value="17.8 Poner en pleno funcionamiento, a más tardar en 2017, el banco de tecnología y el mecanismo de apoyo a la creación de capacidad en materia de ciencia, tecnología e innovación para los países menos adelantados y aumentar la utilización de tecnologías instrumentales, en particular la tecnología de la información y las comunicaciones"
+              >17.8 Poner en pleno funcionamiento, a más tardar en 2017, el
+              banco de tecnología y el mecanismo de apoyo a la creación de
+              capacidad en materia de ciencia, tecnología e innovación para los
+              países menos adelantados y aumentar la utilización de tecnologías
+              instrumentales, en particular la tecnología de la información y
+              las comunicaciones</ng-option
+            >
+            <ng-option
+              value="17.9 Aumentar el apoyo internacional para realizar actividades de creación de capacidad eficaces y específicas en los países en desarrollo a fin de respaldar los planes nacionales de implementación de todos los Objetivos de Desarrollo Sostenible, incluso mediante la cooperación Norte-Sur, Sur-Sur y triangular"
+              >17.9 Aumentar el apoyo internacional para realizar actividades de
+              creación de capacidad eficaces y específicas en los países en
+              desarrollo a fin de respaldar los planes nacionales de
+              implementación de todos los Objetivos de Desarrollo Sostenible,
+              incluso mediante la cooperación Norte-Sur, Sur-Sur y
+              triangular</ng-option
+            >
+            <ng-option
+              value="17.10 Promover un sistema de comercio multilateral universal, basado en normas, abierto, no discriminatorio y equitativo en el marco de la Organización Mundial del Comercio, incluso mediante la conclusión de las negociaciones en el marco del Programa de Doha para el Desarrollo"
+              >17.10 Promover un sistema de comercio multilateral universal,
+              basado en normas, abierto, no discriminatorio y equitativo en el
+              marco de la Organización Mundial del Comercio, incluso mediante la
+              conclusión de las negociaciones en el marco del Programa de Doha
+              para el Desarrollo</ng-option
+            >
+            <ng-option
+              value="17.11 Aumentar significativamente las exportaciones de los países en desarrollo, en particular con miras a duplicar la participación de los países menos adelantados en las exportaciones mundiales de aquí a 2020"
+              >17.11 Aumentar significativamente las exportaciones de los países
+              en desarrollo, en particular con miras a duplicar la participación
+              de los países menos adelantados en las exportaciones mundiales de
+              aquí a 2020</ng-option
+            >
+            <ng-option
+              value="17.12 Lograr la consecución oportuna del acceso a los mercados libre de derechos y contingentes de manera duradera para todos los países menos adelantados, conforme a las decisiones de la Organización Mundial del Comercio, incluso velando por que las normas de origen preferenciales aplicables a las importaciones de los países menos adelantados sean transparentes y sencillas y contribuyan a facilitar el acceso a los mercados"
+              >17.12 Lograr la consecución oportuna del acceso a los mercados
+              libre de derechos y contingentes de manera duradera para todos los
+              países menos adelantados, conforme a las decisiones de la
+              Organización Mundial del Comercio, incluso velando por que las
+              normas de origen preferenciales aplicables a las importaciones de
+              los países menos adelantados sean transparentes y sencillas y
+              contribuyan a facilitar el acceso a los mercados</ng-option
+            >
+            <ng-option
+              value="17.13 Aumentar la estabilidad macroeconómica mundial, incluso mediante la coordinación y coherencia de las políticas"
+              >17.13 Aumentar la estabilidad macroeconómica mundial, incluso
+              mediante la coordinación y coherencia de las políticas</ng-option
+            >
+            <ng-option
+              value="17.14 Mejorar la coherencia de las políticas para el desarrollo sostenible"
+              >17.14 Mejorar la coherencia de las políticas para el desarrollo
+              sostenible</ng-option
+            >
+            <ng-option
+              value="17.15 Respetar el margen normativo y el liderazgo de cada país para establecer y aplicar políticas de erradicación de la pobreza y desarrollo sostenible"
+              >17.15 Respetar el margen normativo y el liderazgo de cada país
+              para establecer y aplicar políticas de erradicación de la pobreza
+              y desarrollo sostenible</ng-option
+            >
+            <ng-option
+              value="17.16 Mejorar la Alianza Mundial para el Desarrollo Sostenible, complementada por alianzas entre múltiples interesados que movilicen e intercambien conocimientos, especialización, tecnología y recursos financieros, a fin de apoyar el logro de los Objetivos de Desarrollo Sostenible en todos los países, particularmente los países en desarrollo"
+              >17.16 Mejorar la Alianza Mundial para el Desarrollo Sostenible,
+              complementada por alianzas entre múltiples interesados que
+              movilicen e intercambien conocimientos, especialización,
+              tecnología y recursos financieros, a fin de apoyar el logro de los
+              Objetivos de Desarrollo Sostenible en todos los países,
+              particularmente los países en desarrollo</ng-option
+            >
+            <ng-option
+              value="17.17 Fomentar y promover la constitución de alianzas eficaces en las esferas pública, público-privada y de la sociedad civil, aprovechando la experiencia y las estrategias de obtención de recursos de las alianzas"
+              >17.17 Fomentar y promover la constitución de alianzas eficaces en
+              las esferas pública, público-privada y de la sociedad civil,
+              aprovechando la experiencia y las estrategias de obtención de
+              recursos de las alianzas</ng-option
+            >
+            <ng-option
+              value="17.18 De aquí a 2020, mejorar el apoyo a la creación de capacidad prestado a los países en desarrollo, incluidos los países menos adelantados y los pequeños Estados insulares en desarrollo, para aumentar significativamente la disponibilidad de datos oportunos, fiables y de gran calidad desglosados por ingresos, sexo, edad, raza, origen étnico, estatus migratorio, discapacidad, ubicación geográfica y otras características pertinentes en los contextos nacionales"
+              >17.18 De aquí a 2020, mejorar el apoyo a la creación de capacidad
+              prestado a los países en desarrollo, incluidos los países menos
+              adelantados y los pequeños Estados insulares en desarrollo, para
+              aumentar significativamente la disponibilidad de datos oportunos,
+              fiables y de gran calidad desglosados por ingresos, sexo, edad,
+              raza, origen étnico, estatus migratorio, discapacidad, ubicación
+              geográfica y otras características pertinentes en los contextos
+              nacionales</ng-option
+            >
+            <ng-option
+              value="17.19 De aquí a 2030, aprovechar las iniciativas existentes para elaborar indicadores que permitan medir los progresos en materia de desarrollo sostenible y complementen el producto interno bruto, y apoyar la creación de capacidad estadística en los países en desarrollo"
+              >17.19 De aquí a 2030, aprovechar las iniciativas existentes para
+              elaborar indicadores que permitan medir los progresos en materia
+              de desarrollo sostenible y complementen el producto interno bruto,
+              y apoyar la creación de capacidad estadística en los países en
+              desarrollo</ng-option
+            >
           </ng-select>
         </div>
       </div>
@@ -2084,6 +2210,117 @@
         </div>
       </ng-container>
     </ng-container>
+
+    <h2 class="mb-3">Comunicación</h2>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="facebook" class="form-label">Facebook</label>
+          <input
+            type="text"
+            class="form-control"
+            id="facebook"
+            placeholder="https://..."
+            formControlName="facebook"
+            [class.is-invalid]="f['facebook'].invalid && f['facebook'].touched"
+          />
+          <app-form-error
+            [control]="f['facebook']"
+            [errors]="{ pattern: 'Url no válida' }"
+          ></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="instagram" class="form-label">Instagram</label>
+          <input
+            type="text"
+            class="form-control"
+            id="instagram"
+            placeholder="https://..."
+            formControlName="instagram"
+            [class.is-invalid]="f['instagram'].invalid && f['instagram'].touched"
+          />
+          <app-form-error
+            [control]="f['instagram']"
+            [errors]="{ pattern: 'Url no válida' }"
+          ></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="linkedin" class="form-label">LinkedIn</label>
+          <input
+            type="text"
+            class="form-control"
+            id="linkedin"
+            placeholder="https://..."
+            formControlName="linkedin"
+            [class.is-invalid]="f['linkedin'].invalid && f['linkedin'].touched"
+          />
+          <app-form-error
+            [control]="f['linkedin']"
+            [errors]="{ pattern: 'Url no válida' }"
+          ></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="twitter" class="form-label">Twitter</label>
+          <input
+            type="text"
+            class="form-control"
+            id="twitter"
+            placeholder="https://..."
+            formControlName="twitter"
+            [class.is-invalid]="f['twitter'].invalid && f['twitter'].touched"
+          />
+          <app-form-error
+            [control]="f['twitter']"
+            [errors]="{ pattern: 'Url no válida' }"
+          ></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="tiktok" class="form-label">Tik Tok</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tiktok"
+            placeholder="https://..."
+            formControlName="tiktok"
+            [class.is-invalid]="f['tiktok'].invalid && f['tiktok'].touched"
+          />
+          <app-form-error
+            [control]="f['tiktok']"
+            [errors]="{ pattern: 'Url no válida' }"
+          ></app-form-error>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="youtube" class="form-label">Youtube</label>
+          <input
+            type="text"
+            class="form-control"
+            id="youtube"
+            placeholder="https://..."
+            formControlName="youtube"
+            [class.is-invalid]="f['youtube'].invalid && f['youtube'].touched"
+          />
+          <app-form-error
+            [control]="f['youtube']"
+            [errors]="{ pattern: 'Url no válida' }"
+          ></app-form-error>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-outline-primary me-3" type="button" (click)="save()">
+      Guardar borrador
+    </button>
+
     <button
       class="btn btn-primary"
       type="button"

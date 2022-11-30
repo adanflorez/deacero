@@ -3,6 +3,8 @@ export const PASSWORD_PATERN =
 export const ONLY_NUMBERS_PATTERN = '^[0-9]+$';
 export const MULTIPLE_EMAIL_PATTERN =
   '(([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}(;|,|$)s?))*';
+export const URL_PATTERN =
+  '((http|https)://)(www.)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)';
 export const RATING = [
   {
     title:
