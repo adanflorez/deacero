@@ -6,11 +6,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import ProjectBudget from 'src/app/lib/models/project-budget.model';
 
 @Component({
-  selector: 'app-contribution-table',
-  templateUrl: './contribution-table.component.html',
-  styleUrls: ['./contribution-table.component.scss'],
+  selector: 'app-budget-table',
+  templateUrl: './budget-table.component.html',
+  styleUrls: ['./budget-table.component.scss'],
 })
-export class ContributionTableComponent
+export class BudgetTableComponent
   implements OnInit, TableComponent<ProjectBudget>
 {
   @Input() records: any[] = [];
