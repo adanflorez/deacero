@@ -430,10 +430,12 @@ export class CallsComponent implements OnInit, OnDestroy {
       },
       error: (error) => console.error(error),
       complete: () => {
-        this.tempDocumentUrl.asObservable().subscribe((res) => {
-          this.f[control].setValue(res);
+        const sub = this.tempDocumentUrl.asObservable().subscribe((res) => {
+          if (!this.f[control].value) {
+            this.f[control].setValue(res);
+          }
         });
-        this.tempDocumentUrl.next('');
+        sub.unsubscribe();
       },
     });
   }
