@@ -120,6 +120,21 @@ export class CallsComponent implements OnInit, OnDestroy {
       // General project data
       projectName: res.generalProjectData.projectName,
       category: res.generalProjectData.category[0],
+      // Location
+      locationQuestion: res.location.locationIsVirtual,
+      street: res.location.streetAndNumber,
+      colony: res.location.colony,
+      town: res.location.municipality,
+      state: res.location.status,
+      postalCode: res.location.postalCode,
+      video: res.location.urlProyect,
+      daysAndHours: res.location.daysAndHoursOfAttention,
+      aboutCall: res.location.howDidYouFindOutAboutTheCall[0],
+      whichMedia: res.location.whichMeans,
+      // Responsible
+      responsibleName: res.projectManager.responsibleName,
+      emails: res.projectManager.emailOfTheProjectManager,
+      phone: res.projectManager.cellPhoneOfTheProjectManager,
     };
   }
 
@@ -151,22 +166,28 @@ export class CallsComponent implements OnInit, OnDestroy {
       urbanDevelopment: new FormControl(''),
       professionalizationProcess: new FormControl(''),
       opportunityGeneration: new FormControl(''),
-      locationQuestion: new FormControl(true),
-      street: new FormControl('', Validators.required),
-      colony: new FormControl('', Validators.required),
-      town: new FormControl('', Validators.required),
-      state: new FormControl('', Validators.required),
-      postalCode: new FormControl('', Validators.required),
-      video: new FormControl('', Validators.required),
-      daysAndHours: new FormControl('', Validators.required),
-      aboutCall: new FormControl('', Validators.required),
-      whichMedia: new FormControl(''),
-      responsibleName: new FormControl('', Validators.required),
-      emails: new FormControl('', [
+      locationQuestion: new FormControl(this.call?.locationQuestion),
+      street: new FormControl(this.call?.street, Validators.required),
+      colony: new FormControl(this.call?.colony, Validators.required),
+      town: new FormControl(this.call?.town, Validators.required),
+      state: new FormControl(this.call?.state, Validators.required),
+      postalCode: new FormControl(this.call?.postalCode, Validators.required),
+      video: new FormControl(this.call?.video, Validators.required),
+      daysAndHours: new FormControl(
+        this.call?.daysAndHours,
+        Validators.required
+      ),
+      aboutCall: new FormControl(this.call?.aboutCall, Validators.required),
+      whichMedia: new FormControl(this.call?.whichMedia),
+      responsibleName: new FormControl(
+        this.call?.responsibleName,
+        Validators.required
+      ),
+      emails: new FormControl(this.call?.emails, [
         Validators.required,
         Validators.pattern(MULTIPLE_EMAIL_PATTERN),
       ]),
-      phone: new FormControl('', [
+      phone: new FormControl(this.call?.phone, [
         Validators.required,
         Validators.pattern(ONLY_NUMBERS_PATTERN),
         Validators.maxLength(12),
