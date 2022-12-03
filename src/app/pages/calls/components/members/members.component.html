@@ -29,7 +29,7 @@
           </ng-container>
         </td>
       </tr>
-      <tr>
+      <tr *ngIf="allowAddRecord">
         <td colspan="6">
           <button class="btn btn-primary" (click)="open(modal)">
             Agregar registro
@@ -69,7 +69,7 @@
         </tr>
         <tr style="height: 10px" class="bg-gray"></tr>
       </ng-container>
-      <tr>
+      <tr *ngIf="allowAddRecord">
         <td colspan="6">
           <button class="btn btn-primary" (click)="open(modal)">
             Agregar registro

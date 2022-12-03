@@ -86,6 +86,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   infoSubmitted$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
+  infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private multimediaService: MultimediaService,
@@ -124,11 +125,11 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   private parseResponse(res: any) {
-    this.members = res?.governingBody.membersOfTheGoverning;
-    this.remunerations = res?.remunerations.tableRemunerations;
-    this.contributions = res?.projectBudget.organizationContribution;
-    this.conversions = res?.projectBudget.jointVenture;
-    this.donations = res?.projectBudget.donationDeaceroFoundation;
+    this.members = res?.governingBody.membersOfTheGoverning || [];
+    this.remunerations = res?.remunerations.tableRemunerations || [];
+    this.contributions = res?.projectBudget.organizationContribution || [];
+    this.conversions = res?.projectBudget.jointVenture || [];
+    this.donations = res?.projectBudget.donationDeaceroFoundation || [];
     this.call = {
       // Governing Body
       meetings: res?.governingBody.numberOfMeetingsPerYear,
@@ -217,6 +218,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       logo: res?.documents.logo,
       livingConditions: res?.selfAppraisal.improveLivingConditions,
       lifeQuality: res?.selfAppraisal.improvementInQualityOfLife,
+      // Rating
       capacityBuilding: res?.selfAppraisal.selfManagementSkills,
       supportType: res?.selfAppraisal.supportType,
       supportScope: res?.selfAppraisal.scopeOfSupport,
@@ -242,7 +244,11 @@ export class CallsComponent implements OnInit, OnDestroy {
         Validators.required,
         Validators.pattern(ONLY_NUMBERS_PATTERN),
       ]),
-      remunerationQuestion: new FormControl(this.call?.remunerationQuestion),
+      remunerationQuestion: new FormControl(
+        this.call?.remunerationQuestion == null
+          ? true
+          : this.call?.remunerationQuestion
+      ),
       projectName: new FormControl(this.call?.projectName, [
         Validators.required,
       ]),
@@ -264,7 +270,9 @@ export class CallsComponent implements OnInit, OnDestroy {
         this.call?.professionalizationProcess
       ),
       opportunityGeneration: new FormControl(this.call?.opportunityGeneration),
-      locationQuestion: new FormControl(this.call?.locationQuestion),
+      locationQuestion: new FormControl(
+        this.call?.locationQuestion == null ? true : this.call?.locationQuestion
+      ),
       street: new FormControl(this.call?.street, Validators.required),
       colony: new FormControl(this.call?.colony, Validators.required),
       town: new FormControl(this.call?.town, Validators.required),
@@ -923,6 +931,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   saveInFlokzu(modal: any) {
+    if (this.form.invalid) return;
     const sub = this.callService.saveInFlokzu().subscribe({
       next: () => {
         this.infoSubmitted$.next(true);

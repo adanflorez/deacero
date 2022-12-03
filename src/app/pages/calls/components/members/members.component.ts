@@ -12,6 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class MembersComponent implements TableComponent<Member> {
   @Input() records: Member[] = [];
+  @Input() allowAddRecord: boolean | null = true;
   @Output() recordsList = new EventEmitter();
   form: FormGroup;
   validForm = false;

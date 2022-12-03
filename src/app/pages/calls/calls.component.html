@@ -15,6 +15,7 @@
         <div class="col-12">
           <app-members
             [records]="members"
+            [allowAddRecord]="infoSaved$ | async"
             (recordsList)="members = $event"
           ></app-members>
         </div>
@@ -2434,7 +2435,7 @@
               />
             </ng-container>
             <ng-container *ngIf="f['logo'].value">
-              <div class="input-group mb-4">
+              <div class="input-group">
                 <input
                   type="text"
                   class="form-control"
