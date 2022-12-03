@@ -81,21 +81,16 @@ export class CallsComponent implements OnInit, OnDestroy {
   tempDocumentUrl: BehaviorSubject<string> = new BehaviorSubject<string>('');
   closeResult: string;
   hideForm$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  call: any = undefined;
 
   constructor(
     private multimediaService: MultimediaService,
     private modalService: NgbModal,
     private callService: CallService
-  ) {
-    this.initForm();
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.handleCategory();
-    this.handleLocation();
-    this.handleAboutCall();
-    this.handleObjectives();
-    this.initDocuments();
+    this.loadApplication();
   }
 
   get f() {
@@ -113,17 +108,31 @@ export class CallsComponent implements OnInit, OnDestroy {
     );
   }
 
+  private parseResponse(res: any) {
+    this.members = res.governingBody.membersOfTheGoverning;
+    this.remunerations = res.remunerations.tableRemunerations;
+    this.call = {
+      // Governing Body
+      meetings: res.governingBody.numberOfMeetingsPerYear,
+      renewalFrequency: res.governingBody.boardRenewalFrequency,
+      // Remunerations
+      remunerationQuestion: res.remunerations.workInYourOrganizationIsPaid,
+    };
+  }
+
   private initForm() {
     this.form = new FormGroup({
-      meetings: new FormControl(null, [
+      meetings: new FormControl(this.call?.meetings, [
         Validators.required,
         Validators.pattern(ONLY_NUMBERS_PATTERN),
       ]),
-      renewalFrequency: new FormControl(null, [
+      renewalFrequency: new FormControl(this.call?.renewalFrequency, [
         Validators.required,
         Validators.pattern(ONLY_NUMBERS_PATTERN),
       ]),
-      remunerationQuestion: new FormControl(true),
+      remunerationQuestion: new FormControl(
+        this.call?.remunerationQuestion
+      ),
       projectName: new FormControl(null, [Validators.required]),
       category: new FormControl('', Validators.required),
       livingConditions: new FormControl(''),
@@ -694,6 +703,21 @@ export class CallsComponent implements OnInit, OnDestroy {
     };
     const sub = this.callService.applicateToCall(body).subscribe((res) => {
       console.log(res);
+      this.loadApplication();
+    });
+    this.unsubscribe.push(sub);
+  }
+
+  loadApplication() {
+    const sub = this.callService.application().subscribe((res: any) => {
+      console.log(res);
+      this.parseResponse(res.data);
+      this.initForm();
+      this.handleCategory();
+      this.handleLocation();
+      this.handleAboutCall();
+      this.handleObjectives();
+      this.initDocuments();
     });
     this.unsubscribe.push(sub);
   }

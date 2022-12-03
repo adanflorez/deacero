@@ -13,4 +13,8 @@ export class CallService {
   applicateToCall(data: any): Observable<any> {
     return this.http.post(`${this.apiCall}application/`, data);
   }
+
+  application() {
+    return this.http.get(`${this.apiCall}application/`);
+  }
 }
