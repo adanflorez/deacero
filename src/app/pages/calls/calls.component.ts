@@ -175,6 +175,13 @@ export class CallsComponent implements OnInit, OnDestroy {
         res.objectivesAndGoals.lifeOfTerrestrialEcosystems,
       peace: res.objectivesAndGoals.peaceAndJustice,
       alliances: res.objectivesAndGoals.alliancesToAchieveObjectives,
+      // Communication
+      facebook: res.communication.facebook,
+      instagram: res.communication.instagram,
+      linkedin: res.communication.linkedln,
+      twitter: res.communication.twitter,
+      tiktok: res.communication.tiktok,
+      youtube: res.communication.youtube,
     };
   }
 
@@ -289,12 +296,24 @@ export class CallsComponent implements OnInit, OnDestroy {
       ),
       peace: new FormControl(this.call?.peace),
       alliances: new FormControl(this.call?.alliances),
-      facebook: new FormControl('', [Validators.pattern(URL_PATTERN)]),
-      instagram: new FormControl('', [Validators.pattern(URL_PATTERN)]),
-      linkedin: new FormControl('', [Validators.pattern(URL_PATTERN)]),
-      twitter: new FormControl('', [Validators.pattern(URL_PATTERN)]),
-      tiktok: new FormControl('', [Validators.pattern(URL_PATTERN)]),
-      youtube: new FormControl('', [Validators.pattern(URL_PATTERN)]),
+      facebook: new FormControl(this.call?.facebook, [
+        Validators.pattern(URL_PATTERN),
+      ]),
+      instagram: new FormControl(this.call?.instagram, [
+        Validators.pattern(URL_PATTERN),
+      ]),
+      linkedin: new FormControl(this.call?.linkedin, [
+        Validators.pattern(URL_PATTERN),
+      ]),
+      twitter: new FormControl(this.call?.twitter, [
+        Validators.pattern(URL_PATTERN),
+      ]),
+      tiktok: new FormControl(this.call?.tiktok, [
+        Validators.pattern(URL_PATTERN),
+      ]),
+      youtube: new FormControl(this.call?.youtube, [
+        Validators.pattern(URL_PATTERN),
+      ]),
       ethicalCode: new FormControl('', Validators.required),
       governanceManual: new FormControl('', Validators.required),
       timelineActivities: new FormControl('', Validators.required),
