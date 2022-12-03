@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-  apiLogin: 'https://a5cf-181-237-13-170.ngrok.io/oauth/login',
-  apiUser: 'https://a5cf-181-237-13-170.ngrok.io/user',
-  apiRegister: 'https://a5cf-181-237-13-170.ngrok.io/register/',
-  apiOSC: 'https://a5cf-181-237-13-170.ngrok.io/osc/',
-  apiMultimedia: 'https://a5cf-181-237-13-170.ngrok.io/multimedia/',
+  apiLogin: 'https://c756-181-237-27-243.ngrok.io/oauth/login',
+  apiUser: 'https://c756-181-237-27-243.ngrok.io/user',
+  apiRegister: 'https://c756-181-237-27-243.ngrok.io/register/',
+  apiOSC: 'https://c756-181-237-27-243.ngrok.io/osc/',
+  apiMultimedia: 'https://c756-181-237-27-243.ngrok.io/multimedia/',
 };
 
 /*

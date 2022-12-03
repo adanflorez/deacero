@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import {
   MULTIPLE_EMAIL_PATTERN,
   OBJECTIVES,
@@ -11,6 +11,7 @@ import {
 import Member from 'src/app/lib/models/member.model';
 import ProjectBudget from 'src/app/lib/models/project-budget.model';
 import Remuneration from 'src/app/lib/models/remuneration.model';
+import { MultimediaService } from 'src/app/lib/services/multimedia.service';
 
 @Component({
   selector: 'app-calls',
@@ -72,11 +73,14 @@ export class CallsComponent implements OnInit, OnDestroy {
     'alliances',
   ];
 
+  documentsFields: Array<any>;
+
   contributions: ProjectBudget[] = [];
   conversions: ProjectBudget[] = [];
   donations: ProjectBudget[] = [];
+  tempDocumentUrl: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor() {
+  constructor(private multimediaService: MultimediaService) {
     this.initForm();
   }
 
@@ -85,6 +89,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.handleLocation();
     this.handleAboutCall();
     this.handleObjectives();
+    this.initDocuments();
   }
 
   get f() {
@@ -174,7 +179,108 @@ export class CallsComponent implements OnInit, OnDestroy {
       twitter: new FormControl('', [Validators.pattern(URL_PATTERN)]),
       tiktok: new FormControl('', [Validators.pattern(URL_PATTERN)]),
       youtube: new FormControl('', [Validators.pattern(URL_PATTERN)]),
+      ethicalCode: new FormControl('', Validators.required),
+      governanceManual: new FormControl('', Validators.required),
+      timelineActivities: new FormControl('', Validators.required),
+      workWithMinors: new FormControl('', Validators.required),
+      officialLetterOfAuthorizationOfDonees: new FormControl(
+        '',
+        Validators.required
+      ),
+      updatedCertificate: new FormControl('', Validators.required),
+      publicationInAnnex14OfTheCurrentRMF: new FormControl(
+        '',
+        Validators.required
+      ),
+      constituentAct: new FormControl('', Validators.required),
+      mostRecentMeeting: new FormControl('', Validators.required),
+      legalRepresentativesPower: new FormControl('', Validators.required),
+      legalRepresentativesId: new FormControl('', Validators.required),
+      oldProofOfAddress: new FormControl('', Validators.required),
+      updatedComplianceOpinion: new FormControl('', Validators.required),
+      proofOfUpdatedTaxSituation: new FormControl('', Validators.required),
+      logo: new FormControl('', Validators.required),
     });
+  }
+
+  initDocuments() {
+    this.documentsFields = [
+      {
+        field: 'ethicalCode',
+        name: 'Código de ética',
+        help: 'PDF legible',
+      },
+      {
+        field: 'governanceManual',
+        name: 'Manual de gobernanza',
+        help: 'PDF legible',
+      },
+      {
+        field: 'timelineActivities',
+        name: 'Cronograma de actividades',
+        help: 'PDF legible',
+      },
+      {
+        field: 'workWithMinors',
+        name: 'En caso de trabajar con menores de edad, adjuntar las políticas, normas, reglamentos o protocolos que aseguren su bienestar',
+        help: 'PDF legible',
+      },
+      {
+        field: 'officialLetterOfAuthorizationOfDonees',
+        name: 'Oficio de autorización de donatarias SAT (vigente)',
+        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
+      },
+      {
+        field: 'updatedCertificate',
+        name: 'Constancia actualizada del Registro Federal de Contribuyentes',
+        help: 'PDF legible',
+      },
+      {
+        field: 'publicationInAnnex14OfTheCurrentRMF',
+        name: 'Publicación en el Anexo-14 de la RMF vigente',
+        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
+      },
+      {
+        field: 'constituentAct',
+        name: 'Acta constitutiva de la organización',
+        help: 'PDF legible',
+      },
+      {
+        field: 'mostRecentMeeting',
+        name: 'Acta de asamblea más reciente',
+        help: 'PDF legible',
+      },
+      {
+        field: 'legalRepresentativesPower',
+        name: 'Poder del (los) representante(s) legal(es)',
+        help: 'PDF legible',
+      },
+      {
+        field: 'legalRepresentativesId',
+        name: 'Identificación oficial del representante legal',
+        help: 'PDF legible',
+      },
+      {
+        field: 'legalRepresentativesId',
+        name: 'Cédula del RFC',
+        help: 'PDF legible',
+      },
+      {
+        field: 'oldProofOfAddress',
+        name: 'Comprobante de domicilio con antigüedad no mayor a 3 meses (agua, luz, teléfono)',
+        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
+      },
+      {
+        field: 'updatedComplianceOpinion',
+        name: 'Opinión de cumplimiento actualizada',
+        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
+      },
+      {
+        field: 'proofOfUpdatedTaxSituation',
+        name: 'Constancia de situación fiscal actualizada',
+        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
+      },
+    ];
   }
 
   private changeCategory() {
@@ -306,6 +412,40 @@ export class CallsComponent implements OnInit, OnDestroy {
       this.form.get(obj)?.clearValidators();
       this.form.get(obj)?.reset();
     });
+  }
+
+  uploadDocument(e: Event, control: string, isImage = false) {
+    if (!this.fileValidation(control, isImage)) return;
+    const formData = new FormData();
+    formData.append('file', (e.target as HTMLInputElement).files![0]);
+    this.multimediaService.upload(formData).subscribe({
+      next: (res) => {
+        this.tempDocumentUrl.next(res.data);
+      },
+      error: (error) => console.error(error),
+      complete: () => {
+        this.tempDocumentUrl.asObservable().subscribe((res) => {
+          this.f[control].setValue(res);
+        });
+      },
+    });
+  }
+
+  private fileValidation(inputId: string, isImage?: boolean): boolean {
+    let allowedExtensions = /(\.pdf)$/i;
+    let message = 'El archivo debe ser de extension .pdf';
+    if (isImage) {
+      allowedExtensions = /(\.png|\.ai|\.svg|\.pdf)$/i;
+      message = 'El archivo debe ser de extension .pdf, .png, .ai o .svg';
+    }
+    const fileInput = document.getElementById(inputId) as HTMLInputElement;
+    const filePath = fileInput?.value;
+    if (!allowedExtensions.exec(filePath)) {
+      alert(message);
+      fileInput.value = '';
+      return false;
+    }
+    return true;
   }
 
   ngOnDestroy(): void {
