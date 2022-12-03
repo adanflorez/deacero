@@ -15,7 +15,7 @@
         <div class="col-12">
           <app-members
             [records]="members"
-            [allowAddRecord]="infoSaved$ | async"
+            [allowAddRecord]="!(infoSaved$ | async)"
             (recordsList)="members = $event"
           ></app-members>
         </div>
@@ -93,6 +93,7 @@
             *ngIf="f['remunerationQuestion'].value"
             [records]="remunerations"
             (onChange)="remunerations = $event"
+            [allowAddRecord]="!(infoSaved$ | async)"
           ></app-remuneration-table>
         </div>
       </div>
@@ -2214,18 +2215,21 @@
       <h6>Contribución de la organización</h6>
       <app-budget-table
         [records]="contributions"
+        [allowAddRecord]="!(infoSaved$ | async)"
         (onChange)="contributions = $event"
       ></app-budget-table>
       <hr />
       <h6>Conversión</h6>
       <app-budget-table
         [records]="conversions"
+        [allowAddRecord]="!(infoSaved$ | async)"
         (onChange)="conversions = $event"
       ></app-budget-table>
       <hr />
       <h6>Donativo Fundación DEACERO</h6>
       <app-budget-table
         [records]="donations"
+        [allowAddRecord]="!(infoSaved$ | async)"
         (onChange)="donations = $event"
       ></app-budget-table>
       <hr />

@@ -12,7 +12,7 @@
     <tbody>
       <tr *ngFor="let record of records">
         <td>{{ record.activity }}</td>
-        <td>{{ record.amount | currency: "MXN" }}</td>
+        <td>{{ record.amount | currency : "MXN" }}</td>
         <td>{{ record.expenseType }}</td>
         <td>
           <ng-container *ngIf="!isEditMode">
@@ -31,7 +31,7 @@
           </ng-container>
         </td>
       </tr>
-      <tr>
+      <tr *ngIf="allowAddRecord">
         <td colspan="6">
           <button class="btn btn-primary" (click)="open(modal)">
             Agregar registro
@@ -49,7 +49,7 @@
           <td>{{ record.activity }}</td>
         </tr>
         <tr>
-          <td>{{ record.amount | currency: "MXN" }}</td>
+          <td>{{ record.amount | currency : "MXN" }}</td>
         </tr>
         <tr>
           <td>{{ record.expenseType }}</td>
@@ -74,7 +74,7 @@
         </tr>
         <tr style="height: 10px" class="bg-gray"></tr>
       </ng-container>
-      <tr>
+      <tr *ngIf="allowAddRecord">
         <td colspan="6">
           <button class="btn btn-primary" (click)="open(modal)">
             Agregar registro
@@ -118,13 +118,21 @@
       />
 
       <label class="form-label" for="expenseType">Tipo de gasto</label>
-      <select class="form-select mb-4" formControlName="expenseType" id="expenseType">
+      <select
+        class="form-select mb-4"
+        formControlName="expenseType"
+        id="expenseType"
+      >
         <option selected value="">Click para seleccionar</option>
-        <option value="Construcción y equipamiento">Construcción y equipamiento</option>
+        <option value="Construcción y equipamiento">
+          Construcción y equipamiento
+        </option>
         <option value="Insumos y materiales">Insumos y materiales</option>
         <option value="Remuneración personal">Remuneración personal</option>
         <option value="Gastos operativos">Gastos operativos</option>
-        <option value="Gastos del objeto social">Gastos del objeto social</option>
+        <option value="Gastos del objeto social">
+          Gastos del objeto social
+        </option>
       </select>
     </form>
   </div>

@@ -13,7 +13,7 @@
       <tr *ngFor="let record of records">
         <td>{{ record.position }}</td>
         <td>{{ record.schema }}</td>
-        <td>{{ record.financialRemuneration | currency: "MXN" }}</td>
+        <td>{{ record.financialRemuneration | currency : "MXN" }}</td>
         <td>
           <ng-container *ngIf="!isEditMode">
             <button
@@ -31,7 +31,7 @@
           </ng-container>
         </td>
       </tr>
-      <tr>
+      <tr *ngIf="allowAddRecord">
         <td colspan="6">
           <button class="btn btn-primary" (click)="open(modal)">
             Agregar registro
@@ -52,7 +52,7 @@
           <td>{{ record.schema }}</td>
         </tr>
         <tr>
-          <td>{{ record.financialRemuneration | currency: "MXN" }}</td>
+          <td>{{ record.financialRemuneration | currency : "MXN" }}</td>
         </tr>
         <tr>
           <td>
@@ -74,7 +74,7 @@
         </tr>
         <tr style="height: 10px" class="bg-gray"></tr>
       </ng-container>
-      <tr>
+      <tr *ngIf="allowAddRecord">
         <td colspan="6">
           <button class="btn btn-primary" (click)="open(modal)">
             Agregar registro
