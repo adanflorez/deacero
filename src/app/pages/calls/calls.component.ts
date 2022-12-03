@@ -196,10 +196,12 @@ export class CallsComponent implements OnInit, OnDestroy {
       mostRecentMeeting: new FormControl('', Validators.required),
       legalRepresentativesPower: new FormControl('', Validators.required),
       legalRepresentativesId: new FormControl('', Validators.required),
+      documentRFC: new FormControl('', Validators.required),
       oldProofOfAddress: new FormControl('', Validators.required),
       updatedComplianceOpinion: new FormControl('', Validators.required),
       proofOfUpdatedTaxSituation: new FormControl('', Validators.required),
       logo: new FormControl('', Validators.required),
+      subscribe: new FormControl(false),
     });
   }
 
@@ -261,7 +263,7 @@ export class CallsComponent implements OnInit, OnDestroy {
         help: 'PDF legible',
       },
       {
-        field: 'legalRepresentativesId',
+        field: 'documentRFC',
         name: 'Cédula del RFC',
         help: 'PDF legible',
       },
@@ -519,6 +521,23 @@ export class CallsComponent implements OnInit, OnDestroy {
       twitter,
       tiktok,
       youtube,
+      ethicalCode,
+      governanceManual,
+      timelineActivities,
+      workWithMinors,
+      officialLetterOfAuthorizationOfDonees,
+      updatedCertificate,
+      publicationInAnnex14OfTheCurrentRMF,
+      constituentAct,
+      mostRecentMeeting,
+      legalRepresentativesPower,
+      legalRepresentativesId,
+      documentRFC,
+      oldProofOfAddress,
+      updatedComplianceOpinion,
+      proofOfUpdatedTaxSituation,
+      logo,
+      subscribe,
     } = this.form.value;
 
     const body = {
@@ -614,6 +633,25 @@ export class CallsComponent implements OnInit, OnDestroy {
         twitter: twitter,
         tiktok: tiktok,
         youtube: youtube,
+      },
+      documents: {
+        codeOfEthics: ethicalCode,
+        governanceHandbook: governanceManual,
+        scheduleOfActivities: timelineActivities,
+        workWithMinors: workWithMinors,
+        officialLetterOfAuthorizationOfDonees: officialLetterOfAuthorizationOfDonees,
+        updatedCertificate: updatedCertificate,
+        publicationInAnnex14OfTheCurrentRMF: publicationInAnnex14OfTheCurrentRMF,
+        constitutiveActOfTheOrganization: constituentAct,
+        mostRecentMeetingMinutes: mostRecentMeeting,
+        powerOfLegalRepresentative: legalRepresentativesPower,
+        officialIdentificationOfLegalRepresentative: legalRepresentativesId,
+        documentRFC: documentRFC,
+        oldProofOfAddress: oldProofOfAddress,
+        updatedComplianceOpinion: updatedComplianceOpinion,
+        proofOfUpdatedTaxSituation: proofOfUpdatedTaxSituation,
+        logo: logo,
+        doYouWanToSubscribe: subscribe,
       },
     };
     console.log(body);
