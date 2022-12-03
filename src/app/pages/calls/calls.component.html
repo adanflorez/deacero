@@ -405,18 +405,19 @@
             <label for="numberOfBeneficiaries" class="form-label"
               >Número de beneficiarios directos que se estima atender</label
             >
-            <textarea
+            <input
+              type="number"
               class="form-control"
               id="numberOfBeneficiaries"
-              rows="3"
               formControlName="numberOfBeneficiaries"
               [class.is-invalid]="
                 f['numberOfBeneficiaries'].invalid &&
                 f['numberOfBeneficiaries'].touched
               "
-            ></textarea>
+            />
             <app-form-error
               [control]="f['numberOfBeneficiaries']"
+              [errors]="{ pattern: 'Solo números' }"
             ></app-form-error>
           </div>
         </div>

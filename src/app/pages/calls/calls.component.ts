@@ -135,6 +135,17 @@ export class CallsComponent implements OnInit, OnDestroy {
       responsibleName: res.projectManager.responsibleName,
       emails: res.projectManager.emailOfTheProjectManager,
       phone: res.projectManager.cellPhoneOfTheProjectManager,
+      // Development
+      whichProblem: res.projectDevelopment.socialProblem,
+      generalObjective: res.projectDevelopment.generalObjective,
+      numberOfBeneficiaries: res.projectDevelopment.numberOfBeneficiaries,
+      collaborationWithOtherOrganizations:
+        res.projectDevelopment.receiveCollaboration,
+      collaboratorsAnswer: res.projectDevelopment.which,
+      populationsConditionsBefore: res.projectDevelopment.currentPopulation,
+      populationsConditionsAfter:
+        res.projectDevelopment.conditionsAfterTheIntervention,
+      promoteSocialImprovement: res.projectDevelopment.socialBetterment,
     };
   }
 
@@ -192,17 +203,38 @@ export class CallsComponent implements OnInit, OnDestroy {
         Validators.pattern(ONLY_NUMBERS_PATTERN),
         Validators.maxLength(12),
       ]),
-      whichProblem: new FormControl('', Validators.required),
-      generalObjective: new FormControl('', Validators.required),
-      numberOfBeneficiaries: new FormControl('', Validators.required),
-      collaborationWithOtherOrganizations: new FormControl(
-        true,
+      whichProblem: new FormControl(
+        this.call?.whichProblem,
         Validators.required
       ),
-      collaboratorsAnswer: new FormControl('', Validators.required),
-      populationsConditionsBefore: new FormControl('', Validators.required),
-      populationsConditionsAfter: new FormControl('', Validators.required),
-      promoteSocialImprovement: new FormControl('', Validators.required),
+      generalObjective: new FormControl(
+        this.call?.generalObjective,
+        Validators.required
+      ),
+      numberOfBeneficiaries: new FormControl(this.call?.numberOfBeneficiaries, [
+        Validators.required,
+        Validators.pattern(ONLY_NUMBERS_PATTERN),
+      ]),
+      collaborationWithOtherOrganizations: new FormControl(
+        this.call?.collaborationWithOtherOrganizations,
+        Validators.required
+      ),
+      collaboratorsAnswer: new FormControl(
+        this.call?.collaboratorsAnswer,
+        Validators.required
+      ),
+      populationsConditionsBefore: new FormControl(
+        this.call?.populationsConditionsBefore,
+        Validators.required
+      ),
+      populationsConditionsAfter: new FormControl(
+        this.call?.populationsConditionsAfter,
+        Validators.required
+      ),
+      promoteSocialImprovement: new FormControl(
+        this.call?.promoteSocialImprovement,
+        Validators.required
+      ),
       startDate: new FormControl('', Validators.required),
       endDate: new FormControl('', Validators.required),
       objectives: new FormControl('', Validators.required),
