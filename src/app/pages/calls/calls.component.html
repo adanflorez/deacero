@@ -1,4 +1,4 @@
-<ng-container *ngIf="(hideForm$ | async) || !call; else callForm">
+<ng-container *ngIf="hideForm$ | async">
   <p>
     <ngb-alert [dismissible]="false">
       Favor de completar la sección de
@@ -7,7 +7,7 @@
     </ngb-alert>
   </p>
 </ng-container>
-<ng-template #callForm>
+<ng-container *ngIf="call">
   <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
     <form [formGroup]="form">
       <h2 class="mb-3">Órgano de gobierno</h2>
@@ -2497,7 +2497,7 @@
       </button>
     </form>
   </div>
-</ng-template>
+</ng-container>
 
 <ng-template #modal let-modal>
   <div class="modal-header">

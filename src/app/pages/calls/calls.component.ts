@@ -92,8 +92,17 @@ export class CallsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.userService.OSCstatus().subscribe((res) => console.log(res.data));
-    this.loadApplication();
+    this.userService.OSCstatus().subscribe({
+      next: (res) => {
+        if (res.data) {
+          this.loadApplication();
+        } else {
+          this.hideForm$.next(true);
+        }
+      },
+      error: (error) => console.error(error),
+      complete: () => {},
+    });
   }
 
   get f() {
@@ -202,7 +211,47 @@ export class CallsComponent implements OnInit, OnDestroy {
       updatedComplianceOpinion: res.documents.updatedComplianceOpinion,
       proofOfUpdatedTaxSituation: res.documents.proofOfUpdatedTaxSituation,
       subscribe: res.documents.doYouWanToSubscribe,
-      logo: res.documents.logo
+      logo: res.documents.logo,
+      livingConditions: res.selfAppraisal.improveLivingConditions
+        ? '0' + res.selfAppraisal.improveLivingConditions
+        : res.selfAppraisal.improveLivingConditions,
+      lifeQuality: res.selfAppraisal.improvementInQualityOfLife
+        ? '0' + res.selfAppraisal.improvementInQualityOfLife
+        : res.selfAppraisal.improvementInQualityOfLife,
+      capacityBuilding: res.selfAppraisal.selfManagementSkills
+        ? '0' + res.selfAppraisal.selfManagementSkills
+        : res.selfAppraisal.selfManagementSkills,
+      supportType: res.selfAppraisal.supportType
+        ? '0' + res.selfAppraisal.supportType
+        : res.selfAppraisal.supportType,
+      supportScope: res.selfAppraisal.scopeOfSupport
+        ? '0' + res.selfAppraisal.scopeOfSupport
+        : res.selfAppraisal.scopeOfSupport,
+      resilienceBuilding: res.selfAppraisal.resilienceBuilding
+        ? '0' + res.selfAppraisal.resilienceBuilding
+        : res.selfAppraisal.resilienceBuilding,
+      socialBackwardness: res.selfAppraisal.socialLag
+        ? '0' + res.selfAppraisal.socialLag
+        : res.selfAppraisal.socialLag,
+      communitySense: res.selfAppraisal.developmentOfSenseOfCommunity
+        ? '0' + res.selfAppraisal.developmentOfSenseOfCommunity
+        : res.selfAppraisal.developmentOfSenseOfCommunity,
+      sustainabilityProcesses: res.selfAppraisal.sustainabilityProcess
+        ? '0' + res.selfAppraisal.sustainabilityProcess
+        : res.selfAppraisal.sustainabilityProcess,
+      statusImprovement: res.selfAppraisal
+        .improvementInTheStateOfTheOrganization
+        ? '0' + res.selfAppraisal.improvementInTheStateOfTheOrganization
+        : res.selfAppraisal.improvementInTheStateOfTheOrganization,
+      urbanDevelopment: res.selfAppraisal.urbanDevelopment
+        ? '0' + res.selfAppraisal.urbanDevelopment
+        : res.selfAppraisal.urbanDevelopment,
+      professionalizationProcess: res.selfAppraisal.professionalizationProcess
+        ? '0' + res.selfAppraisal.professionalizationProcess
+        : res.selfAppraisal.professionalizationProcess,
+      opportunityGeneration: res.selfAppraisal.generationOfOpportunities
+        ? '0' + res.selfAppraisal.generationOfOpportunities
+        : res.selfAppraisal.generationOfOpportunities,
     };
   }
 
@@ -221,19 +270,23 @@ export class CallsComponent implements OnInit, OnDestroy {
         Validators.required,
       ]),
       category: new FormControl(this.call?.category, Validators.required),
-      livingConditions: new FormControl(''),
-      lifeQuality: new FormControl(''),
-      capacityBuilding: new FormControl(''),
-      supportType: new FormControl(''),
-      supportScope: new FormControl(''),
-      resilienceBuilding: new FormControl(''),
-      socialBackwardness: new FormControl(''),
-      communitySense: new FormControl(''),
-      sustainabilityProcesses: new FormControl(''),
-      statusImprovement: new FormControl(''),
-      urbanDevelopment: new FormControl(''),
-      professionalizationProcess: new FormControl(''),
-      opportunityGeneration: new FormControl(''),
+      livingConditions: new FormControl(this.call?.livingConditions),
+      lifeQuality: new FormControl(this.call?.lifeQuality),
+      capacityBuilding: new FormControl(this.call?.capacityBuilding),
+      supportType: new FormControl(this.call?.supportType),
+      supportScope: new FormControl(this.call?.supportScope),
+      resilienceBuilding: new FormControl(this.call?.resilienceBuilding),
+      socialBackwardness: new FormControl(this.call?.socialBackwardness),
+      communitySense: new FormControl(this.call?.communitySense),
+      sustainabilityProcesses: new FormControl(
+        this.call?.sustainabilityProcesses
+      ),
+      statusImprovement: new FormControl(this.call?.statusImprovement),
+      urbanDevelopment: new FormControl(this.call?.urbanDevelopment),
+      professionalizationProcess: new FormControl(
+        this.call?.professionalizationProcess
+      ),
+      opportunityGeneration: new FormControl(this.call?.opportunityGeneration),
       locationQuestion: new FormControl(this.call?.locationQuestion),
       street: new FormControl(this.call?.street, Validators.required),
       colony: new FormControl(this.call?.colony, Validators.required),
@@ -399,6 +452,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.handleObjectives();
     this.handleRemunerationQuestion();
     this.initDocuments();
+    this.changeCategory();
   }
 
   initDocuments() {
@@ -885,7 +939,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   loadApplication() {
     const sub = this.callService.application().subscribe((res: any) => {
-      console.log(res.data.documents);
       this.parseResponse(res.data);
       this.initForm();
     });
