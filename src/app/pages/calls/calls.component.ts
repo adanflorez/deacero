@@ -433,6 +433,7 @@ export class CallsComponent implements OnInit, OnDestroy {
         this.tempDocumentUrl.asObservable().subscribe((res) => {
           this.f[control].setValue(res);
         });
+        this.tempDocumentUrl.next('');
       },
     });
   }

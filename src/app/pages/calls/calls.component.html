@@ -2378,7 +2378,7 @@
                   "
                 />
               </ng-container>
-              <ng-template *ngIf="f[doc.field].value !== ''">
+              <ng-container *ngIf="f[doc.field].value != ''">
                 <div class="input-group mb-4">
                   <input
                     type="text"
@@ -2399,7 +2399,7 @@
                     />
                   </button>
                 </div>
-              </ng-template>
+              </ng-container>
               <app-form-error [control]="f[doc.field]"></app-form-error>
               <div class="small">- {{ doc.help }}</div>
             </div>
