@@ -18,4 +18,8 @@ export class UserService {
   getOSC(): Observable<any> {
     return this.http.get(`${this.apiOSC}`);
   }
+
+  OSCstatus(): Observable<any> {
+    return this.http.get(`${this.apiOSC}status`);
+  }
 }

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CallsRoutingModule } from './calls-routing.module';
 import { CallsComponent } from './calls.component';
@@ -27,6 +28,7 @@ import { BudgetTableComponent } from './components/budget-table/budget-table.com
     FormErrorModule,
     NgxMaskModule.forChild(),
     NgSelectModule,
+    NgbAlertModule,
   ],
 })
 export class CallsModule {}

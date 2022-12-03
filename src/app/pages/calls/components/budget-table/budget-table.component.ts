@@ -14,6 +14,7 @@ export class BudgetTableComponent
   implements OnInit, TableComponent<ProjectBudget>
 {
   @Input() records: any[] = [];
+  @Input() readOnly: boolean | null = false;
   @Output() onChange: EventEmitter<ProjectBudget[]> = new EventEmitter();
   form: FormGroup<any>;
   validForm: boolean;
@@ -71,11 +72,11 @@ export class BudgetTableComponent
   loadRecordInFields(id: string, modal: any): void {
     const records = this.records.filter((record) => record.id === id);
     this.recordToEdit = records[0];
-    const { position, schema, financialRemuneration } = records[0];
+    const { activity, amount, expenseType } = records[0];
     this.form.setValue({
-      position,
-      schema,
-      financialRemuneration,
+      activity,
+      amount,
+      expenseType,
     });
     this.isEditMode = true;
     this.open(modal);
