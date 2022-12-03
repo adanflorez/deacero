@@ -1,4 +1,12 @@
-<ng-container *ngIf="false; else callForm"></ng-container>
+<ng-container *ngIf="hideForm$ | async; else callForm">
+  <p>
+    <ngb-alert [dismissible]="false">
+      Favor de completar la sección de
+      <a routerLink="/home">información de organización</a> para poder iniciar
+      con la aplicación a la convocatoria
+    </ngb-alert>
+  </p>
+</ng-container>
 <ng-template #callForm>
   <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
     <form [formGroup]="form">

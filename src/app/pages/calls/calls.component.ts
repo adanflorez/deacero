@@ -79,6 +79,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   donations: ProjectBudget[] = [];
   tempDocumentUrl: BehaviorSubject<string> = new BehaviorSubject<string>('');
   closeResult: string;
+  hideForm$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private multimediaService: MultimediaService,
