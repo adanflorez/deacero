@@ -14,7 +14,7 @@ export class BudgetTableComponent
   implements OnInit, TableComponent<ProjectBudget>
 {
   @Input() records: any[] = [];
-  @Input() allowAddRecord: boolean | null = true;
+  @Input() readOnly: boolean | null = false;
   @Output() onChange: EventEmitter<ProjectBudget[]> = new EventEmitter();
   form: FormGroup<any>;
   validForm: boolean;

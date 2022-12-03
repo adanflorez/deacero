@@ -15,7 +15,7 @@
         <td>{{ record.amount | currency : "MXN" }}</td>
         <td>{{ record.expenseType }}</td>
         <td>
-          <ng-container *ngIf="!isEditMode">
+          <ng-container *ngIf="!isEditMode && !readOnly">
             <button
               class="btn btn-secondary p-1 me-2"
               (click)="loadRecordInFields(record.id, modal)"
@@ -31,7 +31,7 @@
           </ng-container>
         </td>
       </tr>
-      <tr *ngIf="allowAddRecord">
+      <tr *ngIf="!readOnly">
         <td colspan="6">
           <button class="btn btn-primary" (click)="open(modal)">
             Agregar registro
@@ -56,7 +56,7 @@
         </tr>
         <tr>
           <td>
-            <ng-container *ngIf="!isEditMode">
+            <ng-container *ngIf="!isEditMode && !readOnly">
               <button
                 class="btn btn-secondary p-1 me-2"
                 (click)="loadRecordInFields(record.id, modal)"
@@ -74,7 +74,7 @@
         </tr>
         <tr style="height: 10px" class="bg-gray"></tr>
       </ng-container>
-      <tr *ngIf="allowAddRecord">
+      <tr *ngIf="!readOnly">
         <td colspan="6">
           <button class="btn btn-primary" (click)="open(modal)">
             Agregar registro

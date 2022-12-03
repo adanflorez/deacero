@@ -14,7 +14,7 @@ export class RemunerationTableComponent
   implements TableComponent<Remuneration>
 {
   @Input() records: Remuneration[] = [];
-  @Input() allowAddRecord: boolean | null = true;
+  @Input() readOnly: boolean | null = false;
   @Output() onChange: EventEmitter<Remuneration[]> = new EventEmitter();
   form: FormGroup;
   validForm: boolean;
