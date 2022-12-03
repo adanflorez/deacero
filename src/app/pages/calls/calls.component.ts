@@ -438,6 +438,14 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.handleRemunerationQuestion();
     this.initDocuments();
     this.changeCategory();
+    if (this.form.valid) {
+      this.callService.status().subscribe((res: any) => {
+        if (res.data) {
+          this.form.disable();
+          this.infoSaved$.next(true);
+        }
+      });
+    }
   }
 
   initDocuments() {
@@ -522,7 +530,7 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   private changeCategory() {
     // Reset previous controls
-    this.resetPreviousRatings();
+    // this.resetPreviousRatings();
     switch (this.f.category.value) {
       case this.categories[0]:
       case this.categories[2]:
@@ -943,6 +951,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       },
       complete: () => {
         this.open(modal);
+        this.loadApplication();
       },
     });
     this.unsubscribe.push(sub);
