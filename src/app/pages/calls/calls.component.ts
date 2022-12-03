@@ -114,6 +114,9 @@ export class CallsComponent implements OnInit, OnDestroy {
   private parseResponse(res: any) {
     this.members = res.governingBody.membersOfTheGoverning;
     this.remunerations = res.remunerations.tableRemunerations;
+    this.contributions = res.projectBudget.organizationContribution;
+    this.conversions = res.projectBudget.jointVenture;
+    this.donations = res.projectBudget.donationDeaceroFoundation;
     this.call = {
       // Governing Body
       meetings: res.governingBody.numberOfMeetingsPerYear,
