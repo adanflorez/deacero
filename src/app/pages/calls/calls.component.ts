@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/lib/services/user.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -86,10 +87,12 @@ export class CallsComponent implements OnInit, OnDestroy {
   constructor(
     private multimediaService: MultimediaService,
     private modalService: NgbModal,
-    private callService: CallService
+    private callService: CallService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    this.userService.OSCstatus().subscribe((res) => console.log(res.data));
     this.loadApplication();
   }
 
@@ -149,6 +152,26 @@ export class CallsComponent implements OnInit, OnDestroy {
       // Validity
       startDate: res.validity.startDate,
       endDate: res.validity.endDate,
+      // Objectives
+      objectives: res.objectivesAndGoals.sustainableDevelopmentGoals,
+      povertyEnd: res.objectivesAndGoals.endOfPoverty,
+      zeroHunger: res.objectivesAndGoals.zeroHunger,
+      healthAndWellness: res.objectivesAndGoals.healthAndWellness,
+      qualityEducation: res.objectivesAndGoals.qualityEducation,
+      genderEquality: res.objectivesAndGoals.genderEquality,
+      cleanWater: res.objectivesAndGoals.cleanWaterAndSanitation,
+      affordableEnergy: res.objectivesAndGoals.affordableEnergy,
+      decentWork: res.objectivesAndGoals.decentWorkAndEconomicGrowth,
+      industry: res.objectivesAndGoals.industry,
+      reducingInequalities: res.objectivesAndGoals.reductionOfInequality,
+      cities: res.objectivesAndGoals.sustainableCitiesandCommunities,
+      production: res.objectivesAndGoals.responsibleProductionAndConsumption,
+      climateAction: res.objectivesAndGoals.climateAction,
+      underwaterLife: res.objectivesAndGoals.submarineLife,
+      terrestrialEcosystemLife:
+        res.objectivesAndGoals.lifeOfTerrestrialEcosystems,
+      peace: res.objectivesAndGoals.peaceAndJustice,
+      alliances: res.objectivesAndGoals.alliancesToAchieveObjectives,
     };
   }
 
@@ -240,24 +263,29 @@ export class CallsComponent implements OnInit, OnDestroy {
       ),
       startDate: new FormControl(this.call?.startDate, Validators.required),
       endDate: new FormControl(this.call?.endDate, Validators.required),
-      objectives: new FormControl('', Validators.required),
-      povertyEnd: new FormControl(''),
-      zeroHunger: new FormControl(''),
-      healthAndWellness: new FormControl(''),
-      qualityEducation: new FormControl(''),
-      genderEquality: new FormControl(''),
-      cleanWater: new FormControl(''),
-      affordableEnergy: new FormControl(''),
-      decentWork: new FormControl(''),
-      industry: new FormControl(''),
-      reducingInequalities: new FormControl(''),
-      cities: new FormControl(''),
-      production: new FormControl(''),
-      climateAction: new FormControl(''),
-      underwaterLife: new FormControl(''),
-      terrestrialEcosystemLife: new FormControl(''),
-      peace: new FormControl(''),
-      alliances: new FormControl(''),
+      objectives: new FormControl(
+        this.call?.objectives || '',
+        Validators.required
+      ),
+      povertyEnd: new FormControl(this.call?.povertyEnd),
+      zeroHunger: new FormControl(this.call?.zeroHunger),
+      healthAndWellness: new FormControl(this.call?.healthAndWellness),
+      qualityEducation: new FormControl(this.call?.qualityEducation),
+      genderEquality: new FormControl(this.call?.genderEquality),
+      cleanWater: new FormControl(this.call?.cleanWater),
+      affordableEnergy: new FormControl(this.call?.affordableEnergy),
+      decentWork: new FormControl(this.call?.decentWork),
+      industry: new FormControl(this.call?.industry),
+      reducingInequalities: new FormControl(this.call?.reducingInequalities),
+      cities: new FormControl(this.call?.cities),
+      production: new FormControl(this.call?.production),
+      climateAction: new FormControl(this.call?.climateAction),
+      underwaterLife: new FormControl(this.call?.underwaterLife),
+      terrestrialEcosystemLife: new FormControl(
+        this.call?.terrestrialEcosystemLife
+      ),
+      peace: new FormControl(this.call?.peace),
+      alliances: new FormControl(this.call?.alliances),
       facebook: new FormControl('', [Validators.pattern(URL_PATTERN)]),
       instagram: new FormControl('', [Validators.pattern(URL_PATTERN)]),
       linkedin: new FormControl('', [Validators.pattern(URL_PATTERN)]),
@@ -488,13 +516,15 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   private handleObjectives() {
-    this.resetObjectivesValidators();
     const sub = this.form.get('objectives')?.valueChanges.subscribe((val) => {
       this.objectivesOptions.map((_, index) => {
         if (val.includes(this.objectivesOptions[index])) {
           this.form
             .get(this.objectivesFields[index])
             ?.setValidators(Validators.required);
+        } else {
+          this.form.get(this.objectivesFields[index])?.clearValidators();
+          this.form.get(this.objectivesFields[index])?.reset();
         }
       });
     });
@@ -510,13 +540,6 @@ export class CallsComponent implements OnInit, OnDestroy {
         }
       });
     this.unsubscribe.push(sub!);
-  }
-
-  private resetObjectivesValidators() {
-    this.objectivesFields.map((obj) => {
-      this.form.get(obj)?.clearValidators();
-      this.form.get(obj)?.reset();
-    });
   }
 
   uploadDocument(e: Event, control: string, isImage = false) {
@@ -779,7 +802,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       },
     };
     const sub = this.callService.applicateToCall(body).subscribe((res) => {
-      console.log(res);
       this.loadApplication();
     });
     this.unsubscribe.push(sub);
