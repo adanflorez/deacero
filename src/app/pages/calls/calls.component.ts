@@ -146,6 +146,9 @@ export class CallsComponent implements OnInit, OnDestroy {
       populationsConditionsAfter:
         res.projectDevelopment.conditionsAfterTheIntervention,
       promoteSocialImprovement: res.projectDevelopment.socialBetterment,
+      // Validity
+      startDate: res.validity.startDate,
+      endDate: res.validity.endDate,
     };
   }
 
@@ -235,8 +238,8 @@ export class CallsComponent implements OnInit, OnDestroy {
         this.call?.promoteSocialImprovement,
         Validators.required
       ),
-      startDate: new FormControl('', Validators.required),
-      endDate: new FormControl('', Validators.required),
+      startDate: new FormControl(this.call?.startDate, Validators.required),
+      endDate: new FormControl(this.call?.endDate, Validators.required),
       objectives: new FormControl('', Validators.required),
       povertyEnd: new FormControl(''),
       zeroHunger: new FormControl(''),
