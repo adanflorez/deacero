@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   MULTIPLE_EMAIL_PATTERN,
   OBJECTIVES,
@@ -12,7 +13,7 @@ import Member from 'src/app/lib/models/member.model';
 import ProjectBudget from 'src/app/lib/models/project-budget.model';
 import Remuneration from 'src/app/lib/models/remuneration.model';
 import { MultimediaService } from 'src/app/lib/services/multimedia.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CallService } from 'src/app/lib/services/call.service';
 
 @Component({
   selector: 'app-calls',
@@ -83,7 +84,8 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   constructor(
     private multimediaService: MultimediaService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private callService: CallService
   ) {
     this.initForm();
   }
@@ -98,6 +100,17 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   get f() {
     return this.form.controls;
+  }
+
+  get isValidForm(): boolean {
+    return (
+      this.form.valid &&
+      this.members.length > 0 &&
+      this.remunerations.length > 0 &&
+      this.contributions.length > 0 &&
+      this.conversions.length > 0 &&
+      this.donations.length > 0
+    );
   }
 
   private initForm() {
@@ -609,7 +622,7 @@ export class CallsComponent implements OnInit, OnDestroy {
         endDate,
       },
       objectivesAndGoals: {
-        sustainableDevelopmentGoals: objectives,
+        sustainableDevelopmentGoals: objectives === '' ? null : objectives,
         endOfPoverty: povertyEnd,
         zeroHunger: zeroHunger,
         healthAndWellness: healthAndWellness,
@@ -679,6 +692,9 @@ export class CallsComponent implements OnInit, OnDestroy {
         doYouWanToSubscribe: subscribe,
       },
     };
-    console.log(body);
+    const sub = this.callService.applicateToCall(body).subscribe((res) => {
+      console.log(res);
+    });
+    this.unsubscribe.push(sub);
   }
 }

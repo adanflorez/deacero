@@ -9,6 +9,7 @@ export const environment = {
   apiRegister: 'https://c756-181-237-27-243.ngrok.io/register/',
   apiOSC: 'https://c756-181-237-27-243.ngrok.io/osc/',
   apiMultimedia: 'https://c756-181-237-27-243.ngrok.io/multimedia/',
+  apiCall: 'https://c756-181-237-27-243.ngrok.io/call/',
 };
 
 /*

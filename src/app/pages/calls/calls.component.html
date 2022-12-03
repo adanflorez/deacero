@@ -2476,7 +2476,7 @@
       <button
         class="btn btn-primary"
         type="button"
-        [disabled]="form.invalid"
+        [disabled]="!isValidForm"
         (click)="open(modal)"
       >
         Guardar
