@@ -117,6 +117,9 @@ export class CallsComponent implements OnInit, OnDestroy {
       renewalFrequency: res.governingBody.boardRenewalFrequency,
       // Remunerations
       remunerationQuestion: res.remunerations.workInYourOrganizationIsPaid,
+      // General project data
+      projectName: res.generalProjectData.projectName,
+      category: res.generalProjectData.category[0],
     };
   }
 
@@ -131,8 +134,10 @@ export class CallsComponent implements OnInit, OnDestroy {
         Validators.pattern(ONLY_NUMBERS_PATTERN),
       ]),
       remunerationQuestion: new FormControl(this.call?.remunerationQuestion),
-      projectName: new FormControl(null, [Validators.required]),
-      category: new FormControl('', Validators.required),
+      projectName: new FormControl(this.call?.projectName, [
+        Validators.required,
+      ]),
+      category: new FormControl(this.call?.category, Validators.required),
       livingConditions: new FormControl(''),
       lifeQuality: new FormControl(''),
       capacityBuilding: new FormControl(''),
