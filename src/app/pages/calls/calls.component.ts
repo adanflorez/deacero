@@ -130,9 +130,7 @@ export class CallsComponent implements OnInit, OnDestroy {
         Validators.required,
         Validators.pattern(ONLY_NUMBERS_PATTERN),
       ]),
-      remunerationQuestion: new FormControl(
-        this.call?.remunerationQuestion
-      ),
+      remunerationQuestion: new FormControl(this.call?.remunerationQuestion),
       projectName: new FormControl(null, [Validators.required]),
       category: new FormControl('', Validators.required),
       livingConditions: new FormControl(''),
@@ -229,6 +227,13 @@ export class CallsComponent implements OnInit, OnDestroy {
       logo: new FormControl('', Validators.required),
       subscribe: new FormControl(false),
     });
+
+    this.handleCategory();
+    this.handleLocation();
+    this.handleAboutCall();
+    this.handleObjectives();
+    this.handleRemunerationQuestion();
+    this.initDocuments();
   }
 
   initDocuments() {
@@ -432,6 +437,17 @@ export class CallsComponent implements OnInit, OnDestroy {
         }
       });
     });
+    this.unsubscribe.push(sub!);
+  }
+
+  private handleRemunerationQuestion() {
+    const sub = this.form
+      .get('remunerationQuestion')
+      ?.valueChanges.subscribe((res) => {
+        if (!res) {
+          this.remunerations = [];
+        }
+      });
     this.unsubscribe.push(sub!);
   }
 
@@ -713,11 +729,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       console.log(res);
       this.parseResponse(res.data);
       this.initForm();
-      this.handleCategory();
-      this.handleLocation();
-      this.handleAboutCall();
-      this.handleObjectives();
-      this.initDocuments();
     });
     this.unsubscribe.push(sub);
   }
