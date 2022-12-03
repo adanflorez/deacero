@@ -12,6 +12,7 @@ import Member from 'src/app/lib/models/member.model';
 import ProjectBudget from 'src/app/lib/models/project-budget.model';
 import Remuneration from 'src/app/lib/models/remuneration.model';
 import { MultimediaService } from 'src/app/lib/services/multimedia.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-calls',
@@ -72,15 +73,17 @@ export class CallsComponent implements OnInit, OnDestroy {
     'peace',
     'alliances',
   ];
-
   documentsFields: Array<any>;
-
   contributions: ProjectBudget[] = [];
   conversions: ProjectBudget[] = [];
   donations: ProjectBudget[] = [];
   tempDocumentUrl: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  closeResult: string;
 
-  constructor(private multimediaService: MultimediaService) {
+  constructor(
+    private multimediaService: MultimediaService,
+    private modalService: NgbModal
+  ) {
     this.initForm();
   }
 
@@ -454,6 +457,22 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 
+  open(content: any): void {
+    this.modalService
+      .open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        backdrop: 'static',
+      })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.form.reset();
+        }
+      );
+  }
+
   save() {
     const {
       meetings,
@@ -639,9 +658,11 @@ export class CallsComponent implements OnInit, OnDestroy {
         governanceHandbook: governanceManual,
         scheduleOfActivities: timelineActivities,
         workWithMinors: workWithMinors,
-        officialLetterOfAuthorizationOfDonees: officialLetterOfAuthorizationOfDonees,
+        officialLetterOfAuthorizationOfDonees:
+          officialLetterOfAuthorizationOfDonees,
         updatedCertificate: updatedCertificate,
-        publicationInAnnex14OfTheCurrentRMF: publicationInAnnex14OfTheCurrentRMF,
+        publicationInAnnex14OfTheCurrentRMF:
+          publicationInAnnex14OfTheCurrentRMF,
         constitutiveActOfTheOrganization: constituentAct,
         mostRecentMeetingMinutes: mostRecentMeeting,
         powerOfLegalRepresentative: legalRepresentativesPower,
