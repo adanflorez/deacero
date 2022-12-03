@@ -212,46 +212,19 @@ export class CallsComponent implements OnInit, OnDestroy {
       proofOfUpdatedTaxSituation: res.documents.proofOfUpdatedTaxSituation,
       subscribe: res.documents.doYouWanToSubscribe,
       logo: res.documents.logo,
-      livingConditions: res.selfAppraisal.improveLivingConditions
-        ? '0' + res.selfAppraisal.improveLivingConditions
-        : res.selfAppraisal.improveLivingConditions,
-      lifeQuality: res.selfAppraisal.improvementInQualityOfLife
-        ? '0' + res.selfAppraisal.improvementInQualityOfLife
-        : res.selfAppraisal.improvementInQualityOfLife,
-      capacityBuilding: res.selfAppraisal.selfManagementSkills
-        ? '0' + res.selfAppraisal.selfManagementSkills
-        : res.selfAppraisal.selfManagementSkills,
-      supportType: res.selfAppraisal.supportType
-        ? '0' + res.selfAppraisal.supportType
-        : res.selfAppraisal.supportType,
-      supportScope: res.selfAppraisal.scopeOfSupport
-        ? '0' + res.selfAppraisal.scopeOfSupport
-        : res.selfAppraisal.scopeOfSupport,
-      resilienceBuilding: res.selfAppraisal.resilienceBuilding
-        ? '0' + res.selfAppraisal.resilienceBuilding
-        : res.selfAppraisal.resilienceBuilding,
-      socialBackwardness: res.selfAppraisal.socialLag
-        ? '0' + res.selfAppraisal.socialLag
-        : res.selfAppraisal.socialLag,
-      communitySense: res.selfAppraisal.developmentOfSenseOfCommunity
-        ? '0' + res.selfAppraisal.developmentOfSenseOfCommunity
-        : res.selfAppraisal.developmentOfSenseOfCommunity,
-      sustainabilityProcesses: res.selfAppraisal.sustainabilityProcess
-        ? '0' + res.selfAppraisal.sustainabilityProcess
-        : res.selfAppraisal.sustainabilityProcess,
-      statusImprovement: res.selfAppraisal
-        .improvementInTheStateOfTheOrganization
-        ? '0' + res.selfAppraisal.improvementInTheStateOfTheOrganization
-        : res.selfAppraisal.improvementInTheStateOfTheOrganization,
-      urbanDevelopment: res.selfAppraisal.urbanDevelopment
-        ? '0' + res.selfAppraisal.urbanDevelopment
-        : res.selfAppraisal.urbanDevelopment,
-      professionalizationProcess: res.selfAppraisal.professionalizationProcess
-        ? '0' + res.selfAppraisal.professionalizationProcess
-        : res.selfAppraisal.professionalizationProcess,
-      opportunityGeneration: res.selfAppraisal.generationOfOpportunities
-        ? '0' + res.selfAppraisal.generationOfOpportunities
-        : res.selfAppraisal.generationOfOpportunities,
+      livingConditions: res.selfAppraisal.improveLivingConditions,
+      lifeQuality: res.selfAppraisal.improvementInQualityOfLife,
+      capacityBuilding: res.selfAppraisal.selfManagementSkills,
+      supportType: res.selfAppraisal.supportType,
+      supportScope: res.selfAppraisal.scopeOfSupport,
+      resilienceBuilding: res.selfAppraisal.resilienceBuilding,
+      socialBackwardness: res.selfAppraisal.socialLag,
+      communitySense: res.selfAppraisal.developmentOfSenseOfCommunity,
+      sustainabilityProcesses: res.selfAppraisal.sustainabilityProcess,
+      statusImprovement: res.selfAppraisal.improvementInTheStateOfTheOrganization,
+      urbanDevelopment: res.selfAppraisal.urbanDevelopment,
+      professionalizationProcess: res.selfAppraisal.professionalizationProcess,
+      opportunityGeneration: res.selfAppraisal.generationOfOpportunities,
     };
   }
 
