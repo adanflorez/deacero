@@ -93,7 +93,7 @@
             *ngIf="f['remunerationQuestion'].value"
             [records]="remunerations"
             (onChange)="remunerations = $event"
-            [readOnly]="(infoSaved$ | async)"
+            [readOnly]="infoSaved$ | async"
           ></app-remuneration-table>
         </div>
       </div>
@@ -2484,22 +2484,24 @@
         </div>
       </div>
 
-      <button
-        class="btn btn-outline-primary me-3"
-        type="button"
-        (click)="save()"
-      >
-        Guardar borrador
-      </button>
+      <ng-container *ngIf="!(infoSaved$ | async)">
+        <button
+          class="btn btn-outline-primary me-3"
+          type="button"
+          (click)="save()"
+        >
+          Guardar borrador
+        </button>
 
-      <button
-        class="btn btn-primary"
-        type="button"
-        [disabled]="!isValidForm"
-        (click)="open(modal)"
-      >
-        Guardar
-      </button>
+        <button
+          class="btn btn-primary"
+          type="button"
+          [disabled]="!isValidForm"
+          (click)="open(modal)"
+        >
+          Guardar
+        </button>
+      </ng-container>
     </form>
   </div>
 </ng-container>
