@@ -28,13 +28,5 @@ export class LoadingInterceptor implements HttpInterceptor {
         }
       })
     );
-    // const token = localStorage.getItem('auth_token');
-    // if (!token) {
-    //   return next.handle(req);
-    // }
-    // const headers = req.clone({
-    //   headers: req.headers.set('Authorization', `Bearer ${token}`),
-    // });
-    // return next.handle(headers);
   }
 }

@@ -557,7 +557,7 @@
               id="endDate"
               formControlName="endDate"
               [class.is-invalid]="f['endDate'].invalid && f['endDate'].touched"
-              [min]="f['startDate'].value | date: 'yyyy-MM-dd'"
+              [min]="f['startDate'].value | date : 'yyyy-MM-dd'"
             />
             <app-form-error [control]="f['endDate']"></app-form-error>
           </div>
@@ -2518,6 +2518,34 @@
       Cancelar
     </button>
 
+    <button
+      class="btn btn-primary"
+      (click)="modal.close(); saveInFlokzu(infoSubmitted)"
+    >
+      Aceptar
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #infoSubmitted let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Información enviada</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngIf="infoSubmitted$ | async; else error">
+      Solicitud enviada correctamente
+    </ng-container>
+    <ng-template #error>
+      No es posible enviar la solicitud en este momento, intentelo mas tarde
+    </ng-template>
+  </div>
+  <div class="modal-footer">
     <button class="btn btn-primary" (click)="modal.close()">Aceptar</button>
   </div>
 </ng-template>

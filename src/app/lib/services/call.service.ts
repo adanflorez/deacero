@@ -17,4 +17,8 @@ export class CallService {
   application() {
     return this.http.get(`${this.apiCall}application/`);
   }
+
+  saveInFlokzu() {
+    return this.http.put(`${this.apiCall}application/send`, {});
+  }
 }

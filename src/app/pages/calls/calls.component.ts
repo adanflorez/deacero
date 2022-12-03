@@ -83,6 +83,9 @@ export class CallsComponent implements OnInit, OnDestroy {
   closeResult: string;
   hideForm$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   call: any = undefined;
+  infoSubmitted$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
 
   constructor(
     private multimediaService: MultimediaService,
@@ -121,110 +124,111 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   private parseResponse(res: any) {
-    this.members = res.governingBody.membersOfTheGoverning;
-    this.remunerations = res.remunerations.tableRemunerations;
-    this.contributions = res.projectBudget.organizationContribution;
-    this.conversions = res.projectBudget.jointVenture;
-    this.donations = res.projectBudget.donationDeaceroFoundation;
+    this.members = res?.governingBody.membersOfTheGoverning;
+    this.remunerations = res?.remunerations.tableRemunerations;
+    this.contributions = res?.projectBudget.organizationContribution;
+    this.conversions = res?.projectBudget.jointVenture;
+    this.donations = res?.projectBudget.donationDeaceroFoundation;
     this.call = {
       // Governing Body
-      meetings: res.governingBody.numberOfMeetingsPerYear,
-      renewalFrequency: res.governingBody.boardRenewalFrequency,
+      meetings: res?.governingBody.numberOfMeetingsPerYear,
+      renewalFrequency: res?.governingBody.boardRenewalFrequency,
       // Remunerations
-      remunerationQuestion: res.remunerations.workInYourOrganizationIsPaid,
+      remunerationQuestion: res?.remunerations.workInYourOrganizationIsPaid,
       // General project data
-      projectName: res.generalProjectData.projectName,
-      category: res.generalProjectData.category[0],
+      projectName: res?.generalProjectData.projectName,
+      category: res?.generalProjectData.category[0],
       // Location
-      locationQuestion: res.location.locationIsVirtual,
-      street: res.location.streetAndNumber,
-      colony: res.location.colony,
-      town: res.location.municipality,
-      state: res.location.status,
-      postalCode: res.location.postalCode,
-      video: res.location.urlProyect,
-      daysAndHours: res.location.daysAndHoursOfAttention,
-      aboutCall: res.location.howDidYouFindOutAboutTheCall[0],
-      whichMedia: res.location.whichMeans,
+      locationQuestion: res?.location.locationIsVirtual,
+      street: res?.location.streetAndNumber,
+      colony: res?.location.colony,
+      town: res?.location.municipality,
+      state: res?.location.status,
+      postalCode: res?.location.postalCode,
+      video: res?.location.urlProyect,
+      daysAndHours: res?.location.daysAndHoursOfAttention,
+      aboutCall: res?.location.howDidYouFindOutAboutTheCall[0],
+      whichMedia: res?.location.whichMeans,
       // Responsible
-      responsibleName: res.projectManager.responsibleName,
-      emails: res.projectManager.emailOfTheProjectManager,
-      phone: res.projectManager.cellPhoneOfTheProjectManager,
+      responsibleName: res?.projectManager.responsibleName,
+      emails: res?.projectManager.emailOfTheProjectManager,
+      phone: res?.projectManager.cellPhoneOfTheProjectManager,
       // Development
-      whichProblem: res.projectDevelopment.socialProblem,
-      generalObjective: res.projectDevelopment.generalObjective,
-      numberOfBeneficiaries: res.projectDevelopment.numberOfBeneficiaries,
+      whichProblem: res?.projectDevelopment.socialProblem,
+      generalObjective: res?.projectDevelopment.generalObjective,
+      numberOfBeneficiaries: res?.projectDevelopment.numberOfBeneficiaries,
       collaborationWithOtherOrganizations:
-        res.projectDevelopment.receiveCollaboration,
-      collaboratorsAnswer: res.projectDevelopment.which,
-      populationsConditionsBefore: res.projectDevelopment.currentPopulation,
+        res?.projectDevelopment.receiveCollaboration,
+      collaboratorsAnswer: res?.projectDevelopment.which,
+      populationsConditionsBefore: res?.projectDevelopment.currentPopulation,
       populationsConditionsAfter:
-        res.projectDevelopment.conditionsAfterTheIntervention,
-      promoteSocialImprovement: res.projectDevelopment.socialBetterment,
+        res?.projectDevelopment.conditionsAfterTheIntervention,
+      promoteSocialImprovement: res?.projectDevelopment.socialBetterment,
       // Validity
-      startDate: res.validity.startDate,
-      endDate: res.validity.endDate,
+      startDate: res?.validity.startDate,
+      endDate: res?.validity.endDate,
       // Objectives
-      objectives: res.objectivesAndGoals.sustainableDevelopmentGoals,
-      povertyEnd: res.objectivesAndGoals.endOfPoverty,
-      zeroHunger: res.objectivesAndGoals.zeroHunger,
-      healthAndWellness: res.objectivesAndGoals.healthAndWellness,
-      qualityEducation: res.objectivesAndGoals.qualityEducation,
-      genderEquality: res.objectivesAndGoals.genderEquality,
-      cleanWater: res.objectivesAndGoals.cleanWaterAndSanitation,
-      affordableEnergy: res.objectivesAndGoals.affordableEnergy,
-      decentWork: res.objectivesAndGoals.decentWorkAndEconomicGrowth,
-      industry: res.objectivesAndGoals.industry,
-      reducingInequalities: res.objectivesAndGoals.reductionOfInequality,
-      cities: res.objectivesAndGoals.sustainableCitiesandCommunities,
-      production: res.objectivesAndGoals.responsibleProductionAndConsumption,
-      climateAction: res.objectivesAndGoals.climateAction,
-      underwaterLife: res.objectivesAndGoals.submarineLife,
+      objectives: res?.objectivesAndGoals.sustainableDevelopmentGoals,
+      povertyEnd: res?.objectivesAndGoals.endOfPoverty,
+      zeroHunger: res?.objectivesAndGoals.zeroHunger,
+      healthAndWellness: res?.objectivesAndGoals.healthAndWellness,
+      qualityEducation: res?.objectivesAndGoals.qualityEducation,
+      genderEquality: res?.objectivesAndGoals.genderEquality,
+      cleanWater: res?.objectivesAndGoals.cleanWaterAndSanitation,
+      affordableEnergy: res?.objectivesAndGoals.affordableEnergy,
+      decentWork: res?.objectivesAndGoals.decentWorkAndEconomicGrowth,
+      industry: res?.objectivesAndGoals.industry,
+      reducingInequalities: res?.objectivesAndGoals.reductionOfInequality,
+      cities: res?.objectivesAndGoals.sustainableCitiesandCommunities,
+      production: res?.objectivesAndGoals.responsibleProductionAndConsumption,
+      climateAction: res?.objectivesAndGoals.climateAction,
+      underwaterLife: res?.objectivesAndGoals.submarineLife,
       terrestrialEcosystemLife:
-        res.objectivesAndGoals.lifeOfTerrestrialEcosystems,
-      peace: res.objectivesAndGoals.peaceAndJustice,
-      alliances: res.objectivesAndGoals.alliancesToAchieveObjectives,
+        res?.objectivesAndGoals.lifeOfTerrestrialEcosystems,
+      peace: res?.objectivesAndGoals.peaceAndJustice,
+      alliances: res?.objectivesAndGoals.alliancesToAchieveObjectives,
       // Communication
-      facebook: res.communication.facebook,
-      instagram: res.communication.instagram,
-      linkedin: res.communication.linkedln,
-      twitter: res.communication.twitter,
-      tiktok: res.communication.tiktok,
-      youtube: res.communication.youtube,
+      facebook: res?.communication.facebook,
+      instagram: res?.communication.instagram,
+      linkedin: res?.communication.linkedln,
+      twitter: res?.communication.twitter,
+      tiktok: res?.communication.tiktok,
+      youtube: res?.communication.youtube,
       // Documents
-      ethicalCode: res.documents.codeOfEthics,
-      governanceManual: res.documents.governanceHandbook,
-      timelineActivities: res.documents.scheduleOfActivities,
-      workWithMinors: res.documents.workWithMinors,
+      ethicalCode: res?.documents.codeOfEthics,
+      governanceManual: res?.documents.governanceHandbook,
+      timelineActivities: res?.documents.scheduleOfActivities,
+      workWithMinors: res?.documents.workWithMinors,
       officialLetterOfAuthorizationOfDonees:
-        res.documents.officialLetterOfAuthorizationOfDonees,
-      updatedCertificate: res.documents.updatedCertificate,
+        res?.documents.officialLetterOfAuthorizationOfDonees,
+      updatedCertificate: res?.documents.updatedCertificate,
       publicationInAnnex14OfTheCurrentRMF:
-        res.documents.publicationInAnnex14OfTheCurrentRMF,
-      constituentAct: res.documents.constitutiveActOfTheOrganization,
-      mostRecentMeeting: res.documents.mostRecentMeetingMinutes,
-      legalRepresentativesPower: res.documents.powerOfLegalRepresentative,
+        res?.documents.publicationInAnnex14OfTheCurrentRMF,
+      constituentAct: res?.documents.constitutiveActOfTheOrganization,
+      mostRecentMeeting: res?.documents.mostRecentMeetingMinutes,
+      legalRepresentativesPower: res?.documents.powerOfLegalRepresentative,
       legalRepresentativesId:
-        res.documents.officialIdentificationOfLegalRepresentative,
-      documentRFC: res.documents.documentRFC,
-      oldProofOfAddress: res.documents.oldProofOfAddress,
-      updatedComplianceOpinion: res.documents.updatedComplianceOpinion,
-      proofOfUpdatedTaxSituation: res.documents.proofOfUpdatedTaxSituation,
-      subscribe: res.documents.doYouWanToSubscribe,
-      logo: res.documents.logo,
-      livingConditions: res.selfAppraisal.improveLivingConditions,
-      lifeQuality: res.selfAppraisal.improvementInQualityOfLife,
-      capacityBuilding: res.selfAppraisal.selfManagementSkills,
-      supportType: res.selfAppraisal.supportType,
-      supportScope: res.selfAppraisal.scopeOfSupport,
-      resilienceBuilding: res.selfAppraisal.resilienceBuilding,
-      socialBackwardness: res.selfAppraisal.socialLag,
-      communitySense: res.selfAppraisal.developmentOfSenseOfCommunity,
-      sustainabilityProcesses: res.selfAppraisal.sustainabilityProcess,
-      statusImprovement: res.selfAppraisal.improvementInTheStateOfTheOrganization,
-      urbanDevelopment: res.selfAppraisal.urbanDevelopment,
-      professionalizationProcess: res.selfAppraisal.professionalizationProcess,
-      opportunityGeneration: res.selfAppraisal.generationOfOpportunities,
+        res?.documents.officialIdentificationOfLegalRepresentative,
+      documentRFC: res?.documents.documentRFC,
+      oldProofOfAddress: res?.documents.oldProofOfAddress,
+      updatedComplianceOpinion: res?.documents.updatedComplianceOpinion,
+      proofOfUpdatedTaxSituation: res?.documents.proofOfUpdatedTaxSituation,
+      subscribe: res?.documents.doYouWanToSubscribe,
+      logo: res?.documents.logo,
+      livingConditions: res?.selfAppraisal.improveLivingConditions,
+      lifeQuality: res?.selfAppraisal.improvementInQualityOfLife,
+      capacityBuilding: res?.selfAppraisal.selfManagementSkills,
+      supportType: res?.selfAppraisal.supportType,
+      supportScope: res?.selfAppraisal.scopeOfSupport,
+      resilienceBuilding: res?.selfAppraisal.resilienceBuilding,
+      socialBackwardness: res?.selfAppraisal.socialLag,
+      communitySense: res?.selfAppraisal.developmentOfSenseOfCommunity,
+      sustainabilityProcesses: res?.selfAppraisal.sustainabilityProcess,
+      statusImprovement:
+        res?.selfAppraisal.improvementInTheStateOfTheOrganization,
+      urbanDevelopment: res?.selfAppraisal.urbanDevelopment,
+      professionalizationProcess: res?.selfAppraisal.professionalizationProcess,
+      opportunityGeneration: res?.selfAppraisal.generationOfOpportunities,
     };
   }
 
@@ -914,6 +918,23 @@ export class CallsComponent implements OnInit, OnDestroy {
     const sub = this.callService.application().subscribe((res: any) => {
       this.parseResponse(res.data);
       this.initForm();
+    });
+    this.unsubscribe.push(sub);
+  }
+
+  saveInFlokzu(modal: any) {
+    const sub = this.callService.saveInFlokzu().subscribe({
+      next: () => {
+        this.infoSubmitted$.next(true);
+      },
+      error: (error) => {
+        this.infoSubmitted$.next(true);
+        this.open(modal);
+        console.error(error);
+      },
+      complete: () => {
+        this.open(modal);
+      },
     });
     this.unsubscribe.push(sub);
   }
