@@ -2380,7 +2380,7 @@
           <div class="col-md-12">
             <div class="mb-3">
               <label class="form-label" [for]="doc.field">{{ doc.name }}</label>
-              <ng-container *ngIf="f[doc.field].value == ''">
+              <ng-container *ngIf="!f[doc.field].value">
                 <input
                   class="form-control"
                   type="file"
@@ -2392,7 +2392,7 @@
                   "
                 />
               </ng-container>
-              <ng-container *ngIf="f[doc.field].value != ''">
+              <ng-container *ngIf="f[doc.field].value">
                 <div class="input-group">
                   <input
                     type="text"
@@ -2423,7 +2423,7 @@
         <div class="col-md-12">
           <div class="mb-3">
             <label class="form-label" for="logo">Logotipo</label>
-            <ng-container *ngIf="f['logo'].value == ''">
+            <ng-container *ngIf="!f['logo'].value">
               <input
                 class="form-control"
                 type="file"
@@ -2433,7 +2433,7 @@
                 [class.is-invalid]="f['logo'].invalid && f['logo'].touched"
               />
             </ng-container>
-            <ng-template *ngIf="f['logo'].value !== ''">
+            <ng-container *ngIf="f['logo'].value">
               <div class="input-group mb-4">
                 <input
                   type="text"
@@ -2450,7 +2450,7 @@
                   <img height="18" src="/assets/icons/trash.png" alt="trash" />
                 </button>
               </div>
-            </ng-template>
+            </ng-container>
             <app-form-error [control]="f['logo']"></app-form-error>
             <div class="small">
               - Sube el archivo en vectores ya sea en .ai, .pdf o .svg de tu

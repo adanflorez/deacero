@@ -182,6 +182,27 @@ export class CallsComponent implements OnInit, OnDestroy {
       twitter: res.communication.twitter,
       tiktok: res.communication.tiktok,
       youtube: res.communication.youtube,
+      // Documents
+      ethicalCode: res.documents.codeOfEthics,
+      governanceManual: res.documents.governanceHandbook,
+      timelineActivities: res.documents.scheduleOfActivities,
+      workWithMinors: res.documents.workWithMinors,
+      officialLetterOfAuthorizationOfDonees:
+        res.documents.officialLetterOfAuthorizationOfDonees,
+      updatedCertificate: res.documents.updatedCertificate,
+      publicationInAnnex14OfTheCurrentRMF:
+        res.documents.publicationInAnnex14OfTheCurrentRMF,
+      constituentAct: res.documents.constitutiveActOfTheOrganization,
+      mostRecentMeeting: res.documents.mostRecentMeetingMinutes,
+      legalRepresentativesPower: res.documents.powerOfLegalRepresentative,
+      legalRepresentativesId:
+        res.documents.officialIdentificationOfLegalRepresentative,
+      documentRFC: res.documents.documentRFC,
+      oldProofOfAddress: res.documents.oldProofOfAddress,
+      updatedComplianceOpinion: res.documents.updatedComplianceOpinion,
+      proofOfUpdatedTaxSituation: res.documents.proofOfUpdatedTaxSituation,
+      subscribe: res.documents.doYouWanToSubscribe,
+      logo: res.documents.logo
     };
   }
 
@@ -314,29 +335,62 @@ export class CallsComponent implements OnInit, OnDestroy {
       youtube: new FormControl(this.call?.youtube, [
         Validators.pattern(URL_PATTERN),
       ]),
-      ethicalCode: new FormControl('', Validators.required),
-      governanceManual: new FormControl('', Validators.required),
-      timelineActivities: new FormControl('', Validators.required),
-      workWithMinors: new FormControl('', Validators.required),
+      ethicalCode: new FormControl(this.call?.ethicalCode, Validators.required),
+      governanceManual: new FormControl(
+        this.call?.governanceManual,
+        Validators.required
+      ),
+      timelineActivities: new FormControl(
+        this.call?.timelineActivities,
+        Validators.required
+      ),
+      workWithMinors: new FormControl(
+        this.call?.workWithMinors,
+        Validators.required
+      ),
       officialLetterOfAuthorizationOfDonees: new FormControl(
-        '',
+        this.call?.officialLetterOfAuthorizationOfDonees,
         Validators.required
       ),
-      updatedCertificate: new FormControl('', Validators.required),
+      updatedCertificate: new FormControl(
+        this.call?.updatedCertificate,
+        Validators.required
+      ),
       publicationInAnnex14OfTheCurrentRMF: new FormControl(
-        '',
+        this.call?.publicationInAnnex14OfTheCurrentRMF,
         Validators.required
       ),
-      constituentAct: new FormControl('', Validators.required),
-      mostRecentMeeting: new FormControl('', Validators.required),
-      legalRepresentativesPower: new FormControl('', Validators.required),
-      legalRepresentativesId: new FormControl('', Validators.required),
-      documentRFC: new FormControl('', Validators.required),
-      oldProofOfAddress: new FormControl('', Validators.required),
-      updatedComplianceOpinion: new FormControl('', Validators.required),
-      proofOfUpdatedTaxSituation: new FormControl('', Validators.required),
-      logo: new FormControl('', Validators.required),
-      subscribe: new FormControl(false),
+      constituentAct: new FormControl(
+        this.call?.constituentAct,
+        Validators.required
+      ),
+      mostRecentMeeting: new FormControl(
+        this.call?.mostRecentMeeting,
+        Validators.required
+      ),
+      legalRepresentativesPower: new FormControl(
+        this.call?.legalRepresentativesPower,
+        Validators.required
+      ),
+      legalRepresentativesId: new FormControl(
+        this.call?.legalRepresentativesId,
+        Validators.required
+      ),
+      documentRFC: new FormControl(this.call?.documentRFC, Validators.required),
+      oldProofOfAddress: new FormControl(
+        this.call?.oldProofOfAddress,
+        Validators.required
+      ),
+      updatedComplianceOpinion: new FormControl(
+        this.call?.updatedComplianceOpinion,
+        Validators.required
+      ),
+      proofOfUpdatedTaxSituation: new FormControl(
+        this.call?.proofOfUpdatedTaxSituation,
+        Validators.required
+      ),
+      logo: new FormControl(this.call?.logo, Validators.required),
+      subscribe: new FormControl(this.call?.subscribe),
     });
 
     this.handleCategory();
@@ -831,7 +885,7 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   loadApplication() {
     const sub = this.callService.application().subscribe((res: any) => {
-      console.log(res);
+      console.log(res.data.documents);
       this.parseResponse(res.data);
       this.initForm();
     });
