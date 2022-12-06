@@ -4,12 +4,12 @@
 
 export const environment = {
   production: false,
-  apiLogin: 'https://b9cc-181-237-27-243.ngrok.io/oauth/login',
-  apiUser: 'https://b9cc-181-237-27-243.ngrok.io/user',
-  apiRegister: 'https://b9cc-181-237-27-243.ngrok.io/register/',
-  apiOSC: 'https://b9cc-181-237-27-243.ngrok.io/osc/',
-  apiMultimedia: 'https://b9cc-181-237-27-243.ngrok.io/multimedia/',
-  apiCall: 'https://b9cc-181-237-27-243.ngrok.io/call/',
+  apiLogin: 'http://44.228.61.3:8080/oauth/login',
+  apiUser: 'http://44.228.61.3:8080/user',
+  apiRegister: 'http://44.228.61.3:8080/register/',
+  apiOSC: 'http://44.228.61.3:8080/osc/',
+  apiMultimedia: 'http://44.228.61.3:8080/multimedia/',
+  apiCall: 'http://44.228.61.3:8080/call/',
 };
 
 /*

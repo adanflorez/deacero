@@ -438,6 +438,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.handleRemunerationQuestion();
     this.initDocuments();
     this.changeCategory();
+    this.form.markAllAsTouched();
     if (this.form.valid) {
       this.callService.status().subscribe((res: any) => {
         if (res.data) {
@@ -609,6 +610,16 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   private handleLocation() {
+    if (this.f.locationQuestion.value) {
+      this.locationFields.map((field) => {
+        this.form.get(field)?.setValidators(Validators.required);
+      });
+    } else {
+      this.locationFields.map((field) => {
+        this.form.get(field)?.clearValidators();
+        this.form.get(field)?.reset();
+      });
+    }
     const locationQuestionSub = this.form
       .get('locationQuestion')
       ?.valueChanges.subscribe((res) => {
