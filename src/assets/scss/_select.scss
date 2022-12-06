@@ -11,6 +11,14 @@
   align-items: center;
 }
 
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  display: flex;
+  align-items: center;
+  .ng-value-label {
+    white-space: break-spaces;
+  }
+}
+
 /* Border Color */
 .ng-select.ng-invalid.ng-touched .ng-select-container {
   border-color: #dc3545;

@@ -237,12 +237,7 @@
               [class.is-invalid]="f['video'].invalid && f['video'].touched"
             />
             <app-form-error [control]="f['video']"></app-form-error>
-            <div class="small">
-              Ingresa aquí la ubicación de tu proyecto en Google Maps.
-              <a href="http://" target="_blank" rel="noopener noreferrer"
-                >Ver video</a
-              >
-            </div>
+            <div class="small">URL de ubicación del proyecto en maps</div>
           </div>
         </div>
         <div class="col-12 col-md-6">
@@ -469,7 +464,7 @@
         <div class="col-12 col-md-4">
           <div class="mb-3">
             <label for="populationsConditionsBefore" class="form-label"
-              >¿Cuáles son las condiciones de la población antes de tu
+              >¿Cuáles son las condiciones de la población antes de tu <br />
               intervención?</label
             >
             <textarea
@@ -511,7 +506,7 @@
         <div class="col-12 col-md-4">
           <div class="mb-3">
             <label for="promoteSocialImprovement" class="form-label"
-              >¿De qué manera su proyecto promueve el mejoramiento
+              >¿De qué manera su proyecto promueve el mejoramiento <br />
               social?</label
             >
             <textarea
@@ -2410,6 +2405,7 @@
                   <button
                     class="btn btn-secondary p-1"
                     (click)="f[doc.field].setValue('')"
+                    [disabled]="infoSaved$ | async"
                   >
                     <img
                       height="18"
@@ -2499,7 +2495,7 @@
           [disabled]="!isValidForm"
           (click)="open(modal)"
         >
-          Guardar
+          Enviar
         </button>
       </ng-container>
     </form>
