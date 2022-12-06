@@ -10,6 +10,7 @@ import { ProductTableComponent } from './components/product-table/product-table.
 import { DonationsTableComponent } from './components/donations-table/donations-table.component';
 
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     AlertModule,
     FormErrorModule,
-    NgbModalModule
+    NgbModalModule,
+    NgxMaskModule.forChild(),
   ]
 })
 export class HomeModule { }
