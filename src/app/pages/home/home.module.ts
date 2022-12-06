@@ -11,13 +11,10 @@ import { DonationsTableComponent } from './components/donations-table/donations-
 
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    ProductTableComponent,
-    DonationsTableComponent
-  ],
+  declarations: [HomeComponent, ProductTableComponent, DonationsTableComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -27,6 +24,7 @@ import { NgxMaskModule } from 'ngx-mask';
     FormErrorModule,
     NgbModalModule,
     NgxMaskModule.forChild(),
-  ]
+    NgSelectModule,
+  ],
 })
-export class HomeModule { }
+export class HomeModule {}

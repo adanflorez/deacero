@@ -140,14 +140,16 @@ export class HomeComponent implements OnInit {
       ),
     });
 
-    this.form.get('issuesToStrengthen')?.valueChanges.subscribe((res) => {
-      if (res === '11') {
-        this.f['whichTopics'].enable();
-        return;
-      }
-      this.f['whichTopics'].disable();
-      this.f['whichTopics'].reset();
-    });
+    this.form
+      .get('issuesToStrengthen')
+      ?.valueChanges.subscribe((res: string[]) => {
+        if (res.includes('Otros')) {
+          this.f['whichTopics'].enable();
+          return;
+        }
+        this.f['whichTopics'].disable();
+        this.f['whichTopics'].reset();
+      });
     this.form.get('previousDonations')?.valueChanges.subscribe((val) => {
       this.showDonationsTable = val;
       this.donations = [];

@@ -377,28 +377,45 @@
             >Selecciona, ¿En cuáles de los siguientes temas te gustaría
             fortalecerte como organización?
           </label>
-          <select
-            class="form-select"
-            aria-label="Selecciona, ¿En cuáles de los siguientes temas te gustaría
-                  fortalecerte como organización?"
+          <ng-select
+            #category
+            labelForId="category"
             formControlName="issuesToStrengthen"
             [class.is-invalid]="
               f['issuesToStrengthen'].invalid && f['issuesToStrengthen'].touched
             "
+            [multiple]="true"
           >
-            <option value="" selected>Click para seleccionar</option>
-            <option value="1">Gobernanza</option>
-            <option value="2">Obligaciones fiscales</option>
-            <option value="3">Causales de revocación</option>
-            <option value="4">Desarrollo Institucional</option>
-            <option value="5">Procuración de fondos</option>
-            <option value="6">Creación de proyectos con impacto social</option>
-            <option value="7">Generación de reportes de impacto social</option>
-            <option value="8">Medición de impacto social</option>
-            <option value="9">Creación de matriz de indicadores</option>
-            <option value="10">Intervenciones efectivas</option>
-            <option value="11">Otros</option>
-          </select>
+            <ng-option value="Gobernanza">Gobernanza</ng-option>
+            <ng-option value="Obligaciones fiscales"
+              >Obligaciones fiscales</ng-option
+            >
+            <ng-option value="Causales de revocación"
+              >Causales de revocación</ng-option
+            >
+            <ng-option value="Desarrollo Institucional"
+              >Desarrollo Institucional</ng-option
+            >
+            <ng-option value="Procuración de fondos"
+              >Procuración de fondos</ng-option
+            >
+            <ng-option value="Creación de proyectos con impacto social"
+              >Creación de proyectos con impacto social</ng-option
+            >
+            <ng-option value="Generación de reportes de impacto social"
+              >Generación de reportes de impacto social</ng-option
+            >
+            <ng-option value="Medición de impacto social"
+              >Medición de impacto social</ng-option
+            >
+            <ng-option value="Creación de matriz de indicadores"
+              >Creación de matriz de indicadores</ng-option
+            >
+            <ng-option value="Intervenciones efectivas"
+              >Intervenciones efectivas</ng-option
+            >
+            <ng-option value="Otros">Otros</ng-option>
+          </ng-select>
           <app-form-error [control]="f['issuesToStrengthen']"></app-form-error>
         </div>
       </div>
@@ -416,6 +433,7 @@
             "
           />
           <app-form-error [control]="f['whichTopics']"></app-form-error>
+          <div class="small">Ingrese los temas separados por una “,”</div>
         </div>
       </div>
       <div class="col-12 col-md-6">
