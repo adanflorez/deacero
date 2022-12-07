@@ -63,6 +63,9 @@ export class HomeComponent implements OnInit {
         Validators.required,
         Validators.pattern(MULTIPLE_EMAIL_PATTERN),
       ]),
+      position: new FormControl(this.oscData.position, [
+        Validators.required,
+      ]),
       name: new FormControl(this.oscData.nombre, Validators.required),
       responsibleEmail: new FormControl(this.oscData.emailDelResponsable, [
         Validators.required,

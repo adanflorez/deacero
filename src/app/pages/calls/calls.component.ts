@@ -159,7 +159,9 @@ export class CallsComponent implements OnInit, OnDestroy {
       generalObjective: res?.projectDevelopment.generalObjective,
       numberOfBeneficiaries: res?.projectDevelopment.numberOfBeneficiaries,
       collaborationWithOtherOrganizations:
-        res?.projectDevelopment.receiveCollaboration,
+        res?.projectDevelopment.receiveCollaboration == null
+          ? false
+          : res?.projectDevelopment.receiveCollaboration,
       collaboratorsAnswer: res?.projectDevelopment.which,
       populationsConditionsBefore: res?.projectDevelopment.currentPopulation,
       populationsConditionsAfter:
@@ -312,7 +314,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       ]),
       collaborationWithOtherOrganizations: new FormControl(
         this.call?.collaborationWithOtherOrganizations,
-        Validators.required
       ),
       collaboratorsAnswer: new FormControl(
         this.call?.collaboratorsAnswer,

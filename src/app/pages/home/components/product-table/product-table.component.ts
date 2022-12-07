@@ -61,6 +61,7 @@ export class ProductTableComponent {
     });
     this.form.reset();
     this.productsList.emit(this.products);
+    this.photoUrl.next(undefined);
   }
 
   removeProduct(id: string) {
