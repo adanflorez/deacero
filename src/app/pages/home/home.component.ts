@@ -171,6 +171,7 @@ export class HomeComponent implements OnInit {
       rfc: this.f.rfc.value,
       telefono: this.f.phone.value,
       email: this.f.emails.value,
+      position: this.f.position.value,
       nombre: this.f.name.value,
       emailDelResponsable: this.f.responsibleEmail.value,
       celular: this.f.cellphone.value,
