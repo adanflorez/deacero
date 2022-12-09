@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import {
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
 } from 'src/app/lib/constants';
 import { AlertType } from 'src/app/lib/enums/alert-type';
+import { CallService } from 'src/app/lib/services/call.service';
 import { UserService } from 'src/app/lib/services/user.service';
 
 @Component({
@@ -22,8 +24,12 @@ export class HomeComponent implements OnInit {
   donations = [];
   loading = false;
   oscData: any = {};
+  infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private callService: CallService
+  ) {}
 
   ngOnInit(): void {
     this.getOSC();
@@ -36,7 +42,17 @@ export class HomeComponent implements OnInit {
       this.products = res.data.product || [];
       this.donations = res.data.donation || [];
       this.initForm();
+      this.getCallStatus();
       this.loading = false;
+    });
+  }
+
+  getCallStatus(): void {
+    this.callService.status().subscribe((res: any) => {
+      if (res.data) {
+        this.infoSaved$.next(true);
+        this.form.disable();
+      }
     });
   }
 
@@ -63,9 +79,7 @@ export class HomeComponent implements OnInit {
         Validators.required,
         Validators.pattern(MULTIPLE_EMAIL_PATTERN),
       ]),
-      position: new FormControl(this.oscData.position, [
-        Validators.required,
-      ]),
+      position: new FormControl(this.oscData.position, [Validators.required]),
       name: new FormControl(this.oscData.nombre, Validators.required),
       responsibleEmail: new FormControl(this.oscData.emailDelResponsable, [
         Validators.required,
