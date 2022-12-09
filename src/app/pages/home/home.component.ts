@@ -48,12 +48,14 @@ export class HomeComponent implements OnInit {
   }
 
   getCallStatus(): void {
-    this.callService.status().subscribe((res: any) => {
-      if (res.data) {
-        this.infoSaved$.next(true);
-        this.form.disable();
-      }
-    });
+    if (this.form.valid) {
+      this.callService.status().subscribe((res: any) => {
+        if (res.data) {
+          this.infoSaved$.next(true);
+          this.form.disable();
+        }
+      });
+    }
   }
 
   initForm() {
