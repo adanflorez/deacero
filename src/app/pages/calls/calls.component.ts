@@ -313,7 +313,7 @@ export class CallsComponent implements OnInit, OnDestroy {
         Validators.pattern(ONLY_NUMBERS_PATTERN),
       ]),
       collaborationWithOtherOrganizations: new FormControl(
-        this.call?.collaborationWithOtherOrganizations,
+        this.call?.collaborationWithOtherOrganizations
       ),
       collaboratorsAnswer: new FormControl(
         this.call?.collaboratorsAnswer,
@@ -734,7 +734,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       );
   }
 
-  save() {
+  save(modal?: any, updateAndSave?: boolean) {
     const {
       meetings,
       renewalFrequency,
@@ -937,7 +937,24 @@ export class CallsComponent implements OnInit, OnDestroy {
       },
     };
     const sub = this.callService.applicateToCall(body).subscribe((res) => {
-      this.loadApplication();
+      if (updateAndSave) {
+        this.saveInFlokzu(modal)?.subscribe({
+          next: () => {
+            this.infoSubmitted$.next(true);
+          },
+          error: (error) => {
+            this.infoSubmitted$.next(true);
+            this.open(modal);
+            console.error(error);
+          },
+          complete: () => {
+            this.open(modal);
+            this.loadApplication();
+          },
+        });
+      } else {
+        this.loadApplication();
+      }
     });
     this.unsubscribe.push(sub);
   }
@@ -952,20 +969,8 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   saveInFlokzu(modal: any) {
     if (this.form.invalid) return;
-    const sub = this.callService.saveInFlokzu().subscribe({
-      next: () => {
-        this.infoSubmitted$.next(true);
-      },
-      error: (error) => {
-        this.infoSubmitted$.next(true);
-        this.open(modal);
-        console.error(error);
-      },
-      complete: () => {
-        this.open(modal);
-        this.loadApplication();
-      },
-    });
-    this.unsubscribe.push(sub);
+    this.save();
+    const sub = this.callService.saveInFlokzu();
+    return sub;
   }
 }
