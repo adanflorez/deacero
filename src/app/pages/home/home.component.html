@@ -469,6 +469,7 @@
         <app-donations-table
           *ngIf="showDonationsTable"
           [donations]="donations"
+          [readOnly]="infoSaved$ | async"
           (donationsList)="donations = $event"
         ></app-donations-table>
       </div>
@@ -496,6 +497,7 @@
       <app-product-table
         (productsList)="products = $event"
         [products]="products"
+        [readOnly]="infoSaved$ | async"
       ></app-product-table>
     </div>
     <hr />
@@ -580,7 +582,7 @@
     <button
       class="btn btn-primary"
       type="button"
-      [disabled]="form.invalid"
+      [disabled]="form.invalid || (infoSaved$ | async)"
       (click)="update()"
     >
       Guardar

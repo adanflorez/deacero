@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import {
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit {
   donations = [];
   loading = false;
   oscData: any = {};
+  infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private userService: UserService,
@@ -48,6 +50,7 @@ export class HomeComponent implements OnInit {
   getCallStatus(): void {
     this.callService.status().subscribe((res: any) => {
       if (res.data) {
+        this.infoSaved$.next(true);
         this.form.disable();
       }
     });

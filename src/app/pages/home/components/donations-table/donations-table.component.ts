@@ -18,6 +18,7 @@ interface Donation {
 })
 export class DonationsTableComponent {
   @Input() donations: Donation[] = [];
+  @Input() readOnly: boolean | null = false;
   @Output() donationsList = new EventEmitter();
   form: FormGroup;
   validForm = false;

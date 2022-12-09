@@ -22,6 +22,7 @@ interface Product {
 })
 export class ProductTableComponent {
   @Input() products: Product[] = [];
+  @Input() readOnly: boolean | null = false;
   @Output() productsList = new EventEmitter();
   form: FormGroup;
   validForm = false;
