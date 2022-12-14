@@ -174,6 +174,7 @@ export class HomeComponent implements OnInit {
       this.donations = [];
     });
     this.showDonationsTable = this.f.previousDonations.value;
+    this.form.markAllAsTouched();
   }
 
   get f() {
