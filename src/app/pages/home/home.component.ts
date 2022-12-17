@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import {
-  ALPHABET,
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
-  RFC_PATTERN,
 } from 'src/app/lib/constants';
 import { AlertType } from 'src/app/lib/enums/alert-type';
 import { CallService } from 'src/app/lib/services/call.service';
 import { UserService } from 'src/app/lib/services/user.service';
 import Response from 'src/app/lib/models/response.model';
+import { validateRFC } from 'src/app/lib/helpers/rfc-validator';
 
 @Component({
   selector: 'app-home',
@@ -235,48 +239,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  validateRFC(input: Event) {
-    const rfc = (input.target as HTMLInputElement).value.trim().toUpperCase();
-    if (this.validRFC(rfc)) {
-      this.f.rfc.updateValueAndValidity();
-    } else {
-      this.f.rfc.setErrors({ invalidRFC: true });
-    }
-  }
-
-  validRFC(rfc: string, acceptGeneric = true) {
-    const re = RFC_PATTERN;
-    const isValidated = rfc.match(re);
-
-    if (!isValidated) return false;
-
-    // Separate the check digit from the rest of the RFC
-    const digitVerifier = isValidated.pop(),
-      rfcWithoutDigit = isValidated.slice(1).join(''),
-      len = rfcWithoutDigit.length,
-      // Obtain the expected digit
-      dictionary = ALPHABET,
-      index = len + 1;
-    let sum, digitExpected;
-
-    if (len == 12) sum = 0;
-    else sum = 481; // Adjustment for legal entity
-
-    for (let i = 0; i < len; i++)
-      sum += dictionary.indexOf(rfcWithoutDigit.charAt(i)) * (index - i);
-    digitExpected = 11 - (sum % 11);
-    if (digitExpected == 11) digitExpected = 0;
-    else if (digitExpected == 10) digitExpected = 'A';
-
-    // Does the check digit match the expected digit?
-    // or is it a Generic RFC (sales to general public)?
-    if (
-      (digitVerifier != digitExpected &&
-        (!acceptGeneric ||
-          rfcWithoutDigit + digitVerifier != 'XAXX010101000')) ||
-      (!acceptGeneric && rfcWithoutDigit + digitVerifier == 'XEXX010101000')
-    )
-      return false;
-    return rfcWithoutDigit + digitVerifier;
+  validateRFC(input: Event, control: AbstractControl) {
+    validateRFC(input, control);
   }
 }

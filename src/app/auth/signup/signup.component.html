@@ -26,7 +26,7 @@
               [class.is-invalid]="
                 f['name'].invalid && (f['name'].dirty || f['name'].touched)
               "
-              (change)="validateRFC($event)" />
+              (change)="validateRFC($event, f['name'])" />
             <app-form-error [control]="f['name']"></app-form-error>
             <div class="small">- Registro Federal de Contribuyentes</div>
           </div>

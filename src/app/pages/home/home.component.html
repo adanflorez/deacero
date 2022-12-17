@@ -49,7 +49,7 @@
             placeholder="RFC"
             formControlName="rfc"
             [class.is-invalid]="f['rfc'].invalid && f['rfc'].touched"
-            (change)="validateRFC($event)" />
+            (change)="validateRFC($event, f['rfc'])" />
           <app-form-error [control]="f['rfc']"></app-form-error>
         </div>
       </div>
