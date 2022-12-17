@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import {
+  ALPHABET,
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
+  RFC_PATTERN,
 } from 'src/app/lib/constants';
 import { AlertType } from 'src/app/lib/enums/alert-type';
 import { CallService } from 'src/app/lib/services/call.service';
@@ -216,7 +218,7 @@ export class HomeComponent implements OnInit {
       donation: this.donations,
     };
     this.userService.updateOSC(form).subscribe({
-      next: (res) => {
+      next: () => {
         this.form.reset();
         this.showAlert = true;
         this.alertMessage = 'Información de OSC actualizada';
@@ -232,59 +234,47 @@ export class HomeComponent implements OnInit {
   }
 
   validateRFC(input: any) {
-    var rfc = input.target.value.trim().toUpperCase(),
-      valido;
-
-    var rfcCorrecto = this.rfcValido(rfc); // ⬅️ Acá se comprueba
-
-    if (rfcCorrecto) {
-      valido = 'Válido';
+    const rfc = input.target.value.trim().toUpperCase();
+    if (this.validRFC(rfc)) {
       this.f.rfc.updateValueAndValidity();
     } else {
-      valido = 'No válido';
       this.f.rfc.setErrors({ invalidRFC: true });
     }
   }
 
-  rfcValido(rfc: any, aceptarGenerico = true) {
-    const re =
-      /^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
-    var validado = rfc.match(re);
+  validRFC(rfc: string, acceptGeneric = true) {
+    const re = RFC_PATTERN;
+    const isValidated = rfc.match(re);
 
-    if (!validado)
-      //Coincide con el formato general del regex?
-      return false;
+    if (!isValidated) return false;
 
-    //Separar el dígito verificador del resto del RFC
-    const digitoVerificador = validado.pop(),
-      rfcSinDigito = validado.slice(1).join(''),
-      len = rfcSinDigito.length,
-      //Obtener el digito esperado
-      diccionario = '0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ Ñ',
-      indice = len + 1;
-    var suma, digitoEsperado;
+    // Separate the check digit from the rest of the RFC
+    const digitVerifier = isValidated.pop(),
+      rfcWithoutDigit = isValidated.slice(1).join(''),
+      len = rfcWithoutDigit.length,
+      // Obtain the expected digit
+      dictionary = ALPHABET,
+      index = len + 1;
+    let sum, digitExpected;
 
-    if (len == 12) suma = 0;
-    else suma = 481; //Ajuste para persona moral
+    if (len == 12) sum = 0;
+    else sum = 481; // Adjustment for legal entity
 
-    for (var i = 0; i < len; i++)
-      suma += diccionario.indexOf(rfcSinDigito.charAt(i)) * (indice - i);
-    digitoEsperado = 11 - (suma % 11);
-    if (digitoEsperado == 11) digitoEsperado = 0;
-    else if (digitoEsperado == 10) digitoEsperado = 'A';
+    for (let i = 0; i < len; i++)
+      sum += dictionary.indexOf(rfcWithoutDigit.charAt(i)) * (index - i);
+    digitExpected = 11 - (sum % 11);
+    if (digitExpected == 11) digitExpected = 0;
+    else if (digitExpected == 10) digitExpected = 'A';
 
-    //El dígito verificador coincide con el esperado?
-    // o es un RFC Genérico (ventas a público general)?
+    // Does the check digit match the expected digit?
+    // or is it a Generic RFC (sales to general public)?
     if (
-      digitoVerificador != digitoEsperado &&
-      (!aceptarGenerico || rfcSinDigito + digitoVerificador != 'XAXX010101000')
+      (digitVerifier != digitExpected &&
+        (!acceptGeneric ||
+          rfcWithoutDigit + digitVerifier != 'XAXX010101000')) ||
+      (!acceptGeneric && rfcWithoutDigit + digitVerifier == 'XEXX010101000')
     )
       return false;
-    else if (
-      !aceptarGenerico &&
-      rfcSinDigito + digitoVerificador == 'XEXX010101000'
-    )
-      return false;
-    return rfcSinDigito + digitoVerificador;
+    return rfcWithoutDigit + digitVerifier;
   }
 }
