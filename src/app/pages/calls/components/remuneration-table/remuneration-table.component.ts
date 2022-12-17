@@ -15,7 +15,7 @@ export class RemunerationTableComponent
 {
   @Input() records: Remuneration[] = [];
   @Input() readOnly: boolean | null = false;
-  @Output() onChange: EventEmitter<Remuneration[]> = new EventEmitter();
+  @Output() recordChange: EventEmitter<Remuneration[]> = new EventEmitter();
   form: FormGroup;
   validForm: boolean;
   closeResult: string;
@@ -29,7 +29,7 @@ export class RemunerationTableComponent
       financialRemuneration: new FormControl(''),
     });
 
-    this.form.valueChanges.subscribe((values) => {
+    this.form.valueChanges.subscribe(values => {
       const { schema, position, financialRemuneration } = values;
       if (schema || position || financialRemuneration) {
         this.validForm = this.form.valid && true;
@@ -49,28 +49,28 @@ export class RemunerationTableComponent
       id: uuidv4(),
       ...this.form.value,
     });
-    this.onChange.emit(this.records);
+    this.recordChange.emit(this.records);
     this.form.reset();
   }
 
   editRecord(): void {
     this.recordToEdit = { ...this.recordToEdit, ...this.form.value };
     this.records = this.records.filter(
-      (record) => record.id !== this.recordToEdit.id
+      record => record.id !== this.recordToEdit.id
     );
     this.records.push(this.recordToEdit);
-    this.onChange.emit(this.records);
+    this.recordChange.emit(this.records);
     this.isEditMode = false;
     this.form.reset();
   }
 
   removeRecord(id: string): void {
-    this.records = this.records.filter((record) => record.id !== id);
-    this.onChange.emit(this.records);
+    this.records = this.records.filter(record => record.id !== id);
+    this.recordChange.emit(this.records);
   }
 
   loadRecordInFields(id: string, modal: any): void {
-    const records = this.records.filter((record) => record.id === id);
+    const records = this.records.filter(record => record.id === id);
     this.recordToEdit = records[0];
     const { position, schema, financialRemuneration } = records[0];
     this.form.setValue({
@@ -89,10 +89,10 @@ export class RemunerationTableComponent
         backdrop: 'static',
       })
       .result.then(
-        (result) => {
+        result => {
           this.closeResult = `Closed with: ${result}`;
         },
-        (reason) => {
+        reason => {
           this.form.reset();
         }
       );

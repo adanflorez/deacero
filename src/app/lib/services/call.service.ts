@@ -11,7 +11,10 @@ export class CallService {
   constructor(private http: HttpClient) {}
 
   applicateToCall(data: any): Observable<any> {
-    return this.http.post(`${this.apiCall}application/`, data);
+    return this.http.post<Record<string, unknown>>(
+      `${this.apiCall}application/`,
+      data
+    );
   }
 
   application() {
@@ -22,7 +25,7 @@ export class CallService {
     return this.http.put(`${this.apiCall}application/send`, {});
   }
 
-  status() {
-    return this.http.get(`${this.apiCall}application/status`);
+  status(): Observable<Response> {
+    return this.http.get<Response>(`${this.apiCall}application/status`);
   }
 }

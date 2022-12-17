@@ -12,5 +12,5 @@ export declare interface TableComponent<T> {
   loadRecordInFields(...args: any): void;
   open(...args: any): void;
   cancelEdit(...args: any): void;
-  get f(): any
+  get f(): any;
 }

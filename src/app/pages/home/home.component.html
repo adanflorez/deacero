@@ -1,13 +1,11 @@
 <div
   *ngIf="!loading"
-  class="bg-bright-gray border border-secondary rounded p-3 mb-4"
->
+  class="bg-bright-gray border border-secondary rounded p-3 mb-4">
   <app-alert
     *ngIf="showAlert"
     [type]="alertType"
     [message]="alertMessage"
-    (close)="showAlert = false"
-  ></app-alert>
+    (close)="showAlert = false"></app-alert>
   <form [formGroup]="form">
     <h2>Datos generales</h2>
     <div class="row">
@@ -22,8 +20,7 @@
             formControlName="tradename"
             [class.is-invalid]="
               f['tradename'].invalid && f['tradename'].touched
-            "
-          />
+            " />
           <app-form-error [control]="f['tradename']"></app-form-error>
         </div>
       </div>
@@ -38,8 +35,7 @@
             formControlName="businessname"
             [class.is-invalid]="
               f['businessname'].invalid && f['businessname'].touched
-            "
-          />
+            " />
           <app-form-error [control]="f['businessname']"></app-form-error>
         </div>
       </div>
@@ -53,8 +49,7 @@
             placeholder="RFC"
             formControlName="rfc"
             [class.is-invalid]="f['rfc'].invalid && f['rfc'].touched"
-            (change)="validateRFC($event)"
-          />
+            (change)="validateRFC($event)" />
           <app-form-error [control]="f['rfc']"></app-form-error>
         </div>
       </div>
@@ -67,15 +62,13 @@
             id="phone"
             placeholder="Teléfono"
             formControlName="phone"
-            [class.is-invalid]="f['phone'].invalid && f['phone'].touched"
-          />
+            [class.is-invalid]="f['phone'].invalid && f['phone'].touched" />
           <app-form-error
             [control]="f['phone']"
             [errors]="{
               pattern: 'Solo debe ingresar números',
               maxLength: 'Máximo 12 caracteres'
-            }"
-          ></app-form-error>
+            }"></app-form-error>
         </div>
       </div>
       <div class="col-12 col-md-6">
@@ -87,12 +80,10 @@
             id="emails"
             placeholder="Usa ; ó , para separar los correos electrónicos"
             formControlName="emails"
-            [class.is-invalid]="f['emails'].invalid && f['emails'].touched"
-          />
+            [class.is-invalid]="f['emails'].invalid && f['emails'].touched" />
           <app-form-error
             [control]="f['emails']"
-            [errors]="{ pattern: 'Correos no válidos' }"
-          ></app-form-error>
+            [errors]="{ pattern: 'Correos no válidos' }"></app-form-error>
         </div>
       </div>
       <div class="col-12 col-md-6">
@@ -104,8 +95,9 @@
             id="position"
             placeholder="Puesto"
             formControlName="position"
-            [class.is-invalid]="f['position'].invalid && f['position'].touched"
-          />
+            [class.is-invalid]="
+              f['position'].invalid && f['position'].touched
+            " />
           <app-form-error [control]="f['position']"></app-form-error>
         </div>
       </div>
@@ -122,8 +114,7 @@
             id="name"
             placeholder="Nombre"
             formControlName="name"
-            [class.is-invalid]="f['name'].invalid && f['name'].touched"
-          />
+            [class.is-invalid]="f['name'].invalid && f['name'].touched" />
           <app-form-error [control]="f['name']"></app-form-error>
         </div>
       </div>
@@ -138,12 +129,10 @@
             formControlName="responsibleEmail"
             [class.is-invalid]="
               f['responsibleEmail'].invalid && f['responsibleEmail'].touched
-            "
-          />
+            " />
           <app-form-error
             [control]="f['responsibleEmail']"
-            [errors]="{ pattern: 'Correos no válidos' }"
-          ></app-form-error>
+            [errors]="{ pattern: 'Correos no válidos' }"></app-form-error>
         </div>
       </div>
       <div class="col-12 col-md-4">
@@ -157,15 +146,13 @@
             formControlName="cellphone"
             [class.is-invalid]="
               f['cellphone'].invalid && f['cellphone'].touched
-            "
-          />
+            " />
           <app-form-error
             [control]="f['cellphone']"
             [errors]="{
               pattern: 'Solo debe ingresar números',
               maxLength: 'Máximo 12 caracteres'
-            }"
-          ></app-form-error>
+            }"></app-form-error>
         </div>
       </div>
     </div>
@@ -181,8 +168,7 @@
             id="founder"
             placeholder="Fundador(a)"
             formControlName="founder"
-            [class.is-invalid]="f['founder'].invalid && f['founder'].touched"
-          />
+            [class.is-invalid]="f['founder'].invalid && f['founder'].touched" />
           <app-form-error [control]="f['founder']"></app-form-error>
         </div>
       </div>
@@ -199,8 +185,7 @@
             formControlName="generalManagement"
             [class.is-invalid]="
               f['generalManagement'].invalid && f['generalManagement'].touched
-            "
-          />
+            " />
           <app-form-error [control]="f['generalManagement']"></app-form-error>
         </div>
       </div>
@@ -218,11 +203,9 @@
             [class.is-invalid]="
               f['operationalManagement'].invalid &&
               f['operationalManagement'].touched
-            "
-          />
+            " />
           <app-form-error
-            [control]="f['operationalManagement']"
-          ></app-form-error>
+            [control]="f['operationalManagement']"></app-form-error>
         </div>
       </div>
       <div class="col-12 col-md-6">
@@ -239,8 +222,7 @@
             [class.is-invalid]="
               f['legalRepresentative'].invalid &&
               f['legalRepresentative'].touched
-            "
-          />
+            " />
           <app-form-error [control]="f['legalRepresentative']"></app-form-error>
         </div>
       </div>
@@ -258,12 +240,10 @@
             [class.is-invalid]="
               f['legalRepresentativeEmail'].invalid &&
               f['legalRepresentativeEmail'].touched
-            "
-          />
+            " />
           <app-form-error
             [control]="f['legalRepresentativeEmail']"
-            [errors]="{ pattern: 'Correos no válidos' }"
-          ></app-form-error>
+            [errors]="{ pattern: 'Correos no válidos' }"></app-form-error>
         </div>
       </div>
       <div class="col-12 col-md-6">
@@ -280,8 +260,7 @@
             [class.is-invalid]="
               f['operationsStartDate'].invalid &&
               f['operationsStartDate'].touched
-            "
-          />
+            " />
           <app-form-error [control]="f['operationsStartDate']"></app-form-error>
         </div>
       </div>
@@ -299,11 +278,9 @@
             [class.is-invalid]="
               f['incorporationsStartDate'].invalid &&
               f['incorporationsStartDate'].touched
-            "
-          />
+            " />
           <app-form-error
-            [control]="f['incorporationsStartDate']"
-          ></app-form-error>
+            [control]="f['incorporationsStartDate']"></app-form-error>
         </div>
       </div>
 
@@ -315,8 +292,9 @@
             id="mision"
             rows="3"
             formControlName="mision"
-            [class.is-invalid]="f['mision'].invalid && f['mision'].touched"
-          ></textarea>
+            [class.is-invalid]="
+              f['mision'].invalid && f['mision'].touched
+            "></textarea>
           <app-form-error [control]="f['mision']"></app-form-error>
         </div>
       </div>
@@ -328,8 +306,9 @@
             id="vision"
             rows="3"
             formControlName="vision"
-            [class.is-invalid]="f['vision'].invalid && f['vision'].touched"
-          ></textarea>
+            [class.is-invalid]="
+              f['vision'].invalid && f['vision'].touched
+            "></textarea>
           <app-form-error [control]="f['vision']"></app-form-error>
         </div>
       </div>
@@ -343,8 +322,7 @@
             formControlName="ethicalValues"
             [class.is-invalid]="
               f['ethicalValues'].invalid && f['ethicalValues'].touched
-            "
-          ></textarea>
+            "></textarea>
           <app-form-error [control]="f['ethicalValues']"></app-form-error>
         </div>
       </div>
@@ -365,8 +343,7 @@
             formControlName="alliances"
             [class.is-invalid]="
               f['alliances'].invalid && f['alliances'].touched
-            "
-          ></textarea>
+            "></textarea>
         </div>
       </div>
       <div class="col-12 col-md-6">
@@ -380,8 +357,9 @@
             id="courses"
             rows="3"
             formControlName="courses"
-            [class.is-invalid]="f['courses'].invalid && f['courses'].touched"
-          ></textarea>
+            [class.is-invalid]="
+              f['courses'].invalid && f['courses'].touched
+            "></textarea>
           <app-form-error [control]="f['courses']"></app-form-error>
         </div>
       </div>
@@ -398,8 +376,7 @@
             [class.is-invalid]="
               f['issuesToStrengthen'].invalid && f['issuesToStrengthen'].touched
             "
-            [multiple]="true"
-          >
+            [multiple]="true">
             <ng-option value="Gobernanza">Gobernanza</ng-option>
             <ng-option value="Obligaciones fiscales"
               >Obligaciones fiscales</ng-option
@@ -444,8 +421,7 @@
             formControlName="whichTopics"
             [class.is-invalid]="
               f['whichTopics'].invalid && f['whichTopics'].touched
-            "
-          />
+            " />
           <app-form-error [control]="f['whichTopics']"></app-form-error>
           <div class="small">Ingrese los temas separados por una “,”</div>
         </div>
@@ -457,8 +433,7 @@
               class="form-check-input"
               type="checkbox"
               id="flexCheckDefault"
-              formControlName="previousDonations"
-            />
+              formControlName="previousDonations" />
             <label class="form-check-label" for="flexCheckDefault">
               Ha recibido previamente una donación de Fundación DEACERO A.C.
             </label>
@@ -470,8 +445,7 @@
           *ngIf="showDonationsTable"
           [donations]="donations"
           [readOnly]="infoSaved$ | async"
-          (donationsList)="donations = $event"
-        ></app-donations-table>
+          (donationsList)="donations = $event"></app-donations-table>
       </div>
     </div>
     <div class="col-12">
@@ -488,8 +462,7 @@
           formControlName="strategicAlliances"
           [class.is-invalid]="
             f['strategicAlliances'].invalid && f['strategicAlliances'].touched
-          "
-        ></textarea>
+          "></textarea>
         <app-form-error [control]="f['strategicAlliances']"></app-form-error>
       </div>
     </div>
@@ -497,8 +470,7 @@
       <app-product-table
         (productsList)="products = $event"
         [products]="products"
-        [readOnly]="infoSaved$ | async"
-      ></app-product-table>
+        [readOnly]="infoSaved$ | async"></app-product-table>
     </div>
     <hr />
     <h2>Trabajo digno</h2>
@@ -515,8 +487,7 @@
             formControlName="whyYourOSC"
             [class.is-invalid]="
               f['whyYourOSC'].invalid && f['whyYourOSC'].touched
-            "
-          ></textarea>
+            "></textarea>
           <app-form-error [control]="f['whyYourOSC']"></app-form-error>
         </div>
       </div>
@@ -534,11 +505,9 @@
             [class.is-invalid]="
               f['whatMakesYouDifferent'].invalid &&
               f['whatMakesYouDifferent'].touched
-            "
-          ></textarea>
+            "></textarea>
           <app-form-error
-            [control]="f['whatMakesYouDifferent']"
-          ></app-form-error>
+            [control]="f['whatMakesYouDifferent']"></app-form-error>
         </div>
       </div>
       <div class="col-12 col-md-6">
@@ -554,8 +523,7 @@
             formControlName="benefitsSystem"
             [class.is-invalid]="
               f['benefitsSystem'].invalid && f['benefitsSystem'].touched
-            "
-          ></textarea>
+            "></textarea>
           <app-form-error [control]="f['benefitsSystem']"></app-form-error>
         </div>
       </div>
@@ -572,8 +540,7 @@
             formControlName="personalGrowth"
             [class.is-invalid]="
               f['personalGrowth'].invalid && f['personalGrowth'].touched
-            "
-          ></textarea>
+            "></textarea>
           <app-form-error [control]="f['personalGrowth']"></app-form-error>
         </div>
       </div>
@@ -583,8 +550,7 @@
       class="btn btn-primary"
       type="button"
       [disabled]="form.invalid || (infoSaved$ | async)"
-      (click)="update()"
-    >
+      (click)="update()">
       Guardar
     </button>
   </form>

@@ -44,7 +44,7 @@ export class ProductTableComponent {
       season: new FormControl(''),
       photo: new FormControl(''),
     });
-    this.form.valueChanges.subscribe((values) => {
+    this.form.valueChanges.subscribe(values => {
       const { description, price, available, season, photo } = values;
       if (description || price || available || season || photo) {
         this.validForm = this.form.valid && true;
@@ -66,12 +66,12 @@ export class ProductTableComponent {
   }
 
   removeProduct(id: string) {
-    this.products = this.products.filter((product) => product.id !== id);
+    this.products = this.products.filter(product => product.id !== id);
     this.productsList.emit(this.products);
   }
 
-  loadProductInFields(id: string, modal: any) {
-    const products = this.products.filter((product) => product.id === id);
+  loadProductInFields(id: string, modal: unknown) {
+    const products = this.products.filter(product => product.id === id);
     this.productToEdit = products[0];
     const { description, price, available, season, photo } = products[0];
     this.form.setValue({
@@ -88,7 +88,7 @@ export class ProductTableComponent {
   editProduct() {
     this.productToEdit = { ...this.productToEdit, ...this.form.value };
     this.products = this.products.filter(
-      (product) => product.id !== this.productToEdit.id
+      product => product.id !== this.productToEdit.id
     );
     this.products.push(this.productToEdit);
     this.productsList.emit(this.products);
@@ -105,17 +105,17 @@ export class ProductTableComponent {
     this.form.reset();
   }
 
-  open(content: any) {
+  open(content: unknown) {
     this.modalService
       .open(content, {
         ariaLabelledBy: 'modal-basic-title',
         backdrop: 'static',
       })
       .result.then(
-        (result) => {
+        result => {
           this.closeResult = `Closed with: ${result}`;
         },
-        (reason) => {
+        () => {
           this.form.reset();
         }
       );
@@ -123,14 +123,15 @@ export class ProductTableComponent {
 
   uploadPhoto(e: Event) {
     const formData = new FormData();
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     formData.append('file', (e.target as HTMLInputElement).files![0]);
     this.multimediaService.upload(formData).subscribe({
-      next: (res) => {
+      next: res => {
         this.photoUrl.next(res.data);
       },
-      error: (error) => console.error(error),
+      error: error => console.error(error),
       complete: () => {
-        this.photoUrl.asObservable().subscribe((res) => {
+        this.photoUrl.asObservable().subscribe(res => {
           this.f.photo.setValue(res);
         });
       },

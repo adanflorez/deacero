@@ -25,7 +25,7 @@ export class MembersComponent implements TableComponent<Member> {
       name: new FormControl(''),
       position: new FormControl(''),
     });
-    this.form.valueChanges.subscribe((values) => {
+    this.form.valueChanges.subscribe(values => {
       const { name, position } = values;
       if (name || position) {
         this.validForm = this.form.valid && true;
@@ -39,12 +39,12 @@ export class MembersComponent implements TableComponent<Member> {
   }
 
   removeRecord(id: string) {
-    this.records = this.records.filter((record) => record.id !== id);
+    this.records = this.records.filter(record => record.id !== id);
     this.recordsList.emit(this.records);
   }
 
   loadRecordInFields(id: string, modal: any) {
-    const records = this.records.filter((record) => record.id === id);
+    const records = this.records.filter(record => record.id === id);
     this.recordToEdit = records[0];
     const { name, position } = records[0];
     this.form.setValue({
@@ -62,10 +62,10 @@ export class MembersComponent implements TableComponent<Member> {
         backdrop: 'static',
       })
       .result.then(
-        (result) => {
+        result => {
           this.closeResult = `Closed with: ${result}`;
         },
-        (reason) => {
+        reason => {
           this.form.reset();
         }
       );
@@ -84,7 +84,7 @@ export class MembersComponent implements TableComponent<Member> {
   editRecord() {
     this.recordToEdit = { ...this.recordToEdit, ...this.form.value };
     this.records = this.records.filter(
-      (record) => record.id !== this.recordToEdit.id
+      record => record.id !== this.recordToEdit.id
     );
     this.records.push(this.recordToEdit);
     this.recordsList.emit(this.records);

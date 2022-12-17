@@ -16,8 +16,7 @@
           <app-members
             [records]="members"
             [readOnly]="infoSaved$ | async"
-            (recordsList)="members = $event"
-          ></app-members>
+            (recordsList)="members = $event"></app-members>
         </div>
         <div class="col-12 col-md-6">
           <div class="mb-3">
@@ -32,14 +31,12 @@
               formControlName="meetings"
               [class.is-invalid]="
                 f['meetings'].invalid && f['meetings'].touched
-              "
-            />
+              " />
             <app-form-error
               [control]="f['meetings']"
               [errors]="{
                 pattern: 'Solo debe ingresar números'
-              }"
-            ></app-form-error>
+              }"></app-form-error>
           </div>
         </div>
         <div class="col-12 col-md-6">
@@ -55,14 +52,12 @@
               formControlName="renewalFrequency"
               [class.is-invalid]="
                 f['renewalFrequency'].invalid && f['renewalFrequency'].touched
-              "
-            />
+              " />
             <app-form-error
               [control]="f['renewalFrequency']"
               [errors]="{
                 pattern: 'Solo debe ingresar números'
-              }"
-            ></app-form-error>
+              }"></app-form-error>
           </div>
         </div>
       </div>
@@ -81,8 +76,7 @@
                   name="toggle1"
                   class="mobileToggle"
                   id="toggle1"
-                  formControlName="remunerationQuestion"
-                />
+                  formControlName="remunerationQuestion" />
                 <label for="toggle1" class="cursor-pointer"></label>
               </div>
             </div>
@@ -92,9 +86,8 @@
           <app-remuneration-table
             *ngIf="f['remunerationQuestion'].value"
             [records]="remunerations"
-            (onChange)="remunerations = $event"
-            [readOnly]="infoSaved$ | async"
-          ></app-remuneration-table>
+            (recordChange)="remunerations = $event"
+            [readOnly]="infoSaved$ | async"></app-remuneration-table>
         </div>
       </div>
       <hr />
@@ -113,8 +106,7 @@
               formControlName="projectName"
               [class.is-invalid]="
                 f['projectName'].invalid && f['projectName'].touched
-              "
-            />
+              " />
             <app-form-error [control]="f['projectName']"></app-form-error>
           </div>
         </div>
@@ -142,8 +134,7 @@
                   name="locationQuestion"
                   class="mobileToggle"
                   id="locationQuestion"
-                  formControlName="locationQuestion"
-                />
+                  formControlName="locationQuestion" />
                 <label for="locationQuestion" class="cursor-pointer"></label>
               </div>
             </div>
@@ -159,8 +150,9 @@
                 id="street"
                 placeholder="Calle y número"
                 formControlName="street"
-                [class.is-invalid]="f['street'].invalid && f['street'].touched"
-              />
+                [class.is-invalid]="
+                  f['street'].invalid && f['street'].touched
+                " />
               <app-form-error [control]="f['street']"></app-form-error>
             </div>
           </div>
@@ -173,8 +165,9 @@
                 id="colony"
                 placeholder="Colonia"
                 formControlName="colony"
-                [class.is-invalid]="f['colony'].invalid && f['colony'].touched"
-              />
+                [class.is-invalid]="
+                  f['colony'].invalid && f['colony'].touched
+                " />
               <app-form-error [control]="f['colony']"></app-form-error>
             </div>
           </div>
@@ -187,8 +180,7 @@
                 id="town"
                 placeholder="Municipio"
                 formControlName="town"
-                [class.is-invalid]="f['town'].invalid && f['town'].touched"
-              />
+                [class.is-invalid]="f['town'].invalid && f['town'].touched" />
               <app-form-error [control]="f['town']"></app-form-error>
             </div>
           </div>
@@ -201,8 +193,7 @@
                 id="state"
                 placeholder="Estado"
                 formControlName="state"
-                [class.is-invalid]="f['state'].invalid && f['state'].touched"
-              />
+                [class.is-invalid]="f['state'].invalid && f['state'].touched" />
               <app-form-error [control]="f['state']"></app-form-error>
             </div>
           </div>
@@ -217,8 +208,7 @@
                 formControlName="postalCode"
                 [class.is-invalid]="
                   f['postalCode'].invalid && f['postalCode'].touched
-                "
-              />
+                " />
               <app-form-error [control]="f['postalCode']"></app-form-error>
             </div>
           </div>
@@ -234,8 +224,7 @@
               id="video"
               placeholder="URL de ubicación del proyecto en maps"
               formControlName="video"
-              [class.is-invalid]="f['video'].invalid && f['video'].touched"
-            />
+              [class.is-invalid]="f['video'].invalid && f['video'].touched" />
             <app-form-error [control]="f['video']"></app-form-error>
             <div class="small">URL de ubicación del proyecto en maps</div>
           </div>
@@ -252,8 +241,7 @@
               formControlName="daysAndHours"
               [class.is-invalid]="
                 f['daysAndHours'].invalid && f['daysAndHours'].touched
-              "
-            ></textarea>
+              "></textarea>
             <app-form-error [control]="f['daysAndHours']"></app-form-error>
           </div>
         </div>
@@ -267,8 +255,7 @@
               formControlName="aboutCall"
               [class.is-invalid]="
                 f['aboutCall'].invalid && f['aboutCall'].touched
-              "
-            >
+              ">
               <option value="" selected>Click para seleccionar</option>
               <option value="Amigo/a">Amigo/a</option>
               <option value="Facebook/Instagram">Facebook/Instagram</option>
@@ -280,7 +267,7 @@
           </div>
         </div>
         <div class="col-12 col-md-6">
-          <div *ngIf="f['aboutCall'].value == 'Otro'" class="mb-3">
+          <div *ngIf="f['aboutCall'].value === 'Otro'" class="mb-3">
             <label for="whichMedia" class="form-label">¿Cuál medio?</label>
             <input
               type="text"
@@ -290,8 +277,7 @@
               formControlName="whichMedia"
               [class.is-invalid]="
                 f['whichMedia'].invalid && f['whichMedia'].touched
-              "
-            />
+              " />
             <app-form-error [control]="f['whichMedia']"></app-form-error>
           </div>
         </div>
@@ -313,8 +299,7 @@
               formControlName="responsibleName"
               [class.is-invalid]="
                 f['responsibleName'].invalid && f['responsibleName'].touched
-              "
-            />
+              " />
             <app-form-error [control]="f['responsibleName']"></app-form-error>
           </div>
         </div>
@@ -329,12 +314,10 @@
               id="emails"
               placeholder="Usa ; ó , para separar los correos electrónicos"
               formControlName="emails"
-              [class.is-invalid]="f['emails'].invalid && f['emails'].touched"
-            />
+              [class.is-invalid]="f['emails'].invalid && f['emails'].touched" />
             <app-form-error
               [control]="f['emails']"
-              [errors]="{ pattern: 'Correos no válidos' }"
-            ></app-form-error>
+              [errors]="{ pattern: 'Correos no válidos' }"></app-form-error>
           </div>
         </div>
         <div class="col-12 col-md-4">
@@ -348,15 +331,13 @@
               id="phone"
               placeholder="Celular"
               formControlName="phone"
-              [class.is-invalid]="f['phone'].invalid && f['phone'].touched"
-            />
+              [class.is-invalid]="f['phone'].invalid && f['phone'].touched" />
             <app-form-error
               [control]="f['phone']"
               [errors]="{
                 pattern: 'Solo debe ingresar números',
                 maxLength: 'Máximo 12 caracteres'
-              }"
-            ></app-form-error>
+              }"></app-form-error>
           </div>
         </div>
       </div>
@@ -375,8 +356,7 @@
               formControlName="whichProblem"
               [class.is-invalid]="
                 f['whichProblem'].invalid && f['whichProblem'].touched
-              "
-            ></textarea>
+              "></textarea>
             <app-form-error [control]="f['whichProblem']"></app-form-error>
           </div>
         </div>
@@ -392,8 +372,7 @@
               formControlName="generalObjective"
               [class.is-invalid]="
                 f['generalObjective'].invalid && f['generalObjective'].touched
-              "
-            ></textarea>
+              "></textarea>
             <app-form-error [control]="f['generalObjective']"></app-form-error>
           </div>
         </div>
@@ -410,12 +389,10 @@
               [class.is-invalid]="
                 f['numberOfBeneficiaries'].invalid &&
                 f['numberOfBeneficiaries'].touched
-              "
-            />
+              " />
             <app-form-error
               [control]="f['numberOfBeneficiaries']"
-              [errors]="{ pattern: 'Solo números' }"
-            ></app-form-error>
+              [errors]="{ pattern: 'Solo números' }"></app-form-error>
           </div>
         </div>
         <div class="col-12 col-md-6">
@@ -431,12 +408,10 @@
                   name="collaborationWithOtherOrganizations"
                   class="mobileToggle"
                   id="collaborationWithOtherOrganizations"
-                  formControlName="collaborationWithOtherOrganizations"
-                />
+                  formControlName="collaborationWithOtherOrganizations" />
                 <label
                   for="collaborationWithOtherOrganizations"
-                  class="cursor-pointer"
-                ></label>
+                  class="cursor-pointer"></label>
               </div>
             </div>
           </div>
@@ -454,11 +429,9 @@
               [class.is-invalid]="
                 f['collaboratorsAnswer'].invalid &&
                 f['collaboratorsAnswer'].touched
-              "
-            ></textarea>
+              "></textarea>
             <app-form-error
-              [control]="f['collaboratorsAnswer']"
-            ></app-form-error>
+              [control]="f['collaboratorsAnswer']"></app-form-error>
           </div>
         </div>
         <div class="col-12 col-md-4">
@@ -475,11 +448,9 @@
               [class.is-invalid]="
                 f['populationsConditionsBefore'].invalid &&
                 f['populationsConditionsBefore'].touched
-              "
-            ></textarea>
+              "></textarea>
             <app-form-error
-              [control]="f['populationsConditionsBefore']"
-            ></app-form-error>
+              [control]="f['populationsConditionsBefore']"></app-form-error>
           </div>
         </div>
         <div class="col-12 col-md-4">
@@ -496,11 +467,9 @@
               [class.is-invalid]="
                 f['populationsConditionsAfter'].invalid &&
                 f['populationsConditionsAfter'].touched
-              "
-            ></textarea>
+              "></textarea>
             <app-form-error
-              [control]="f['populationsConditionsAfter']"
-            ></app-form-error>
+              [control]="f['populationsConditionsAfter']"></app-form-error>
           </div>
         </div>
         <div class="col-12 col-md-4">
@@ -517,11 +486,9 @@
               [class.is-invalid]="
                 f['promoteSocialImprovement'].invalid &&
                 f['promoteSocialImprovement'].touched
-              "
-            ></textarea>
+              "></textarea>
             <app-form-error
-              [control]="f['promoteSocialImprovement']"
-            ></app-form-error>
+              [control]="f['promoteSocialImprovement']"></app-form-error>
           </div>
         </div>
       </div>
@@ -540,8 +507,7 @@
               formControlName="startDate"
               [class.is-invalid]="
                 f['startDate'].invalid && f['startDate'].touched
-              "
-            />
+              " />
             <app-form-error [control]="f['startDate']"></app-form-error>
           </div>
         </div>
@@ -554,8 +520,7 @@
               id="endDate"
               formControlName="endDate"
               [class.is-invalid]="f['endDate'].invalid && f['endDate'].touched"
-              [min]="f['startDate'].value | date : 'yyyy-MM-dd'"
-            />
+              [min]="f['startDate'].value | date : 'yyyy-MM-dd'" />
             <app-form-error [control]="f['endDate']"></app-form-error>
           </div>
         </div>
@@ -574,8 +539,7 @@
               labelForId="objectives"
               formControlName="objectives"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option *ngFor="let opt of objectivesOptions" [value]="opt">{{
                 opt
               }}</ng-option>
@@ -585,8 +549,7 @@
         </div>
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[0])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[0])">
           <div class="mb-3">
             <label for="povertyEnd" class="form-label"
               >1. Fin de la pobreza (Seleccione al menos una meta)</label
@@ -596,8 +559,7 @@
               labelForId="povertyEnd"
               formControlName="povertyEnd"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="1.1 Para 2030 erradicar la pobreza extrema para todas las personas en el mundo actualmente medida por un ingreso por persona inferior a 125 dólares al día."
                 >1.1 Para 2030, erradicar la pobreza extrema para todas las
@@ -659,8 +621,7 @@
         </div>
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[1])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[1])">
           <div class="mb-3">
             <label for="zeroHunger" class="form-label"
               >2. Hambre cero (Seleccione al menos una meta)</label
@@ -670,8 +631,7 @@
               labelForId="zeroHunger"
               formControlName="zeroHunger"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="2.1 Para 2030 poner fin al hambre y asegurar el acceso de todas las personas en particular los pobres y las personas en situaciones vulnerables incluidos los lactantes a una alimentación sana nutritiva y suficiente durante todo el año"
                 >2.1 Para 2030, poner fin al hambre y asegurar el acceso de
@@ -756,8 +716,7 @@
         </div>
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[2])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[2])">
           <div class="mb-3">
             <label for="healthAndWellness" class="form-label">
               3. Salud y bienestar (Seleccione al menos una meta)</label
@@ -767,8 +726,7 @@
               labelForId="healthAndWellness"
               formControlName="healthAndWellness"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="3.1 Para 2030 reducir la tasa mundial de mortalidad materna a menos de 70 por cada 100.000 nacidos vivos"
                 >3.1 Para 2030, reducir la tasa mundial de mortalidad materna a
@@ -872,8 +830,7 @@
         </div>
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[3])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[3])">
           <div class="mb-3">
             <label for="qualityEducation" class="form-label"
               >4. Educación de calidad (Seleccione al menos una meta)</label
@@ -883,8 +840,7 @@
               labelForId="qualityEducation"
               formControlName="qualityEducation"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="4.1 De aquí a 2030 asegurar que todas las niñas y todos los niños terminen la enseñanza primaria y secundaria que ha de ser gratuita equitativa y de calidad y producir resultados de aprendizaje pertinentes y efectivos"
                 >4.1 De aquí a 2030, asegurar que todas las niñas y todos los
@@ -973,8 +929,7 @@
         </div>
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[4])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[4])">
           <div class="mb-3">
             <label for="genderEquality" class="form-label"
               >5. Igualdad de genero (Seleccione al menos una meta)</label
@@ -984,8 +939,7 @@
               labelForId="genderEquality"
               formControlName="genderEquality"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="5.1 Poner fin a todas las formas de discriminación contra todas las mujeres y las niñas en todo el mundo"
                 >5.1 Poner fin a todas las formas de discriminación contra todas
@@ -1052,8 +1006,7 @@
         </div>
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[5])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[5])">
           <div class="mb-3">
             <label for="cleanWater" class="form-label"
               >6. Agua limpia y saneamiento (Seleccione al menos una
@@ -1064,8 +1017,7 @@
               labelForId="cleanWater"
               formControlName="cleanWater"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="6.1 De aquí a 2030 lograr el acceso universal y equitativo al agua potable a un precio asequible para todos"
                 >6.1 De aquí a 2030, lograr el acceso universal y equitativo al
@@ -1129,8 +1081,7 @@
         </div>
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[6])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[6])">
           <div class="mb-3">
             <label for="affordableEnergy" class="form-label"
               >7. Energía asequible y no contaminante (Seleccione al menos una
@@ -1141,8 +1092,7 @@
               labelForId="affordableEnergy"
               formControlName="affordableEnergy"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="7.1 De aquí a 2030 garantizar el acceso universal a servicios energéticos asequibles fiables y modernos"
                 >7.1 De aquí a 2030, garantizar el acceso universal a servicios
@@ -1182,8 +1132,7 @@
         </div>
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[7])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[7])">
           <div class="mb-3">
             <label for="decentWork" class="form-label"
               >8. Trabajo decente y crecimiento económico (Seleccione al menos
@@ -1194,8 +1143,7 @@
               labelForId="decentWork"
               formControlName="decentWork"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="8.1 Mantener el crecimiento económico per capita de conformidad con las circunstancias nacionales y en particular un crecimiento del producto interno bruto de al menos el 7% anual en los países menos adelantados"
                 >8.1 Mantener el crecimiento económico per capita de conformidad
@@ -1291,8 +1239,7 @@
         </div>
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[8])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[8])">
           <div class="mb-3">
             <label for="industry" class="form-label"
               >9. Industria, innovación e infraestructuras (Seleccione al menos
@@ -1303,8 +1250,7 @@
               labelForId="industry"
               formControlName="industry"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="9.1 Desarrollar infraestructuras fiables sostenibles resilientes y de calidad incluidas infraestructuras regionales y transfronterizas para apoyar el desarrollo económico y el bienestar humano haciendo especial hincapié en el acceso asequible y equitativo para todos"
                 >9.1 Desarrollar infraestructuras fiables, sostenibles,
@@ -1376,8 +1322,7 @@
 
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[9])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[9])">
           <div class="mb-3">
             <label for="reducingInequalities" class="form-label"
               >10. Reducción de las desigualdades (Seleccione al menos una
@@ -1388,8 +1333,7 @@
               labelForId="reducingInequalities"
               formControlName="reducingInequalities"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="10.1 De aquí a 2030 lograr progresivamente y mantener el crecimiento de los ingresos del 40% más pobre de la población a una tasa superior a la media nacional"
                 >10.1 De aquí a 2030, lograr progresivamente y mantener el
@@ -1467,8 +1411,7 @@
 
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[10])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[10])">
           <div class="mb-3">
             <label for="cities" class="form-label"
               >11. Ciudades y comunidades sostenibles (Seleccione al menos una
@@ -1479,8 +1422,7 @@
               labelForId="cities"
               formControlName="cities"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="11.1 De aquí a 2030 asegurar el acceso de todas las personas a viviendas y servicios básicos adecuados seguros y asequibles y mejorar los barrios marginales"
                 >11.1 De aquí a 2030, asegurar el acceso de todas las personas a
@@ -1566,8 +1508,7 @@
 
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[11])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[11])">
           <div class="mb-3">
             <label for="production" class="form-label"
               >12. Producción y consumo responsables(Seleccione al menos una
@@ -1578,8 +1519,7 @@
               labelForId="production"
               formControlName="production"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="12.1 Aplicar el Marco Decenal de Programas sobre Modalidades de Consumo y Producción Sostenibles con la participación de todos los países y bajo el liderazgo de los países desarrollados teniendo en cuenta el grado de desarrollo y las capacidades de los países en desarrollo"
                 >12.1 Aplicar el Marco Decenal de Programas sobre Modalidades de
@@ -1669,8 +1609,7 @@
 
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[12])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[12])">
           <div class="mb-3">
             <label for="climateAction" class="form-label"
               >13. Acción por el clima (Seleccione al menos una meta)</label
@@ -1680,8 +1619,7 @@
               labelForId="climateAction"
               formControlName="climateAction"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="13.1 Fortalecer la resiliencia y la capacidad de adaptación a los riesgos relacionados con el clima y los desastres naturales en todos los países"
                 >13.1 Fortalecer la resiliencia y la capacidad de adaptación a
@@ -1727,8 +1665,7 @@
 
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[13])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[13])">
           <div class="mb-3">
             <label for="underwaterLife" class="form-label"
               >14. Vida submarina (Seleccione al menos una meta)</label
@@ -1738,8 +1675,7 @@
               labelForId="underwaterLife"
               formControlName="underwaterLife"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="14.1 De aquí a 2025 prevenir y reducir significativamente la contaminación marina de todo tipo en particular la producida por actividades realizadas en tierra incluidos los detritos marinos y la polución por nutrientes"
                 >14.1 De aquí a 2025, prevenir y reducir significativamente la
@@ -1832,8 +1768,7 @@
 
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[14])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[14])">
           <div class="mb-3">
             <label for="terrestrialEcosystemLife" class="form-label"
               >15. Vida de ecosistemas terrestres (Seleccione al menos una
@@ -1844,8 +1779,7 @@
               labelForId="terrestrialEcosystemLife"
               formControlName="terrestrialEcosystemLife"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="15.1 Para 2020 velar por la conservación el restablecimiento y el uso sostenible de los ecosistemas terrestres y los ecosistemas interiores de agua dulce y los servicios que proporcionan en particular los bosques los humedales las montañas y las zonas áridas en consonancia con las obligaciones contraídas en virtud de acuerdos internacionales"
                 >15.1 Para 2020, velar por la conservación, el restablecimiento
@@ -1941,8 +1875,7 @@
 
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[15])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[15])">
           <div class="mb-3">
             <label for="peace" class="form-label"
               >16. Paz, Justicia e instituciones solidas (Seleccione al menos
@@ -1953,8 +1886,7 @@
               labelForId="peace"
               formControlName="peace"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="16.1 Reducir significativamente todas las formas de violencia y las correspondientes tasas de mortalidad en todo el mundo"
                 >16.1 Reducir significativamente todas las formas de violencia y
@@ -2031,8 +1963,7 @@
 
         <div
           class="col-12"
-          *ngIf="f['objectives'].value.includes(objectivesOptions[16])"
-        >
+          *ngIf="f['objectives'].value.includes(objectivesOptions[16])">
           <div class="mb-3">
             <label for="alliances" class="form-label"
               >17. Alianzas para lograr objetivos (Seleccione al menos una
@@ -2043,8 +1974,7 @@
               labelForId="alliances"
               formControlName="alliances"
               [multiple]="true"
-              [hideSelected]="true"
-            >
+              [hideSelected]="true">
               <ng-option
                 value="17.1 Fortalecer la movilización de recursos internos incluso mediante la prestación de apoyo internacional a los países en desarrollo con el fin de mejorar la capacidad nacional para recaudar ingresos fiscales y de otra índole"
                 >17.1 Fortalecer la movilización de recursos internos, incluso
@@ -2211,22 +2141,19 @@
       <app-budget-table
         [records]="contributions"
         [readOnly]="infoSaved$ | async"
-        (onChange)="contributions = $event"
-      ></app-budget-table>
+        (recordChange)="contributions = $event"></app-budget-table>
       <hr />
       <h6>Conversión</h6>
       <app-budget-table
         [records]="conversions"
         [readOnly]="infoSaved$ | async"
-        (onChange)="conversions = $event"
-      ></app-budget-table>
+        (recordChange)="conversions = $event"></app-budget-table>
       <hr />
       <h6>Donativo Fundación DEACERO</h6>
       <app-budget-table
         [records]="donations"
         [readOnly]="infoSaved$ | async"
-        (onChange)="donations = $event"
-      ></app-budget-table>
+        (recordChange)="donations = $event"></app-budget-table>
       <hr />
       <h2 *ngIf="f['category'].value" class="mb-3">
         Con la implementación del proyecto, ¿Cual consideras que será el
@@ -2252,8 +2179,7 @@
                       [name]="rate.group"
                       [id]="rate.group"
                       [value]="'0' + item"
-                      [formControlName]="rate.group"
-                    />
+                      [formControlName]="rate.group" />
                   </div>
                 </div>
               </ng-container>
@@ -2275,12 +2201,10 @@
               formControlName="facebook"
               [class.is-invalid]="
                 f['facebook'].invalid && f['facebook'].touched
-              "
-            />
+              " />
             <app-form-error
               [control]="f['facebook']"
-              [errors]="{ pattern: 'Url no válida' }"
-            ></app-form-error>
+              [errors]="{ pattern: 'Url no válida' }"></app-form-error>
           </div>
         </div>
         <div class="col-12 col-md-6">
@@ -2294,12 +2218,10 @@
               formControlName="instagram"
               [class.is-invalid]="
                 f['instagram'].invalid && f['instagram'].touched
-              "
-            />
+              " />
             <app-form-error
               [control]="f['instagram']"
-              [errors]="{ pattern: 'Url no válida' }"
-            ></app-form-error>
+              [errors]="{ pattern: 'Url no válida' }"></app-form-error>
           </div>
         </div>
         <div class="col-12 col-md-6">
@@ -2313,12 +2235,10 @@
               formControlName="linkedin"
               [class.is-invalid]="
                 f['linkedin'].invalid && f['linkedin'].touched
-              "
-            />
+              " />
             <app-form-error
               [control]="f['linkedin']"
-              [errors]="{ pattern: 'Url no válida' }"
-            ></app-form-error>
+              [errors]="{ pattern: 'Url no válida' }"></app-form-error>
           </div>
         </div>
         <div class="col-12 col-md-6">
@@ -2330,12 +2250,12 @@
               id="twitter"
               placeholder="https://..."
               formControlName="twitter"
-              [class.is-invalid]="f['twitter'].invalid && f['twitter'].touched"
-            />
+              [class.is-invalid]="
+                f['twitter'].invalid && f['twitter'].touched
+              " />
             <app-form-error
               [control]="f['twitter']"
-              [errors]="{ pattern: 'Url no válida' }"
-            ></app-form-error>
+              [errors]="{ pattern: 'Url no válida' }"></app-form-error>
           </div>
         </div>
         <div class="col-12 col-md-6">
@@ -2347,12 +2267,10 @@
               id="tiktok"
               placeholder="https://..."
               formControlName="tiktok"
-              [class.is-invalid]="f['tiktok'].invalid && f['tiktok'].touched"
-            />
+              [class.is-invalid]="f['tiktok'].invalid && f['tiktok'].touched" />
             <app-form-error
               [control]="f['tiktok']"
-              [errors]="{ pattern: 'Url no válida' }"
-            ></app-form-error>
+              [errors]="{ pattern: 'Url no válida' }"></app-form-error>
           </div>
         </div>
         <div class="col-12 col-md-6">
@@ -2364,12 +2282,12 @@
               id="youtube"
               placeholder="https://..."
               formControlName="youtube"
-              [class.is-invalid]="f['youtube'].invalid && f['youtube'].touched"
-            />
+              [class.is-invalid]="
+                f['youtube'].invalid && f['youtube'].touched
+              " />
             <app-form-error
               [control]="f['youtube']"
-              [errors]="{ pattern: 'Url no válida' }"
-            ></app-form-error>
+              [errors]="{ pattern: 'Url no válida' }"></app-form-error>
           </div>
         </div>
       </div>
@@ -2389,8 +2307,7 @@
                   accept="application/pdf"
                   [class.is-invalid]="
                     f[doc.field].invalid && f[doc.field].touched
-                  "
-                />
+                  " />
               </ng-container>
               <ng-container *ngIf="f[doc.field].value">
                 <div class="input-group">
@@ -2400,18 +2317,15 @@
                     [id]="doc.field"
                     placeholder="https://..."
                     [formControlName]="doc.field"
-                    readonly
-                  />
+                    readonly />
                   <button
                     class="btn btn-secondary p-1"
                     (click)="f[doc.field].setValue('')"
-                    [disabled]="infoSaved$ | async"
-                  >
+                    [disabled]="infoSaved$ | async">
                     <img
                       height="18"
                       src="/assets/icons/trash.png"
-                      alt="trash"
-                    />
+                      alt="trash" />
                   </button>
                 </div>
               </ng-container>
@@ -2431,8 +2345,7 @@
                 id="logo"
                 (change)="uploadDocument($event, 'logo', true)"
                 accept="image/png, application/pdf"
-                [class.is-invalid]="f['logo'].invalid && f['logo'].touched"
-              />
+                [class.is-invalid]="f['logo'].invalid && f['logo'].touched" />
             </ng-container>
             <ng-container *ngIf="f['logo'].value">
               <div class="input-group">
@@ -2442,12 +2355,10 @@
                   id="logo"
                   placeholder="https://..."
                   formControlName="logo"
-                  readonly
-                />
+                  readonly />
                 <button
                   class="btn btn-secondary p-1"
-                  (click)="f['logo'].setValue('')"
-                >
+                  (click)="f['logo'].setValue('')">
                   <img height="18" src="/assets/icons/trash.png" alt="trash" />
                 </button>
               </div>
@@ -2471,8 +2382,7 @@
               id="subscribe1"
               value="Quiero darme de alta en la lista de difusión de Fundación DEACERO
               por correo y WhatsApp."
-              formControlName="subscribe"
-            />
+              formControlName="subscribe" />
             <label class="form-check-label" for="subscribe1">
               Quiero darme de alta en la lista de difusión de Fundación DEACERO
               por correo y WhatsApp.
@@ -2486,8 +2396,7 @@
               id="subscribe2"
               value=" Quiero darme de alta en la lista de difusión de Fundación DEACERO
               sólo por correo."
-              formControlName="subscribe"
-            />
+              formControlName="subscribe" />
             <label class="form-check-label" for="subscribe2">
               Quiero darme de alta en la lista de difusión de Fundación DEACERO
               sólo por correo.
@@ -2500,8 +2409,7 @@
               name="subscribe"
               id="subscribe3"
               value="No quiero darme de alta en la lista de difusión."
-              formControlName="subscribe"
-            />
+              formControlName="subscribe" />
             <label class="form-check-label" for="subscribe3">
               No quiero darme de alta en la lista de difusión.
             </label>
@@ -2509,12 +2417,11 @@
         </div>
       </div>
 
-      <ng-container *ngIf="!(infoSaved$ | async)">
+      <ng-container *ngIf="(infoSaved$ | async) === false">
         <button
           class="btn btn-outline-primary me-3"
           type="button"
-          (click)="save()"
-        >
+          (click)="save()">
           Guardar borrador
         </button>
 
@@ -2522,8 +2429,7 @@
           class="btn btn-primary"
           type="button"
           [disabled]="!isValidForm"
-          (click)="open(modal)"
-        >
+          (click)="open(modal)">
           Enviar
         </button>
       </ng-container>
@@ -2538,8 +2444,7 @@
       type="button"
       class="btn-close"
       aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    ></button>
+      (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
     Una vez enviada la solicitud, los datos registrados no podrán ser
@@ -2552,8 +2457,7 @@
 
     <button
       class="btn btn-primary"
-      (click)="modal.close(); save(infoSubmitted, true)"
-    >
+      (click)="modal.close(); save(infoSubmitted, true)">
       Aceptar
     </button>
   </div>
@@ -2566,8 +2470,7 @@
       type="button"
       class="btn-close"
       aria-label="Close"
-      (click)="modal.dismiss()"
-    ></button>
+      (click)="modal.dismiss()"></button>
   </div>
   <div class="modal-body">
     <ng-container *ngIf="infoSubmitted$ | async; else error">

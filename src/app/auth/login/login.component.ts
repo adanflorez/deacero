@@ -37,11 +37,11 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(this.f['username'].value, this.f['password'].value)
       .subscribe({
-        next: (res) => {
+        next: res => {
           localStorage.setItem('token', res.token);
           this.router.navigate(['/home']);
         },
-        error: (error) => {
+        error: error => {
           this.setAlert(
             true,
             'Usuario y/o contraseña incorrecto',

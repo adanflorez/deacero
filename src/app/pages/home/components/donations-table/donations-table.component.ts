@@ -36,7 +36,7 @@ export class DonationsTableComponent {
       amount: new FormControl('', Validators.pattern(ONLY_NUMBERS_PATTERN)),
       proyectName: new FormControl(''),
     });
-    this.form.valueChanges.subscribe((values) => {
+    this.form.valueChanges.subscribe(values => {
       const { year, amount, proyectName } = values;
       if (year || amount || proyectName) {
         this.validForm = this.form.valid && true;
@@ -57,7 +57,7 @@ export class DonationsTableComponent {
   }
 
   removeDonation(id: string) {
-    this.donations = this.donations.filter((donation) => donation.id !== id);
+    this.donations = this.donations.filter(donation => donation.id !== id);
     this.donationsList.emit(this.donations);
   }
 
@@ -65,8 +65,8 @@ export class DonationsTableComponent {
     return this.form.controls;
   }
 
-  loadDonationInFields(id: string, modal: any) {
-    const donations = this.donations.filter((donation) => donation.id === id);
+  loadDonationInFields(id: string, modal: unknown) {
+    const donations = this.donations.filter(donation => donation.id === id);
     this.donationToEdit = donations[0];
     const { year, amount, proyectName } = donations[0];
     this.form.setValue({
@@ -81,7 +81,7 @@ export class DonationsTableComponent {
   editDonation() {
     this.donationToEdit = { ...this.donationToEdit, ...this.form.value };
     this.donations = this.donations.filter(
-      (donation) => donation.id !== this.donationToEdit.id
+      donation => donation.id !== this.donationToEdit.id
     );
     this.donations.push(this.donationToEdit);
     this.donationsList.emit(this.donations);
@@ -94,17 +94,17 @@ export class DonationsTableComponent {
     this.form.reset();
   }
 
-  open(content: any) {
+  open(content: unknown) {
     this.modalService
       .open(content, {
         ariaLabelledBy: 'modal-basic-title',
         backdrop: 'static',
       })
       .result.then(
-        (result) => {
+        result => {
           this.closeResult = `Closed with: ${result}`;
         },
-        (reason) => {
+        reason => {
           this.form.reset();
         }
       );

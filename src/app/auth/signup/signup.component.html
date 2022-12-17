@@ -4,8 +4,7 @@
       class="img-fluid center-block my-3"
       style="max-width: 378px"
       src="/assets/img/fundacion.png"
-      alt="fundacion"
-    />
+      alt="fundacion" />
   </div>
   <div class="row justify-content-center">
     <div class="col-md-6">
@@ -14,8 +13,7 @@
           *ngIf="showAlert"
           [type]="alertType"
           [message]="alertMessage"
-          (close)="showAlert = false"
-        ></app-alert>
+          (close)="showAlert = false"></app-alert>
         <h3 class="text-independence text-center">Pre - Registro de Acceso</h3>
         <form [formGroup]="signupForm">
           <div class="mb-3">
@@ -28,8 +26,7 @@
               [class.is-invalid]="
                 f['name'].invalid && (f['name'].dirty || f['name'].touched)
               "
-              (change)="validateRFC($event)"
-            />
+              (change)="validateRFC($event)" />
             <app-form-error [control]="f['name']"></app-form-error>
             <div class="small">- Registro Federal de Contribuyentes</div>
           </div>
@@ -40,12 +37,10 @@
               id="email"
               placeholder="Correo electrónico"
               formControlName="email"
-              [class.is-invalid]="f['email'].invalid && f['email'].touched"
-            />
+              [class.is-invalid]="f['email'].invalid && f['email'].touched" />
             <div
               class="invalid-feedback"
-              *ngIf="f['email'].invalid && f['email'].touched"
-            >
+              *ngIf="f['email'].invalid && f['email'].touched">
               Correo no valido
             </div>
             <div class="small">- El correo electronico de la organización</div>
@@ -61,19 +56,16 @@
                 [class.is-invalid]="
                   f['password'].invalid && f['password'].touched
                 "
-                aria-describedby="button-addon2"
-              />
+                aria-describedby="button-addon2" />
 
               <button
                 class="btn btn-secondary"
                 type="button"
-                (click)="showHidePassword(1)"
-              >
+                (click)="showHidePassword(1)">
                 <img
                   height="20"
                   [src]="'/assets/icons/' + passwordButonnIcon + '.png'"
-                  alt="lock"
-                />
+                  alt="lock" />
               </button>
 
               <button
@@ -83,15 +75,13 @@
                 data-bs-placement="left"
                 data-bs-html="true"
                 title="<p class='text-start'>La contraseña debe contener: <br /><br />- Mínimo 8 caracteres alfanuméricos<br /> - Al menos una letra mayúscula</p>"
-                id="button-addon2"
-              >
+                id="button-addon2">
                 <span class="badge rounded-pill bg-dark">?</span>
               </button>
             </div>
             <div
               class="text-danger small"
-              *ngIf="f['password'].invalid && f['password'].touched"
-            >
+              *ngIf="f['password'].invalid && f['password'].touched">
               Contraseña no válida
             </div>
 
@@ -105,18 +95,15 @@
                 id="confirmPassword"
                 placeholder="Confirma tu contraseña"
                 formControlName="confirmPassword"
-                [class.is-invalid]="passwordMatchError"
-              />
+                [class.is-invalid]="passwordMatchError" />
               <button
                 class="btn btn-secondary"
                 type="button"
-                (click)="showHidePassword(2)"
-              >
+                (click)="showHidePassword(2)">
                 <img
                   height="20"
                   [src]="'/assets/icons/' + confirmPasswordButonnIcon + '.png'"
-                  alt="lock"
-                />
+                  alt="lock" />
               </button>
               <div *ngIf="passwordMatchError" class="invalid-feedback">
                 Las contraseñas no coinciden
@@ -148,8 +135,7 @@
               class="btn btn-primary"
               type="button"
               [disabled]="signupForm.invalid"
-              (click)="signup()"
-            >
+              (click)="signup()">
               Enviar
             </button>
           </div>

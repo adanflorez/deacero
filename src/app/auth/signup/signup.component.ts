@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { PASSWORD_PATERN } from 'src/app/lib/constants';
 import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
 
-declare var window: any;
+declare let window: any;
 
 @Component({
   selector: 'app-signup',
@@ -39,10 +39,10 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var tooltipTriggerList = [].slice.call(
+    const tooltipTriggerList = [].slice.call(
       document.querySelectorAll('[data-bs-toggle="tooltip"]')
     );
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new window.bootstrap.Tooltip(tooltipTriggerEl);
     });
   }
@@ -70,7 +70,7 @@ export class SignupComponent implements OnInit {
           localStorage.setItem('token', res.data.token);
           this.router.navigate(['/home']);
         },
-        error: (error) => {
+        error: error => {
           this.showAlert = true;
           this.alertMessage = error.error.message;
           this.alertType = AlertType.Danger;
@@ -99,10 +99,10 @@ export class SignupComponent implements OnInit {
   }
 
   validateRFC(input: any) {
-    var rfc = input.target.value.trim().toUpperCase(),
+    let rfc = input.target.value.trim().toUpperCase(),
       valido;
 
-    var rfcCorrecto = this.rfcValido(rfc); // ⬅️ Acá se comprueba
+    const rfcCorrecto = this.rfcValido(rfc); // ⬅️ Acá se comprueba
 
     if (rfcCorrecto) {
       valido = 'Válido';
@@ -116,7 +116,7 @@ export class SignupComponent implements OnInit {
   rfcValido(rfc: any, aceptarGenerico = true) {
     const re =
       /^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
-    var validado = rfc.match(re);
+    const validado = rfc.match(re);
 
     if (!validado)
       //Coincide con el formato general del regex?
@@ -129,12 +129,12 @@ export class SignupComponent implements OnInit {
       //Obtener el digito esperado
       diccionario = '0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ Ñ',
       indice = len + 1;
-    var suma, digitoEsperado;
+    let suma, digitoEsperado;
 
     if (len == 12) suma = 0;
     else suma = 481; //Ajuste para persona moral
 
-    for (var i = 0; i < len; i++)
+    for (let i = 0; i < len; i++)
       suma += diccionario.indexOf(rfcSinDigito.charAt(i)) * (indice - i);
     digitoEsperado = 11 - (suma % 11);
     if (digitoEsperado == 11) digitoEsperado = 0;

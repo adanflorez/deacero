@@ -10,6 +10,7 @@ import {
 import { AlertType } from 'src/app/lib/enums/alert-type';
 import { CallService } from 'src/app/lib/services/call.service';
 import { UserService } from 'src/app/lib/services/user.service';
+import Response from 'src/app/lib/models/response.model';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
   products = [];
   donations = [];
   loading = false;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   oscData: any = {};
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -39,7 +41,7 @@ export class HomeComponent implements OnInit {
 
   getOSC() {
     this.loading = true;
-    this.userService.getOSC().subscribe((res) => {
+    this.userService.getOSC().subscribe(res => {
       this.oscData = res.data;
       this.products = res.data.product || [];
       this.donations = res.data.donation || [];
@@ -51,8 +53,8 @@ export class HomeComponent implements OnInit {
 
   getCallStatus(): void {
     if (this.form.valid) {
-      this.callService.status().subscribe((res: any) => {
-        if (res.data) {
+      this.callService.status().subscribe((res: unknown) => {
+        if ((res as Response).data) {
           this.infoSaved$.next(true);
           this.form.disable();
         }
@@ -171,7 +173,7 @@ export class HomeComponent implements OnInit {
         this.f['whichTopics'].disable();
         this.f['whichTopics'].reset();
       });
-    this.form.get('previousDonations')?.valueChanges.subscribe((val) => {
+    this.form.get('previousDonations')?.valueChanges.subscribe(val => {
       this.showDonationsTable = val;
       this.donations = [];
     });
@@ -233,8 +235,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  validateRFC(input: any) {
-    const rfc = input.target.value.trim().toUpperCase();
+  validateRFC(input: Event) {
+    const rfc = (input.target as HTMLInputElement).value.trim().toUpperCase();
     if (this.validRFC(rfc)) {
       this.f.rfc.updateValueAndValidity();
     } else {

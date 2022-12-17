@@ -97,14 +97,14 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userService.OSCstatus().subscribe({
-      next: (res) => {
+      next: res => {
         if (res.data) {
           this.loadApplication();
         } else {
           this.hideForm$.next(true);
         }
       },
-      error: (error) => console.error(error),
+      error: error => console.error(error),
       complete: () => {},
     });
   }
@@ -591,14 +591,14 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   private resetPreviousRatings() {
-    this.groups.map((group) => {
+    this.groups.map(group => {
       this.form.get(group)?.clearValidators();
       this.form.get(group)?.reset();
     });
   }
 
   private setValidatorsToRating() {
-    this.groups.map((group) => {
+    this.groups.map(group => {
       this.form.get(group)?.setValidators(Validators.required);
     });
   }
@@ -612,24 +612,24 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   private handleLocation() {
     if (this.f.locationQuestion.value) {
-      this.locationFields.map((field) => {
+      this.locationFields.map(field => {
         this.form.get(field)?.setValidators(Validators.required);
       });
     } else {
-      this.locationFields.map((field) => {
+      this.locationFields.map(field => {
         this.form.get(field)?.clearValidators();
         this.form.get(field)?.reset();
       });
     }
     const locationQuestionSub = this.form
       .get('locationQuestion')
-      ?.valueChanges.subscribe((res) => {
+      ?.valueChanges.subscribe(res => {
         if (res) {
-          this.locationFields.map((field) => {
+          this.locationFields.map(field => {
             this.form.get(field)?.setValidators(Validators.required);
           });
         } else {
-          this.locationFields.map((field) => {
+          this.locationFields.map(field => {
             this.form.get(field)?.clearValidators();
             this.form.get(field)?.reset();
           });
@@ -639,7 +639,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   private handleAboutCall() {
-    const sub = this.form.get('aboutCall')?.valueChanges.subscribe((res) => {
+    const sub = this.form.get('aboutCall')?.valueChanges.subscribe(res => {
       if (res == 3) {
         this.form.get('whichMedia')?.setValidators(Validators.required);
       } else {
@@ -651,7 +651,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   private handleObjectives() {
-    const sub = this.form.get('objectives')?.valueChanges.subscribe((val) => {
+    const sub = this.form.get('objectives')?.valueChanges.subscribe(val => {
       this.objectivesOptions.map((_, index) => {
         if (val.includes(this.objectivesOptions[index])) {
           this.form
@@ -669,7 +669,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   private handleRemunerationQuestion() {
     const sub = this.form
       .get('remunerationQuestion')
-      ?.valueChanges.subscribe((res) => {
+      ?.valueChanges.subscribe(res => {
         if (!res) {
           this.remunerations = [];
         }
@@ -682,12 +682,12 @@ export class CallsComponent implements OnInit, OnDestroy {
     const formData = new FormData();
     formData.append('file', (e.target as HTMLInputElement).files![0]);
     this.multimediaService.upload(formData).subscribe({
-      next: (res) => {
+      next: res => {
         this.tempDocumentUrl.next(res.data);
       },
-      error: (error) => console.error(error),
+      error: error => console.error(error),
       complete: () => {
-        const sub = this.tempDocumentUrl.asObservable().subscribe((res) => {
+        const sub = this.tempDocumentUrl.asObservable().subscribe(res => {
           if (!this.f[control].value) {
             this.f[control].setValue(res);
           }
@@ -715,7 +715,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe.forEach((sb) => sb.unsubscribe());
+    this.unsubscribe.forEach(sb => sb.unsubscribe());
   }
 
   open(content: any): void {
@@ -725,10 +725,10 @@ export class CallsComponent implements OnInit, OnDestroy {
         backdrop: 'static',
       })
       .result.then(
-        (result) => {
+        result => {
           this.closeResult = `Closed with: ${result}`;
         },
-        (reason) => {
+        reason => {
           this.form.reset();
         }
       );
@@ -936,13 +936,13 @@ export class CallsComponent implements OnInit, OnDestroy {
         doYouWanToSubscribe: subscribe,
       },
     };
-    const sub = this.callService.applicateToCall(body).subscribe((res) => {
+    const sub = this.callService.applicateToCall(body).subscribe(res => {
       if (updateAndSave) {
         this.saveInFlokzu(modal)?.subscribe({
           next: () => {
             this.infoSubmitted$.next(true);
           },
-          error: (error) => {
+          error: error => {
             this.infoSubmitted$.next(true);
             this.open(modal);
             console.error(error);

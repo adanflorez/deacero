@@ -14,20 +14,18 @@
       <tbody>
         <tr *ngFor="let donation of donations">
           <td>{{ donation.year }}</td>
-          <td>{{ donation.amount | currency : "MXN" }}</td>
+          <td>{{ donation.amount | currency : 'MXN' }}</td>
           <td>{{ donation.proyectName }}</td>
           <td>
             <ng-container *ngIf="!isEditMode && !readOnly">
               <button
                 class="btn btn-secondary p-1 me-2"
-                (click)="loadDonationInFields(donation.id, modal)"
-              >
+                (click)="loadDonationInFields(donation.id, modal)">
                 <img height="18" src="/assets/icons/edit.png" alt="edit" />
               </button>
               <button
                 class="btn btn-secondary p-1"
-                (click)="removeDonation(donation.id)"
-              >
+                (click)="removeDonation(donation.id)">
                 <img height="18" src="/assets/icons/trash.png" alt="trash" />
               </button>
             </ng-container>
@@ -51,7 +49,7 @@
             <td>{{ donation.year }}</td>
           </tr>
           <tr>
-            <td>{{ donation.amount | currency : "MXN" }}</td>
+            <td>{{ donation.amount | currency : 'MXN' }}</td>
           </tr>
           <tr>
             <td>{{ donation.proyectName }}</td>
@@ -61,14 +59,12 @@
               <ng-container *ngIf="!isEditMode && !readOnly">
                 <button
                   class="btn btn-secondary p-1 me-2"
-                  (click)="loadDonationInFields(donation.id, modal)"
-                >
+                  (click)="loadDonationInFields(donation.id, modal)">
                   <img height="18" src="/assets/icons/edit.png" alt="edit" />
                 </button>
                 <button
                   class="btn btn-secondary p-1"
-                  (click)="removeDonation(donation.id)"
-                >
+                  (click)="removeDonation(donation.id)">
                   <img height="18" src="/assets/icons/trash.png" alt="trash" />
                 </button>
               </ng-container>
@@ -95,8 +91,7 @@
       type="button"
       class="btn-close"
       aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    ></button>
+      (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
     <form [formGroup]="form" class="px-4">
@@ -107,8 +102,7 @@
         id="year"
         placeholder="Año"
         formControlName="year"
-        [class.is-invalid]="f['year'].invalid && f['year'].touched"
-      />
+        [class.is-invalid]="f['year'].invalid && f['year'].touched" />
       <label for="year" class="form-label">Monto</label>
       <input
         type="text"
@@ -119,31 +113,27 @@
         [class.is-invalid]="f['amount'].invalid && f['amount'].touched"
         mask="separator.2"
         thousandSeparator="."
-        prefix="MX$ "
-      />
+        prefix="MX$ " />
       <label for="year" class="form-label">Proyecto</label>
       <input
         type="text"
         class="form-control"
         id="proyectName"
         placeholder="Proyecto"
-        formControlName="proyectName"
-      />
+        formControlName="proyectName" />
     </form>
   </div>
   <div class="modal-footer">
     <button
       class="btn btn-secondary me-2"
-      (click)="cancelEdit(); modal.close()"
-    >
+      (click)="cancelEdit(); modal.close()">
       Cancelar
     </button>
     <ng-container *ngIf="isEditMode; else save">
       <button
         class="btn btn-primary"
         (click)="editDonation(); modal.close()"
-        [disabled]="!validForm"
-      >
+        [disabled]="!validForm">
         Editar
       </button>
     </ng-container>
@@ -152,8 +142,7 @@
         *ngIf="!isEditMode"
         class="btn btn-primary"
         (click)="addDonation(); modal.close()"
-        [disabled]="!validForm"
-      >
+        [disabled]="!validForm">
         Guardar
       </button>
     </ng-template>

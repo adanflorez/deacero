@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data$.subscribe((res) => {
+    this.data$.subscribe(res => {
       this.show = res;
     });
   }

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { LayoutService } from './../../lib/services/layout.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',

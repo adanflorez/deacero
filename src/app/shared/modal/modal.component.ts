@@ -8,7 +8,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-declare var window: any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare let window: any;
 
 @Component({
   selector: 'app-modal',
@@ -20,11 +21,10 @@ export class ModalComponent implements OnInit, OnChanges {
   @Input() closable = true;
   @Input() show = false;
   @Input() acceptLabel = 'Aceptar';
-  @Output() close = new EventEmitter();
+  @Output() closeModal = new EventEmitter();
   @Output() confirm = new EventEmitter();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formModal: any;
-
-  constructor() {}
 
   ngOnInit(): void {
     this.formModal = new window.bootstrap.Modal(

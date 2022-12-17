@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 })
 export class LayoutService {
   sidebarIsOpenSubject = new BehaviorSubject(false);
-  constructor() {}
 
   get sidebarIsOpenValue(): boolean {
     return this.sidebarIsOpenSubject.value;

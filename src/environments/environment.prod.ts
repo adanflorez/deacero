@@ -5,5 +5,5 @@ export const environment = {
   apiRegister: 'http://44.228.61.3:8080/register/',
   apiOSC: 'http://44.228.61.3:8080/osc/',
   apiMultimedia: 'http://44.228.61.3:8080/multimedia/',
-  apiCall: 'http://44.228.61.3:8080/call/'
+  apiCall: 'http://44.228.61.3:8080/call/',
 };
