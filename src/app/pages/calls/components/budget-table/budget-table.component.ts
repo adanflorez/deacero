@@ -11,10 +11,10 @@ import ProjectBudget from 'src/app/lib/models/project-budget.model';
   styleUrls: ['./budget-table.component.scss'],
 })
 export class BudgetTableComponent implements TableComponent<ProjectBudget> {
-  @Input() records: any[] = [];
+  @Input() records: ProjectBudget[] = [];
   @Input() readOnly: boolean | null = false;
   @Output() recordChange: EventEmitter<ProjectBudget[]> = new EventEmitter();
-  form: FormGroup<any>;
+  form: FormGroup;
   validForm: boolean;
   closeResult: string;
   isEditMode: boolean;
@@ -37,7 +37,7 @@ export class BudgetTableComponent implements TableComponent<ProjectBudget> {
     });
   }
 
-  get f(): any {
+  get f(): unknown {
     return this.form.controls;
   }
 
@@ -50,7 +50,7 @@ export class BudgetTableComponent implements TableComponent<ProjectBudget> {
     this.recordChange.emit(this.records);
     this.form.reset();
   }
-  editRecord(...args: any): void {
+  editRecord(): void {
     this.recordToEdit = { ...this.recordToEdit, ...this.form.value };
     this.records = this.records.filter(
       record => record.id !== this.recordToEdit.id
@@ -65,7 +65,7 @@ export class BudgetTableComponent implements TableComponent<ProjectBudget> {
     this.recordChange.emit(this.records);
   }
 
-  loadRecordInFields(id: string, modal: any): void {
+  loadRecordInFields(id: string, modal: unknown): void {
     const records = this.records.filter(record => record.id === id);
     this.recordToEdit = records[0];
     const { activity, amount, expenseType } = records[0];
@@ -78,7 +78,7 @@ export class BudgetTableComponent implements TableComponent<ProjectBudget> {
     this.open(modal);
   }
 
-  open(content: any): void {
+  open(content: unknown): void {
     this.modalService
       .open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -88,7 +88,7 @@ export class BudgetTableComponent implements TableComponent<ProjectBudget> {
         result => {
           this.closeResult = `Closed with: ${result}`;
         },
-        reason => {
+        () => {
           this.form.reset();
         }
       );

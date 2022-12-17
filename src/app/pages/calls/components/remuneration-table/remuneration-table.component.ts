@@ -69,7 +69,7 @@ export class RemunerationTableComponent
     this.recordChange.emit(this.records);
   }
 
-  loadRecordInFields(id: string, modal: any): void {
+  loadRecordInFields(id: string, modal: unknown): void {
     const records = this.records.filter(record => record.id === id);
     this.recordToEdit = records[0];
     const { position, schema, financialRemuneration } = records[0];
@@ -82,7 +82,7 @@ export class RemunerationTableComponent
     this.open(modal);
   }
 
-  open(content: any): void {
+  open(content: unknown): void {
     this.modalService
       .open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -92,7 +92,7 @@ export class RemunerationTableComponent
         result => {
           this.closeResult = `Closed with: ${result}`;
         },
-        reason => {
+        () => {
           this.form.reset();
         }
       );

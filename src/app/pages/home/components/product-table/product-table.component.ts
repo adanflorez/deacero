@@ -5,6 +5,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Response from 'src/app/lib/models/response.model';
 
 interface Product {
   id: string;
@@ -126,8 +127,8 @@ export class ProductTableComponent {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     formData.append('file', (e.target as HTMLInputElement).files![0]);
     this.multimediaService.upload(formData).subscribe({
-      next: res => {
-        this.photoUrl.next(res.data);
+      next: (res: unknown) => {
+        this.photoUrl.next((res as Response<unknown>).data as string);
       },
       error: error => console.error(error),
       complete: () => {

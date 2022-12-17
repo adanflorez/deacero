@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/lib/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Response from 'src/app/lib/models/response.model';
 
 @Component({
   selector: 'app-login',
@@ -37,11 +38,14 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(this.f['username'].value, this.f['password'].value)
       .subscribe({
-        next: res => {
-          localStorage.setItem('token', res.token);
+        next: (res: Response<unknown>) => {
+          localStorage.setItem(
+            'token',
+            (res as Response<unknown>).token as string
+          );
           this.router.navigate(['/home']);
         },
-        error: error => {
+        error: () => {
           this.setAlert(
             true,
             'Usuario y/o contraseña incorrecto',

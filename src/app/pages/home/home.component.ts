@@ -41,10 +41,10 @@ export class HomeComponent implements OnInit {
 
   getOSC() {
     this.loading = true;
-    this.userService.getOSC().subscribe(res => {
+    this.userService.getOSC().subscribe((res: Response<unknown>) => {
       this.oscData = res.data;
-      this.products = res.data.product || [];
-      this.donations = res.data.donation || [];
+      this.products = (res.data as { product: never[] }).product || [];
+      this.donations = (res.data as { donation: never[] }).donation || [];
       this.initForm();
       this.getCallStatus();
       this.loading = false;
@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
   getCallStatus(): void {
     if (this.form.valid) {
       this.callService.status().subscribe((res: unknown) => {
-        if ((res as Response).data) {
+        if ((res as Response<unknown>).data) {
           this.infoSaved$.next(true);
           this.form.disable();
         }

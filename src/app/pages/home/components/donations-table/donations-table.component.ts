@@ -104,7 +104,7 @@ export class DonationsTableComponent {
         result => {
           this.closeResult = `Closed with: ${result}`;
         },
-        reason => {
+        () => {
           this.form.reset();
         }
       );

@@ -13,6 +13,7 @@ import {
 import Member from 'src/app/lib/models/member.model';
 import ProjectBudget from 'src/app/lib/models/project-budget.model';
 import Remuneration from 'src/app/lib/models/remuneration.model';
+import Response from 'src/app/lib/models/response.model';
 import { MultimediaService } from 'src/app/lib/services/multimedia.service';
 import { CallService } from 'src/app/lib/services/call.service';
 
@@ -75,13 +76,14 @@ export class CallsComponent implements OnInit, OnDestroy {
     'peace',
     'alliances',
   ];
-  documentsFields: Array<any>;
+  documentsFields: Array<{ field: string; name: string; help: string }>;
   contributions: ProjectBudget[] = [];
   conversions: ProjectBudget[] = [];
   donations: ProjectBudget[] = [];
   tempDocumentUrl: BehaviorSubject<string> = new BehaviorSubject<string>('');
   closeResult: string;
   hideForm$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   call: any = undefined;
   infoSubmitted$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
@@ -105,6 +107,7 @@ export class CallsComponent implements OnInit, OnDestroy {
         }
       },
       error: error => console.error(error),
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       complete: () => {},
     });
   }
@@ -124,6 +127,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private parseResponse(res: any) {
     this.members = res?.governingBody.membersOfTheGoverning || [];
     this.remunerations = res?.remunerations.tableRemunerations || [];
@@ -441,8 +445,8 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.changeCategory();
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      this.callService.status().subscribe((res: any) => {
-        if (res.data) {
+      this.callService.status().subscribe((res: unknown) => {
+        if ((res as Response<unknown>).data) {
           this.form.disable();
           this.infoSaved$.next(true);
         }
@@ -591,14 +595,14 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   private resetPreviousRatings() {
-    this.groups.map(group => {
+    this.groups.forEach(group => {
       this.form.get(group)?.clearValidators();
       this.form.get(group)?.reset();
     });
   }
 
   private setValidatorsToRating() {
-    this.groups.map(group => {
+    this.groups.forEach(group => {
       this.form.get(group)?.setValidators(Validators.required);
     });
   }
@@ -607,16 +611,16 @@ export class CallsComponent implements OnInit, OnDestroy {
     const sub = this.form
       .get('category')
       ?.valueChanges.subscribe(() => this.changeCategory());
-    this.unsubscribe.push(sub!);
+    this.unsubscribe.push(sub as Subscription);
   }
 
   private handleLocation() {
     if (this.f.locationQuestion.value) {
-      this.locationFields.map(field => {
+      this.locationFields.forEach(field => {
         this.form.get(field)?.setValidators(Validators.required);
       });
     } else {
-      this.locationFields.map(field => {
+      this.locationFields.forEach(field => {
         this.form.get(field)?.clearValidators();
         this.form.get(field)?.reset();
       });
@@ -625,17 +629,17 @@ export class CallsComponent implements OnInit, OnDestroy {
       .get('locationQuestion')
       ?.valueChanges.subscribe(res => {
         if (res) {
-          this.locationFields.map(field => {
+          this.locationFields.forEach(field => {
             this.form.get(field)?.setValidators(Validators.required);
           });
         } else {
-          this.locationFields.map(field => {
+          this.locationFields.forEach(field => {
             this.form.get(field)?.clearValidators();
             this.form.get(field)?.reset();
           });
         }
       });
-    this.unsubscribe.push(locationQuestionSub!);
+    this.unsubscribe.push(locationQuestionSub as Subscription);
   }
 
   private handleAboutCall() {
@@ -647,12 +651,12 @@ export class CallsComponent implements OnInit, OnDestroy {
         this.form.get('whichMedia')?.reset();
       }
     });
-    this.unsubscribe.push(sub!);
+    this.unsubscribe.push(sub as Subscription);
   }
 
   private handleObjectives() {
     const sub = this.form.get('objectives')?.valueChanges.subscribe(val => {
-      this.objectivesOptions.map((_, index) => {
+      this.objectivesOptions.forEach((_, index) => {
         if (val.includes(this.objectivesOptions[index])) {
           this.form
             .get(this.objectivesFields[index])
@@ -663,7 +667,7 @@ export class CallsComponent implements OnInit, OnDestroy {
         }
       });
     });
-    this.unsubscribe.push(sub!);
+    this.unsubscribe.push(sub as Subscription);
   }
 
   private handleRemunerationQuestion() {
@@ -674,16 +678,17 @@ export class CallsComponent implements OnInit, OnDestroy {
           this.remunerations = [];
         }
       });
-    this.unsubscribe.push(sub!);
+    this.unsubscribe.push(sub as Subscription);
   }
 
   uploadDocument(e: Event, control: string, isImage = false) {
     if (!this.fileValidation(control, isImage)) return;
     const formData = new FormData();
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     formData.append('file', (e.target as HTMLInputElement).files![0]);
     this.multimediaService.upload(formData).subscribe({
-      next: res => {
-        this.tempDocumentUrl.next(res.data);
+      next: (res: unknown) => {
+        this.tempDocumentUrl.next((res as Response<unknown>).data as string);
       },
       error: error => console.error(error),
       complete: () => {
@@ -718,7 +723,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.unsubscribe.forEach(sb => sb.unsubscribe());
   }
 
-  open(content: any): void {
+  open(content: unknown): void {
     this.modalService
       .open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -728,13 +733,13 @@ export class CallsComponent implements OnInit, OnDestroy {
         result => {
           this.closeResult = `Closed with: ${result}`;
         },
-        reason => {
+        () => {
           this.form.reset();
         }
       );
   }
 
-  save(modal?: any, updateAndSave?: boolean) {
+  save(modal?: unknown, updateAndSave?: boolean) {
     const {
       meetings,
       renewalFrequency,
@@ -936,9 +941,9 @@ export class CallsComponent implements OnInit, OnDestroy {
         doYouWanToSubscribe: subscribe,
       },
     };
-    const sub = this.callService.applicateToCall(body).subscribe(res => {
+    const sub = this.callService.applicateToCall(body).subscribe(() => {
       if (updateAndSave) {
-        this.saveInFlokzu(modal)?.subscribe({
+        this.saveInFlokzu()?.subscribe({
           next: () => {
             this.infoSubmitted$.next(true);
           },
@@ -960,14 +965,14 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   loadApplication() {
-    const sub = this.callService.application().subscribe((res: any) => {
-      this.parseResponse(res.data);
+    const sub = this.callService.application().subscribe((res: unknown) => {
+      this.parseResponse((res as Response<unknown>).data);
       this.initForm();
     });
     this.unsubscribe.push(sub);
   }
 
-  saveInFlokzu(modal: any) {
+  saveInFlokzu() {
     if (this.form.invalid) return;
     this.save();
     const sub = this.callService.saveInFlokzu();

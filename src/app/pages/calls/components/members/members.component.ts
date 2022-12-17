@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Member from 'src/app/lib/models/member.model';
@@ -43,7 +43,7 @@ export class MembersComponent implements TableComponent<Member> {
     this.recordsList.emit(this.records);
   }
 
-  loadRecordInFields(id: string, modal: any) {
+  loadRecordInFields(id: string, modal: unknown) {
     const records = this.records.filter(record => record.id === id);
     this.recordToEdit = records[0];
     const { name, position } = records[0];
@@ -55,7 +55,7 @@ export class MembersComponent implements TableComponent<Member> {
     this.open(modal);
   }
 
-  open(content: any) {
+  open(content: unknown) {
     this.modalService
       .open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -65,7 +65,7 @@ export class MembersComponent implements TableComponent<Member> {
         result => {
           this.closeResult = `Closed with: ${result}`;
         },
-        reason => {
+        () => {
           this.form.reset();
         }
       );

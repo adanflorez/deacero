@@ -7,10 +7,10 @@ export declare interface TableComponent<T> {
   isEditMode: boolean;
   recordToEdit: T;
   addRecord(): void;
-  editRecord(...args: any): void;
-  removeRecord(...args: any): void;
-  loadRecordInFields(...args: any): void;
-  open(...args: any): void;
-  cancelEdit(...args: any): void;
-  get f(): any;
+  editRecord(...args: unknown[]): void;
+  removeRecord(...args: unknown[]): void;
+  loadRecordInFields(...args: unknown[]): void;
+  open(...args: unknown[]): void;
+  cancelEdit(...args: unknown[]): void;
+  get f(): unknown;
 }
