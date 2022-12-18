@@ -1,0 +1,131 @@
+<div class="d-none d-md-flex">
+  <table class="table table-light table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Puesto</th>
+        <th scope="col" style="width: 100px">*</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let member of records">
+        <td>{{ member.name }}</td>
+        <td>{{ member.position }}</td>
+        <td>
+          <ng-container *ngIf="!isEditMode && !readOnly">
+            <button
+              class="btn btn-secondary p-1 me-2"
+              (click)="loadRecordInFields(member.id, modal)">
+              <img height="18" src="/assets/icons/edit.png" alt="edit" />
+            </button>
+            <button
+              class="btn btn-secondary p-1"
+              (click)="removeRecord(member.id)">
+              <img height="18" src="/assets/icons/trash.png" alt="trash" />
+            </button>
+          </ng-container>
+        </td>
+      </tr>
+      <tr *ngIf="!readOnly">
+        <td colspan="6">
+          <button class="btn btn-primary" (click)="open(modal)">
+            Agregar registro
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="d-flex d-md-none">
+  <table class="table table-light table-bordered">
+    <tbody>
+      <ng-container *ngFor="let member of records">
+        <tr>
+          <td>{{ member.name }}</td>
+        </tr>
+        <tr>
+          <td>{{ member.position }}</td>
+        </tr>
+        <tr>
+          <td>
+            <ng-container *ngIf="!isEditMode && !readOnly">
+              <button
+                class="btn btn-secondary p-1 me-2"
+                (click)="loadRecordInFields(member.id, modal)">
+                <img height="18" src="/assets/icons/edit.png" alt="edit" />
+              </button>
+              <button
+                class="btn btn-secondary p-1"
+                (click)="removeRecord(member.id)">
+                <img height="18" src="/assets/icons/trash.png" alt="trash" />
+              </button>
+            </ng-container>
+          </td>
+        </tr>
+        <tr style="height: 10px" class="bg-gray"></tr>
+      </ng-container>
+      <tr *ngIf="!readOnly">
+        <td colspan="6">
+          <button class="btn btn-primary" (click)="open(modal)">
+            Agregar registro
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Registro</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" class="px-4">
+      <label for="name" class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control mb-4"
+        id="name"
+        placeholder="Nombre"
+        formControlName="name"
+        [class.is-invalid]="f['name'].invalid && f['name'].touched" />
+      <label for="position" class="form-label">Puesto</label>
+      <input
+        type="text"
+        class="form-control mb-4"
+        id="position"
+        placeholder="Puesto"
+        formControlName="position"
+        [class.is-invalid]="f['position'].invalid && f['position'].touched" />
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      class="btn btn-secondary me-2"
+      (click)="cancelEdit(); modal.close()">
+      Cancelar
+    </button>
+    <ng-container *ngIf="isEditMode; else save">
+      <button
+        class="btn btn-primary"
+        (click)="editRecord(); modal.close()"
+        [disabled]="!validForm">
+        Editar
+      </button>
+    </ng-container>
+    <ng-template #save>
+      <button
+        *ngIf="!isEditMode"
+        class="btn btn-primary"
+        (click)="addRecord(); modal.close()"
+        [disabled]="!validForm">
+        Guardar
+      </button>
+    </ng-template>
+  </div>
+</ng-template>
