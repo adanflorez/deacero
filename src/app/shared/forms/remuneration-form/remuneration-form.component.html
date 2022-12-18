@@ -16,4 +16,10 @@
       </div>
     </div>
   </div>
+  <div class="col-12">
+    <app-remuneration-table
+      *ngIf="f['remunerationQuestion'].value"
+      [records]="remunerations"
+      (recordChange)="updateRemunerations($event)"></app-remuneration-table>
+  </div>
 </div>

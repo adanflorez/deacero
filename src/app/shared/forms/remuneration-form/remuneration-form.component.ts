@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import Remuneration from 'src/app/lib/models/remuneration.model';
 import RemunerationForm from 'src/app/lib/models/remuneration-form.model';
 
 @Component({
@@ -16,12 +17,14 @@ export class RemunerationFormComponent implements OnInit, OnDestroy {
   ) => void = () => {};
   @Input() defaultValues: RemunerationForm;
   form: FormGroup;
+  remunerations: Remuneration[];
   private unsubscribe: Subscription[] = [];
 
   constructor() {
     this.form = new FormGroup({});
     this.defaultValues = {};
-    this.updateParentModel({}, this.form.valid);
+    this.remunerations = [];
+    this.updateParentModel({}, this.isValid);
   }
 
   ngOnInit(): void {
@@ -45,12 +48,36 @@ export class RemunerationFormComponent implements OnInit, OnDestroy {
       ),
     });
     this.subscribeToForm();
+    this.subscribeToRemunerationQuestion();
   }
 
   subscribeToForm() {
     const sub = this.form.valueChanges.subscribe(val => {
-      this.updateParentModel({ ...val }, this.form.valid);
+      this.updateParentModel({ ...val }, this.isValid);
     });
     this.unsubscribe.push(sub);
+  }
+
+  updateRemunerations(remuneration: Remuneration[]) {
+    this.remunerations = remuneration;
+    const data = { ...this.form.value, remuneration };
+    this.updateParentModel(data, this.isValid);
+  }
+
+  private subscribeToRemunerationQuestion() {
+    const sub = this.form
+      .get('remunerationQuestion')
+      ?.valueChanges.subscribe(res => {
+        if (!res) {
+          this.updateRemunerations([]);
+        }
+      });
+    this.unsubscribe.push(sub as Subscription);
+  }
+
+  get isValid(): boolean {
+    return this.form.valid && this.f['remunerationQuestion']?.value
+      ? this.remunerations.length > 0
+      : true;
   }
 }
