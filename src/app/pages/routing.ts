@@ -10,6 +10,11 @@ const Routing: Routes = [
     loadChildren: () => import('./calls/calls.module').then(m => m.CallsModule),
   },
   {
+    path: 'call-alerts',
+    loadChildren: () =>
+      import('./call-alerts/call-alerts.module').then(m => m.CallAlertsModule),
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full',
