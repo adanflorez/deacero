@@ -22,6 +22,7 @@ export class DaButtonComponent {
   @Input() containerClasses: string;
   @Input() display: 'grid' | undefined;
   @Input() variant: 'outline' | '';
+  @Input() size: 'sm' | 'lg' | '';
 
   @Output() clicked: EventEmitter<void> = new EventEmitter();
 
@@ -31,6 +32,7 @@ export class DaButtonComponent {
     this.containerClasses = '';
     this.display = undefined;
     this.variant = '';
+    this.size = '';
   }
 
   get displayClasses(): string {
@@ -41,5 +43,9 @@ export class DaButtonComponent {
     return this.variant
       ? `btn-${this.variant}-${this.color}`
       : `btn-${this.color}`;
+  }
+
+  get sizeClasses() {
+    return this.size ? `btn-${this.size}` : '';
   }
 }
