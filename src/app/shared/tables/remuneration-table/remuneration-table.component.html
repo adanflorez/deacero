@@ -1,0 +1,147 @@
+<div class="d-none d-md-flex">
+  <table class="table table-light table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Puesto</th>
+        <th scope="col">Esquema</th>
+        <th scope="col">Remuneración económica</th>
+        <th scope="col" style="width: 100px">*</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let record of records">
+        <td>{{ record.position }}</td>
+        <td>{{ record.schema }}</td>
+        <td>{{ record.financialRemuneration | currency : 'MXN' }}</td>
+        <td>
+          <ng-container *ngIf="!isEditMode && !readOnly">
+            <button
+              class="btn btn-secondary p-1 me-2"
+              (click)="loadRecordInFields(record.id, modal)">
+              <img height="18" src="/assets/icons/edit.png" alt="edit" />
+            </button>
+            <button
+              class="btn btn-secondary p-1"
+              (click)="removeRecord(record.id)">
+              <img height="18" src="/assets/icons/trash.png" alt="trash" />
+            </button>
+          </ng-container>
+        </td>
+      </tr>
+      <tr *ngIf="!readOnly">
+        <td colspan="6">
+          <button class="btn btn-primary" (click)="open(modal)">
+            Agregar registro
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="d-flex d-md-none">
+  <table class="table table-light table-bordered">
+    <tbody>
+      <ng-container *ngFor="let record of records">
+        <tr>
+          <td>{{ record.position }}</td>
+        </tr>
+        <tr>
+          <td>{{ record.schema }}</td>
+        </tr>
+        <tr>
+          <td>{{ record.financialRemuneration | currency : 'MXN' }}</td>
+        </tr>
+        <tr>
+          <td>
+            <ng-container *ngIf="!isEditMode && !readOnly">
+              <button
+                class="btn btn-secondary p-1 me-2"
+                (click)="loadRecordInFields(record.id, modal)">
+                <img height="18" src="/assets/icons/edit.png" alt="edit" />
+              </button>
+              <button
+                class="btn btn-secondary p-1"
+                (click)="removeRecord(record.id)">
+                <img height="18" src="/assets/icons/trash.png" alt="trash" />
+              </button>
+            </ng-container>
+          </td>
+        </tr>
+        <tr style="height: 10px" class="bg-gray"></tr>
+      </ng-container>
+      <tr *ngIf="!readOnly">
+        <td colspan="6">
+          <button class="btn btn-primary" (click)="open(modal)">
+            Agregar registro
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Registro</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" class="px-4">
+      <label for="position" class="form-label">Puesto</label>
+      <input
+        type="text"
+        class="form-control mb-4"
+        id="position"
+        placeholder="Puesto"
+        formControlName="position" />
+      <label class="form-label" for="schema">Esquema</label>
+      <select class="form-select mb-4" formControlName="schema" id="schema">
+        <option selected value="">Click para seleccionar</option>
+        <option value="Sueldos y salarios">Sueldos y salarios</option>
+        <option value="Asalariados">Asalariados</option>
+        <option value="Honorarios">Honorarios</option>
+        <option value="Mixtos">Mixtos</option>
+      </select>
+      <label for="financialRemuneration" class="form-label"
+        >Remuneración económica</label
+      >
+      <input
+        type="text"
+        class="form-control mb-4"
+        id="financialRemuneration"
+        placeholder="Remuneración económica"
+        formControlName="financialRemuneration"
+        mask="separator.2"
+        thousandSeparator="."
+        prefix="MX$ " />
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      class="btn btn-secondary me-2"
+      (click)="cancelEdit(); modal.close()">
+      Cancelar
+    </button>
+    <ng-container *ngIf="isEditMode; else save">
+      <button
+        class="btn btn-primary"
+        (click)="editRecord(); modal.close()"
+        [disabled]="!validForm">
+        Editar
+      </button>
+    </ng-container>
+    <ng-template #save>
+      <button
+        *ngIf="!isEditMode"
+        class="btn btn-primary"
+        (click)="addRecord(); modal.close()"
+        [disabled]="!validForm">
+        Guardar
+      </button>
+    </ng-template>
+  </div>
+</ng-template>
