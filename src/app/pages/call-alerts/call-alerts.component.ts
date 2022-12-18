@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { Component } from '@angular/core';
 import CallForm from 'src/app/lib/models/call-form.model';
 
@@ -8,6 +9,7 @@ import CallForm from 'src/app/lib/models/call-form.model';
 })
 export class CallAlertsComponent {
   formData: CallForm = {};
+  infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   updateData = (form: CallForm, isFormValid: boolean) => {
     const currentData = this.formData;
@@ -16,4 +18,8 @@ export class CallAlertsComponent {
     console.log(isFormValid);
     console.log(this.formData);
   };
+
+  get isValidForm(): boolean {
+    return true;
+  }
 }

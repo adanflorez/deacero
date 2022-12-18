@@ -12,4 +12,12 @@
     [defaultValues]="{
       remunerationQuestion: formData.remunerationQuestion
     }"></app-remuneration-form>
+
+  <button
+    *ngIf="(infoSaved$ | async) === false"
+    class="btn btn-primary"
+    type="button"
+    [disabled]="!isValidForm">
+    Enviar
+  </button>
 </div>
