@@ -1,0 +1,19 @@
+<h2 class="mb-3">Remuneraciones</h2>
+<div class="row">
+  <div class="col-12">
+    <div class="mb-3">
+      <div class="d-flex align-items-center">
+        <p class="m-0 me-3">¿Se remunera el trabajo en su organización?</p>
+        <div class="toggleWrapper" [formGroup]="form">
+          <input
+            type="checkbox"
+            name="toggle1"
+            class="mobileToggle"
+            id="toggle1"
+            formControlName="remunerationQuestion" />
+          <label for="toggle1" class="cursor-pointer"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

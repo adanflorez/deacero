@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import GoverningBody from 'src/app/lib/models/governing-body.model';
+import RemunerationForm from 'src/app/lib/models/remuneration-form.model';
 
 @Component({
   selector: 'app-call-alerts',
@@ -7,9 +8,12 @@ import GoverningBody from 'src/app/lib/models/governing-body.model';
   styleUrls: ['./call-alerts.component.scss'],
 })
 export class CallAlertsComponent {
-  formData: GoverningBody = {};
+  formData: GoverningBody & RemunerationForm = {};
 
-  updateData = (form: GoverningBody, isFormValid: boolean) => {
+  updateData = (
+    form: GoverningBody & RemunerationForm,
+    isFormValid: boolean
+  ) => {
     const currentData = this.formData;
     console.log(isFormValid);
     console.log(form);

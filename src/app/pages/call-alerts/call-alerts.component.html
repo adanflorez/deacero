@@ -6,4 +6,10 @@
       renewalFrequency: formData.renewalFrequency,
       members: formData.members
     }"></app-governing-body>
+  <hr />
+  <app-remuneration-form
+    [updateParentModel]="updateData"
+    [defaultValues]="{
+      remunerationQuestion: formData.remunerationQuestion
+    }"></app-remuneration-form>
 </div>
