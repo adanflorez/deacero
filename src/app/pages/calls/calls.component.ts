@@ -24,7 +24,7 @@ import { CallService } from 'src/app/lib/services/call.service';
 })
 export class CallsComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
-  form: FormGroup;
+  form!: FormGroup;
   members: Member[] = [];
   remunerations: Remuneration[] = [];
   groups: string[] = [];
@@ -76,7 +76,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     'peace',
     'alliances',
   ];
-  documentsFields: Array<{ field: string; name: string; help: string }>;
+  documentsFields!: Array<{ field: string; name: string; help: string }>;
   contributions: ProjectBudget[] = [];
   conversions: ProjectBudget[] = [];
   donations: ProjectBudget[] = [];
@@ -95,7 +95,9 @@ export class CallsComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private callService: CallService,
     private userService: UserService
-  ) {}
+  ) {
+    this.closeResult = '';
+  }
 
   ngOnInit(): void {
     this.userService.OSCstatus().subscribe({

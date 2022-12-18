@@ -6,15 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Response from 'src/app/lib/models/response.model';
-
-interface Product {
-  id: string;
-  description: string;
-  price: string;
-  season: string;
-  photo: string;
-  available: string;
-}
+import Product from 'src/app/lib/models/product.model';
 
 @Component({
   selector: 'app-product-table',
@@ -27,7 +19,7 @@ export class ProductTableComponent {
   @Output() productsList = new EventEmitter();
   form: FormGroup;
   validForm = false;
-  productToEdit: Product;
+  productToEdit!: Product;
   isEditMode = false;
   closeResult = '';
   photoUrl: BehaviorSubject<string | undefined> = new BehaviorSubject<

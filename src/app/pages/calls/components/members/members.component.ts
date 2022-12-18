@@ -18,7 +18,7 @@ export class MembersComponent implements TableComponent<Member> {
   validForm = false;
   closeResult = '';
   isEditMode = false;
-  recordToEdit: Member;
+  recordToEdit!: Member;
 
   constructor(private modalService: NgbModal) {
     this.form = new FormGroup({

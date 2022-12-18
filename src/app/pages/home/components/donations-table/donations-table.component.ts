@@ -1,16 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { v4 as uuidv4 } from 'uuid';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
 import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
-import { v4 as uuidv4 } from 'uuid';
+import Donation from 'src/app/lib/models/donation.model';
 
-interface Donation {
-  id: string;
-  year: string;
-  amount: number;
-  proyectName: string;
-}
 @Component({
   selector: 'app-donations-table',
   templateUrl: './donations-table.component.html',
@@ -22,7 +17,7 @@ export class DonationsTableComponent {
   @Output() donationsList = new EventEmitter();
   form: FormGroup;
   validForm = false;
-  donationToEdit: Donation;
+  donationToEdit!: Donation;
   isEditMode = false;
   closeResult = '';
 

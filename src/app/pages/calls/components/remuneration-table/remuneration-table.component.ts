@@ -20,9 +20,12 @@ export class RemunerationTableComponent
   validForm: boolean;
   closeResult: string;
   isEditMode: boolean;
-  recordToEdit: Remuneration;
+  recordToEdit!: Remuneration;
 
   constructor(private modalService: NgbModal) {
+    this.validForm = false;
+    this.closeResult = '';
+    this.isEditMode = false;
     this.form = new FormGroup({
       position: new FormControl(''),
       schema: new FormControl(''),

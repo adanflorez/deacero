@@ -18,9 +18,12 @@ export class BudgetTableComponent implements TableComponent<ProjectBudget> {
   validForm: boolean;
   closeResult: string;
   isEditMode: boolean;
-  recordToEdit: ProjectBudget;
+  recordToEdit!: ProjectBudget;
 
   constructor(private modalService: NgbModal) {
+    this.validForm = false;
+    this.closeResult = '';
+    this.isEditMode = false;
     this.form = new FormGroup({
       activity: new FormControl(''),
       amount: new FormControl(''),

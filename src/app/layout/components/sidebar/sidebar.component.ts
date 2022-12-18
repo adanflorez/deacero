@@ -10,7 +10,8 @@ import { LayoutService } from 'src/app/lib/services/layout.service';
 export class SidebarComponent implements OnInit {
   data$: Observable<boolean>;
   show: boolean;
-  constructor(private layout: LayoutService) {
+  constructor(layout: LayoutService) {
+    this.show = false;
     this.data$ = layout.sidebarIsOpenSubject;
   }
 

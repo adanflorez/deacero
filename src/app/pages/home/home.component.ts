@@ -37,7 +37,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private userService: UserService,
     private callService: CallService
-  ) {}
+  ) {
+    this.form = new FormGroup({});
+  }
 
   ngOnInit(): void {
     this.getOSC();
