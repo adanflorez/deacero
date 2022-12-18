@@ -1,3 +1,4 @@
+import { GoverningBodyModule } from './../../shared/forms/governing-body/governing-body.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -6,6 +7,6 @@ import { CallAlertsComponent } from './call-alerts.component';
 
 @NgModule({
   declarations: [CallAlertsComponent],
-  imports: [CommonModule, CallAlertsRoutingModule],
+  imports: [CommonModule, CallAlertsRoutingModule, GoverningBodyModule],
 })
 export class CallAlertsModule {}

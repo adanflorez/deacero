@@ -1,1 +1,8 @@
-<p>call-alerts works!</p>
+<div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  <app-governing-body
+    [updateParentModel]="updateData"
+    [defaultValues]="{
+      meetings: formData.meetings,
+      renewalFrequency: formData.renewalFrequency
+    }"></app-governing-body>
+</div>
