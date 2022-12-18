@@ -51,15 +51,12 @@
               Campo obligatorio
             </div>
           </div>
-          <div class="d-grid gap-2">
-            <button
-              class="btn btn-primary"
-              type="button"
-              [disabled]="loginForm.invalid"
-              (click)="login()">
-              Entrar
-            </button>
-          </div>
+          <da-button
+            color="primary"
+            label="Entrar"
+            display="grid"
+            [disabled]="loginForm.invalid"
+            (clicked)="login()"></da-button>
           <hr
             class="bg-independence border-1 border-top border-independence w-100" />
           <div class="d-flex flex-column mb-2">

@@ -19,11 +19,27 @@ export class DaButtonComponent {
       configurable: true,
     });
   }
+  @Input() containerClasses: string;
+  @Input() display: 'grid' | undefined;
+  @Input() variant: 'outline' | '';
 
   @Output() clicked: EventEmitter<void> = new EventEmitter();
 
   constructor() {
     this.color = '';
     this.disabled = false;
+    this.containerClasses = '';
+    this.display = undefined;
+    this.variant = '';
+  }
+
+  get displayClasses(): string {
+    return this.display ? `d-${this.display}` : '';
+  }
+
+  get variantClasses(): string {
+    return this.variant
+      ? `btn-${this.variant}-${this.color}`
+      : `btn-${this.color}`;
   }
 }

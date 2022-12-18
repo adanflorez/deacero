@@ -1,7 +1,10 @@
-<button
-  type="button"
-  class="btn btn-{{ color }}"
-  [disabled]="disabled"
-  (click)="clicked.emit()">
-  {{ label }}
-</button>
+<div [ngClass]="[containerClasses, displayClasses]">
+  <button
+    type="button"
+    class="btn"
+    [ngClass]="[variantClasses]"
+    [disabled]="disabled"
+    (click)="clicked.emit()">
+    {{ label }}
+  </button>
+</div>
