@@ -1,6 +1,11 @@
 <form [formGroup]="form">
   <h2 class="mb-3">Órgano de gobierno</h2>
   <div class="row">
+    <div class="col-12">
+      <app-members-table
+        [records]="defaultValues.members || []"
+        (recordsList)="updateMembers($event)"></app-members-table>
+    </div>
     <div class="col-12 col-md-6">
       <div class="mb-3">
         <label for="meetings" class="form-label"

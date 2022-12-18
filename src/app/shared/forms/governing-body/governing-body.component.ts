@@ -1,8 +1,9 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
 import GoverningBody from 'src/app/lib/models/governing-body.model';
-import { Subscription } from 'rxjs';
+import Member from 'src/app/lib/models/member.model';
 
 @Component({
   selector: 'app-governing-body',
@@ -17,12 +18,14 @@ export class GoverningBodyComponent implements OnInit, OnDestroy {
   ) => void = () => {};
   @Input() defaultValues: GoverningBody;
   form: FormGroup;
+  members: Member[];
   private unsubscribe: Subscription[] = [];
 
   constructor() {
     this.form = new FormGroup({});
-    this.updateParentModel({}, this.form.valid);
     this.defaultValues = {};
+    this.members = [];
+    this.updateParentModel({}, this.form.valid && this.members.length > 0);
   }
 
   ngOnInit(): void {
@@ -53,8 +56,17 @@ export class GoverningBodyComponent implements OnInit, OnDestroy {
 
   subscribeToForm() {
     const sub = this.form.valueChanges.subscribe(val => {
-      this.updateParentModel(val, this.form.valid);
+      this.updateParentModel(
+        { ...val, members: this.members },
+        this.form.valid && this.members.length > 0
+      );
     });
     this.unsubscribe.push(sub);
+  }
+
+  updateMembers(members: Member[]) {
+    this.members = members;
+    const data = { ...this.form.value, members };
+    this.updateParentModel(data, this.form.valid && this.members.length > 0);
   }
 }
