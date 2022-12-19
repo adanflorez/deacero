@@ -35,7 +35,13 @@
       whichMedia: formData.whichMedia
     }"></app-location-form>
   <hr />
-  <app-project-manager-form></app-project-manager-form>
+  <app-project-manager-form
+    [updateParentModel]="updateData"
+    [defaultValues]="{
+      responsibleName: formData.responsibleName,
+      emails: formData.emails,
+      phone: formData.phone
+    }"></app-project-manager-form>
 
   <button
     *ngIf="(infoSaved$ | async) === false"
