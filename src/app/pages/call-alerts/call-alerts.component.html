@@ -74,6 +74,8 @@
       tiktok: formData.tiktok,
       youtube: formData.youtube
     }"></app-communication-form>
+  <hr />
+  <app-project-budget-form></app-project-budget-form>
 
   <button
     *ngIf="(infoSaved$ | async) === false"
