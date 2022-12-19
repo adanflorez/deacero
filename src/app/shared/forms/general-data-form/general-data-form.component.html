@@ -15,4 +15,14 @@
       <app-form-error [control]="f['projectName']"></app-form-error>
     </div>
   </div>
+  <div class="form-group col-md-6">
+    <label for="category" class="form-label">Categoría</label>
+    <ng-select #category labelForId="category" formControlName="category">
+      <ng-option value="">Click para seleccionar</ng-option>
+      <ng-option [value]="category" *ngFor="let category of categories">{{
+        category
+      }}</ng-option>
+    </ng-select>
+    <app-form-error [control]="f['category']"></app-form-error>
+  </div>
 </div>

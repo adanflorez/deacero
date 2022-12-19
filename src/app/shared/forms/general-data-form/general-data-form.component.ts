@@ -19,10 +19,40 @@ export class GeneralDataFormComponent implements OnInit {
   @Input() defaultValues: GeneralDataForm;
   form: FormGroup;
 
+  categories: string[] = [];
+  groups: string[];
+
   private unsubscribe: Subscription[] = [];
 
   constructor() {
     this.defaultValues = {};
+    this.categories = [
+      'Alimentación',
+      'Asistencia jurídica',
+      'Asistencia o rehabilitación médica',
+      'Atención a grupos sociales con discapacidad',
+      'Becas',
+      'Defensa y promoción de los DH',
+      'Desarrollo comunidades indígenas.',
+      'Desarrollo Institucional',
+      'Desarrollo urbano',
+      'Detonación de oportunidades para la resiliencia económica.',
+      'Ecología',
+      'Educación',
+      'Empoderamiento social',
+      'Equipamiento',
+      'Fomento educativo',
+      'Inclusión',
+      'Infraestructura',
+      'Medio ambiente',
+      'Nutrición',
+      'Orientación social',
+      'Participación ciudadana.',
+      'Promoción y difusión cultural',
+      'Reinserción social',
+      'Salud mental',
+    ];
+    this.groups = [];
     this.form = new FormGroup({});
   }
 
@@ -44,9 +74,16 @@ export class GeneralDataFormComponent implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      projectName: new FormControl('', [Validators.required]),
+      projectName: new FormControl(this.defaultValues.projectName, [
+        Validators.required,
+      ]),
+      category: new FormControl(
+        this.defaultValues.category,
+        Validators.required
+      ),
     });
     this.subscribeToForm();
+    this.handleCategory();
   }
 
   subscribeToForm() {
@@ -54,5 +91,78 @@ export class GeneralDataFormComponent implements OnInit {
       this.updateParentModel({ ...val }, this.isValid);
     });
     this.unsubscribe.push(sub);
+  }
+
+  private handleCategory() {
+    const sub = this.form
+      .get('category')
+      ?.valueChanges.subscribe(() => this.changeCategory());
+    this.unsubscribe.push(sub as Subscription);
+  }
+
+  private changeCategory() {
+    // Reset previous controls
+    // this.resetPreviousRatings();
+    switch (this.f.category.value) {
+      case this.categories[0]:
+      case this.categories[2]:
+      case this.categories[3]:
+      case this.categories[15]:
+      case this.categories[18]:
+      case this.categories[19]:
+      case this.categories[23]:
+      case this.categories[24]:
+        this.groups = [
+          'livingConditions',
+          'lifeQuality',
+          'capacityBuilding',
+          'supportType',
+          'supportScope',
+          'resilienceBuilding',
+        ];
+        break;
+      case this.categories[1]:
+      case this.categories[4]:
+      case this.categories[5]:
+      case this.categories[6]:
+      case this.categories[8]:
+      case this.categories[10]:
+      case this.categories[11]:
+      case this.categories[12]:
+      case this.categories[14]:
+      case this.categories[17]:
+      case this.categories[20]:
+      case this.categories[21]:
+      case this.categories[22]:
+        this.groups = [
+          'socialBackwardness',
+          'capacityBuilding',
+          'communitySense',
+          'sustainabilityProcesses',
+        ];
+        break;
+      case this.categories[7]:
+      case this.categories[9]:
+      case this.categories[13]:
+      case this.categories[16]:
+        this.groups = [
+          'statusImprovement',
+          'urbanDevelopment',
+          'professionalizationProcess',
+          'opportunityGeneration',
+        ];
+        break;
+      default:
+        this.groups = [];
+        break;
+    }
+    // Set validators to current controls
+    this.setValidatorsToRating();
+  }
+
+  private setValidatorsToRating() {
+    this.groups.forEach(group => {
+      this.form.get(group)?.setValidators(Validators.required);
+    });
   }
 }
