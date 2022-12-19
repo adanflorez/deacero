@@ -34,6 +34,8 @@
       aboutCall: formData.aboutCall,
       whichMedia: formData.whichMedia
     }"></app-location-form>
+  <hr />
+  <app-project-manager-form></app-project-manager-form>
 
   <button
     *ngIf="(infoSaved$ | async) === false"

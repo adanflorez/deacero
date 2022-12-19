@@ -8,6 +8,7 @@ import { RemunerationFormModule } from './../../shared/forms/remuneration-form/r
 import { GoverningBodyModule } from './../../shared/forms/governing-body/governing-body.module';
 import { GeneralDataFormModule } from './../../shared/forms/general-data-form/general-data-form.module';
 import { LocationFormModule } from './../../shared/forms/location-form/location-form.module';
+import { ProjectManagerFormModule } from './../../shared/forms/project-manager-form/project-manager-form.module';
 
 @NgModule({
   declarations: [CallAlertsComponent],
@@ -18,6 +19,7 @@ import { LocationFormModule } from './../../shared/forms/location-form/location-
     RemunerationFormModule,
     GeneralDataFormModule,
     LocationFormModule,
+    ProjectManagerFormModule,
   ],
 })
 export class CallAlertsModule {}
