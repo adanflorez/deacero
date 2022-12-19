@@ -1,1 +1,30 @@
-<p>period-form works!</p>
+<h2 class="mb-3">
+  Vigencia (Período durante el cual se hará uso del donativo)
+</h2>
+<div class="row" [formGroup]="form">
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="startDate" class="form-label">Fecha inicio</label>
+      <input
+        type="date"
+        class="form-control"
+        id="startDate"
+        formControlName="startDate"
+        [class.is-invalid]="f['startDate'].invalid && f['startDate'].touched" />
+      <app-form-error [control]="f['startDate']"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="endDate" class="form-label">Fecha fin</label>
+      <input
+        type="date"
+        class="form-control"
+        id="endDate"
+        formControlName="endDate"
+        [class.is-invalid]="f['endDate'].invalid && f['endDate'].touched"
+        [min]="f['startDate'].value | date : 'yyyy-MM-dd'" />
+      <app-form-error [control]="f['endDate']"></app-form-error>
+    </div>
+  </div>
+</div>

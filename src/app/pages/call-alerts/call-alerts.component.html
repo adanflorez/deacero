@@ -57,7 +57,12 @@
       promoteSocialImprovement: formData.promoteSocialImprovement
     }"></app-project-development-form>
   <hr />
-  <app-period-form></app-period-form>
+  <app-period-form
+    [updateParentModel]="updateData"
+    [defaultValues]="{
+      startDate: formData.startDate,
+      endDate: formData.endDate
+    }"></app-period-form>
 
   <button
     *ngIf="(infoSaved$ | async) === false"
