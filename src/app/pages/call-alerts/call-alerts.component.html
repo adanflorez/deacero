@@ -12,6 +12,13 @@
     [defaultValues]="{
       remunerationQuestion: formData.remunerationQuestion
     }"></app-remuneration-form>
+  <hr />
+  <app-general-data-form
+    [updateParentModel]="updateData"
+    [defaultValues]="{
+      projectName: formData.projectName,
+      category: formData.category
+    }"></app-general-data-form>
 
   <button
     *ngIf="(infoSaved$ | async) === false"

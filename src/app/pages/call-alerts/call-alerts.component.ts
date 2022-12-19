@@ -21,6 +21,7 @@ export class CallAlertsComponent {
     const currentData = this.formData;
     const updatedData = { ...currentData, ...form };
     this.formData = updatedData;
+    console.log(isFormValid);
     this.updateFormStatus(isFormValid);
   };
 

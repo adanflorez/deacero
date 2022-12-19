@@ -1,3 +1,4 @@
+import { GeneralDataFormModule } from './../../shared/forms/general-data-form/general-data-form.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,6 +15,7 @@ import { GoverningBodyModule } from './../../shared/forms/governing-body/governi
     CallAlertsRoutingModule,
     GoverningBodyModule,
     RemunerationFormModule,
+    GeneralDataFormModule,
   ],
 })
 export class CallAlertsModule {}
