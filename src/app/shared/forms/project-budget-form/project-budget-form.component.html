@@ -1,1 +1,6 @@
-<p>project-budget-form works!</p>
+<h2 class="mb-3">Presupuesto del proyecto</h2>
+<h6>Contribución de la organización</h6>
+<app-budget-table
+  [records]="contributions"
+  (recordChange)="contributions = $event"></app-budget-table>
+<hr />
