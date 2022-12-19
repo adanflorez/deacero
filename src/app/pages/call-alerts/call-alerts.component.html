@@ -19,12 +19,28 @@
       projectName: formData.projectName,
       category: formData.category
     }"></app-general-data-form>
+  <hr />
+  <app-location-form
+    [updateParentModel]="updateData"
+    [defaultValues]="{
+      locationQuestion: formData.locationQuestion,
+      street: formData.street,
+      colony: formData.colony,
+      town: formData.town,
+      state: formData.state,
+      postalCode: formData.postalCode,
+      video: formData.video,
+      daysAndHours: formData.daysAndHours,
+      aboutCall: formData.aboutCall,
+      whichMedia: formData.whichMedia
+    }"></app-location-form>
 
   <button
     *ngIf="(infoSaved$ | async) === false"
     class="btn btn-primary"
     type="button"
-    [disabled]="isInvalidForm">
+    [disabled]="isInvalidForm"
+    (click)="save()">
     Enviar
   </button>
 </div>

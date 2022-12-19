@@ -1,0 +1,154 @@
+<h2 class="mb-3">Ubicación, ¿Dónde se llevará a cabo?</h2>
+<div class="row" [formGroup]="form">
+  <div class="col-12">
+    <div class="mb-3">
+      <div class="d-flex align-items-center">
+        <p class="m-0 me-3">¿La ubicación es virtual?</p>
+        <div class="toggleWrapper">
+          <input
+            type="checkbox"
+            name="locationQuestion"
+            class="mobileToggle"
+            id="locationQuestion"
+            formControlName="locationQuestion" />
+          <label for="locationQuestion" class="cursor-pointer"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="f['locationQuestion'].value">
+    <div class="col-12 col-md-4">
+      <div class="mb-3">
+        <label for="street" class="form-label">Calle y número</label>
+        <input
+          type="text"
+          class="form-control"
+          id="street"
+          placeholder="Calle y número"
+          formControlName="street"
+          [class.is-invalid]="f['street'].invalid && f['street'].touched" />
+        <app-form-error [control]="f['street']"></app-form-error>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="mb-3">
+        <label for="colony" class="form-label">Colonia</label>
+        <input
+          type="text"
+          class="form-control"
+          id="colony"
+          placeholder="Colonia"
+          formControlName="colony"
+          [class.is-invalid]="f['colony'].invalid && f['colony'].touched" />
+        <app-form-error [control]="f['colony']"></app-form-error>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="mb-3">
+        <label for="town" class="form-label">Municipio</label>
+        <input
+          type="text"
+          class="form-control"
+          id="town"
+          placeholder="Municipio"
+          formControlName="town"
+          [class.is-invalid]="f['town'].invalid && f['town'].touched" />
+        <app-form-error [control]="f['town']"></app-form-error>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="mb-3">
+        <label for="state" class="form-label">Estado</label>
+        <input
+          type="text"
+          class="form-control"
+          id="state"
+          placeholder="Estado"
+          formControlName="state"
+          [class.is-invalid]="f['state'].invalid && f['state'].touched" />
+        <app-form-error [control]="f['state']"></app-form-error>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="mb-3">
+        <label for="postalCode" class="form-label">Código postal</label>
+        <input
+          type="text"
+          class="form-control"
+          id="postalCode"
+          placeholder="Código postal"
+          formControlName="postalCode"
+          [class.is-invalid]="
+            f['postalCode'].invalid && f['postalCode'].touched
+          " />
+        <app-form-error [control]="f['postalCode']"></app-form-error>
+      </div>
+    </div>
+  </ng-container>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="video" class="form-label"
+        >Ubicación del proyecto en Google Maps</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="video"
+        placeholder="URL de ubicación del proyecto en maps"
+        formControlName="video"
+        [class.is-invalid]="f['video'].invalid && f['video'].touched" />
+      <app-form-error [control]="f['video']"></app-form-error>
+      <div class="small">URL de ubicación del proyecto en maps</div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="daysAndHours" class="form-label"
+        >Días y horas de atención</label
+      >
+      <textarea
+        class="form-control"
+        id="daysAndHours"
+        rows="3"
+        formControlName="daysAndHours"
+        [class.is-invalid]="
+          f['daysAndHours'].invalid && f['daysAndHours'].touched
+        "></textarea>
+      <app-form-error [control]="f['daysAndHours']"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="aboutCall" class="form-label"
+        >¿Cómo te enteraste de la convocatoria?
+      </label>
+      <select
+        class="form-select"
+        formControlName="aboutCall"
+        [class.is-invalid]="f['aboutCall'].invalid && f['aboutCall'].touched">
+        <option value="" selected>Click para seleccionar</option>
+        <option value="Amigo/a">Amigo/a</option>
+        <option value="Facebook/Instagram">Facebook/Instagram</option>
+        <option value="Otro">Otro</option>
+        <option value="Página web">Página web</option>
+        <option value="Whatsapp">Whatsapp</option>
+      </select>
+      <app-form-error [control]="f['aboutCall']"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div *ngIf="f['aboutCall'].value === 'Otro'" class="mb-3">
+      <label for="whichMedia" class="form-label">¿Cuál medio?</label>
+      <input
+        type="text"
+        class="form-control"
+        id="whichMedia"
+        placeholder="¿Cuál medio?"
+        formControlName="whichMedia"
+        [class.is-invalid]="
+          f['whichMedia'].invalid && f['whichMedia'].touched
+        " />
+      <app-form-error [control]="f['whichMedia']"></app-form-error>
+    </div>
+  </div>
+</div>

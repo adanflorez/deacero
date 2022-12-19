@@ -1,4 +1,3 @@
-import { GeneralDataFormModule } from './../../shared/forms/general-data-form/general-data-form.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -7,6 +6,8 @@ import { CallAlertsComponent } from './call-alerts.component';
 
 import { RemunerationFormModule } from './../../shared/forms/remuneration-form/remuneration-form.module';
 import { GoverningBodyModule } from './../../shared/forms/governing-body/governing-body.module';
+import { GeneralDataFormModule } from './../../shared/forms/general-data-form/general-data-form.module';
+import { LocationFormModule } from './../../shared/forms/location-form/location-form.module';
 
 @NgModule({
   declarations: [CallAlertsComponent],
@@ -16,6 +17,7 @@ import { GoverningBodyModule } from './../../shared/forms/governing-body/governi
     GoverningBodyModule,
     RemunerationFormModule,
     GeneralDataFormModule,
+    LocationFormModule,
   ],
 })
 export class CallAlertsModule {}

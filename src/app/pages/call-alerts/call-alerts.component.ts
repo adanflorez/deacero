@@ -42,4 +42,8 @@ export class CallAlertsComponent {
       ? this.formsStatus.some(form => !form.valid)
       : true;
   }
+
+  save() {
+    console.log('sending...');
+  }
 }
