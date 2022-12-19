@@ -42,6 +42,8 @@
       emails: formData.emails,
       phone: formData.phone
     }"></app-project-manager-form>
+  <hr />
+  <app-project-development-form></app-project-development-form>
 
   <button
     *ngIf="(infoSaved$ | async) === false"
