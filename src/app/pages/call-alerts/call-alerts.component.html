@@ -63,6 +63,8 @@
       startDate: formData.startDate,
       endDate: formData.endDate
     }"></app-period-form>
+  <hr />
+  <app-communication-form></app-communication-form>
 
   <button
     *ngIf="(infoSaved$ | async) === false"

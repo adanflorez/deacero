@@ -11,6 +11,7 @@ import { LocationFormModule } from './../../shared/forms/location-form/location-
 import { ProjectManagerFormModule } from './../../shared/forms/project-manager-form/project-manager-form.module';
 import { ProjectDevelopmentFormModule } from './../../shared/forms/project-development-form/project-development-form.module';
 import { PeriodFormModule } from './../../shared/forms/period-form/period-form.module';
+import { CommunicationFormModule } from './../../shared/forms/communication-form/communication-form.module';
 
 @NgModule({
   declarations: [CallAlertsComponent],
@@ -24,6 +25,7 @@ import { PeriodFormModule } from './../../shared/forms/period-form/period-form.m
     ProjectManagerFormModule,
     ProjectDevelopmentFormModule,
     PeriodFormModule,
+    CommunicationFormModule,
   ],
 })
 export class CallAlertsModule {}
