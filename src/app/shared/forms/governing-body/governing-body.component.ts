@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
 import GoverningBody from 'src/app/lib/models/governing-body.model';
 import Member from 'src/app/lib/models/member.model';
+import { CallSection } from 'src/app/lib/enums/sections.enum';
+import FormValid from 'src/app/lib/models/form-valid.model';
 
 @Component({
   selector: 'app-governing-body',
@@ -13,7 +15,7 @@ import Member from 'src/app/lib/models/member.model';
 export class GoverningBodyComponent implements OnInit, OnDestroy {
   @Input() updateParentModel: (
     part: GoverningBody,
-    isFormValid: boolean
+    formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: GoverningBody;
@@ -25,11 +27,11 @@ export class GoverningBodyComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({});
     this.defaultValues = {};
     this.members = [];
-    this.updateParentModel({}, this.form.valid && this.members.length > 0);
   }
 
   ngOnInit(): void {
     this.initForm();
+    this.updateParentModel({}, this.isValidForm);
   }
 
   ngOnDestroy(): void {
@@ -58,7 +60,7 @@ export class GoverningBodyComponent implements OnInit, OnDestroy {
     const sub = this.form.valueChanges.subscribe(val => {
       this.updateParentModel(
         { ...val, members: this.members },
-        this.form.valid && this.members.length > 0
+        this.isValidForm
       );
     });
     this.unsubscribe.push(sub);
@@ -67,6 +69,13 @@ export class GoverningBodyComponent implements OnInit, OnDestroy {
   updateMembers(members: Member[]) {
     this.members = members;
     const data = { ...this.form.value, members };
-    this.updateParentModel(data, this.form.valid && this.members.length > 0);
+    this.updateParentModel(data, this.isValidForm);
+  }
+
+  get isValidForm(): FormValid {
+    return {
+      name: CallSection.GOVERNING_BODY,
+      valid: this.form.valid && this.members.length > 0,
+    };
   }
 }

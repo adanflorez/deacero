@@ -2,7 +2,9 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import Remuneration from 'src/app/lib/models/remuneration.model';
+import FormValid from 'src/app/lib/models/form-valid.model';
 import RemunerationForm from 'src/app/lib/models/remuneration-form.model';
+import { CallSection } from 'src/app/lib/enums/sections.enum';
 
 @Component({
   selector: 'app-remuneration-form',
@@ -12,7 +14,7 @@ import RemunerationForm from 'src/app/lib/models/remuneration-form.model';
 export class RemunerationFormComponent implements OnInit, OnDestroy {
   @Input() updateParentModel: (
     part: RemunerationForm,
-    isFormValid: boolean
+    isFormValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: RemunerationForm;
@@ -24,11 +26,11 @@ export class RemunerationFormComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({});
     this.defaultValues = {};
     this.remunerations = [];
-    this.updateParentModel({}, this.isValid);
   }
 
   ngOnInit(): void {
     this.initForm();
+    this.updateParentModel({}, this.isValid);
   }
 
   ngOnDestroy(): void {
@@ -75,9 +77,13 @@ export class RemunerationFormComponent implements OnInit, OnDestroy {
     this.unsubscribe.push(sub as Subscription);
   }
 
-  get isValid(): boolean {
-    return this.form.valid && this.f['remunerationQuestion']?.value
-      ? this.remunerations.length > 0
-      : true;
+  get isValid(): FormValid {
+    return {
+      name: CallSection.REMUNERATIONS,
+      valid:
+        this.form.valid && this.f['remunerationQuestion']?.value
+          ? this.remunerations.length > 0
+          : true,
+    };
   }
 }

@@ -17,7 +17,7 @@
     *ngIf="(infoSaved$ | async) === false"
     class="btn btn-primary"
     type="button"
-    [disabled]="!isValidForm">
+    [disabled]="isInvalidForm">
     Enviar
   </button>
 </div>

@@ -1,0 +1,4 @@
+export enum CallSection {
+  GOVERNING_BODY = 'GOVERNING_BODY',
+  REMUNERATIONS = 'REMUNERATIONS',
+}
