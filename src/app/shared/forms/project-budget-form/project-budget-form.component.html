@@ -11,3 +11,8 @@
   [readOnly]="false"
   (recordChange)="updateConversions($event)"></app-budget-table>
 <hr />
+<h6>Donativo Fundación DEACERO</h6>
+<app-budget-table
+  [records]="donations"
+  [readOnly]="false"
+  (recordChange)="updateDonations($event)"></app-budget-table>

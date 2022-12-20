@@ -18,10 +18,12 @@ export class ProjectBudgetFormComponent implements OnInit {
   @Input() defaultValues: ProjectBudgetForm;
   contributions: ProjectBudget[];
   conversions: ProjectBudget[];
+  donations: ProjectBudget[];
 
   constructor() {
     this.contributions = [];
     this.conversions = [];
+    this.donations = [];
     this.defaultValues = {};
   }
 
@@ -30,12 +32,17 @@ export class ProjectBudgetFormComponent implements OnInit {
       this.defaultValues.contributions as ProjectBudget[]
     );
     this.updateConversions(this.defaultValues.conversions as ProjectBudget[]);
+    this.updateDonations(this.defaultValues.donations as ProjectBudget[]);
   }
 
   updateContributions(contributions: ProjectBudget[]) {
     this.contributions = contributions || [];
     this.updateParentModel(
-      { contributions: this.contributions, conversions: this.conversions },
+      {
+        contributions: this.contributions,
+        conversions: this.conversions,
+        donations: this.donations,
+      },
       this.isValid
     );
   }
@@ -43,7 +50,23 @@ export class ProjectBudgetFormComponent implements OnInit {
   updateConversions(conversions: ProjectBudget[]) {
     this.conversions = conversions || [];
     this.updateParentModel(
-      { contributions: this.contributions, conversions: this.conversions },
+      {
+        contributions: this.contributions,
+        conversions: this.conversions,
+        donations: this.donations,
+      },
+      this.isValid
+    );
+  }
+
+  updateDonations(donations: ProjectBudget[]) {
+    this.donations = donations || [];
+    this.updateParentModel(
+      {
+        contributions: this.contributions,
+        conversions: this.conversions,
+        donations: this.donations,
+      },
       this.isValid
     );
   }
