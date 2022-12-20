@@ -94,8 +94,27 @@
       conversions: formData.conversions
     }"></app-project-budget-form>
   <hr />
-  <app-rating-form></app-rating-form>
-  <hr />
+  <ng-container *ngIf="formData.category">
+    <app-rating-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        livingConditions: formData.livingConditions,
+        lifeQuality: formData.lifeQuality,
+        capacityBuilding: formData.capacityBuilding,
+        supportType: formData.supportType,
+        supportScope: formData.supportScope,
+        resilienceBuilding: formData.resilienceBuilding,
+        socialBackwardness: formData.socialBackwardness,
+        communitySense: formData.communitySense,
+        sustainabilityProcesses: formData.sustainabilityProcesses,
+        statusImprovement: formData.statusImprovement,
+        urbanDevelopment: formData.urbanDevelopment,
+        professionalizationProcess: formData.professionalizationProcess,
+        opportunityGeneration: formData.opportunityGeneration
+      }"
+      [category]="formData.category"></app-rating-form>
+    <hr />
+  </ng-container>
   <app-communication-form
     [updateParentModel]="updateData"
     [defaultValues]="{
