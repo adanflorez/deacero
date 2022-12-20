@@ -75,7 +75,11 @@
       youtube: formData.youtube
     }"></app-communication-form>
   <hr />
-  <app-project-budget-form></app-project-budget-form>
+  <app-project-budget-form
+    [updateParentModel]="updateData"
+    [defaultValues]="{
+      contributions: formData.contributions
+    }"></app-project-budget-form>
 
   <button
     *ngIf="(infoSaved$ | async) === false"
