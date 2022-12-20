@@ -13,6 +13,7 @@ import { ProjectDevelopmentFormModule } from './../../shared/forms/project-devel
 import { PeriodFormModule } from './../../shared/forms/period-form/period-form.module';
 import { CommunicationFormModule } from './../../shared/forms/communication-form/communication-form.module';
 import { ProjectBudgetFormModule } from './../../shared/forms/project-budget-form/project-budget-form.module';
+import { DocumentsFormModule } from './../../shared/forms/documents-form/documents-form.module';
 
 @NgModule({
   declarations: [CallAlertsComponent],
@@ -28,6 +29,7 @@ import { ProjectBudgetFormModule } from './../../shared/forms/project-budget-for
     PeriodFormModule,
     CommunicationFormModule,
     ProjectBudgetFormModule,
+    DocumentsFormModule,
   ],
 })
 export class CallAlertsModule {}
