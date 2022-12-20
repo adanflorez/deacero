@@ -7,6 +7,7 @@ import ProjectDevelopmentForm from 'src/app/lib/models/project-development-form.
 import PeriodForm from 'src/app/lib/models/period-form.model';
 import SocialMediaForm from 'src/app/lib/models/social-media-form.model';
 import ProjectBudgetForm from 'src/app/lib/models/project-budget-form.model';
+import DocumentsForm from 'src/app/lib/models/documents-form.model';
 
 export default interface CallForm
   extends GoverningBody,
@@ -17,4 +18,5 @@ export default interface CallForm
     ProjectDevelopmentForm,
     PeriodForm,
     SocialMediaForm,
-    ProjectBudgetForm {}
+    ProjectBudgetForm,
+    DocumentsForm {}

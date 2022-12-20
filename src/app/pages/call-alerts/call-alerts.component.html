@@ -82,7 +82,28 @@
       youtube: formData.youtube
     }"></app-communication-form>
   <hr />
-  <app-documents-form></app-documents-form>
+  <app-documents-form
+    [updateParentModel]="updateData"
+    [defaultValues]="{
+      ethicalCode: formData.ethicalCode,
+      governanceManual: formData.governanceManual,
+      timelineActivities: formData.timelineActivities,
+      workWithMinors: formData.workWithMinors,
+      officialLetterOfAuthorizationOfDonees:
+        formData.officialLetterOfAuthorizationOfDonees,
+      updatedCertificate: formData.updatedCertificate,
+      publicationInAnnex14OfTheCurrentRMF:
+        formData.publicationInAnnex14OfTheCurrentRMF,
+      constituentAct: formData.constituentAct,
+      mostRecentMeeting: formData.mostRecentMeeting,
+      legalRepresentativesPower: formData.legalRepresentativesPower,
+      legalRepresentativesId: formData.legalRepresentativesId,
+      documentRFC: formData.documentRFC,
+      oldProofOfAddress: formData.oldProofOfAddress,
+      updatedComplianceOpinion: formData.updatedComplianceOpinion,
+      proofOfUpdatedTaxSituation: formData.proofOfUpdatedTaxSituation,
+      logo: formData.logo
+    }"></app-documents-form>
 
   <button
     *ngIf="(infoSaved$ | async) === false"
