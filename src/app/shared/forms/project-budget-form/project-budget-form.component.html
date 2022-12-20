@@ -5,3 +5,9 @@
   [readOnly]="false"
   (recordChange)="updateContributions($event)"></app-budget-table>
 <hr />
+<h6>Conversión</h6>
+<app-budget-table
+  [records]="conversions"
+  [readOnly]="false"
+  (recordChange)="updateConversions($event)"></app-budget-table>
+<hr />
