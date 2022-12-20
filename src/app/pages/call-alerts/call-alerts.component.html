@@ -64,6 +64,29 @@
       endDate: formData.endDate
     }"></app-period-form>
   <hr />
+  <app-objectives-form
+    [updateParentModel]="updateData"
+    [defaultValues]="{
+      objectives: formData.objectives,
+      povertyEnd: formData.povertyEnd,
+      zeroHunger: formData.zeroHunger,
+      healthAndWellness: formData.healthAndWellness,
+      qualityEducation: formData.qualityEducation,
+      genderEquality: formData.genderEquality,
+      cleanWater: formData.cleanWater,
+      affordableEnergy: formData.affordableEnergy,
+      decentWork: formData.decentWork,
+      industry: formData.industry,
+      reducingInequalities: formData.reducingInequalities,
+      cities: formData.cities,
+      production: formData.production,
+      climateAction: formData.climateAction,
+      underwaterLife: formData.underwaterLife,
+      terrestrialEcosystemLife: formData.terrestrialEcosystemLife,
+      peace: formData.peace,
+      alliances: formData.alliances
+    }"></app-objectives-form>
+  <hr />
   <app-project-budget-form
     [updateParentModel]="updateData"
     [defaultValues]="{
