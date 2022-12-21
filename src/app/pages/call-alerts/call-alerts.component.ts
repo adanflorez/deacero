@@ -1,40 +1,39 @@
 import { BehaviorSubject } from 'rxjs';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import CallForm from 'src/app/lib/models/call-form.model';
 import FormValid from 'src/app/lib/models/form-valid.model';
+import { CallService } from 'src/app/lib/services/call.service';
 
 @Component({
   selector: 'app-call-alerts',
   templateUrl: './call-alerts.component.html',
   styleUrls: ['./call-alerts.component.scss'],
 })
-export class CallAlertsComponent {
-  formData: CallForm = {
-    governingBody: {
-      comment: 'Ajustes',
-    },
-    remuneration: { comment: 'Comenatrio remuneracion' },
-    generalProjectData: {
-      comment: 'Comentario datos generales',
-      category: 'Alimentación',
-    },
-    location: { comment: 'Comentario ubicacion' },
-    projectManager: {
-      comment: 'Comentario responsable del proyecto',
-    },
-    projectDevelopment: { comment: 'Comentario desarrollo del proyecto' },
-    period: { comment: 'Comentario vigencia' },
-    objectives: { comment: 'Comentario objetivos y metas' },
-    projectBudget: { comment: 'Comentario presupuesto de proyecto' },
-    communication: { comment: 'Comentario comunicacion' },
-    documents: {},
-    rating: { comment: 'Comentario calificaciones' },
-  };
+export class CallAlertsComponent implements OnInit {
+  formData: CallForm;
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   formsStatus: FormValid[];
 
-  constructor() {
+  constructor(private callService: CallService) {
     this.formsStatus = [];
+    this.formData = {
+      governingBody: {},
+      remuneration: {},
+      generalProjectData: {},
+      location: {},
+      projectManager: {},
+      projectDevelopment: {},
+      period: {},
+      objectives: {},
+      projectBudget: {},
+      communication: {},
+      documents: {},
+      rating: {},
+    };
+  }
+
+  ngOnInit(): void {
+    this.loadFeedback();
   }
 
   updateData = <T>(form: T, isFormValid: FormValid) => {
@@ -65,5 +64,9 @@ export class CallAlertsComponent {
 
   save() {
     console.log('sending...');
+  }
+
+  loadFeedback(): void {
+    this.callService.feedback().subscribe(res => console.log(res));
   }
 }
