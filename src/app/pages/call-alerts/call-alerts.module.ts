@@ -6,7 +6,7 @@ import { CallAlertsComponent } from './call-alerts.component';
 
 import { RemunerationFormModule } from './../../shared/forms/remuneration-form/remuneration-form.module';
 import { GoverningBodyModule } from './../../shared/forms/governing-body/governing-body.module';
-import { GeneralDataFormModule } from './../../shared/forms/general-data-form/general-data-form.module';
+import { GeneralDataFormModule } from '../../shared/forms/general-project-data-form/general-project-data-form.module';
 import { LocationFormModule } from './../../shared/forms/location-form/location-form.module';
 import { ProjectManagerFormModule } from './../../shared/forms/project-manager-form/project-manager-form.module';
 import { ProjectDevelopmentFormModule } from './../../shared/forms/project-development-form/project-development-form.module';

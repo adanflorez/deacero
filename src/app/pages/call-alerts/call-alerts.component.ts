@@ -12,7 +12,7 @@ export class CallAlertsComponent {
   formData: CallForm = {
     governingBodyComment: 'Ajustes',
     remunerationComment: 'Comenatrio remuneracion',
-    generalDataComment: 'Comentario datos generales',
+    generalProjectDataComment: 'Comentario datos generales',
     locationComment: 'Comentario ubicacion',
     projectManagerComment: 'Comentario responsable del proyecto',
     projectDevelopmentComment: 'Comentario desarrollo del proyecto',

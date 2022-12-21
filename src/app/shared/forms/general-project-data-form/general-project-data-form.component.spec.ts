@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GeneralDataFormComponent } from './general-data-form.component';
+import { GeneralProjectDataFormComponent } from './general-project-data-form.component';
 
 describe('GeneralDataFormComponent', () => {
-  let component: GeneralDataFormComponent;
-  let fixture: ComponentFixture<GeneralDataFormComponent>;
+  let component: GeneralProjectDataFormComponent;
+  let fixture: ComponentFixture<GeneralProjectDataFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GeneralDataFormComponent],
+      declarations: [GeneralProjectDataFormComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GeneralDataFormComponent);
+    fixture = TestBed.createComponent(GeneralProjectDataFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
