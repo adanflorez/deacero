@@ -85,29 +85,32 @@
       }"></app-period-form>
     <hr />
   </ng-container>
-  <app-objectives-form
-    [updateParentModel]="updateData"
-    [defaultValues]="{
-      objectives: formData.objectives,
-      povertyEnd: formData.povertyEnd,
-      zeroHunger: formData.zeroHunger,
-      healthAndWellness: formData.healthAndWellness,
-      qualityEducation: formData.qualityEducation,
-      genderEquality: formData.genderEquality,
-      cleanWater: formData.cleanWater,
-      affordableEnergy: formData.affordableEnergy,
-      decentWork: formData.decentWork,
-      industry: formData.industry,
-      reducingInequalities: formData.reducingInequalities,
-      cities: formData.cities,
-      production: formData.production,
-      climateAction: formData.climateAction,
-      underwaterLife: formData.underwaterLife,
-      terrestrialEcosystemLife: formData.terrestrialEcosystemLife,
-      peace: formData.peace,
-      alliances: formData.alliances
-    }"></app-objectives-form>
-  <hr />
+  <ng-container *ngIf="!!formData.objectivesComment">
+    <app-objectives-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        objectives: formData.objectives,
+        povertyEnd: formData.povertyEnd,
+        zeroHunger: formData.zeroHunger,
+        healthAndWellness: formData.healthAndWellness,
+        qualityEducation: formData.qualityEducation,
+        genderEquality: formData.genderEquality,
+        cleanWater: formData.cleanWater,
+        affordableEnergy: formData.affordableEnergy,
+        decentWork: formData.decentWork,
+        industry: formData.industry,
+        reducingInequalities: formData.reducingInequalities,
+        cities: formData.cities,
+        production: formData.production,
+        climateAction: formData.climateAction,
+        underwaterLife: formData.underwaterLife,
+        terrestrialEcosystemLife: formData.terrestrialEcosystemLife,
+        peace: formData.peace,
+        alliances: formData.alliances,
+        objectivesComment: formData.objectivesComment
+      }"></app-objectives-form>
+    <hr />
+  </ng-container>
   <app-project-budget-form
     [updateParentModel]="updateData"
     [defaultValues]="{

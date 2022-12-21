@@ -1,3 +1,4 @@
+import { AlertModule } from 'src/app/shared/alert/alert.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +14,7 @@ import { FormErrorModule } from './../../form-error/form-error.module';
     ReactiveFormsModule,
     FormErrorModule,
     NgSelectModule,
+    AlertModule,
   ],
   exports: [ObjectivesFormComponent],
 })

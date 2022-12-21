@@ -17,6 +17,7 @@ export class CallAlertsComponent {
     projectManagerComment: 'Comentario responsable del proyecto',
     projectDevelopmentComment: 'Comentario desarrollo del proyecto',
     periodComment: 'Comentario vigencia',
+    objectivesComment: 'Comentario objetivos y metas',
   };
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   formsStatus: FormValid[];

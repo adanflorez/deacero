@@ -17,4 +17,5 @@ export default interface ObjectivesForm {
   terrestrialEcosystemLife?: string;
   peace?: string;
   alliances?: string;
+  objectivesComment?: string;
 }
