@@ -1,6 +1,7 @@
 import GeneralDataForm from 'src/app/lib/models/general-data-form.model';
 import FundManagerForm from 'src/app/lib/models/fund-manager-form.model';
 import OrganizationalInformationForm from 'src/app/lib/models/organizational-information-form.model';
+import StrategicAlliancesForm from 'src/app/lib/models/strategic-alliances-form.model';
 import GoverningBody from './governing-body.model';
 import LocationForm from './location-form.model';
 import RemunerationForm from './remuneration-form.model';
@@ -18,6 +19,7 @@ export default interface CallForm {
   generalData: GeneralDataForm;
   fundManager: FundManagerForm;
   organizationalInformation: OrganizationalInformationForm;
+  strategicAlliances: StrategicAlliancesForm;
   governingBody: GoverningBody;
   remuneration: RemunerationForm;
   generalProjectData: GeneralProjectDataForm;

@@ -5,10 +5,11 @@ import { CallAlertsRoutingModule } from './call-alerts-routing.module';
 import { CallAlertsComponent } from './call-alerts.component';
 
 import { GeneralDataFormModule } from './../../shared/forms/general-data-form/general-data-form.module';
+import { FundManagerFormModule } from './../../shared/forms/fund-manager-form/fund-manager-form.module';
 import { OrganizationalInformationFormModule } from './../../shared/forms/organizational-information-form/organizational-information-form.module';
+import { StrategicAlliancesFormModule } from './../../shared/forms/strategic-alliances-form/strategic-alliances-form.module';
 import { RemunerationFormModule } from './../../shared/forms/remuneration-form/remuneration-form.module';
 import { GoverningBodyModule } from './../../shared/forms/governing-body/governing-body.module';
-import { FundManagerFormModule } from './../../shared/forms/fund-manager-form/fund-manager-form.module';
 import { GeneralProjectDataFormModule } from '../../shared/forms/general-project-data-form/general-project-data-form.module';
 import { LocationFormModule } from './../../shared/forms/location-form/location-form.module';
 import { ProjectManagerFormModule } from './../../shared/forms/project-manager-form/project-manager-form.module';
@@ -40,6 +41,7 @@ import { RatingFormModule } from './../../shared/forms/rating-form/rating-form.m
     DocumentsFormModule,
     ObjectivesFormModule,
     RatingFormModule,
+    StrategicAlliancesFormModule,
   ],
 })
 export class CallAlertsModule {}
