@@ -14,7 +14,9 @@ export class CallAlertsComponent {
       comment: 'Ajustes',
     },
     remuneration: { comment: 'Comenatrio remuneracion' },
-    generalProjectDataComment: 'Comentario datos generales',
+    generalProjectData: {
+      comment: 'Comentario datos generales',
+    },
     locationComment: 'Comentario ubicacion',
     projectManagerComment: 'Comentario responsable del proyecto',
     projectDevelopmentComment: 'Comentario desarrollo del proyecto',
