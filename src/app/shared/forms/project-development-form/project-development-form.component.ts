@@ -5,6 +5,7 @@ import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
 import FormValid from 'src/app/lib/models/form-valid.model';
 import ProjectDevelopmentForm from 'src/app/lib/models/project-development-form.model';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-project-development-form',
@@ -19,6 +20,7 @@ export class ProjectDevelopmentFormComponent implements OnInit, OnDestroy {
   ) => void = () => {};
   @Input() defaultValues: ProjectDevelopmentForm;
   form: FormGroup;
+  alertType: AlertType = AlertType.Warning;
 
   private unsubscribe: Subscription[] = [];
 
