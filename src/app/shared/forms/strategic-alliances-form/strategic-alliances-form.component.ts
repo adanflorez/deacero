@@ -64,12 +64,13 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
         this.defaultValues.previousDonations || true,
         Validators.required
       ),
-      strategicAlliances: new FormControl(
-        this.defaultValues.strategicAlliances,
+      strategicalAlliances: new FormControl(
+        this.defaultValues.strategicalAlliances,
         Validators.required
       ),
     });
     this.subscribeToForm();
+    this.subscribeToIssues();
   }
 
   subscribeToForm() {
@@ -77,5 +78,19 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
       this.updateParentModel(val, this.isValidForm);
     });
     this.unsubscribe.push(sub);
+  }
+
+  subscribeToIssues() {
+    const sub = this.form
+      .get('issuesToStrengthen')
+      ?.valueChanges.subscribe((res: string[]) => {
+        if (res.includes('Otros')) {
+          this.f['whichTopics'].enable();
+          return;
+        }
+        this.f['whichTopics'].disable();
+        this.f['whichTopics'].reset();
+      });
+    this.unsubscribe.push(sub as Subscription);
   }
 }
