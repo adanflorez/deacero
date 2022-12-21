@@ -6,6 +6,7 @@ import GoverningBody from 'src/app/lib/models/governing-body.model';
 import Member from 'src/app/lib/models/member.model';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
 import FormValid from 'src/app/lib/models/form-valid.model';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-governing-body',
@@ -21,6 +22,7 @@ export class GoverningBodyComponent implements OnInit, OnDestroy {
   @Input() defaultValues: GoverningBody;
   form: FormGroup;
   members: Member[];
+  alertType: AlertType = AlertType.Warning;
   private unsubscribe: Subscription[] = [];
 
   constructor() {
