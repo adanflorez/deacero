@@ -10,8 +10,10 @@ import FormValid from 'src/app/lib/models/form-valid.model';
 })
 export class CallAlertsComponent {
   formData: CallForm = {
-    governingBodyComment: 'Ajustes',
-    remunerationComment: 'Comenatrio remuneracion',
+    governingBody: {
+      comment: 'Ajustes',
+    },
+    remuneration: { comment: 'Comenatrio remuneracion' },
     generalProjectDataComment: 'Comentario datos generales',
     locationComment: 'Comentario ubicacion',
     projectManagerComment: 'Comentario responsable del proyecto',
@@ -28,7 +30,7 @@ export class CallAlertsComponent {
     this.formsStatus = [];
   }
 
-  updateData = (form: CallForm, isFormValid: FormValid) => {
+  updateData = <T>(form: T, isFormValid: FormValid) => {
     const currentData = this.formData;
     const updatedData = { ...currentData, ...form };
     this.formData = updatedData;

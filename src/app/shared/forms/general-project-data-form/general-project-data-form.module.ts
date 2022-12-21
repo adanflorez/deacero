@@ -8,4 +8,4 @@ import { NgSelectModule } from '@ng-select/ng-select';
   imports: [NgSelectModule, ...formModules],
   exports: [GeneralProjectDataFormComponent],
 })
-export class GeneralDataFormModule {}
+export class GeneralProjectDataFormModule {}

@@ -1,21 +1,21 @@
 <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
-  <ng-container *ngIf="!!formData.governingBodyComment">
+  <ng-container *ngIf="!!formData.governingBody.comment">
     <app-governing-body
       [updateParentModel]="updateData"
       [defaultValues]="{
-        meetings: formData.meetings,
-        renewalFrequency: formData.renewalFrequency,
-        members: formData.members,
-        governingBodyComment: formData.governingBodyComment
+        meetings: formData.governingBody.meetings,
+        renewalFrequency: formData.governingBody.renewalFrequency,
+        members: formData.governingBody.members,
+        comment: formData.governingBody.comment
       }"></app-governing-body>
     <hr />
   </ng-container>
-  <ng-container *ngIf="!!formData.remunerationComment">
+  <ng-container *ngIf="!!formData.remuneration.comment">
     <app-remuneration-form
       [updateParentModel]="updateData"
       [defaultValues]="{
-        remunerationQuestion: formData.remunerationQuestion,
-        remunerationComment: formData.remunerationComment
+        remunerationQuestion: formData.remuneration.remunerationQuestion,
+        comment: formData.remuneration.comment
       }"></app-remuneration-form>
     <hr />
   </ng-container>
