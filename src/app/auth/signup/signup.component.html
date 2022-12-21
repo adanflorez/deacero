@@ -10,10 +10,10 @@
     <div class="col-md-6">
       <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
         <app-alert
-          *ngIf="showAlert"
+          [show]="showAlert"
           [type]="alertType"
           [message]="alertMessage"
-          (close)="showAlert = false"></app-alert>
+          [dismissible]="true"></app-alert>
         <h3 class="text-independence text-center">Pre - Registro de Acceso</h3>
         <form [formGroup]="signupForm">
           <div class="mb-3">
