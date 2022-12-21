@@ -5,6 +5,7 @@ import FormValid from 'src/app/lib/models/form-valid.model';
 import SocialMediaForm from 'src/app/lib/models/social-media-form.model';
 import { Subscription } from 'rxjs';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-communication-form',
@@ -19,6 +20,7 @@ export class CommunicationFormComponent implements OnInit, OnDestroy {
   ) => void = () => {};
   @Input() defaultValues: SocialMediaForm;
   form: FormGroup;
+  alertType: AlertType = AlertType.Warning;
 
   private unsubscribe: Subscription[] = [];
 
