@@ -24,7 +24,28 @@
       }"></app-fund-manager-form>
     <hr
   /></ng-container>
-
+  <ng-container>
+    <app-organizational-information-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        founder: formData.organizationalInformation.founder,
+        generalManagement: formData.organizationalInformation.generalManagement,
+        operationalManagement:
+          formData.organizationalInformation.operationalManagement,
+        legalRepresentative:
+          formData.organizationalInformation.legalRepresentative,
+        legalRepresentativeEmail:
+          formData.organizationalInformation.legalRepresentativeEmail,
+        operationsStartDate:
+          formData.organizationalInformation.operationsStartDate,
+        incorporationsStartDate:
+          formData.organizationalInformation.incorporationsStartDate,
+        mission: formData.organizationalInformation.mission,
+        vision: formData.organizationalInformation.vision,
+        ethicalValues: formData.organizationalInformation.ethicalValues
+      }"></app-organizational-information-form>
+    <hr />
+  </ng-container>
   <ng-container *ngIf="!!formData.governingBody.comment">
     <app-governing-body
       [updateParentModel]="updateData"

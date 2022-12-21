@@ -5,6 +5,7 @@ import { CallAlertsRoutingModule } from './call-alerts-routing.module';
 import { CallAlertsComponent } from './call-alerts.component';
 
 import { GeneralDataFormModule } from './../../shared/forms/general-data-form/general-data-form.module';
+import { OrganizationalInformationFormModule } from './../../shared/forms/organizational-information-form/organizational-information-form.module';
 import { RemunerationFormModule } from './../../shared/forms/remuneration-form/remuneration-form.module';
 import { GoverningBodyModule } from './../../shared/forms/governing-body/governing-body.module';
 import { FundManagerFormModule } from './../../shared/forms/fund-manager-form/fund-manager-form.module';
@@ -26,6 +27,7 @@ import { RatingFormModule } from './../../shared/forms/rating-form/rating-form.m
     CallAlertsRoutingModule,
     GeneralDataFormModule,
     FundManagerFormModule,
+    OrganizationalInformationFormModule,
     GoverningBodyModule,
     RemunerationFormModule,
     GeneralProjectDataFormModule,

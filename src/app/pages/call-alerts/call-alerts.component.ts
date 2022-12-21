@@ -19,6 +19,7 @@ export class CallAlertsComponent implements OnInit {
     this.formData = {
       generalData: {},
       fundManager: {},
+      organizationalInformation: {},
       governingBody: {},
       remuneration: {},
       generalProjectData: {},
