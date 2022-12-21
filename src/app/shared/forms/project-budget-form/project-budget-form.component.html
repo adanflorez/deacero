@@ -1,8 +1,8 @@
 <h2 class="mb-3">Presupuesto del proyecto</h2>
 <h6>Contribución de la organización</h6>
 <app-alert
-  [show]="!!defaultValues.projectBudgetComment"
-  [message]="defaultValues.projectBudgetComment!"
+  [show]="!!defaultValues.comment"
+  [message]="defaultValues.comment!"
   [type]="alertType"></app-alert>
 <app-budget-table
   [records]="contributions"

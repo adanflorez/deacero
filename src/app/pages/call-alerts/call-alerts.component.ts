@@ -24,7 +24,7 @@ export class CallAlertsComponent {
     projectDevelopment: { comment: 'Comentario desarrollo del proyecto' },
     period: { comment: 'Comentario vigencia' },
     objectivesComment: 'Comentario objetivos y metas',
-    projectBudgetComment: 'Comentario presupuesto de proyecto',
+    projectBudget: { comment: 'Comentario presupuesto de proyecto' },
     communication: { comment: 'Comentario comunicacion' },
   };
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

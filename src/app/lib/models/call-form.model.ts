@@ -12,8 +12,7 @@ import ObjectivesForm from 'src/app/lib/models/objectives-form.model';
 import RatingForm from 'src/app/lib/models/rating-form.model';
 
 export default interface CallForm
-  extends ProjectBudgetForm,
-    DocumentsForm,
+  extends DocumentsForm,
     ObjectivesForm,
     RatingForm {
   governingBody: GoverningBody;
@@ -24,4 +23,5 @@ export default interface CallForm
   projectDevelopment: ProjectDevelopmentForm;
   period: PeriodForm;
   communication: SocialMediaForm;
+  projectBudget: ProjectBudgetForm;
 }

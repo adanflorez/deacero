@@ -4,5 +4,5 @@ export default interface ProjectBudgetForm {
   contributions?: ProjectBudget[];
   conversions?: ProjectBudget[];
   donations?: ProjectBudget[];
-  projectBudgetComment?: string;
+  comment?: string;
 }
