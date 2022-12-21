@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FundManagerFormComponent } from './fund-manager-form.component';
+import { formModules } from '../modules';
 
 @NgModule({
   declarations: [FundManagerFormComponent],
-  imports: [CommonModule],
+  imports: [...formModules],
   exports: [FundManagerFormComponent],
 })
 export class FundManagerFormModule {}

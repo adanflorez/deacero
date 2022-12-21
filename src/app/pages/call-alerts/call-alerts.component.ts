@@ -18,6 +18,7 @@ export class CallAlertsComponent implements OnInit {
     this.formsStatus = [];
     this.formData = {
       generalData: {},
+      fundManager: {},
       governingBody: {},
       remuneration: {},
       generalProjectData: {},

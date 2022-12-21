@@ -14,7 +14,13 @@
     <hr />
   </ng-container>
   <ng-container
-    ><app-fund-manager-form></app-fund-manager-form>
+    ><app-fund-manager-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        name: formData.fundManager.name,
+        responsibleEmail: formData.fundManager.responsibleEmail,
+        cellphone: formData.fundManager.cellphone
+      }"></app-fund-manager-form>
     <hr
   /></ng-container>
 

@@ -1,4 +1,5 @@
 import GeneralDataForm from 'src/app/lib/models/general-data-form.model';
+import FundManagerForm from 'src/app/lib/models/fund-manager-form.model';
 import GoverningBody from './governing-body.model';
 import LocationForm from './location-form.model';
 import RemunerationForm from './remuneration-form.model';
@@ -14,6 +15,7 @@ import RatingForm from 'src/app/lib/models/rating-form.model';
 
 export default interface CallForm {
   generalData: GeneralDataForm;
+  fundManager: FundManagerForm;
   governingBody: GoverningBody;
   remuneration: RemunerationForm;
   generalProjectData: GeneralProjectDataForm;
