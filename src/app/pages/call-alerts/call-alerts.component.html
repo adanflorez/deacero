@@ -1,5 +1,5 @@
 <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
-  <ng-container
+  <ng-container *ngIf="!!formData.generalData.comment"
     ><app-general-data-form
       [updateParentModel]="updateData"
       [defaultValues]="{
@@ -8,7 +8,8 @@
         rfc: formData.generalData.rfc,
         phone: formData.generalData.phone,
         emails: formData.generalData.emails,
-        position: formData.generalData.position
+        position: formData.generalData.position,
+        comment: formData.generalData.comment
       }"></app-general-data-form
   ></ng-container>
 

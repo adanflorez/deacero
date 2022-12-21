@@ -5,4 +5,5 @@ export default interface GeneralData {
   phone?: string;
   emails?: string;
   position?: string;
+  comment?: string;
 }

@@ -1,4 +1,8 @@
 <h2>Datos generales</h2>
+<app-alert
+  [show]="!!defaultValues.comment"
+  [message]="defaultValues.comment!"
+  [type]="alertType"></app-alert>
 <div class="row" [formGroup]="form">
   <div class="col-12 col-md-4">
     <div class="mb-3">
