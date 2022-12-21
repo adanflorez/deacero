@@ -146,17 +146,17 @@
       [category]="formData.generalProjectData.category"></app-rating-form>
     <hr />
   </ng-container>
-  <ng-container *ngIf="!!formData.socialMediaComment">
+  <ng-container *ngIf="!!formData.communication.comment">
     <app-communication-form
       [updateParentModel]="updateData"
       [defaultValues]="{
-        facebook: formData.facebook,
-        instagram: formData.instagram,
-        linkedin: formData.linkedin,
-        twitter: formData.twitter,
-        tiktok: formData.tiktok,
-        youtube: formData.youtube,
-        socialMediaComment: formData.socialMediaComment
+        facebook: formData.communication.facebook,
+        instagram: formData.communication.instagram,
+        linkedin: formData.communication.linkedin,
+        twitter: formData.communication.twitter,
+        tiktok: formData.communication.tiktok,
+        youtube: formData.communication.youtube,
+        comment: formData.communication.comment
       }"></app-communication-form>
     <hr />
   </ng-container>
