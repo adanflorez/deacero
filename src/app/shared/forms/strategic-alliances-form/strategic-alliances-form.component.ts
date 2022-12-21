@@ -5,6 +5,7 @@ import FormValid from 'src/app/lib/models/form-valid.model';
 import StrategicAlliancesForm from 'src/app/lib/models/strategic-alliances-form.model';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
 import { AlertType } from 'src/app/lib/enums/alert-type';
+import Donation from 'src/app/lib/models/donation.model';
 
 @Component({
   selector: 'app-strategic-alliances-form',
@@ -21,11 +22,13 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   alertType: AlertType = AlertType.Warning;
   showDonationsTable: boolean;
+  donations: Donation[];
 
   private unsubscribe: Subscription[] = [];
 
   constructor() {
     this.showDonationsTable = true;
+    this.donations = [];
     this.form = new FormGroup({});
     this.defaultValues = {};
   }
@@ -46,7 +49,10 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
   get isValidForm(): FormValid {
     return {
       name: CallSection.STRATEGIC_ALLIANCES,
-      valid: this.form.valid,
+      valid:
+        this.form.valid && this.f['previousDonations'].value
+          ? this.donations.length > 0
+          : true,
     };
   }
 
@@ -77,7 +83,10 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
 
   private subscribeToForm(): void {
     const sub = this.form.valueChanges.subscribe(val => {
-      this.updateParentModel(val, this.isValidForm);
+      this.updateParentModel(
+        { ...val, donations: this.donations },
+        this.isValidForm
+      );
     });
     this.unsubscribe.push(sub);
   }
@@ -101,7 +110,14 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
       .get('previousDonations')
       ?.valueChanges.subscribe((check: boolean) => {
         this.showDonationsTable = check;
+        this.donations = [];
       });
     this.unsubscribe.push(sub as Subscription);
+  }
+
+  updateDonations(donations: Donation[]) {
+    this.donations = donations;
+    const data = { ...this.form.value, donations };
+    this.updateParentModel(data, this.isValidForm);
   }
 }

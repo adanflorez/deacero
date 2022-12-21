@@ -115,7 +115,11 @@
     </div>
   </div>
   <div class="col-12">
-    <app-donations-table *ngIf="showDonationsTable"></app-donations-table>
+    <app-donations-table
+      *ngIf="showDonationsTable"
+      [donations]="donations"
+      [readOnly]="false"
+      (donationsList)="updateDonations($event)"></app-donations-table>
   </div>
   <div class="col-12">
     <div class="mb-3">
