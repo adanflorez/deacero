@@ -69,7 +69,7 @@ export class GeneralProjectDataFormComponent implements OnInit {
 
   get isValid(): FormValid {
     return {
-      name: CallSection.GENERAL_DATA,
+      name: CallSection.GENERAL_PROJECT_DATA,
       valid: this.form.valid,
     };
   }
