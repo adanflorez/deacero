@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
 import FormValid from 'src/app/lib/models/form-valid.model';
 import PeriodForm from 'src/app/lib/models/period-form.model';
@@ -18,6 +19,7 @@ export class PeriodFormComponent implements OnInit, OnDestroy {
   ) => void = () => {};
   @Input() defaultValues: PeriodForm;
   form: FormGroup;
+  alertType: AlertType = AlertType.Warning;
 
   private unsubscribe: Subscription[] = [];
 

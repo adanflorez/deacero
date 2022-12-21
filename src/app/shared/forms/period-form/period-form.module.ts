@@ -3,10 +3,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PeriodFormComponent } from './period-form.component';
 import { FormErrorModule } from './../../form-error/form-error.module';
+import { AlertModule } from 'src/app/shared/alert/alert.module';
 
 @NgModule({
   declarations: [PeriodFormComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, FormErrorModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FormErrorModule,
+    AlertModule,
+  ],
   exports: [PeriodFormComponent],
 })
 export class PeriodFormModule {}
