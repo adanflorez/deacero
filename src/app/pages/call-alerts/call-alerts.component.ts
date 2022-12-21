@@ -9,7 +9,9 @@ import FormValid from 'src/app/lib/models/form-valid.model';
   styleUrls: ['./call-alerts.component.scss'],
 })
 export class CallAlertsComponent {
-  formData: CallForm = {};
+  formData: CallForm = {
+    governingBodyComment: 'Ajustes',
+  };
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   formsStatus: FormValid[];
 

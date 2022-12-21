@@ -1,9 +1,9 @@
-<app-alert
-  [show]="!!defaultValues.governingBodyComment"
-  [message]="defaultValues.governingBodyComment!"
-  [type]="alertType"></app-alert>
 <form [formGroup]="form">
   <h2 class="mb-3">Órgano de gobierno</h2>
+  <app-alert
+    [show]="!!defaultValues.governingBodyComment"
+    [message]="defaultValues.governingBodyComment!"
+    [type]="alertType"></app-alert>
   <div class="row">
     <div class="col-12">
       <app-members-table

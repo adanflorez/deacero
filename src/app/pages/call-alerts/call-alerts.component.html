@@ -1,13 +1,15 @@
 <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
-  <app-governing-body
-    [updateParentModel]="updateData"
-    [defaultValues]="{
-      meetings: formData.meetings,
-      renewalFrequency: formData.renewalFrequency,
-      members: formData.members,
-      governingBodyComment: formData.governingBodyComment
-    }"></app-governing-body>
-  <hr />
+  <ng-container *ngIf="!!formData.governingBodyComment">
+    <app-governing-body
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        meetings: formData.meetings,
+        renewalFrequency: formData.renewalFrequency,
+        members: formData.members,
+        governingBodyComment: formData.governingBodyComment
+      }"></app-governing-body>
+    <hr />
+  </ng-container>
   <app-remuneration-form
     [updateParentModel]="updateData"
     [defaultValues]="{
