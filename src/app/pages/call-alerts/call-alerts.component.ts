@@ -13,6 +13,7 @@ export class CallAlertsComponent {
     governingBodyComment: 'Ajustes',
     remunerationComment: 'Comenatrio remuneracion',
     generalDataComment: 'Comentario datos generales',
+    locationComment: 'Comentario ubicacion',
   };
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   formsStatus: FormValid[];
