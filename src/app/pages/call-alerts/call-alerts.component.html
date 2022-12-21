@@ -10,8 +10,13 @@
         emails: formData.generalData.emails,
         position: formData.generalData.position,
         comment: formData.generalData.comment
-      }"></app-general-data-form
-  ></ng-container>
+      }"></app-general-data-form>
+    <hr />
+  </ng-container>
+  <ng-container
+    ><app-fund-manager-form></app-fund-manager-form>
+    <hr
+  /></ng-container>
 
   <ng-container *ngIf="!!formData.governingBody.comment">
     <app-governing-body
