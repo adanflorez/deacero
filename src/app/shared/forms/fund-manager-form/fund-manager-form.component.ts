@@ -8,6 +8,7 @@ import FormValid from 'src/app/lib/models/form-valid.model';
 import FundManagerForm from 'src/app/lib/models/fund-manager-form.model';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
 import { Subscription } from 'rxjs';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-fund-manager-form',
@@ -22,6 +23,8 @@ export class FundManagerFormComponent implements OnInit, OnDestroy {
   ) => void = () => {};
   @Input() defaultValues: FundManagerForm;
   form: FormGroup;
+
+  alertType: AlertType = AlertType.Warning;
 
   private unsubscribe: Subscription[] = [];
 
