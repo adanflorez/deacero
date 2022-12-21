@@ -1,0 +1,91 @@
+<h2>Datos generales</h2>
+<div class="row" [formGroup]="form">
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="tradename" class="form-label">Nombre comercial</label>
+      <input
+        type="text"
+        class="form-control"
+        id="tradename"
+        placeholder="Nombre comercial"
+        formControlName="tradename"
+        [class.is-invalid]="f['tradename'].invalid && f['tradename'].touched" />
+      <app-form-error [control]="f['tradename']"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="businessname" class="form-label">Razón social</label>
+      <input
+        type="text"
+        class="form-control"
+        id="businessname"
+        placeholder="Razón social"
+        formControlName="businessname"
+        [class.is-invalid]="
+          f['businessname'].invalid && f['businessname'].touched
+        " />
+      <app-form-error [control]="f['businessname']"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="rfc" class="form-label">RFC</label>
+      <input
+        type="text"
+        class="form-control"
+        id="rfc"
+        placeholder="RFC"
+        formControlName="rfc"
+        [class.is-invalid]="f['rfc'].invalid && f['rfc'].touched"
+        (change)="validateRFC($event, f['rfc'])" />
+      <app-form-error [control]="f['rfc']"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="phone" class="form-label">Teléfono</label>
+      <input
+        type="text"
+        class="form-control"
+        id="phone"
+        placeholder="Teléfono"
+        formControlName="phone"
+        [class.is-invalid]="f['phone'].invalid && f['phone'].touched" />
+      <app-form-error
+        [control]="f['phone']"
+        [errors]="{
+          pattern: 'Solo debe ingresar números',
+          maxLength: 'Máximo 12 caracteres'
+        }"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="emails" class="form-label">E-mail(s)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="emails"
+        placeholder="Usa ; ó , para separar los correos electrónicos"
+        formControlName="emails"
+        [class.is-invalid]="f['emails'].invalid && f['emails'].touched" />
+      <app-form-error
+        [control]="f['emails']"
+        [errors]="{ pattern: 'Correos no válidos' }"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="position" class="form-label">Puesto</label>
+      <input
+        type="text"
+        class="form-control"
+        id="position"
+        placeholder="Puesto"
+        formControlName="position"
+        [class.is-invalid]="f['position'].invalid && f['position'].touched" />
+      <app-form-error [control]="f['position']"></app-form-error>
+    </div>
+  </div>
+</div>
