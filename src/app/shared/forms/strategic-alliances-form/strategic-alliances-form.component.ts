@@ -100,11 +100,7 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
     const sub = this.form
       .get('previousDonations')
       ?.valueChanges.subscribe((check: boolean) => {
-        if (check) {
-          this.showDonationsTable = true;
-        } else {
-          this.showDonationsTable = false;
-        }
+        this.showDonationsTable = check;
       });
     this.unsubscribe.push(sub as Subscription);
   }
