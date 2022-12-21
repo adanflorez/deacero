@@ -125,7 +125,8 @@
       }"></app-project-budget-form>
     <hr />
   </ng-container>
-  <ng-container *ngIf="formData.generalProjectData.category">
+  <ng-container
+    *ngIf="formData.generalProjectData.category && formData.rating.comment">
     <app-rating-form
       [updateParentModel]="updateData"
       [defaultValues]="{
@@ -141,7 +142,8 @@
         statusImprovement: formData.rating.statusImprovement,
         urbanDevelopment: formData.rating.urbanDevelopment,
         professionalizationProcess: formData.rating.professionalizationProcess,
-        opportunityGeneration: formData.rating.opportunityGeneration
+        opportunityGeneration: formData.rating.opportunityGeneration,
+        comment: formData.rating.comment
       }"
       [category]="formData.generalProjectData.category"></app-rating-form>
     <hr />

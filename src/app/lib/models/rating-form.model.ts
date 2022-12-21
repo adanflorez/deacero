@@ -12,4 +12,5 @@ export default interface RatingForm {
   urbanDevelopment?: string;
   professionalizationProcess?: string;
   opportunityGeneration?: string;
+  comment?: string;
 }

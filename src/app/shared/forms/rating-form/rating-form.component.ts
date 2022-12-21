@@ -5,6 +5,7 @@ import FormValid from 'src/app/lib/models/form-valid.model';
 import RatingForm from 'src/app/lib/models/rating-form.model';
 import { Subscription } from 'rxjs';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-rating-form',
@@ -49,6 +50,8 @@ export class RatingFormComponent implements OnChanges {
     'Reinserción social',
     'Salud mental',
   ];
+
+  alertType: AlertType = AlertType.Warning;
 
   private unsubscribe: Subscription[] = [];
 

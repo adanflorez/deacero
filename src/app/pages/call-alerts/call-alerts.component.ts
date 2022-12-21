@@ -16,6 +16,7 @@ export class CallAlertsComponent {
     remuneration: { comment: 'Comenatrio remuneracion' },
     generalProjectData: {
       comment: 'Comentario datos generales',
+      category: 'Alimentación',
     },
     location: { comment: 'Comentario ubicacion' },
     projectManager: {
@@ -27,7 +28,7 @@ export class CallAlertsComponent {
     projectBudget: { comment: 'Comentario presupuesto de proyecto' },
     communication: { comment: 'Comentario comunicacion' },
     documents: {},
-    rating: {},
+    rating: { comment: 'Comentario calificaciones' },
   };
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   formsStatus: FormValid[];
