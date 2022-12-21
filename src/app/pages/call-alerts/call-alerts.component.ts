@@ -17,6 +17,7 @@ export class CallAlertsComponent implements OnInit {
   constructor(private callService: CallService) {
     this.formsStatus = [];
     this.formData = {
+      generalData: {},
       governingBody: {},
       remuneration: {},
       generalProjectData: {},

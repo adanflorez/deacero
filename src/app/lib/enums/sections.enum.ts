@@ -11,4 +11,5 @@ export enum CallSection {
   DOCUMENTS = 'DOCUMENTS',
   OBJECTIVES = 'OBJECTIVES',
   RATING = 'RATING',
+  GENERAL_DATA = 'GENERAL_DATA',
 }

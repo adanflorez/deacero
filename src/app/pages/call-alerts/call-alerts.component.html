@@ -1,4 +1,17 @@
 <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  <ng-container
+    ><app-general-data-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        tradename: formData.generalData.tradename,
+        businessname: formData.generalData.businessname,
+        rfc: formData.generalData.rfc,
+        phone: formData.generalData.phone,
+        emails: formData.generalData.emails,
+        position: formData.generalData.position
+      }"></app-general-data-form
+  ></ng-container>
+
   <ng-container *ngIf="!!formData.governingBody.comment">
     <app-governing-body
       [updateParentModel]="updateData"
