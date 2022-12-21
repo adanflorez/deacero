@@ -21,7 +21,7 @@ export class CallAlertsComponent {
     projectManager: {
       comment: 'Comentario responsable del proyecto',
     },
-    projectDevelopmentComment: 'Comentario desarrollo del proyecto',
+    projectDevelopment: { comment: 'Comentario desarrollo del proyecto' },
     periodComment: 'Comentario vigencia',
     objectivesComment: 'Comentario objetivos y metas',
     projectBudgetComment: 'Comentario presupuesto de proyecto',

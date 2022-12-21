@@ -7,5 +7,5 @@ export default interface ProjectDevelopmentForm {
   populationsConditionsBefore?: string;
   populationsConditionsAfter?: string;
   promoteSocialImprovement?: string;
-  projectDevelopmentComment?: string;
+  comment?: string;
 }

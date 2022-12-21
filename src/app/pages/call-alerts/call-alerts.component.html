@@ -58,20 +58,24 @@
       }"></app-project-manager-form>
     <hr />
   </ng-container>
-  <ng-container *ngIf="!!formData.projectDevelopmentComment">
+  <ng-container *ngIf="!!formData.projectDevelopment.comment">
     <app-project-development-form
       [updateParentModel]="updateData"
       [defaultValues]="{
-        whichProblem: formData.whichProblem,
-        generalObjective: formData.generalObjective,
-        numberOfBeneficiaries: formData.numberOfBeneficiaries,
+        whichProblem: formData.projectDevelopment.whichProblem,
+        generalObjective: formData.projectDevelopment.generalObjective,
+        numberOfBeneficiaries:
+          formData.projectDevelopment.numberOfBeneficiaries,
         collaborationWithOtherOrganizations:
-          formData.collaborationWithOtherOrganizations,
-        collaboratorsAnswer: formData.collaboratorsAnswer,
-        populationsConditionsBefore: formData.populationsConditionsBefore,
-        populationsConditionsAfter: formData.populationsConditionsAfter,
-        promoteSocialImprovement: formData.promoteSocialImprovement,
-        projectDevelopmentComment: formData.projectDevelopmentComment
+          formData.projectDevelopment.collaborationWithOtherOrganizations,
+        collaboratorsAnswer: formData.projectDevelopment.collaboratorsAnswer,
+        populationsConditionsBefore:
+          formData.projectDevelopment.populationsConditionsBefore,
+        populationsConditionsAfter:
+          formData.projectDevelopment.populationsConditionsAfter,
+        promoteSocialImprovement:
+          formData.projectDevelopment.promoteSocialImprovement,
+        comment: formData.projectDevelopment.comment
       }"></app-project-development-form>
     <hr />
   </ng-container>
