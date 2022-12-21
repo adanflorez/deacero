@@ -1,4 +1,8 @@
 <h2 class="mb-3">Datos generales del proyecto</h2>
+<app-alert
+  [show]="!!defaultValues.generalDataComment"
+  [message]="defaultValues.generalDataComment!"
+  [type]="alertType"></app-alert>
 <div class="row" [formGroup]="form">
   <div class="col-12 col-md-6">
     <div class="mb-3">

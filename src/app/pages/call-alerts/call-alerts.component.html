@@ -19,13 +19,16 @@
       }"></app-remuneration-form>
     <hr />
   </ng-container>
-  <app-general-data-form
-    [updateParentModel]="updateData"
-    [defaultValues]="{
-      projectName: formData.projectName,
-      category: formData.category
-    }"></app-general-data-form>
-  <hr />
+  <ng-container *ngIf="!!formData.generalDataComment">
+    <app-general-data-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        projectName: formData.projectName,
+        category: formData.category,
+        generalDataComment: formData.generalDataComment
+      }"></app-general-data-form>
+    <hr />
+  </ng-container>
   <app-location-form
     [updateParentModel]="updateData"
     [defaultValues]="{

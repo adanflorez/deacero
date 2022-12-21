@@ -4,6 +4,7 @@ import FormValid from 'src/app/lib/models/form-valid.model';
 import GeneralDataForm from 'src/app/lib/models/general-data-form.model';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
 import { Subscription } from 'rxjs';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-general-data-form',
@@ -21,6 +22,7 @@ export class GeneralDataFormComponent implements OnInit {
 
   categories: string[] = [];
   groups: string[];
+  alertType: AlertType = AlertType.Warning;
 
   private unsubscribe: Subscription[] = [];
 
