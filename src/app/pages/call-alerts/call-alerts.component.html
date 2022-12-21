@@ -29,21 +29,21 @@
       }"></app-general-project-data-form>
     <hr />
   </ng-container>
-  <ng-container *ngIf="!!formData.locationComment">
+  <ng-container *ngIf="!!formData.location.comment">
     <app-location-form
       [updateParentModel]="updateData"
       [defaultValues]="{
-        locationQuestion: formData.locationQuestion,
-        street: formData.street,
-        colony: formData.colony,
-        town: formData.town,
-        state: formData.state,
-        postalCode: formData.postalCode,
-        video: formData.video,
-        daysAndHours: formData.daysAndHours,
-        aboutCall: formData.aboutCall,
-        whichMedia: formData.whichMedia,
-        locationComment: formData.locationComment
+        locationQuestion: formData.location.locationQuestion,
+        street: formData.location.street,
+        colony: formData.location.colony,
+        town: formData.location.town,
+        state: formData.location.state,
+        postalCode: formData.location.postalCode,
+        video: formData.location.video,
+        daysAndHours: formData.location.daysAndHours,
+        aboutCall: formData.location.aboutCall,
+        whichMedia: formData.location.whichMedia,
+        comment: formData.location.comment
       }"></app-location-form>
     <hr />
   </ng-container>

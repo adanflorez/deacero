@@ -9,5 +9,5 @@ export default interface LocationForm {
   daysAndHours?: string;
   aboutCall?: string;
   whichMedia?: string;
-  locationComment?: string;
+  comment?: string;
 }

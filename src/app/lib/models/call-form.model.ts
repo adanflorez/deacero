@@ -12,8 +12,7 @@ import ObjectivesForm from 'src/app/lib/models/objectives-form.model';
 import RatingForm from 'src/app/lib/models/rating-form.model';
 
 export default interface CallForm
-  extends LocationForm,
-    ProjectManagerForm,
+  extends ProjectManagerForm,
     ProjectDevelopmentForm,
     PeriodForm,
     SocialMediaForm,
@@ -24,4 +23,5 @@ export default interface CallForm
   governingBody: GoverningBody;
   remuneration: RemunerationForm;
   generalProjectData: GeneralProjectDataForm;
+  location: LocationForm;
 }
