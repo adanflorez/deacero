@@ -7,11 +7,16 @@ import { AlertType } from 'src/app/lib/enums/alert-type';
   styleUrls: ['./alert.component.scss'],
 })
 export class AlertComponent {
-  @Input() type: AlertType = AlertType.Danger;
-  @Input() message = '';
+  @Input() type: AlertType;
+  @Input() message;
+  @Input() show: boolean;
+  @Input() dismissible: boolean;
   @Output() hide = new EventEmitter();
 
-  get alertType(): string[] {
-    return ['alert-' + this.type];
+  constructor() {
+    this.type = AlertType.Danger;
+    this.message = '';
+    this.show = false;
+    this.dismissible = false;
   }
 }
