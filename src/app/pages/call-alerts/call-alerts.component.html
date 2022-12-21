@@ -79,13 +79,13 @@
       }"></app-project-development-form>
     <hr />
   </ng-container>
-  <ng-container *ngIf="!!formData.periodComment">
+  <ng-container *ngIf="!!formData.period.comment">
     <app-period-form
       [updateParentModel]="updateData"
       [defaultValues]="{
-        startDate: formData.startDate,
-        endDate: formData.endDate,
-        periodComment: formData.periodComment
+        startDate: formData.period.startDate,
+        endDate: formData.period.endDate,
+        comment: formData.period.comment
       }"></app-period-form>
     <hr />
   </ng-container>

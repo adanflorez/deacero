@@ -22,7 +22,7 @@ export class CallAlertsComponent {
       comment: 'Comentario responsable del proyecto',
     },
     projectDevelopment: { comment: 'Comentario desarrollo del proyecto' },
-    periodComment: 'Comentario vigencia',
+    period: { comment: 'Comentario vigencia' },
     objectivesComment: 'Comentario objetivos y metas',
     projectBudgetComment: 'Comentario presupuesto de proyecto',
     socialMediaComment: 'Comentario comunicacion',
