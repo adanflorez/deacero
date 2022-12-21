@@ -11,6 +11,7 @@ import FormValid from 'src/app/lib/models/form-valid.model';
 export class CallAlertsComponent {
   formData: CallForm = {
     governingBodyComment: 'Ajustes',
+    remunerationComment: 'Comenatrio remuneracion',
   };
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   formsStatus: FormValid[];

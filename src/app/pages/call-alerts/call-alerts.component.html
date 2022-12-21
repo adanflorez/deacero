@@ -10,12 +10,15 @@
       }"></app-governing-body>
     <hr />
   </ng-container>
-  <app-remuneration-form
-    [updateParentModel]="updateData"
-    [defaultValues]="{
-      remunerationQuestion: formData.remunerationQuestion
-    }"></app-remuneration-form>
-  <hr />
+  <ng-container *ngIf="!!formData.remunerationComment">
+    <app-remuneration-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        remunerationQuestion: formData.remunerationQuestion,
+        remunerationComment: formData.remunerationComment
+      }"></app-remuneration-form>
+    <hr />
+  </ng-container>
   <app-general-data-form
     [updateParentModel]="updateData"
     [defaultValues]="{

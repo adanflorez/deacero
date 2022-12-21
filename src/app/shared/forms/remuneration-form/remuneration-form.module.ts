@@ -1,7 +1,8 @@
-import { RemunerationTableModule } from './../../tables/remuneration-table/remuneration-table.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AlertModule } from 'src/app/shared/alert/alert.module';
+import { RemunerationTableModule } from './../../tables/remuneration-table/remuneration-table.module';
 import { RemunerationFormComponent } from './remuneration-form.component';
 
 @NgModule({
@@ -11,6 +12,7 @@ import { RemunerationFormComponent } from './remuneration-form.component';
     FormsModule,
     ReactiveFormsModule,
     RemunerationTableModule,
+    AlertModule,
   ],
   exports: [RemunerationFormComponent],
 })

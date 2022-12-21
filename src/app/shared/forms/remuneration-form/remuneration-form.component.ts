@@ -5,6 +5,7 @@ import Remuneration from 'src/app/lib/models/remuneration.model';
 import FormValid from 'src/app/lib/models/form-valid.model';
 import RemunerationForm from 'src/app/lib/models/remuneration-form.model';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-remuneration-form',
@@ -20,6 +21,7 @@ export class RemunerationFormComponent implements OnInit, OnDestroy {
   @Input() defaultValues: RemunerationForm;
   form: FormGroup;
   remunerations: Remuneration[];
+  alertType: AlertType = AlertType.Warning;
   private unsubscribe: Subscription[] = [];
 
   constructor() {
