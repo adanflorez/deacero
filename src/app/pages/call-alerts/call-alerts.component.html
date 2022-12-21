@@ -111,13 +111,16 @@
       }"></app-objectives-form>
     <hr />
   </ng-container>
-  <app-project-budget-form
-    [updateParentModel]="updateData"
-    [defaultValues]="{
-      contributions: formData.contributions,
-      conversions: formData.conversions
-    }"></app-project-budget-form>
-  <hr />
+  <ng-container *ngIf="!!formData.projectBudgetComment">
+    <app-project-budget-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        contributions: formData.contributions,
+        conversions: formData.conversions,
+        projectBudgetComment: formData.projectBudgetComment
+      }"></app-project-budget-form>
+    <hr />
+  </ng-container>
   <ng-container *ngIf="formData.category">
     <app-rating-form
       [updateParentModel]="updateData"

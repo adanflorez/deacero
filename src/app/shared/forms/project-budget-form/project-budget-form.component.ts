@@ -3,6 +3,7 @@ import { CallSection } from 'src/app/lib/enums/sections.enum';
 import FormValid from 'src/app/lib/models/form-valid.model';
 import ProjectBudget from 'src/app/lib/models/project-budget.model';
 import ProjectBudgetForm from 'src/app/lib/models/project-budget-form.model';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-project-budget-form',
@@ -19,6 +20,7 @@ export class ProjectBudgetFormComponent implements OnInit {
   contributions: ProjectBudget[];
   conversions: ProjectBudget[];
   donations: ProjectBudget[];
+  alertType: AlertType = AlertType.Warning;
 
   constructor() {
     this.contributions = [];
