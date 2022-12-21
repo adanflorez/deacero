@@ -18,7 +18,9 @@ export class CallAlertsComponent {
       comment: 'Comentario datos generales',
     },
     location: { comment: 'Comentario ubicacion' },
-    projectManagerComment: 'Comentario responsable del proyecto',
+    projectManager: {
+      comment: 'Comentario responsable del proyecto',
+    },
     projectDevelopmentComment: 'Comentario desarrollo del proyecto',
     periodComment: 'Comentario vigencia',
     objectivesComment: 'Comentario objetivos y metas',
