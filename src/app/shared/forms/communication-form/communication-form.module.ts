@@ -1,19 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommunicationFormComponent } from './communication-form.component';
-import { FormErrorModule } from '../../form-error/form-error.module';
-import { AlertModule } from 'src/app/shared/alert/alert.module';
+import { formModules } from '../modules';
 
 @NgModule({
   declarations: [CommunicationFormComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FormErrorModule,
-    AlertModule,
-  ],
+  imports: [...formModules],
   exports: [CommunicationFormComponent],
 })
 export class CommunicationFormModule {}
