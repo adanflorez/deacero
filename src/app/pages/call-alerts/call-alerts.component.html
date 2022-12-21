@@ -129,19 +129,19 @@
     <app-rating-form
       [updateParentModel]="updateData"
       [defaultValues]="{
-        livingConditions: formData.livingConditions,
-        lifeQuality: formData.lifeQuality,
-        capacityBuilding: formData.capacityBuilding,
-        supportType: formData.supportType,
-        supportScope: formData.supportScope,
-        resilienceBuilding: formData.resilienceBuilding,
-        socialBackwardness: formData.socialBackwardness,
-        communitySense: formData.communitySense,
-        sustainabilityProcesses: formData.sustainabilityProcesses,
-        statusImprovement: formData.statusImprovement,
-        urbanDevelopment: formData.urbanDevelopment,
-        professionalizationProcess: formData.professionalizationProcess,
-        opportunityGeneration: formData.opportunityGeneration
+        livingConditions: formData.rating.livingConditions,
+        lifeQuality: formData.rating.lifeQuality,
+        capacityBuilding: formData.rating.capacityBuilding,
+        supportType: formData.rating.supportType,
+        supportScope: formData.rating.supportScope,
+        resilienceBuilding: formData.rating.resilienceBuilding,
+        socialBackwardness: formData.rating.socialBackwardness,
+        communitySense: formData.rating.communitySense,
+        sustainabilityProcesses: formData.rating.sustainabilityProcesses,
+        statusImprovement: formData.rating.statusImprovement,
+        urbanDevelopment: formData.rating.urbanDevelopment,
+        professionalizationProcess: formData.rating.professionalizationProcess,
+        opportunityGeneration: formData.rating.opportunityGeneration
       }"
       [category]="formData.generalProjectData.category"></app-rating-form>
     <hr />
@@ -163,24 +163,24 @@
   <app-documents-form
     [updateParentModel]="updateData"
     [defaultValues]="{
-      ethicalCode: formData.ethicalCode,
-      governanceManual: formData.governanceManual,
-      timelineActivities: formData.timelineActivities,
-      workWithMinors: formData.workWithMinors,
+      ethicalCode: formData.documents.ethicalCode,
+      governanceManual: formData.documents.governanceManual,
+      timelineActivities: formData.documents.timelineActivities,
+      workWithMinors: formData.documents.workWithMinors,
       officialLetterOfAuthorizationOfDonees:
-        formData.officialLetterOfAuthorizationOfDonees,
-      updatedCertificate: formData.updatedCertificate,
+        formData.documents.officialLetterOfAuthorizationOfDonees,
+      updatedCertificate: formData.documents.updatedCertificate,
       publicationInAnnex14OfTheCurrentRMF:
-        formData.publicationInAnnex14OfTheCurrentRMF,
-      constituentAct: formData.constituentAct,
-      mostRecentMeeting: formData.mostRecentMeeting,
-      legalRepresentativesPower: formData.legalRepresentativesPower,
-      legalRepresentativesId: formData.legalRepresentativesId,
-      documentRFC: formData.documentRFC,
-      oldProofOfAddress: formData.oldProofOfAddress,
-      updatedComplianceOpinion: formData.updatedComplianceOpinion,
-      proofOfUpdatedTaxSituation: formData.proofOfUpdatedTaxSituation,
-      logo: formData.logo
+        formData.documents.publicationInAnnex14OfTheCurrentRMF,
+      constituentAct: formData.documents.constituentAct,
+      mostRecentMeeting: formData.documents.mostRecentMeeting,
+      legalRepresentativesPower: formData.documents.legalRepresentativesPower,
+      legalRepresentativesId: formData.documents.legalRepresentativesId,
+      documentRFC: formData.documents.documentRFC,
+      oldProofOfAddress: formData.documents.oldProofOfAddress,
+      updatedComplianceOpinion: formData.documents.updatedComplianceOpinion,
+      proofOfUpdatedTaxSituation: formData.documents.proofOfUpdatedTaxSituation,
+      logo: formData.documents.logo
     }"></app-documents-form>
 
   <button
