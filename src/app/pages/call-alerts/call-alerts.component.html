@@ -89,29 +89,29 @@
       }"></app-period-form>
     <hr />
   </ng-container>
-  <ng-container *ngIf="!!formData.objectivesComment">
+  <ng-container *ngIf="!!formData.objectives.comment">
     <app-objectives-form
       [updateParentModel]="updateData"
       [defaultValues]="{
-        objectives: formData.objectives,
-        povertyEnd: formData.povertyEnd,
-        zeroHunger: formData.zeroHunger,
-        healthAndWellness: formData.healthAndWellness,
-        qualityEducation: formData.qualityEducation,
-        genderEquality: formData.genderEquality,
-        cleanWater: formData.cleanWater,
-        affordableEnergy: formData.affordableEnergy,
-        decentWork: formData.decentWork,
-        industry: formData.industry,
-        reducingInequalities: formData.reducingInequalities,
-        cities: formData.cities,
-        production: formData.production,
-        climateAction: formData.climateAction,
-        underwaterLife: formData.underwaterLife,
-        terrestrialEcosystemLife: formData.terrestrialEcosystemLife,
-        peace: formData.peace,
-        alliances: formData.alliances,
-        objectivesComment: formData.objectivesComment
+        objectives: formData.objectives.objectives,
+        povertyEnd: formData.objectives.povertyEnd,
+        zeroHunger: formData.objectives.zeroHunger,
+        healthAndWellness: formData.objectives.healthAndWellness,
+        qualityEducation: formData.objectives.qualityEducation,
+        genderEquality: formData.objectives.genderEquality,
+        cleanWater: formData.objectives.cleanWater,
+        affordableEnergy: formData.objectives.affordableEnergy,
+        decentWork: formData.objectives.decentWork,
+        industry: formData.objectives.industry,
+        reducingInequalities: formData.objectives.reducingInequalities,
+        cities: formData.objectives.cities,
+        production: formData.objectives.production,
+        climateAction: formData.objectives.climateAction,
+        underwaterLife: formData.objectives.underwaterLife,
+        terrestrialEcosystemLife: formData.objectives.terrestrialEcosystemLife,
+        peace: formData.objectives.peace,
+        alliances: formData.objectives.alliances,
+        comment: formData.objectives.comment
       }"></app-objectives-form>
     <hr />
   </ng-container>
