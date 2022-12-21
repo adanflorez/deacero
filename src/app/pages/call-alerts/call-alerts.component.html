@@ -47,14 +47,17 @@
       }"></app-location-form>
     <hr />
   </ng-container>
-  <app-project-manager-form
-    [updateParentModel]="updateData"
-    [defaultValues]="{
-      responsibleName: formData.responsibleName,
-      emails: formData.emails,
-      phone: formData.phone
-    }"></app-project-manager-form>
-  <hr />
+  <ng-container *ngIf="!!formData.projectManagerComment">
+    <app-project-manager-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        responsibleName: formData.responsibleName,
+        emails: formData.emails,
+        phone: formData.phone,
+        projectManagerComment: formData.projectManagerComment
+      }"></app-project-manager-form>
+    <hr />
+  </ng-container>
   <app-project-development-form
     [updateParentModel]="updateData"
     [defaultValues]="{

@@ -8,6 +8,7 @@ import FormValid from 'src/app/lib/models/form-valid.model';
 import ProjectManagerForm from 'src/app/lib/models/project-manager-form.model';
 import { Subscription } from 'rxjs';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-project-manager-form',
@@ -22,6 +23,7 @@ export class ProjectManagerFormComponent implements OnInit, OnDestroy {
   ) => void = () => {};
   @Input() defaultValues: ProjectManagerForm;
   form: FormGroup;
+  alertType: AlertType = AlertType.Warning;
 
   private unsubscribe: Subscription[] = [];
 
