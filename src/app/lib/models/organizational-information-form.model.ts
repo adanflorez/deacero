@@ -9,4 +9,5 @@ export default interface OrganizationalInformationForm {
   mission?: string;
   vision?: string;
   ethicalValues?: string;
+  comment?: string;
 }

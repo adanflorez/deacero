@@ -5,6 +5,7 @@ import FormValid from 'src/app/lib/models/form-valid.model';
 import OrganizationalInformationForm from 'src/app/lib/models/organizational-information-form.model';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
 import { Subscription } from 'rxjs';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-organizational-information-form',
@@ -21,6 +22,7 @@ export class OrganizationalInformationFormComponent
   ) => void = () => {};
   @Input() defaultValues: OrganizationalInformationForm;
   form: FormGroup;
+  alertType: AlertType = AlertType.Warning;
 
   private unsubscribe: Subscription[] = [];
 

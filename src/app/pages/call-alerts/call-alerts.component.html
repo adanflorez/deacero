@@ -24,7 +24,7 @@
       }"></app-fund-manager-form>
     <hr
   /></ng-container>
-  <ng-container>
+  <ng-container *ngIf="!!formData.organizationalInformation.comment">
     <app-organizational-information-form
       [updateParentModel]="updateData"
       [defaultValues]="{
@@ -42,7 +42,8 @@
           formData.organizationalInformation.incorporationsStartDate,
         mission: formData.organizationalInformation.mission,
         vision: formData.organizationalInformation.vision,
-        ethicalValues: formData.organizationalInformation.ethicalValues
+        ethicalValues: formData.organizationalInformation.ethicalValues,
+        comment: formData.organizationalInformation.comment
       }"></app-organizational-information-form>
     <hr />
   </ng-container>
