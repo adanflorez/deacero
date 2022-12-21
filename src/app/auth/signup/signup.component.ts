@@ -1,12 +1,19 @@
 import { AlertType } from 'src/app/lib/enums/alert-type';
 import { AuthService } from 'src/app/lib/services/auth.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PASSWORD_PATERN } from 'src/app/lib/constants';
 import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
+import { validateRFC } from 'src/app/lib/helpers/rfc-validator';
 
-declare var window: any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare let window: any;
 
 @Component({
   selector: 'app-signup',
@@ -39,10 +46,10 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var tooltipTriggerList = [].slice.call(
+    const tooltipTriggerList = [].slice.call(
       document.querySelectorAll('[data-bs-toggle="tooltip"]')
     );
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
       return new window.bootstrap.Tooltip(tooltipTriggerEl);
     });
   }
@@ -66,11 +73,12 @@ export class SignupComponent implements OnInit {
         this.f['name'].value
       )
       .subscribe({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         next: (res: any) => {
           localStorage.setItem('token', res.data.token);
           this.router.navigate(['/home']);
         },
-        error: (error) => {
+        error: error => {
           this.showAlert = true;
           this.alertMessage = error.error.message;
           this.alertType = AlertType.Danger;
@@ -98,60 +106,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  validateRFC(input: any) {
-    var rfc = input.target.value.trim().toUpperCase(),
-      valido;
-
-    var rfcCorrecto = this.rfcValido(rfc); // ⬅️ Acá se comprueba
-
-    if (rfcCorrecto) {
-      valido = 'Válido';
-      this.f.name.updateValueAndValidity();
-    } else {
-      valido = 'No válido';
-      this.f.name.setErrors({ invalidRFC: true });
-    }
-  }
-
-  rfcValido(rfc: any, aceptarGenerico = true) {
-    const re =
-      /^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
-    var validado = rfc.match(re);
-
-    if (!validado)
-      //Coincide con el formato general del regex?
-      return false;
-
-    //Separar el dígito verificador del resto del RFC
-    const digitoVerificador = validado.pop(),
-      rfcSinDigito = validado.slice(1).join(''),
-      len = rfcSinDigito.length,
-      //Obtener el digito esperado
-      diccionario = '0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ Ñ',
-      indice = len + 1;
-    var suma, digitoEsperado;
-
-    if (len == 12) suma = 0;
-    else suma = 481; //Ajuste para persona moral
-
-    for (var i = 0; i < len; i++)
-      suma += diccionario.indexOf(rfcSinDigito.charAt(i)) * (indice - i);
-    digitoEsperado = 11 - (suma % 11);
-    if (digitoEsperado == 11) digitoEsperado = 0;
-    else if (digitoEsperado == 10) digitoEsperado = 'A';
-
-    //El dígito verificador coincide con el esperado?
-    // o es un RFC Genérico (ventas a público general)?
-    if (
-      digitoVerificador != digitoEsperado &&
-      (!aceptarGenerico || rfcSinDigito + digitoVerificador != 'XAXX010101000')
-    )
-      return false;
-    else if (
-      !aceptarGenerico &&
-      rfcSinDigito + digitoVerificador == 'XEXX010101000'
-    )
-      return false;
-    return rfcSinDigito + digitoVerificador;
+  validateRFC(input: Event, control: AbstractControl<unknown, unknown>) {
+    validateRFC(input, control);
   }
 }

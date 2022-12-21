@@ -1,14 +1,12 @@
 <div
   class="alert alert-dismissible fade show"
   [ngClass]="alertType"
-  role="alert"
->
+  role="alert">
   {{ message }}
   <button
     type="button"
     class="btn-close"
     data-bs-dismiss="alert"
     aria-label="Close"
-    (click)="close.emit()"
-  ></button>
+    (click)="hide.emit()"></button>
 </div>

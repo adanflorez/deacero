@@ -8,8 +8,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./validate.component.scss'],
 })
 export class ValidateComponent implements OnInit {
-  title: string = '';
-  message: string = '';
+  title = '';
+  message = '';
   success = false;
 
   constructor(
@@ -18,7 +18,7 @@ export class ValidateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.subscribe(params => {
       const { code, derivation, email } = params;
       this.validate(code, derivation, email);
     });

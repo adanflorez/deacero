@@ -11,9 +11,9 @@ export const BYPASS_AUTH = new HttpContextToken(() => false);
 
 export class TokenInterceptor implements HttpInterceptor {
   intercept(
-    req: HttpRequest<any>,
+    req: HttpRequest<unknown>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<unknown>> {
     if (req.context.get(BYPASS_AUTH) === true) return next.handle(req);
 
     const token = localStorage.getItem('token');

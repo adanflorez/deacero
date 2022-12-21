@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import {
   MULTIPLE_EMAIL_PATTERN,
@@ -8,6 +13,8 @@ import {
 import { AlertType } from 'src/app/lib/enums/alert-type';
 import { CallService } from 'src/app/lib/services/call.service';
 import { UserService } from 'src/app/lib/services/user.service';
+import Response from 'src/app/lib/models/response.model';
+import { validateRFC } from 'src/app/lib/helpers/rfc-validator';
 
 @Component({
   selector: 'app-home',
@@ -23,13 +30,16 @@ export class HomeComponent implements OnInit {
   products = [];
   donations = [];
   loading = false;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   oscData: any = {};
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private userService: UserService,
     private callService: CallService
-  ) {}
+  ) {
+    this.form = new FormGroup({});
+  }
 
   ngOnInit(): void {
     this.getOSC();
@@ -37,10 +47,10 @@ export class HomeComponent implements OnInit {
 
   getOSC() {
     this.loading = true;
-    this.userService.getOSC().subscribe((res) => {
+    this.userService.getOSC().subscribe((res: Response<unknown>) => {
       this.oscData = res.data;
-      this.products = res.data.product || [];
-      this.donations = res.data.donation || [];
+      this.products = (res.data as { product: never[] }).product || [];
+      this.donations = (res.data as { donation: never[] }).donation || [];
       this.initForm();
       this.getCallStatus();
       this.loading = false;
@@ -49,8 +59,8 @@ export class HomeComponent implements OnInit {
 
   getCallStatus(): void {
     if (this.form.valid) {
-      this.callService.status().subscribe((res: any) => {
-        if (res.data) {
+      this.callService.status().subscribe((res: unknown) => {
+        if ((res as Response<unknown>).data) {
           this.infoSaved$.next(true);
           this.form.disable();
         }
@@ -169,7 +179,7 @@ export class HomeComponent implements OnInit {
         this.f['whichTopics'].disable();
         this.f['whichTopics'].reset();
       });
-    this.form.get('previousDonations')?.valueChanges.subscribe((val) => {
+    this.form.get('previousDonations')?.valueChanges.subscribe(val => {
       this.showDonationsTable = val;
       this.donations = [];
     });
@@ -216,7 +226,7 @@ export class HomeComponent implements OnInit {
       donation: this.donations,
     };
     this.userService.updateOSC(form).subscribe({
-      next: (res) => {
+      next: () => {
         this.form.reset();
         this.showAlert = true;
         this.alertMessage = 'Información de OSC actualizada';
@@ -231,60 +241,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  validateRFC(input: any) {
-    var rfc = input.target.value.trim().toUpperCase(),
-      valido;
-
-    var rfcCorrecto = this.rfcValido(rfc); // ⬅️ Acá se comprueba
-
-    if (rfcCorrecto) {
-      valido = 'Válido';
-      this.f.rfc.updateValueAndValidity();
-    } else {
-      valido = 'No válido';
-      this.f.rfc.setErrors({ invalidRFC: true });
-    }
-  }
-
-  rfcValido(rfc: any, aceptarGenerico = true) {
-    const re =
-      /^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
-    var validado = rfc.match(re);
-
-    if (!validado)
-      //Coincide con el formato general del regex?
-      return false;
-
-    //Separar el dígito verificador del resto del RFC
-    const digitoVerificador = validado.pop(),
-      rfcSinDigito = validado.slice(1).join(''),
-      len = rfcSinDigito.length,
-      //Obtener el digito esperado
-      diccionario = '0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ Ñ',
-      indice = len + 1;
-    var suma, digitoEsperado;
-
-    if (len == 12) suma = 0;
-    else suma = 481; //Ajuste para persona moral
-
-    for (var i = 0; i < len; i++)
-      suma += diccionario.indexOf(rfcSinDigito.charAt(i)) * (indice - i);
-    digitoEsperado = 11 - (suma % 11);
-    if (digitoEsperado == 11) digitoEsperado = 0;
-    else if (digitoEsperado == 10) digitoEsperado = 'A';
-
-    //El dígito verificador coincide con el esperado?
-    // o es un RFC Genérico (ventas a público general)?
-    if (
-      digitoVerificador != digitoEsperado &&
-      (!aceptarGenerico || rfcSinDigito + digitoVerificador != 'XAXX010101000')
-    )
-      return false;
-    else if (
-      !aceptarGenerico &&
-      rfcSinDigito + digitoVerificador == 'XEXX010101000'
-    )
-      return false;
-    return rfcSinDigito + digitoVerificador;
+  validateRFC(input: Event, control: AbstractControl) {
+    validateRFC(input, control);
   }
 }

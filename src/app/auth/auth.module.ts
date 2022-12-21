@@ -1,3 +1,4 @@
+import { DaButtonModule } from '../shared/da-button/da-button.module';
 import { FormErrorModule } from './../shared/form-error/form-error.module';
 import { NavbarModule } from './../shared/navbar/navbar.module';
 import { AlertModule } from './../shared/alert/alert.module';
@@ -32,6 +33,7 @@ import { AuthComponent } from './auth.component';
     AlertModule,
     NavbarModule,
     FormErrorModule,
+    DaButtonModule,
   ],
 })
 export class AuthModule {}

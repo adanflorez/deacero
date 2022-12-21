@@ -4,8 +4,7 @@
       class="img-fluid center-block mt-3"
       style="max-width: 378px"
       src="/assets/img/fundacion.png"
-      alt="fundacion"
-    />
+      alt="fundacion" />
     <h3 class="my-3">Ingreso al sistema de Fundación DEACERO</h3>
   </div>
   <div class="row justify-content-center">
@@ -15,8 +14,7 @@
           *ngIf="showAlert"
           (close)="showAlert = false"
           [message]="message"
-          [type]="alertType"
-        ></app-alert>
+          [type]="alertType"></app-alert>
         <h3 class="text-independence text-center">BIENVENIDO</h3>
         <form [formGroup]="loginForm">
           <div class="mb-3">
@@ -29,12 +27,10 @@
               formControlName="username"
               [class.is-invalid]="
                 f['username'].invalid && f['username'].touched
-              "
-            />
+              " />
             <div
               class="invalid-feedback"
-              *ngIf="f['username'].invalid && f['username'].touched"
-            >
+              *ngIf="f['username'].invalid && f['username'].touched">
               Correo no valido
             </div>
           </div>
@@ -48,40 +44,31 @@
               formControlName="password"
               [class.is-invalid]="
                 f['password'].invalid && f['password'].touched
-              "
-            />
+              " />
             <div
               class="invalid-feedback"
-              *ngIf="f['password'].invalid && f['password'].touched"
-            >
+              *ngIf="f['password'].invalid && f['password'].touched">
               Campo obligatorio
             </div>
           </div>
-          <div class="d-grid gap-2">
-            <button
-              class="btn btn-primary"
-              type="button"
-              [disabled]="loginForm.invalid"
-              (click)="login()"
-            >
-              Entrar
-            </button>
-          </div>
+          <da-button
+            color="primary"
+            label="Entrar"
+            display="grid"
+            [disabled]="loginForm.invalid"
+            (clicked)="login()"></da-button>
           <hr
-            class="bg-independence border-1 border-top border-independence w-100"
-          />
+            class="bg-independence border-1 border-top border-independence w-100" />
           <div class="d-flex flex-column mb-2">
             <app-password-recovery
               class="ms-auto"
               (showAlert)="
                 setAlert($event.showAlert, $event.message, $event.alertType)
-              "
-            ></app-password-recovery>
+              "></app-password-recovery>
             <button
               type="button"
               class="btn btn-link ms-auto"
-              routerLink="/auth/call"
-            >
+              routerLink="/auth/call">
               Crear usuario
             </button>
           </div>

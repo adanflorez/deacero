@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
@@ -6,13 +6,10 @@ import { AlertType } from 'src/app/lib/enums/alert-type';
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
 })
-export class AlertComponent implements OnInit {
+export class AlertComponent {
   @Input() type: AlertType = AlertType.Danger;
-  @Input() message: string = '';
-  @Output() close = new EventEmitter();
-  constructor() {}
-
-  ngOnInit(): void {}
+  @Input() message = '';
+  @Output() hide = new EventEmitter();
 
   get alertType(): string[] {
     return ['alert-' + this.type];

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BYPASS_AUTH } from '../interceptors/token.interceptor';
+import Response from '../models/response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,12 +31,16 @@ export class AuthService {
     );
   }
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(this.apiLogin, { username, password }, this.byPASS);
+  login(username: string, password: string): Observable<Response<unknown>> {
+    return this.http.post<Response<unknown>>(
+      this.apiLogin,
+      { username, password },
+      this.byPASS
+    );
   }
 
-  passwordRecovery(email: string): Observable<any> {
-    return this.http.get(
+  passwordRecovery(email: string): Observable<Response<unknown>> {
+    return this.http.get<Response<unknown>>(
       `${this.apiUser}/recover/password?email=${email}`,
       this.byPASS
     );
@@ -45,8 +50,8 @@ export class AuthService {
     code: string,
     derivation: string,
     email: string
-  ): Observable<any> {
-    return this.http.get(
+  ): Observable<Response<unknown>> {
+    return this.http.get<Response<unknown>>(
       `${this.apiUser}/validate?code=${code}&derivation=${derivation}&email=${email}`,
       this.byPASS
     );

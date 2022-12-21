@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import Response from '../models/response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +11,11 @@ export class CallService {
   private apiCall = environment.apiCall;
   constructor(private http: HttpClient) {}
 
-  applicateToCall(data: any): Observable<any> {
-    return this.http.post(`${this.apiCall}application/`, data);
+  applicateToCall(data: unknown): Observable<Response<unknown>> {
+    return this.http.post<Response<unknown>>(
+      `${this.apiCall}application/`,
+      data
+    );
   }
 
   application() {
@@ -22,7 +26,9 @@ export class CallService {
     return this.http.put(`${this.apiCall}application/send`, {});
   }
 
-  status() {
-    return this.http.get(`${this.apiCall}application/status`);
+  status(): Observable<Response<unknown>> {
+    return this.http.get<Response<unknown>>(
+      `${this.apiCall}application/status`
+    );
   }
 }

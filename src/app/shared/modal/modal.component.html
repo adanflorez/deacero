@@ -5,8 +5,7 @@
   data-bs-keyboard="false"
   tabindex="-1"
   aria-labelledby="mainModal"
-  aria-hidden="true"
->
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -16,23 +15,17 @@
           class="btn-close"
           aria-label="Close"
           *ngIf="closable"
-          (click)="close.emit()"
-        ></button>
+          (click)="closeModal.emit()"></button>
       </div>
       <ng-content selector="content"> </ng-content>
       <div class="modal-footer">
         <button
           type="button"
           class="btn btn-secondary"
-          (click)="close.emit()"
-        >
+          (click)="closeModal.emit()">
           Cancelar
         </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="confirm.emit()"
-        >
+        <button type="button" class="btn btn-primary" (click)="confirm.emit()">
           {{ acceptLabel }}
         </button>
       </div>

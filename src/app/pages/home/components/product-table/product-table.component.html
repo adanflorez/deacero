@@ -15,7 +15,7 @@
     <tbody>
       <tr *ngFor="let product of products">
         <td>{{ product.description }}</td>
-        <td>{{ product.price | currency: "MXN" }}</td>
+        <td>{{ product.price | currency : 'MXN' }}</td>
         <td>{{ product.available }}</td>
         <td>{{ product.season }}</td>
         <td style="max-width: 150px">
@@ -29,14 +29,12 @@
           <ng-container *ngIf="!isEditMode && !readOnly">
             <button
               class="btn btn-secondary p-1 me-2"
-              (click)="loadProductInFields(product.id, modal)"
-            >
+              (click)="loadProductInFields(product.id, modal)">
               <img height="18" src="/assets/icons/edit.png" alt="edit" />
             </button>
             <button
               class="btn btn-secondary p-1"
-              (click)="removeProduct(product.id)"
-            >
+              (click)="removeProduct(product.id)">
               <img height="18" src="/assets/icons/trash.png" alt="trash" />
             </button>
           </ng-container>
@@ -60,7 +58,7 @@
           <td>{{ product.description }}</td>
         </tr>
         <tr>
-          <td>{{ product.price | currency: "MXN" }}</td>
+          <td>{{ product.price | currency : 'MXN' }}</td>
         </tr>
         <tr>
           <td>{{ product.available }}</td>
@@ -80,14 +78,12 @@
             <ng-container *ngIf="!isEditMode && !readOnly">
               <button
                 class="btn btn-secondary p-1 me-2"
-                (click)="loadProductInFields(product.id, modal)"
-              >
+                (click)="loadProductInFields(product.id, modal)">
                 <img height="18" src="/assets/icons/edit.png" alt="edit" />
               </button>
               <button
                 class="btn btn-secondary p-1"
-                (click)="removeProduct(product.id)"
-              >
+                (click)="removeProduct(product.id)">
                 <img height="18" src="/assets/icons/trash.png" alt="trash" />
               </button>
             </ng-container>
@@ -113,8 +109,7 @@
       type="button"
       class="btn-close"
       aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    ></button>
+      (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
     <form [formGroup]="form" class="px-4">
@@ -124,8 +119,7 @@
         class="form-control mb-4"
         id="description"
         placeholder="Descripción"
-        formControlName="description"
-      />
+        formControlName="description" />
       <label class="form-label" for="price">Precio</label>
       <input
         type="text"
@@ -136,14 +130,12 @@
         [class.is-invalid]="f['price'].invalid && f['price'].touched"
         mask="separator.2"
         thousandSeparator="."
-        prefix="MX$ "
-      />
+        prefix="MX$ " />
       <label class="form-label" for="available">Disponibilidad</label>
       <select
         class="form-select mb-4"
         formControlName="available"
-        id="available"
-      >
+        id="available">
         <option selected>Click para seleccionar</option>
         <option value="Permanente">Permanente</option>
         <option value="De temporada">De temporada</option>
@@ -155,17 +147,15 @@
         class="form-control mb-4"
         id="season"
         placeholder="Temporada"
-        formControlName="season"
-      />
+        formControlName="season" />
       <div class="mb-3">
         <label class="form-label" for="photo">Fotografía del producto</label>
-        <ng-container *ngIf="!(photoUrl | async); else photo">
+        <ng-container *ngIf="(photoUrl | async) === undefined; else photo">
           <input
             class="form-control"
             type="file"
             id="photo"
-            (change)="uploadPhoto($event)"
-          />
+            (change)="uploadPhoto($event)" />
         </ng-container>
         <ng-template #photo>
           <div class="input-group mb-4">
@@ -175,12 +165,10 @@
               id="photo"
               placeholder="https://..."
               formControlName="photo"
-              readonly
-            />
+              readonly />
             <button
               class="btn btn-secondary p-1"
-              (click)="photoUrl.next(undefined); f.photo.setValue('')"
-            >
+              (click)="photoUrl.next(undefined); f.photo.setValue('')">
               <img height="18" src="/assets/icons/trash.png" alt="trash" />
             </button>
           </div>
@@ -191,16 +179,14 @@
   <div class="modal-footer">
     <button
       class="btn btn-secondary me-2"
-      (click)="cancelEdit(); modal.close()"
-    >
+      (click)="cancelEdit(); modal.close()">
       Cancelar
     </button>
     <ng-container *ngIf="isEditMode; else save">
       <button
         class="btn btn-primary"
         (click)="editProduct(); modal.close()"
-        [disabled]="!validForm"
-      >
+        [disabled]="!validForm">
         Editar
       </button>
     </ng-container>
@@ -209,8 +195,7 @@
         *ngIf="!isEditMode"
         class="btn btn-primary"
         (click)="addProduct(); modal.close()"
-        [disabled]="!validForm"
-      >
+        [disabled]="!validForm">
         Guardar
       </button>
     </ng-template>

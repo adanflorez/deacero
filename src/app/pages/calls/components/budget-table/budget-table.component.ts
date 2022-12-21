@@ -1,5 +1,5 @@
 import { TableComponent } from 'src/app/lib/models/table.model';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,26 +10,27 @@ import ProjectBudget from 'src/app/lib/models/project-budget.model';
   templateUrl: './budget-table.component.html',
   styleUrls: ['./budget-table.component.scss'],
 })
-export class BudgetTableComponent
-  implements OnInit, TableComponent<ProjectBudget>
-{
-  @Input() records: any[] = [];
+export class BudgetTableComponent implements TableComponent<ProjectBudget> {
+  @Input() records: ProjectBudget[] = [];
   @Input() readOnly: boolean | null = false;
-  @Output() onChange: EventEmitter<ProjectBudget[]> = new EventEmitter();
-  form: FormGroup<any>;
+  @Output() recordChange: EventEmitter<ProjectBudget[]> = new EventEmitter();
+  form: FormGroup;
   validForm: boolean;
   closeResult: string;
   isEditMode: boolean;
-  recordToEdit: ProjectBudget;
+  recordToEdit!: ProjectBudget;
 
   constructor(private modalService: NgbModal) {
+    this.validForm = false;
+    this.closeResult = '';
+    this.isEditMode = false;
     this.form = new FormGroup({
       activity: new FormControl(''),
       amount: new FormControl(''),
       expenseType: new FormControl(''),
     });
 
-    this.form.valueChanges.subscribe((values) => {
+    this.form.valueChanges.subscribe(values => {
       const { activity, amount, expenseType } = values;
       if (activity || amount || expenseType) {
         this.validForm = this.form.valid && true;
@@ -39,9 +40,7 @@ export class BudgetTableComponent
     });
   }
 
-  ngOnInit(): void {}
-
-  get f(): any {
+  get f(): unknown {
     return this.form.controls;
   }
 
@@ -51,26 +50,26 @@ export class BudgetTableComponent
       id: uuidv4(),
       ...this.form.value,
     });
-    this.onChange.emit(this.records);
+    this.recordChange.emit(this.records);
     this.form.reset();
   }
-  editRecord(...args: any): void {
+  editRecord(): void {
     this.recordToEdit = { ...this.recordToEdit, ...this.form.value };
     this.records = this.records.filter(
-      (record) => record.id !== this.recordToEdit.id
+      record => record.id !== this.recordToEdit.id
     );
     this.records.push(this.recordToEdit);
-    this.onChange.emit(this.records);
+    this.recordChange.emit(this.records);
     this.isEditMode = false;
     this.form.reset();
   }
   removeRecord(id: string): void {
-    this.records = this.records.filter((record) => record.id !== id);
-    this.onChange.emit(this.records);
+    this.records = this.records.filter(record => record.id !== id);
+    this.recordChange.emit(this.records);
   }
 
-  loadRecordInFields(id: string, modal: any): void {
-    const records = this.records.filter((record) => record.id === id);
+  loadRecordInFields(id: string, modal: unknown): void {
+    const records = this.records.filter(record => record.id === id);
     this.recordToEdit = records[0];
     const { activity, amount, expenseType } = records[0];
     this.form.setValue({
@@ -82,17 +81,17 @@ export class BudgetTableComponent
     this.open(modal);
   }
 
-  open(content: any): void {
+  open(content: unknown): void {
     this.modalService
       .open(content, {
         ariaLabelledBy: 'modal-basic-title',
         backdrop: 'static',
       })
       .result.then(
-        (result) => {
+        result => {
           this.closeResult = `Closed with: ${result}`;
         },
-        (reason) => {
+        () => {
           this.form.reset();
         }
       );

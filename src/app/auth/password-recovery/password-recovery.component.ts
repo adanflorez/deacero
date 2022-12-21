@@ -32,7 +32,7 @@ export class PasswordRecoveryComponent implements OnInit {
   confirm() {
     if (this.form.invalid) return;
     this.authService.passwordRecovery(this.f['email'].value).subscribe({
-      next: (res) => {
+      next: () => {
         this.showModal = false;
         this.showAlert.emit({
           showAlert: true,
@@ -41,7 +41,7 @@ export class PasswordRecoveryComponent implements OnInit {
         });
         this.form.reset();
       },
-      error: (error) => {
+      error: () => {
         this.showModal = false;
         this.showAlert.emit({
           showAlert: true,
