@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import FormValid from 'src/app/lib/models/form-valid.model';
 import StrategicAlliancesForm from 'src/app/lib/models/strategic-alliances-form.model';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-strategic-alliances-form',
@@ -18,6 +19,8 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
   ) => void = () => {};
   @Input() defaultValues: StrategicAlliancesForm;
   form: FormGroup;
+  alertType: AlertType = AlertType.Warning;
+
   private unsubscribe: Subscription[] = [];
 
   constructor() {

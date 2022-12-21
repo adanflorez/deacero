@@ -47,7 +47,7 @@
       }"></app-organizational-information-form>
     <hr />
   </ng-container>
-  <ng-container>
+  <ng-container *ngIf="!!formData.strategicAlliances.comment">
     <app-strategic-alliances-form
       [updateParentModel]="updateData"
       [defaultValues]="{
@@ -56,7 +56,8 @@
         issuesToStrengthen: formData.strategicAlliances.issuesToStrengthen,
         whichTopics: formData.strategicAlliances.whichTopics,
         previousDonations: formData.strategicAlliances.previousDonations,
-        strategicAlliances: formData.strategicAlliances.strategicAlliances
+        strategicAlliances: formData.strategicAlliances.strategicAlliances,
+        comment: formData.strategicAlliances.comment
       }"></app-strategic-alliances-form>
     <hr />
   </ng-container>

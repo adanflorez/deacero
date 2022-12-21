@@ -5,4 +5,5 @@ export default interface StrategicAlliancesForm {
   whichTopics?: string;
   previousDonations?: string;
   strategicAlliances?: string;
+  comment?: string;
 }
