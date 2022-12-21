@@ -20,10 +20,12 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
   @Input() defaultValues: StrategicAlliancesForm;
   form: FormGroup;
   alertType: AlertType = AlertType.Warning;
+  showDonationsTable: boolean;
 
   private unsubscribe: Subscription[] = [];
 
   constructor() {
+    this.showDonationsTable = true;
     this.form = new FormGroup({});
     this.defaultValues = {};
   }
@@ -48,7 +50,7 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
     };
   }
 
-  initForm() {
+  private initForm(): void {
     this.form = new FormGroup({
       alliances: new FormControl(this.defaultValues.alliances),
       courses: new FormControl(this.defaultValues.courses, Validators.required),
@@ -61,8 +63,7 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
         Validators.required
       ),
       previousDonations: new FormControl(
-        this.defaultValues.previousDonations || true,
-        Validators.required
+        this.defaultValues.previousDonations || true
       ),
       strategicalAlliances: new FormControl(
         this.defaultValues.strategicalAlliances,
@@ -71,16 +72,17 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
     });
     this.subscribeToForm();
     this.subscribeToIssues();
+    this.subscribeToPreviousDonations();
   }
 
-  subscribeToForm() {
+  private subscribeToForm(): void {
     const sub = this.form.valueChanges.subscribe(val => {
       this.updateParentModel(val, this.isValidForm);
     });
     this.unsubscribe.push(sub);
   }
 
-  subscribeToIssues() {
+  private subscribeToIssues(): void {
     const sub = this.form
       .get('issuesToStrengthen')
       ?.valueChanges.subscribe((res: string[]) => {
@@ -90,6 +92,19 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
         }
         this.f['whichTopics'].disable();
         this.f['whichTopics'].reset();
+      });
+    this.unsubscribe.push(sub as Subscription);
+  }
+
+  private subscribeToPreviousDonations(): void {
+    const sub = this.form
+      .get('previousDonations')
+      ?.valueChanges.subscribe((check: boolean) => {
+        if (check) {
+          this.showDonationsTable = true;
+        } else {
+          this.showDonationsTable = false;
+        }
       });
     this.unsubscribe.push(sub as Subscription);
   }
