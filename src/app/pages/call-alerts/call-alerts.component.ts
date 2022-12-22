@@ -288,6 +288,8 @@ export class CallAlertsComponent implements OnInit {
           logoComment: res.data.documents.logoComments,
         },
         rating: {
+          livingConditions: res.data.selfAppraisal.improveLivingConditions,
+          lifeQuality: res.data.selfAppraisal.improvementInQualityOfLife,
           comment: res.data.selfAppraisal.comments,
           capacityBuilding: res.data.selfAppraisal.selfManagementSkills,
           supportType: res.data.selfAppraisal.supportType,
