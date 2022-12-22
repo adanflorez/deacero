@@ -42,4 +42,8 @@ export class CallService {
       form,
     });
   }
+
+  feedbackStatus(): Observable<Response<unknown>> {
+    return this.http.get<Response<unknown>>(`${this.apiFeedback}status`);
+  }
 }

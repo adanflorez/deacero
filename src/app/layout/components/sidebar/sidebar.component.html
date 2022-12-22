@@ -20,13 +20,13 @@
         Aplicación a convocatoria
       </a>
     </li>
-    <li class="nav-item">
+    <li *ngIf="showAdministrationOption" class="nav-item">
       <a
         routerLink="/call-alerts"
         class="nav-link"
         routerLinkActive="active"
         aria-current="page">
-        Aplicación a convocatoria alertas
+        Corrección de administración de la solicitud
       </a>
     </li>
   </ul>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { LayoutService } from 'src/app/lib/services/layout.service';
+import { CallService } from 'src/app/lib/services/call.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,14 +11,23 @@ import { LayoutService } from 'src/app/lib/services/layout.service';
 export class SidebarComponent implements OnInit {
   data$: Observable<boolean>;
   show: boolean;
-  constructor(layout: LayoutService) {
+  showAdministrationOption: boolean;
+
+  constructor(layout: LayoutService, private callService: CallService) {
     this.show = false;
+    this.showAdministrationOption = false;
     this.data$ = layout.sidebarIsOpenSubject;
   }
 
   ngOnInit(): void {
+    this.validateMenu();
     this.data$.subscribe(res => {
       this.show = res;
     });
+  }
+
+  async validateMenu(): Promise<void> {
+    const res = await firstValueFrom(this.callService.feedbackStatus());
+    this.showAdministrationOption = res.data as boolean;
   }
 }
