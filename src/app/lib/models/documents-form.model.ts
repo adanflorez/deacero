@@ -4,6 +4,7 @@ export default interface DocumentsForm {
   governanceManual?: string;
   governanceManualComment?: string;
   timelineActivities?: string;
+  timelineActivitiesComment?: string;
   workWithMinors?: string;
   officialLetterOfAuthorizationOfDonees?: string;
   updatedCertificate?: string;

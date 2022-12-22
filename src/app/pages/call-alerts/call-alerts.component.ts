@@ -238,6 +238,9 @@ export class CallAlertsComponent implements OnInit {
           governanceManual: res.data.documents.governanceHandbook,
           governanceManualComment:
             res.data.documents.commentsInTheGovernanceManual,
+          timelineActivities: res.data.documents.scheduleOfActivities,
+          timelineActivitiesComment:
+            res.data.documents.commentsInTheScheduleOfActivities,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,
