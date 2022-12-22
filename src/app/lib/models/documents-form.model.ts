@@ -28,5 +28,6 @@ export default interface DocumentsForm {
   updatedComplianceOpinion?: string;
   updatedComplianceOpinionComment?: string;
   proofOfUpdatedTaxSituation?: string;
+  proofOfUpdatedTaxSituationComment?: string;
   logo?: string;
 }

@@ -280,6 +280,10 @@ export class CallAlertsComponent implements OnInit {
           updatedComplianceOpinion: res.data.documents.updatedComplianceOpinion,
           updatedComplianceOpinionComment:
             res.data.documents.commentsInUpdatedComplianceOpinion,
+          proofOfUpdatedTaxSituation:
+            res.data.documents.proofOfUpdatedTaxSituation,
+          proofOfUpdatedTaxSituationComment:
+            res.data.documents.commentsInProofOfUpdatedFiscalSituation,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,
