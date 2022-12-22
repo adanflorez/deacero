@@ -273,6 +273,10 @@ export class CallAlertsComponent implements OnInit {
               .commentsInOfficialIdentificationOfTheLegalRepresentative,
           documentRFC: res.data.documents.documentRFC,
           documentRFCComment: res.data.documents.commentsInTheRFCDocument,
+          oldProofOfAddress: res.data.documents.oldProofOfAddress,
+          oldProofOfAddressComment:
+            res.data.documents
+              .commentsProofOfAddressWithAnAgeOfNoMoreThanMonths,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,

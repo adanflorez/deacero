@@ -24,6 +24,7 @@ export default interface DocumentsForm {
   documentRFC?: string;
   documentRFCComment?: string;
   oldProofOfAddress?: string;
+  oldProofOfAddressComment?: string;
   updatedComplianceOpinion?: string;
   proofOfUpdatedTaxSituation?: string;
   logo?: string;
