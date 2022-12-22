@@ -139,4 +139,10 @@
       <app-form-error [control]="f['strategicalAlliances']"></app-form-error>
     </div>
   </div>
+  <div class="col-12">
+    <app-product-table
+      [products]="products"
+      [readOnly]="false"
+      (productsList)="updateProducts($event)"></app-product-table>
+  </div>
 </div>

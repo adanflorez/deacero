@@ -6,6 +6,7 @@ import StrategicAlliancesForm from 'src/app/lib/models/strategic-alliances-form.
 import { CallSection } from 'src/app/lib/enums/sections.enum';
 import { AlertType } from 'src/app/lib/enums/alert-type';
 import Donation from 'src/app/lib/models/donation.model';
+import Product from 'src/app/lib/models/product.model';
 
 @Component({
   selector: 'app-strategic-alliances-form',
@@ -23,12 +24,14 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
   alertType: AlertType = AlertType.Warning;
   showDonationsTable: boolean;
   donations: Donation[];
+  products: Product[];
 
   private unsubscribe: Subscription[] = [];
 
   constructor() {
     this.showDonationsTable = true;
     this.donations = [];
+    this.products = [];
     this.form = new FormGroup({});
     this.defaultValues = {};
   }
@@ -50,9 +53,9 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
     return {
       name: CallSection.STRATEGIC_ALLIANCES,
       valid:
-        this.form.valid && this.f['previousDonations'].value
-          ? this.donations.length > 0
-          : true,
+        this.form.valid &&
+        this.products.length > 0 &&
+        (this.f['previousDonations'].value ? this.donations.length > 0 : true),
     };
   }
 
@@ -84,7 +87,7 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
   private subscribeToForm(): void {
     const sub = this.form.valueChanges.subscribe(val => {
       this.updateParentModel(
-        { ...val, donations: this.donations },
+        { ...val, donations: this.donations, products: this.products },
         this.isValidForm
       );
     });
@@ -117,7 +120,21 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
 
   updateDonations(donations: Donation[]) {
     this.donations = donations;
-    const data = { ...this.form.value, donations };
+    const data = {
+      ...this.form.value,
+      products: this.products,
+      donations: this.donations,
+    };
+    this.updateParentModel(data, this.isValidForm);
+  }
+
+  updateProducts(products: Product[]) {
+    this.products = products;
+    const data = {
+      ...this.form.value,
+      products: this.products,
+      donations: this.donations,
+    };
     this.updateParentModel(data, this.isValidForm);
   }
 }
