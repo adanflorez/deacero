@@ -271,6 +271,8 @@ export class CallAlertsComponent implements OnInit {
           legalRepresentativesIdComment:
             res.data.documents
               .commentsInOfficialIdentificationOfTheLegalRepresentative,
+          documentRFC: res.data.documents.documentRFC,
+          documentRFCComment: res.data.documents.commentsInTheRFCDocument,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,

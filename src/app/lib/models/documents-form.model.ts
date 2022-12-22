@@ -22,6 +22,7 @@ export default interface DocumentsForm {
   legalRepresentativesId?: string;
   legalRepresentativesIdComment?: string;
   documentRFC?: string;
+  documentRFCComment?: string;
   oldProofOfAddress?: string;
   updatedComplianceOpinion?: string;
   proofOfUpdatedTaxSituation?: string;
