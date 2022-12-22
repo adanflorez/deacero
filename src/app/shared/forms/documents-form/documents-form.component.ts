@@ -252,8 +252,8 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
     let allowedExtensions = /(\.pdf)$/i;
     let message = 'El archivo debe ser de extension .pdf';
     if (isImage) {
-      allowedExtensions = /(\.png|\.ai|\.svg|\.pdf)$/i;
-      message = 'El archivo debe ser de extension .pdf, .png, .ai o .svg';
+      allowedExtensions = /(\.png|\.ai|\.svg|\.pdf|\.jpg|\.jpeg)$/i;
+      message = 'El archivo debe ser de extension .jpg, .pdf, .png, .ai o .svg';
     }
     const fileInput = document.getElementById(inputId) as HTMLInputElement;
     const filePath = fileInput?.value;
