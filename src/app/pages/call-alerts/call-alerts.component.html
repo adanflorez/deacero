@@ -63,7 +63,7 @@
       }"></app-strategic-alliances-form>
     <hr />
   </ng-container>
-  <ng-container
+  <ng-container *ngIf="!!formData.decentWork.comment"
     ><app-decent-work-form
       [updateParentModel]="updateData"
       [defaultValues]="{
