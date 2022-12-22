@@ -277,6 +277,9 @@ export class CallAlertsComponent implements OnInit {
           oldProofOfAddressComment:
             res.data.documents
               .commentsProofOfAddressWithAnAgeOfNoMoreThanMonths,
+          updatedComplianceOpinion: res.data.documents.updatedComplianceOpinion,
+          updatedComplianceOpinionComment:
+            res.data.documents.commentsInUpdatedComplianceOpinion,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,
