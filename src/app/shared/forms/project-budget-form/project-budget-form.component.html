@@ -1,0 +1,22 @@
+<h2 class="mb-3">Presupuesto del proyecto</h2>
+<h6>Contribución de la organización</h6>
+<app-alert
+  [show]="!!defaultValues.comment"
+  [message]="defaultValues.comment!"
+  [type]="alertType"></app-alert>
+<app-budget-table
+  [records]="contributions"
+  [readOnly]="false"
+  (recordChange)="updateContributions($event)"></app-budget-table>
+<hr />
+<h6>Conversión</h6>
+<app-budget-table
+  [records]="conversions"
+  [readOnly]="false"
+  (recordChange)="updateConversions($event)"></app-budget-table>
+<hr />
+<h6>Donativo Fundación DEACERO</h6>
+<app-budget-table
+  [records]="donations"
+  [readOnly]="false"
+  (recordChange)="updateDonations($event)"></app-budget-table>

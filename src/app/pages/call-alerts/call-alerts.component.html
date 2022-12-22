@@ -1,0 +1,304 @@
+<div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  <app-alert
+    [show]="showAlert"
+    [message]="alertMessage"
+    [type]="alertType"
+    [dismissible]="true"></app-alert>
+  <ng-container *ngIf="!!formData.generalData.comment"
+    ><app-general-data-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        tradename: formData.generalData.tradename,
+        businessname: formData.generalData.businessname,
+        rfc: formData.generalData.rfc,
+        phone: formData.generalData.phone,
+        emails: formData.generalData.emails,
+        position: formData.generalData.position,
+        comment: formData.generalData.comment
+      }"></app-general-data-form>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!!formData.fundManager.comment"
+    ><app-fund-manager-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        name: formData.fundManager.name,
+        responsibleEmail: formData.fundManager.responsibleEmail,
+        cellphone: formData.fundManager.cellphone,
+        comment: formData.fundManager.comment
+      }"></app-fund-manager-form>
+    <hr
+  /></ng-container>
+  <ng-container *ngIf="!!formData.organizationalInformation.comment">
+    <app-organizational-information-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        founder: formData.organizationalInformation.founder,
+        generalManagement: formData.organizationalInformation.generalManagement,
+        operationalManagement:
+          formData.organizationalInformation.operationalManagement,
+        legalRepresentative:
+          formData.organizationalInformation.legalRepresentative,
+        legalRepresentativeEmail:
+          formData.organizationalInformation.legalRepresentativeEmail,
+        operationsStartDate:
+          formData.organizationalInformation.operationsStartDate,
+        incorporationsStartDate:
+          formData.organizationalInformation.incorporationsStartDate,
+        mission: formData.organizationalInformation.mission,
+        vision: formData.organizationalInformation.vision,
+        ethicalValues: formData.organizationalInformation.ethicalValues,
+        comment: formData.organizationalInformation.comment
+      }"></app-organizational-information-form>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!!formData.strategicAlliances.comment">
+    <app-strategic-alliances-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        alliances: formData.strategicAlliances.alliances,
+        courses: formData.strategicAlliances.courses,
+        issuesToStrengthen: formData.strategicAlliances.issuesToStrengthen,
+        whichTopics: formData.strategicAlliances.whichTopics,
+        previousDonations: formData.strategicAlliances.previousDonations,
+        strategicalAlliances: formData.strategicAlliances.strategicalAlliances,
+        comment: formData.strategicAlliances.comment,
+        products: formData.strategicAlliances.products,
+        donations: formData.strategicAlliances.donations
+      }"></app-strategic-alliances-form>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!!formData.decentWork.comment"
+    ><app-decent-work-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        whyYourOSC: formData.decentWork.whyYourOSC,
+        whatMakesYouDifferent: formData.decentWork.whatMakesYouDifferent,
+        benefitsSystem: formData.decentWork.benefitsSystem,
+        personalGrowth: formData.decentWork.personalGrowth,
+        comment: formData.decentWork.comment
+      }"></app-decent-work-form>
+    <hr
+  /></ng-container>
+  <ng-container *ngIf="!!formData.governingBody.comment">
+    <app-governing-body
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        meetings: formData.governingBody.meetings,
+        renewalFrequency: formData.governingBody.renewalFrequency,
+        members: formData.governingBody.members,
+        comment: formData.governingBody.comment
+      }"></app-governing-body>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!!formData.remuneration.comment">
+    <app-remuneration-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        remunerationQuestion: formData.remuneration.remunerationQuestion,
+        comment: formData.remuneration.comment,
+        remunerations: formData.remuneration.remunerations
+      }"></app-remuneration-form>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!!formData.generalProjectData.comment">
+    <app-general-project-data-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        projectName: formData.generalProjectData.projectName,
+        category: formData.generalProjectData.category,
+        comment: formData.generalProjectData.comment
+      }"></app-general-project-data-form>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!!formData.location.comment">
+    <app-location-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        locationQuestion: formData.location.locationQuestion,
+        street: formData.location.street,
+        colony: formData.location.colony,
+        town: formData.location.town,
+        state: formData.location.state,
+        postalCode: formData.location.postalCode,
+        video: formData.location.video,
+        daysAndHours: formData.location.daysAndHours,
+        aboutCall: formData.location.aboutCall,
+        whichMedia: formData.location.whichMedia,
+        comment: formData.location.comment
+      }"></app-location-form>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!!formData.projectManager.comment">
+    <app-project-manager-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        responsibleName: formData.projectManager.responsibleName,
+        emails: formData.projectManager.emails,
+        phone: formData.projectManager.phone,
+        comment: formData.projectManager.comment
+      }"></app-project-manager-form>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!!formData.projectDevelopment.comment">
+    <app-project-development-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        whichProblem: formData.projectDevelopment.whichProblem,
+        generalObjective: formData.projectDevelopment.generalObjective,
+        numberOfBeneficiaries:
+          formData.projectDevelopment.numberOfBeneficiaries,
+        collaborationWithOtherOrganizations:
+          formData.projectDevelopment.collaborationWithOtherOrganizations,
+        collaboratorsAnswer: formData.projectDevelopment.collaboratorsAnswer,
+        populationsConditionsBefore:
+          formData.projectDevelopment.populationsConditionsBefore,
+        populationsConditionsAfter:
+          formData.projectDevelopment.populationsConditionsAfter,
+        promoteSocialImprovement:
+          formData.projectDevelopment.promoteSocialImprovement,
+        comment: formData.projectDevelopment.comment
+      }"></app-project-development-form>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!!formData.period.comment">
+    <app-period-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        startDate: formData.period.startDate,
+        endDate: formData.period.endDate,
+        comment: formData.period.comment
+      }"></app-period-form>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!!formData.objectives.comment">
+    <app-objectives-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        objectives: formData.objectives.objectives,
+        povertyEnd: formData.objectives.povertyEnd,
+        zeroHunger: formData.objectives.zeroHunger,
+        healthAndWellness: formData.objectives.healthAndWellness,
+        qualityEducation: formData.objectives.qualityEducation,
+        genderEquality: formData.objectives.genderEquality,
+        cleanWater: formData.objectives.cleanWater,
+        affordableEnergy: formData.objectives.affordableEnergy,
+        decentWork: formData.objectives.decentWork,
+        industry: formData.objectives.industry,
+        reducingInequalities: formData.objectives.reducingInequalities,
+        cities: formData.objectives.cities,
+        production: formData.objectives.production,
+        climateAction: formData.objectives.climateAction,
+        underwaterLife: formData.objectives.underwaterLife,
+        terrestrialEcosystemLife: formData.objectives.terrestrialEcosystemLife,
+        peace: formData.objectives.peace,
+        alliances: formData.objectives.alliances,
+        comment: formData.objectives.comment
+      }"></app-objectives-form>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!!formData.projectBudget.comment">
+    <app-project-budget-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        contributions: formData.projectBudget.contributions,
+        conversions: formData.projectBudget.conversions,
+        donations: formData.projectBudget.donations,
+        comment: formData.projectBudget.comment
+      }"></app-project-budget-form>
+    <hr />
+  </ng-container>
+  <ng-container
+    *ngIf="formData.generalProjectData.category && formData.rating.comment">
+    <app-rating-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        livingConditions: formData.rating.livingConditions,
+        lifeQuality: formData.rating.lifeQuality,
+        capacityBuilding: formData.rating.capacityBuilding,
+        supportType: formData.rating.supportType,
+        supportScope: formData.rating.supportScope,
+        resilienceBuilding: formData.rating.resilienceBuilding,
+        socialBackwardness: formData.rating.socialBackwardness,
+        communitySense: formData.rating.communitySense,
+        sustainabilityProcesses: formData.rating.sustainabilityProcesses,
+        statusImprovement: formData.rating.statusImprovement,
+        urbanDevelopment: formData.rating.urbanDevelopment,
+        professionalizationProcess: formData.rating.professionalizationProcess,
+        opportunityGeneration: formData.rating.opportunityGeneration,
+        comment: formData.rating.comment
+      }"
+      [category]="formData.generalProjectData.category"></app-rating-form>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!!formData.communication.comment">
+    <app-communication-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        facebook: formData.communication.facebook,
+        instagram: formData.communication.instagram,
+        linkedin: formData.communication.linkedin,
+        twitter: formData.communication.twitter,
+        tiktok: formData.communication.tiktok,
+        youtube: formData.communication.youtube,
+        comment: formData.communication.comment
+      }"></app-communication-form>
+    <hr />
+  </ng-container>
+  <ng-container *ngIf="!emptyDocuments">
+    <app-documents-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        ethicalCode: formData.documents.ethicalCode,
+        ethicalCodeComment: formData.documents.ethicalCodeComment,
+        governanceManual: formData.documents.governanceManual,
+        governanceManualComment: formData.documents.governanceManualComment,
+        timelineActivities: formData.documents.timelineActivities,
+        timelineActivitiesComment: formData.documents.timelineActivitiesComment,
+        workWithMinors: formData.documents.workWithMinors,
+        workWithMinorsComment: formData.documents.workWithMinorsComment,
+        officialLetterOfAuthorizationOfDonees:
+          formData.documents.officialLetterOfAuthorizationOfDonees,
+        officialLetterOfAuthorizationOfDoneesComment:
+          formData.documents.officialLetterOfAuthorizationOfDoneesComment,
+        updatedCertificate: formData.documents.updatedCertificate,
+        updatedCertificateComment: formData.documents.updatedCertificateComment,
+        publicationInAnnex14OfTheCurrentRMF:
+          formData.documents.publicationInAnnex14OfTheCurrentRMF,
+        publicationInAnnex14OfTheCurrentRMFComment:
+          formData.documents.publicationInAnnex14OfTheCurrentRMFComment,
+        constituentAct: formData.documents.constituentAct,
+        constituentActComment: formData.documents.constituentActComment,
+        mostRecentMeeting: formData.documents.mostRecentMeeting,
+        mostRecentMeetingComment: formData.documents.mostRecentMeetingComment,
+        legalRepresentativesPower: formData.documents.legalRepresentativesPower,
+        legalRepresentativesPowerComment:
+          formData.documents.legalRepresentativesPowerComment,
+        legalRepresentativesId: formData.documents.legalRepresentativesId,
+        legalRepresentativesIdComment:
+          formData.documents.legalRepresentativesIdComment,
+        documentRFC: formData.documents.documentRFC,
+        documentRFCComment: formData.documents.documentRFCComment,
+        oldProofOfAddress: formData.documents.oldProofOfAddress,
+        oldProofOfAddressComment: formData.documents.oldProofOfAddressComment,
+        updatedComplianceOpinion: formData.documents.updatedComplianceOpinion,
+        updatedComplianceOpinionComment:
+          formData.documents.updatedComplianceOpinionComment,
+        proofOfUpdatedTaxSituation:
+          formData.documents.proofOfUpdatedTaxSituation,
+        proofOfUpdatedTaxSituationComment:
+          formData.documents.proofOfUpdatedTaxSituationComment,
+        logo: formData.documents.logo,
+        logoComment: formData.documents.logoComment
+      }"></app-documents-form>
+  </ng-container>
+
+  <button
+    *ngIf="(infoSaved$ | async) === false"
+    class="btn btn-primary"
+    type="button"
+    [disabled]="isInvalidForm"
+    (click)="save()">
+    Enviar
+  </button>
+</div>

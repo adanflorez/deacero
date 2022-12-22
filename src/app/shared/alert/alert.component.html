@@ -1,12 +1,9 @@
-<div
-  class="alert alert-dismissible fade show"
-  [ngClass]="alertType"
-  role="alert">
-  {{ message }}
-  <button
-    type="button"
-    class="btn-close"
-    data-bs-dismiss="alert"
-    aria-label="Close"
-    (click)="hide.emit()"></button>
-</div>
+<p>
+  <ngb-alert
+    *ngIf="show"
+    [type]="type"
+    [dismissible]="dismissible"
+    (closed)="show = false">
+    {{ message }}
+  </ngb-alert>
+</p>

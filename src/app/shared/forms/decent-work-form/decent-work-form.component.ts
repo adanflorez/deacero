@@ -1,0 +1,79 @@
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import FormValid from 'src/app/lib/models/form-valid.model';
+import DecentWorkForm from 'src/app/lib/models/decent-work-form.model';
+import { CallSection } from 'src/app/lib/enums/sections.enum';
+import { AlertType } from 'src/app/lib/enums/alert-type';
+
+@Component({
+  selector: 'app-decent-work-form',
+  templateUrl: './decent-work-form.component.html',
+  styleUrls: ['./decent-work-form.component.scss'],
+})
+export class DecentWorkFormComponent implements OnInit, OnDestroy {
+  @Input() updateParentModel: (
+    part: DecentWorkForm,
+    formValid: FormValid
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+  ) => void = () => {};
+  @Input() defaultValues: DecentWorkForm;
+  form: FormGroup;
+  alertType: AlertType = AlertType.Warning;
+
+  private unsubscribe: Subscription[] = [];
+
+  constructor() {
+    this.form = new FormGroup({});
+    this.defaultValues = {};
+  }
+
+  ngOnInit(): void {
+    this.initForm();
+    this.updateParentModel({}, this.isValidForm);
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.forEach(sb => sb.unsubscribe());
+  }
+
+  get f() {
+    return this.form.controls;
+  }
+
+  initForm() {
+    this.form = new FormGroup({
+      whyYourOSC: new FormControl(
+        this.defaultValues.whyYourOSC,
+        Validators.required
+      ),
+      whatMakesYouDifferent: new FormControl(
+        this.defaultValues.whatMakesYouDifferent,
+        Validators.required
+      ),
+      benefitsSystem: new FormControl(
+        this.defaultValues.benefitsSystem,
+        Validators.required
+      ),
+      personalGrowth: new FormControl(
+        this.defaultValues.personalGrowth,
+        Validators.required
+      ),
+    });
+    this.subscribeToForm();
+  }
+
+  subscribeToForm() {
+    const sub = this.form.valueChanges.subscribe(val => {
+      this.updateParentModel(val, this.isValidForm);
+    });
+    this.unsubscribe.push(sub);
+  }
+
+  get isValidForm(): FormValid {
+    return {
+      name: CallSection.DECENT_WORK,
+      valid: this.form.valid,
+    };
+  }
+}

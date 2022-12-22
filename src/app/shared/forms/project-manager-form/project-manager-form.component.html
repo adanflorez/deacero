@@ -1,0 +1,61 @@
+<h2 class="mb-3">Responsable del proyecto</h2>
+<app-alert
+  [show]="!!defaultValues.comment"
+  [message]="defaultValues.comment!"
+  [type]="alertType"></app-alert>
+<div class="row" [formGroup]="form">
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="responsibleName" class="form-label"
+        >Nombre del responsable</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="responsibleName"
+        placeholder="Nombre"
+        formControlName="responsibleName"
+        [class.is-invalid]="
+          f['responsibleName'].invalid && f['responsibleName'].touched
+        " />
+      <app-form-error [control]="f['responsibleName']"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="emails" class="form-label"
+        >Email del responsable del proyecto</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="emails"
+        placeholder="Usa ; ó , para separar los correos electrónicos"
+        formControlName="emails"
+        [class.is-invalid]="f['emails'].invalid && f['emails'].touched" />
+      <app-form-error
+        [control]="f['emails']"
+        [errors]="{ pattern: 'Correos no válidos' }"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="phone" class="form-label"
+        >Celular del responsable del proyecto</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="phone"
+        placeholder="Celular"
+        formControlName="phone"
+        [class.is-invalid]="f['phone'].invalid && f['phone'].touched" />
+      <app-form-error
+        [control]="f['phone']"
+        [errors]="{
+          pattern: 'Solo debe ingresar números',
+          maxLength: 'Máximo 12 caracteres'
+        }"></app-form-error>
+    </div>
+  </div>
+</div>

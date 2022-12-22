@@ -1,0 +1,151 @@
+<h2 class="mb-3">Desarrollo del proyecto</h2>
+<app-alert
+  [show]="!!defaultValues.comment"
+  [message]="defaultValues.comment!"
+  [type]="alertType"></app-alert>
+<div class="row" [formGroup]="form">
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="whichProblem" class="form-label"
+        >¿Cuál es el problema social en el que se intervendrá?</label
+      >
+      <textarea
+        class="form-control"
+        id="whichProblem"
+        rows="3"
+        formControlName="whichProblem"
+        [class.is-invalid]="
+          f['whichProblem'].invalid && f['whichProblem'].touched
+        "></textarea>
+      <app-form-error [control]="f['whichProblem']"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="generalObjective" class="form-label"
+        >Describe brevemente el objetivo general del proyecto</label
+      >
+      <textarea
+        class="form-control"
+        id="generalObjective"
+        rows="3"
+        formControlName="generalObjective"
+        [class.is-invalid]="
+          f['generalObjective'].invalid && f['generalObjective'].touched
+        "></textarea>
+      <app-form-error [control]="f['generalObjective']"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="numberOfBeneficiaries" class="form-label"
+        >Número de beneficiarios directos que se estima atender</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="numberOfBeneficiaries"
+        formControlName="numberOfBeneficiaries"
+        [class.is-invalid]="
+          f['numberOfBeneficiaries'].invalid &&
+          f['numberOfBeneficiaries'].touched
+        " />
+      <app-form-error
+        [control]="f['numberOfBeneficiaries']"
+        [errors]="{ pattern: 'Solo números' }"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <div class="d-flex align-items-center">
+        <p class="m-0 me-3">
+          ¿El proyecto postulado es en colaboración con otras organizaciones?
+        </p>
+        <div class="toggleWrapper">
+          <input
+            type="checkbox"
+            name="collaborationWithOtherOrganizations"
+            class="mobileToggle"
+            id="collaborationWithOtherOrganizations"
+            formControlName="collaborationWithOtherOrganizations" />
+          <label
+            for="collaborationWithOtherOrganizations"
+            class="cursor-pointer"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="collaboratorsAnswer" class="form-label"
+        >Si es así ¿cuáles? y sino ¿por qué?</label
+      >
+      <textarea
+        class="form-control"
+        id="collaboratorsAnswer"
+        rows="3"
+        formControlName="collaboratorsAnswer"
+        [class.is-invalid]="
+          f['collaboratorsAnswer'].invalid && f['collaboratorsAnswer'].touched
+        "></textarea>
+      <app-form-error [control]="f['collaboratorsAnswer']"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="populationsConditionsBefore" class="form-label"
+        >¿Cuáles son las condiciones de la población antes de tu <br />
+        intervención?</label
+      >
+      <textarea
+        class="form-control"
+        id="populationsConditionsBefore"
+        rows="3"
+        formControlName="populationsConditionsBefore"
+        [class.is-invalid]="
+          f['populationsConditionsBefore'].invalid &&
+          f['populationsConditionsBefore'].touched
+        "></textarea>
+      <app-form-error
+        [control]="f['populationsConditionsBefore']"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="populationsConditionsAfter" class="form-label"
+        >¿Cuáles son las condiciones de la población a las que se planea llegar
+        después de la intervención?</label
+      >
+      <textarea
+        class="form-control"
+        id="populationsConditionsAfter"
+        rows="3"
+        formControlName="populationsConditionsAfter"
+        [class.is-invalid]="
+          f['populationsConditionsAfter'].invalid &&
+          f['populationsConditionsAfter'].touched
+        "></textarea>
+      <app-form-error
+        [control]="f['populationsConditionsAfter']"></app-form-error>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="promoteSocialImprovement" class="form-label"
+        >¿De qué manera su proyecto promueve el mejoramiento <br />
+        social?</label
+      >
+      <textarea
+        class="form-control"
+        id="promoteSocialImprovement"
+        rows="3"
+        formControlName="promoteSocialImprovement"
+        [class.is-invalid]="
+          f['promoteSocialImprovement'].invalid &&
+          f['promoteSocialImprovement'].touched
+        "></textarea>
+      <app-form-error
+        [control]="f['promoteSocialImprovement']"></app-form-error>
+    </div>
+  </div>
+</div>

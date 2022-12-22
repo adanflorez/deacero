@@ -1,0 +1,32 @@
+<h2 class="mb-3">Datos generales del proyecto</h2>
+<app-alert
+  [show]="!!defaultValues.comment"
+  [message]="defaultValues.comment!"
+  [type]="alertType"></app-alert>
+<div class="row" [formGroup]="form">
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="projectName" class="form-label">Nombre del proyecto</label>
+      <input
+        type="text"
+        class="form-control"
+        id="projectName"
+        placeholder="Nombre del proyecto"
+        formControlName="projectName"
+        [class.is-invalid]="
+          f['projectName'].invalid && f['projectName'].touched
+        " />
+      <app-form-error [control]="f['projectName']"></app-form-error>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="category" class="form-label">Categoría</label>
+    <ng-select #category labelForId="category" formControlName="category">
+      <ng-option value="">Click para seleccionar</ng-option>
+      <ng-option [value]="category" *ngFor="let category of categories">{{
+        category
+      }}</ng-option>
+    </ng-select>
+    <app-form-error [control]="f['category']"></app-form-error>
+  </div>
+</div>

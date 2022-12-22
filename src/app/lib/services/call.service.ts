@@ -9,6 +9,7 @@ import Response from '../models/response.model';
 })
 export class CallService {
   private apiCall = environment.apiCall;
+  private apiFeedback = environment.apiFeedback;
   constructor(private http: HttpClient) {}
 
   applicateToCall(data: unknown): Observable<Response<unknown>> {
@@ -30,5 +31,19 @@ export class CallService {
     return this.http.get<Response<unknown>>(
       `${this.apiCall}application/status`
     );
+  }
+
+  feedback(): Observable<Response<unknown>> {
+    return this.http.get<Response<unknown>>(`${this.apiFeedback}`);
+  }
+
+  updateFeedback(form: unknown): Observable<Response<unknown>> {
+    return this.http.put<Response<unknown>>(`${this.apiFeedback}`, {
+      form,
+    });
+  }
+
+  feedbackStatus(): Observable<Response<unknown>> {
+    return this.http.get<Response<unknown>>(`${this.apiFeedback}status`);
   }
 }

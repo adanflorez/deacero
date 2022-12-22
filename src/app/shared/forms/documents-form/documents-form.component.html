@@ -1,0 +1,84 @@
+<h2 class="mb-3">Documentos</h2>
+<div class="row" [formGroup]="form">
+  <ng-container *ngFor="let doc of documentsFields">
+    <div class="col-md-12">
+      <div class="mb-3">
+        <label class="form-label" [for]="doc.field">{{ doc.name }}</label>
+        <ng-container *ngIf="!f[doc.field].value">
+          <input
+            class="form-control"
+            type="file"
+            [id]="doc.field"
+            (change)="uploadDocument($event, doc.field)"
+            accept="application/pdf"
+            [class.is-invalid]="f[doc.field].invalid && f[doc.field].touched" />
+        </ng-container>
+        <ng-container *ngIf="f[doc.field].value">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              [id]="doc.field"
+              placeholder="https://..."
+              [formControlName]="doc.field"
+              readonly />
+            <button
+              class="btn btn-secondary p-1"
+              (click)="f[doc.field].setValue('')"
+              [disabled]="false">
+              <img height="18" src="/assets/icons/trash.png" alt="trash" />
+            </button>
+          </div>
+        </ng-container>
+        <app-form-error [control]="f[doc.field]"></app-form-error>
+        <div class="small">- {{ doc.help }}</div>
+      </div>
+      <app-alert
+        [show]="!!doc.comment"
+        [message]="doc.comment!"
+        [type]="alertType"></app-alert>
+      <hr />
+    </div>
+  </ng-container>
+  <div class="col-md-12">
+    <div class="mb-3">
+      <label class="form-label" for="logo">Logotipo</label>
+      <ng-container *ngIf="!f['logo'].value">
+        <input
+          class="form-control"
+          type="file"
+          id="logo"
+          (change)="uploadDocument($event, 'logo', true)"
+          accept="image/png, application/pdf"
+          [class.is-invalid]="f['logo'].invalid && f['logo'].touched" />
+      </ng-container>
+      <ng-container *ngIf="f['logo'].value">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            id="logo"
+            placeholder="https://..."
+            formControlName="logo"
+            readonly />
+          <button
+            class="btn btn-secondary p-1"
+            (click)="f['logo'].setValue('')">
+            <img height="18" src="/assets/icons/trash.png" alt="trash" />
+          </button>
+        </div>
+      </ng-container>
+      <app-form-error [control]="f['logo']"></app-form-error>
+      <div class="small">
+        - Sube el archivo en vectores ya sea en .ai, .pdf o .svg de tu logotipo.
+        Si no tienes tu logotipo en vectores, sube un archivo .png con
+        transparencia. Si no cuentas con estos, sube tu logotipo en .jpg
+      </div>
+    </div>
+    <app-alert
+      [show]="!!defaultValues.logoComment"
+      [message]="defaultValues.logoComment!"
+      [type]="alertType"></app-alert>
+    <hr />
+  </div>
+</div>

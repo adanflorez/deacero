@@ -1,0 +1,54 @@
+<form [formGroup]="form">
+  <h2 class="mb-3">Órgano de gobierno</h2>
+  <app-alert
+    [show]="!!defaultValues.comment"
+    [message]="defaultValues.comment!"
+    [type]="alertType"></app-alert>
+  <div class="row">
+    <div class="col-12">
+      <app-members-table
+        [records]="defaultValues.members || []"
+        (recordsList)="updateMembers($event)"></app-members-table>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="mb-3">
+        <label for="meetings" class="form-label"
+          >Número de reuniones al año</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="meetings"
+          placeholder="Número de reuniones al año"
+          formControlName="meetings"
+          [class.is-invalid]="f['meetings'].invalid && f['meetings'].touched" />
+        <app-form-error
+          [control]="f['meetings']"
+          [errors]="{
+            pattern: 'Solo debe ingresar números'
+          }"></app-form-error>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="mb-3">
+        <label for="renewalFrequency" class="form-label"
+          >Frecuencia de renovación de consejos (años)</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="renewalFrequency"
+          placeholder="Frecuencia de renovación de consejos (años)"
+          formControlName="renewalFrequency"
+          [class.is-invalid]="
+            f['renewalFrequency'].invalid && f['renewalFrequency'].touched
+          " />
+        <app-form-error
+          [control]="f['renewalFrequency']"
+          [errors]="{
+            pattern: 'Solo debe ingresar números'
+          }"></app-form-error>
+      </div>
+    </div>
+  </div>
+</form>

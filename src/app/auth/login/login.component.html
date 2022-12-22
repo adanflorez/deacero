@@ -11,10 +11,10 @@
     <div class="col-md-4">
       <div class="bg-bright-gray border border-secondary rounded p-3">
         <app-alert
-          *ngIf="showAlert"
-          (close)="showAlert = false"
+          [show]="showAlert"
           [message]="message"
-          [type]="alertType"></app-alert>
+          [type]="alertType"
+          [dismissible]="true"></app-alert>
         <h3 class="text-independence text-center">BIENVENIDO</h3>
         <form [formGroup]="loginForm">
           <div class="mb-3">
