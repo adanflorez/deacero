@@ -1,3 +1,4 @@
+import { AlertModule } from './../../shared/alert/alert.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -44,6 +45,7 @@ import { RatingFormModule } from './../../shared/forms/rating-form/rating-form.m
     DocumentsFormModule,
     ObjectivesFormModule,
     RatingFormModule,
+    AlertModule,
   ],
 })
 export class CallAlertsModule {}

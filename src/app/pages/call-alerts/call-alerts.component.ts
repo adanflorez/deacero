@@ -1,8 +1,9 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import CallForm from 'src/app/lib/models/call-form.model';
 import FormValid from 'src/app/lib/models/form-valid.model';
 import { CallService } from 'src/app/lib/services/call.service';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-call-alerts',
@@ -10,9 +11,12 @@ import { CallService } from 'src/app/lib/services/call.service';
   styleUrls: ['./call-alerts.component.scss'],
 })
 export class CallAlertsComponent implements OnInit {
-  formData: CallForm;
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  formData: CallForm;
   formsStatus: FormValid[];
+  showAlert: boolean;
+  alertType: AlertType;
+  alertMessage: string;
 
   constructor(private callService: CallService) {
     this.formsStatus = [];
@@ -35,6 +39,9 @@ export class CallAlertsComponent implements OnInit {
       documents: {},
       rating: {},
     };
+    this.showAlert = false;
+    this.alertType = AlertType.Danger;
+    this.alertMessage = '';
   }
 
   ngOnInit(): void {
@@ -71,13 +78,183 @@ export class CallAlertsComponent implements OnInit {
     return JSON.stringify(this.formData.documents) === '{}';
   }
 
-  save() {
-    console.log('sending...');
+  async save() {
+    const form = {
+      generalData: {
+        RFC: this.formData.generalData.rfc,
+        email: this.formData.generalData.emails,
+        razonSocial: this.formData.generalData.businessname,
+        position: this.formData.generalData.position,
+        nombreComercial: this.formData.generalData.tradename,
+        telefono: this.formData.generalData.phone,
+      },
+      procuringFunds: {
+        celular: this.formData.fundManager.cellphone,
+        emailDelResponsable: this.formData.fundManager.responsibleEmail,
+        nombre: this.formData.fundManager.name,
+      },
+      organizationalInformation: {
+        direccionGeneral:
+          this.formData.organizationalInformation.generalManagement,
+        direccionOperativa:
+          this.formData.organizationalInformation.operationalManagement,
+        emailDelRepresentanteLegal:
+          this.formData.organizationalInformation.legalRepresentativeEmail,
+        fechaDeConstitucion:
+          this.formData.organizationalInformation.incorporationsStartDate,
+        fechaInicioOperaciones:
+          this.formData.organizationalInformation.operationsStartDate,
+        fundador: this.formData.organizationalInformation.founder,
+        mision: this.formData.organizationalInformation.mission,
+        representanteLegal:
+          this.formData.organizationalInformation.legalRepresentative,
+        valores: this.formData.organizationalInformation.ethicalValues,
+        vision: this.formData.organizationalInformation.vision,
+      },
+      sustainabilityAndStrategic: {
+        donation: this.formData.strategicAlliances.donations,
+        product: this.formData.strategicAlliances.products,
+        recibioUnaDonacion: this.formData.strategicAlliances.previousDonations,
+        actividadesEspecificasFDA:
+          this.formData.strategicAlliances.strategicalAlliances,
+        temasAFortalecer: this.formData.strategicAlliances.issuesToStrengthen,
+        temasDescripcion: this.formData.strategicAlliances.whichTopics,
+        redDeAlianzas: this.formData.strategicAlliances.alliances,
+        listaCursosDeActualizacion: this.formData.strategicAlliances.courses,
+      },
+      hardWork: {
+        porqueTrabajarEnTuOSC: this.formData.decentWork.whyYourOSC,
+        crecimientoPersonal: this.formData.decentWork.personalGrowth,
+        descripcionOSC: this.formData.decentWork.whatMakesYouDifferent,
+        diferenciasDeTuOsc: this.formData.decentWork.benefitsSystem,
+      },
+      governingBody: {
+        boardRenewalFrequency: this.formData.governingBody.renewalFrequency,
+        membersOfTheGoverning: this.formData.governingBody.members,
+        numberOfMeetingsPerYear: this.formData.governingBody.meetings,
+      },
+      remunerations: {
+        workInYourOrganizationIsPaid:
+          this.formData.remuneration.remunerationQuestion,
+        tableRemunerations: this.formData.remuneration.remunerations,
+      },
+      generalProjectData: {
+        category: [this.formData.generalProjectData.category],
+        projectName: this.formData.generalProjectData.projectName,
+      },
+      location: {
+        colony: this.formData.location.colony,
+        daysAndHoursOfAttention: this.formData.location.daysAndHours,
+        streetAndNumber: this.formData.location.street,
+        status: this.formData.location.state,
+        municipality: this.formData.location.town,
+        postalCode: this.formData.location.postalCode,
+        urlProyect: this.formData.location.video,
+        howDidYouFindOutAboutTheCall: this.formData.location.aboutCall,
+        locationIsVirtual: this.formData.location.locationQuestion,
+        whichMeans: this.formData.location.whichMedia,
+      },
+      projectManager: {
+        cellPhoneOfTheProjectManager: this.formData.projectManager.phone,
+        emailOfTheProjectManager: this.formData.projectManager.emails,
+        responsibleName: this.formData.projectManager.responsibleName,
+      },
+      projectDevelopment: {
+        socialProblem: this.formData.projectDevelopment.whichProblem,
+        generalObjective: this.formData.projectDevelopment.generalObjective,
+        numberOfBeneficiaries:
+          this.formData.projectDevelopment.numberOfBeneficiaries,
+        receiveCollaboration:
+          this.formData.projectDevelopment.collaborationWithOtherOrganizations,
+        which: this.formData.projectDevelopment.collaboratorsAnswer,
+        currentPopulation:
+          this.formData.projectDevelopment.populationsConditionsBefore,
+        conditionsAfterTheIntervention:
+          this.formData.projectDevelopment.populationsConditionsAfter,
+        socialBetterment:
+          this.formData.projectDevelopment.promoteSocialImprovement,
+      },
+      validity: {
+        startDate: this.formData.period.startDate,
+        endDate: this.formData.period.endDate,
+      },
+      objectivesAnfGoals: {
+        sustainableDevelopmentGoals: this.formData.objectives.objectives,
+        endOfPoverty: this.formData.objectives.povertyEnd,
+        zeroHunger: this.formData.objectives.zeroHunger,
+        healthAndWellness: this.formData.objectives.healthAndWellness,
+        qualityEducation: this.formData.objectives.qualityEducation,
+        genderEquality: this.formData.objectives.genderEquality,
+        cleanWaterAndSanitation: this.formData.objectives.cleanWater,
+        affordableEnergy: this.formData.objectives.affordableEnergy,
+        decentWorkAndEconomicGrowth: this.formData.objectives.decentWork,
+        industry: this.formData.objectives.industry,
+        reductionOfInequality: this.formData.objectives.reducingInequalities,
+        sustainableCitiesandCommunities: this.formData.objectives.cities,
+        responsibleProductionAndConsumption:
+          this.formData.objectives.production,
+        climateAction: this.formData.objectives.climateAction,
+        submarineLife: this.formData.objectives.underwaterLife,
+        lifeOfTerrestrialEcosystems:
+          this.formData.objectives.terrestrialEcosystemLife,
+        peaceAndJustice: this.formData.objectives.peace,
+        alliancesToAchieveObjectives: this.formData.objectives.alliances,
+      },
+      projectBudget: {
+        organizationContribution: this.formData.projectBudget.contributions,
+        donationDeaceroFoundation: this.formData.projectBudget.donations,
+        jointVenture: this.formData.projectBudget.conversions,
+      },
+      communication: {
+        facebook: this.formData.communication.facebook,
+        instagram: this.formData.communication.instagram,
+        tiktok: this.formData.communication.tiktok,
+        linkedln: this.formData.communication.linkedin,
+        twitter: this.formData.communication.twitter,
+        youtube: this.formData.communication.youtube,
+      },
+      documents: {
+        codeOfEthics: this.formData.documents.ethicalCode,
+        governanceHandbook: this.formData.documents.governanceManual,
+        scheduleOfActivities: this.formData.documents.timelineActivities,
+        workWithMinors: this.formData.documents.workWithMinors,
+        officialLetterOfAuthorizationOfDonees:
+          this.formData.documents.officialLetterOfAuthorizationOfDonees,
+        updatedCertificate: this.formData.documents.updatedCertificate,
+        publicationInAnnex14OfTheCurrentRMF:
+          this.formData.documents.publicationInAnnex14OfTheCurrentRMF,
+        constitutiveActOfTheOrganization:
+          this.formData.documents.constituentAct,
+        mostRecentMeetingMinutes: this.formData.documents.mostRecentMeeting,
+        powerOfLegalRepresentative:
+          this.formData.documents.legalRepresentativesPower,
+        officialIdentificationOfLegalRepresentative:
+          this.formData.documents.legalRepresentativesId,
+        documentRFC: this.formData.documents.documentRFC,
+        oldProofOfAddress: this.formData.documents.oldProofOfAddress,
+        updatedComplianceOpinion:
+          this.formData.documents.updatedComplianceOpinion,
+        proofOfUpdatedTaxSituation:
+          this.formData.documents.proofOfUpdatedTaxSituation,
+        logo: this.formData.documents.logo,
+      },
+    };
+    console.log(form);
+    try {
+      await firstValueFrom(this.callService.updateFeedback(form));
+      await firstValueFrom(this.callService.saveInFlokzu());
+      this.showAlert = true;
+      this.alertMessage = 'Solicitud enviada correctamente';
+    } catch (error) {
+      console.error(error);
+      this.showAlert = true;
+      this.alertMessage =
+        'No es posible enviar la solicitud en este momento, intentelo mas tarde';
+    }
   }
 
   loadFeedback(): void {
     this.callService.feedback().subscribe((res: any) => {
-      console.log(res.data);
       this.formData = {
         generalData: {
           comment: res.data.generalData.comments,
@@ -195,6 +372,7 @@ export class CallAlertsComponent implements OnInit {
           endDate: res.data.validity.endDate,
         },
         objectives: {
+          comment: res.data.objectivesAndGoals.comments,
           objectives: res.data.objectivesAndGoals.sustainableDevelopmentGoals,
           povertyEnd: res.data.objectivesAndGoals.endOfPoverty,
           zeroHunger: res.data.objectivesAndGoals.zeroHunger,
