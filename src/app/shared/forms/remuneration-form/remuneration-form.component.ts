@@ -18,7 +18,7 @@ export class RemunerationFormComponent implements OnInit, OnDestroy {
     isFormValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
-  @Input() defaultValues: RemunerationForm;
+  @Input() defaultValues!: RemunerationForm;
   form: FormGroup;
   remunerations: Remuneration[];
   alertType: AlertType = AlertType.Warning;
@@ -26,12 +26,13 @@ export class RemunerationFormComponent implements OnInit, OnDestroy {
 
   constructor() {
     this.form = new FormGroup({});
-    this.defaultValues = {};
     this.remunerations = [];
+    this.defaultValues = {};
   }
 
   ngOnInit(): void {
     this.initForm();
+    this.initRemunerations();
     this.updateParentModel({}, this.isValid);
   }
 
@@ -41,6 +42,11 @@ export class RemunerationFormComponent implements OnInit, OnDestroy {
 
   get f() {
     return this.form.controls;
+  }
+
+  private initRemunerations() {
+    this.remunerations =
+      (this.defaultValues?.remunerations as Remuneration[]) || [];
   }
 
   initForm() {
