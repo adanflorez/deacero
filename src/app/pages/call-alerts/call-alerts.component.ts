@@ -262,6 +262,10 @@ export class CallAlertsComponent implements OnInit {
           mostRecentMeeting: res.data.documents.mostRecentMeetingMinutes,
           mostRecentMeetingComment:
             res.data.documents.commentsInTheMostRecentMeetingMinutes,
+          legalRepresentativesPower:
+            res.data.documents.powerOfLegalRepresentative,
+          legalRepresentativesPowerComment:
+            res.data.documents.commentsInPowerOfLegalRepresentatives,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,
