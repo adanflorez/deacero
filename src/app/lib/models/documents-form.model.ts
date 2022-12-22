@@ -12,6 +12,7 @@ export default interface DocumentsForm {
   updatedCertificate?: string;
   updatedCertificateComment?: string;
   publicationInAnnex14OfTheCurrentRMF?: string;
+  publicationInAnnex14OfTheCurrentRMFComment?: string;
   constituentAct?: string;
   mostRecentMeeting?: string;
   legalRepresentativesPower?: string;

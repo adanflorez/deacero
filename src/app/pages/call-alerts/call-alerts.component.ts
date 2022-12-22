@@ -252,6 +252,10 @@ export class CallAlertsComponent implements OnInit {
           updatedCertificateComment:
             res.data.documents
               .commentsInAnUpdatedRecordOfTheFederalTaxpayerRegistry,
+          publicationInAnnex14OfTheCurrentRMF:
+            res.data.documents.publicationInAnnex14OfTheCurrentRMF,
+          publicationInAnnex14OfTheCurrentRMFComment:
+            res.data.documents.commentsInPublicationInAnnexOfTheCurrentRMF,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,
