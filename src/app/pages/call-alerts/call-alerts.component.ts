@@ -256,6 +256,9 @@ export class CallAlertsComponent implements OnInit {
             res.data.documents.publicationInAnnex14OfTheCurrentRMF,
           publicationInAnnex14OfTheCurrentRMFComment:
             res.data.documents.commentsInPublicationInAnnexOfTheCurrentRMF,
+          constituentAct: res.data.documents.constitutiveActOfTheOrganization,
+          constituentActComment:
+            res.data.documents.commentsToTheConstitutiveActOfOrganization,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,

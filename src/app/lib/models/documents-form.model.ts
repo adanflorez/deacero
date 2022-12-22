@@ -14,6 +14,7 @@ export default interface DocumentsForm {
   publicationInAnnex14OfTheCurrentRMF?: string;
   publicationInAnnex14OfTheCurrentRMFComment?: string;
   constituentAct?: string;
+  constituentActComment?: string;
   mostRecentMeeting?: string;
   legalRepresentativesPower?: string;
   legalRepresentativesId?: string;
