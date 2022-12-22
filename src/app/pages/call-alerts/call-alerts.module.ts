@@ -8,6 +8,7 @@ import { GeneralDataFormModule } from './../../shared/forms/general-data-form/ge
 import { FundManagerFormModule } from './../../shared/forms/fund-manager-form/fund-manager-form.module';
 import { OrganizationalInformationFormModule } from './../../shared/forms/organizational-information-form/organizational-information-form.module';
 import { StrategicAlliancesFormModule } from './../../shared/forms/strategic-alliances-form/strategic-alliances-form.module';
+import { DecentWorkFormModule } from './../../shared/forms/decent-work-form/decent-work-form.module';
 import { RemunerationFormModule } from './../../shared/forms/remuneration-form/remuneration-form.module';
 import { GoverningBodyModule } from './../../shared/forms/governing-body/governing-body.module';
 import { GeneralProjectDataFormModule } from '../../shared/forms/general-project-data-form/general-project-data-form.module';
@@ -29,6 +30,8 @@ import { RatingFormModule } from './../../shared/forms/rating-form/rating-form.m
     GeneralDataFormModule,
     FundManagerFormModule,
     OrganizationalInformationFormModule,
+    StrategicAlliancesFormModule,
+    DecentWorkFormModule,
     GoverningBodyModule,
     RemunerationFormModule,
     GeneralProjectDataFormModule,
@@ -41,7 +44,6 @@ import { RatingFormModule } from './../../shared/forms/rating-form/rating-form.m
     DocumentsFormModule,
     ObjectivesFormModule,
     RatingFormModule,
-    StrategicAlliancesFormModule,
   ],
 })
 export class CallAlertsModule {}
