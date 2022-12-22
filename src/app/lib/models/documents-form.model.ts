@@ -20,6 +20,7 @@ export default interface DocumentsForm {
   legalRepresentativesPower?: string;
   legalRepresentativesPowerComment?: string;
   legalRepresentativesId?: string;
+  legalRepresentativesIdComment?: string;
   documentRFC?: string;
   oldProofOfAddress?: string;
   updatedComplianceOpinion?: string;

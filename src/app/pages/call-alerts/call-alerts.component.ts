@@ -266,6 +266,11 @@ export class CallAlertsComponent implements OnInit {
             res.data.documents.powerOfLegalRepresentative,
           legalRepresentativesPowerComment:
             res.data.documents.commentsInPowerOfLegalRepresentatives,
+          legalRepresentativesId:
+            res.data.documents.officialIdentificationOfLegalRepresentative,
+          legalRepresentativesIdComment:
+            res.data.documents
+              .commentsInOfficialIdentificationOfTheLegalRepresentative,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,
