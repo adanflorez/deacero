@@ -33,11 +33,16 @@ export class GoverningBodyComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
+    this.initMembers();
     this.updateParentModel({}, this.isValidForm);
   }
 
   ngOnDestroy(): void {
     this.unsubscribe.forEach(sb => sb.unsubscribe());
+  }
+
+  initMembers() {
+    this.members = this.defaultValues.members as Member[];
   }
 
   get f() {
