@@ -248,6 +248,10 @@ export class CallAlertsComponent implements OnInit {
             res.data.documents.officialLetterOfAuthorizationOfDonees,
           officialLetterOfAuthorizationOfDoneesComment:
             res.data.documents.commentsInSATDoneAuthorizationLetter,
+          updatedCertificate: res.data.documents.updatedCertificate,
+          updatedCertificateComment:
+            res.data.documents
+              .commentsInAnUpdatedRecordOfTheFederalTaxpayerRegistry,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,

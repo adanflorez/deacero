@@ -10,6 +10,7 @@ export default interface DocumentsForm {
   officialLetterOfAuthorizationOfDonees?: string;
   officialLetterOfAuthorizationOfDoneesComment?: string;
   updatedCertificate?: string;
+  updatedCertificateComment?: string;
   publicationInAnnex14OfTheCurrentRMF?: string;
   constituentAct?: string;
   mostRecentMeeting?: string;
