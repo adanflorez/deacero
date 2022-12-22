@@ -14,12 +14,14 @@ import ProjectBudgetForm from 'src/app/lib/models/project-budget-form.model';
 import DocumentsForm from 'src/app/lib/models/documents-form.model';
 import ObjectivesForm from 'src/app/lib/models/objectives-form.model';
 import RatingForm from 'src/app/lib/models/rating-form.model';
+import DecentWorkForm from 'src/app/lib/models/decent-work-form.model';
 
 export default interface CallForm {
   generalData: GeneralDataForm;
   fundManager: FundManagerForm;
   organizationalInformation: OrganizationalInformationForm;
   strategicAlliances: StrategicAlliancesForm;
+  decentWork: DecentWorkForm;
   governingBody: GoverningBody;
   remuneration: RemunerationForm;
   generalProjectData: GeneralProjectDataForm;

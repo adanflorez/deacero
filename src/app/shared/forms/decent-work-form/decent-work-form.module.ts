@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { DecentWorkFormComponent } from './decent-work-form.component';
+import { formModules } from '../modules';
 
 @NgModule({
   declarations: [DecentWorkFormComponent],
-  imports: [CommonModule],
+  imports: [...formModules],
   exports: [DecentWorkFormComponent],
 })
 export class DecentWorkFormModule {}

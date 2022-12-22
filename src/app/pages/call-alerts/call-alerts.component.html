@@ -64,7 +64,14 @@
     <hr />
   </ng-container>
   <ng-container
-    ><app-decent-work-form></app-decent-work-form>
+    ><app-decent-work-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        whyYourOSC: formData.decentWork.whyYourOSC,
+        whatMakesYouDifferent: formData.decentWork.whatMakesYouDifferent,
+        benefitsSystem: formData.decentWork.benefitsSystem,
+        personalGrowth: formData.decentWork.personalGrowth
+      }"></app-decent-work-form>
     <hr
   /></ng-container>
   <ng-container *ngIf="!!formData.governingBody.comment">
