@@ -8,6 +8,7 @@ export default interface DocumentsForm {
   workWithMinors?: string;
   workWithMinorsComment?: string;
   officialLetterOfAuthorizationOfDonees?: string;
+  officialLetterOfAuthorizationOfDoneesComment?: string;
   updatedCertificate?: string;
   publicationInAnnex14OfTheCurrentRMF?: string;
   constituentAct?: string;

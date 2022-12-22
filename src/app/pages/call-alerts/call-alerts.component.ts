@@ -244,6 +244,10 @@ export class CallAlertsComponent implements OnInit {
           workWithMinors: res.data.documents.workWithMinors,
           workWithMinorsComment:
             res.data.documents.commentsOnPoliciesToEnsureTheWelfareOfMinors,
+          officialLetterOfAuthorizationOfDonees:
+            res.data.documents.officialLetterOfAuthorizationOfDonees,
+          officialLetterOfAuthorizationOfDoneesComment:
+            res.data.documents.commentsInSATDoneAuthorizationLetter,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,
