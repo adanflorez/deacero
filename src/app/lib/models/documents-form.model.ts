@@ -30,4 +30,5 @@ export default interface DocumentsForm {
   proofOfUpdatedTaxSituation?: string;
   proofOfUpdatedTaxSituationComment?: string;
   logo?: string;
+  logoComment?: string;
 }

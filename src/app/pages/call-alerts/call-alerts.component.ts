@@ -284,6 +284,8 @@ export class CallAlertsComponent implements OnInit {
             res.data.documents.proofOfUpdatedTaxSituation,
           proofOfUpdatedTaxSituationComment:
             res.data.documents.commentsInProofOfUpdatedFiscalSituation,
+          logo: res.data.documents.logo,
+          logoComment: res.data.documents.logoComments,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,

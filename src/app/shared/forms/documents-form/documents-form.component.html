@@ -75,6 +75,10 @@
         transparencia. Si no cuentas con estos, sube tu logotipo en .jpg
       </div>
     </div>
+    <app-alert
+      [show]="!!defaultValues.logoComment"
+      [message]="defaultValues.logoComment!"
+      [type]="alertType"></app-alert>
     <hr />
   </div>
 </div>
