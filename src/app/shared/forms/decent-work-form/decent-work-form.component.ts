@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import FormValid from 'src/app/lib/models/form-valid.model';
 import DecentWorkForm from 'src/app/lib/models/decent-work-form.model';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-decent-work-form',
@@ -18,6 +19,7 @@ export class DecentWorkFormComponent implements OnInit, OnDestroy {
   ) => void = () => {};
   @Input() defaultValues: DecentWorkForm;
   form: FormGroup;
+  alertType: AlertType = AlertType.Warning;
 
   private unsubscribe: Subscription[] = [];
 

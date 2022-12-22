@@ -3,4 +3,5 @@ export default interface DecentWorkForm {
   whatMakesYouDifferent?: string;
   benefitsSystem?: string;
   personalGrowth?: string;
+  comment?: string;
 }

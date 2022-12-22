@@ -21,6 +21,7 @@ export class CallAlertsComponent implements OnInit {
       fundManager: {},
       organizationalInformation: {},
       strategicAlliances: {},
+      decentWork: {},
       governingBody: {},
       remuneration: {},
       generalProjectData: {},
