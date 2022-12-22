@@ -16,6 +16,7 @@ export default interface DocumentsForm {
   constituentAct?: string;
   constituentActComment?: string;
   mostRecentMeeting?: string;
+  mostRecentMeetingComment?: string;
   legalRepresentativesPower?: string;
   legalRepresentativesId?: string;
   documentRFC?: string;

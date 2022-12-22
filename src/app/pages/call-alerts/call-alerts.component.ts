@@ -259,6 +259,9 @@ export class CallAlertsComponent implements OnInit {
           constituentAct: res.data.documents.constitutiveActOfTheOrganization,
           constituentActComment:
             res.data.documents.commentsToTheConstitutiveActOfOrganization,
+          mostRecentMeeting: res.data.documents.mostRecentMeetingMinutes,
+          mostRecentMeetingComment:
+            res.data.documents.commentsInTheMostRecentMeetingMinutes,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,
