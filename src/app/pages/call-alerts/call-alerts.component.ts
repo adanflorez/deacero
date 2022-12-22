@@ -241,6 +241,9 @@ export class CallAlertsComponent implements OnInit {
           timelineActivities: res.data.documents.scheduleOfActivities,
           timelineActivitiesComment:
             res.data.documents.commentsInTheScheduleOfActivities,
+          workWithMinors: res.data.documents.workWithMinors,
+          workWithMinorsComment:
+            res.data.documents.commentsOnPoliciesToEnsureTheWelfareOfMinors,
         },
         rating: {
           comment: res.data.selfAppraisal.comments,

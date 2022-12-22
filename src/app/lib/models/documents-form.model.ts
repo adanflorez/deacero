@@ -6,6 +6,7 @@ export default interface DocumentsForm {
   timelineActivities?: string;
   timelineActivitiesComment?: string;
   workWithMinors?: string;
+  workWithMinorsComment?: string;
   officialLetterOfAuthorizationOfDonees?: string;
   updatedCertificate?: string;
   publicationInAnnex14OfTheCurrentRMF?: string;
