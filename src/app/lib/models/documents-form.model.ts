@@ -1,6 +1,8 @@
 export default interface DocumentsForm {
   ethicalCode?: string;
+  ethicalCodeComment?: string;
   governanceManual?: string;
+  governanceManualComment?: string;
   timelineActivities?: string;
   workWithMinors?: string;
   officialLetterOfAuthorizationOfDonees?: string;

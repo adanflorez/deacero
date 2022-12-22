@@ -100,7 +100,6 @@ export class RatingFormComponent implements OnChanges {
         this.defaultValues.opportunityGeneration
       ),
     });
-    console.log(this.form);
     this.subscribeToForm();
   }
 

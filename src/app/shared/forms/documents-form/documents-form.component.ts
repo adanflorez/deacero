@@ -6,6 +6,7 @@ import Response from 'src/app/lib/models/response.model';
 import { CallSection } from 'src/app/lib/enums/sections.enum';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { MultimediaService } from 'src/app/lib/services/multimedia.service';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 @Component({
   selector: 'app-documents-form',
@@ -20,7 +21,14 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
   ) => void = () => {};
   @Input() defaultValues: DocumentsForm;
   form: FormGroup;
-  documentsFields!: Array<{ field: string; name: string; help: string }>;
+  documentsFields!: Array<{
+    field: string;
+    name: string;
+    help: string;
+    comment?: string;
+  }>;
+
+  alertType: AlertType = AlertType.Warning;
 
   private unsubscribe: Subscription[] = [];
   tempDocumentUrl: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -53,6 +61,7 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
   }
 
   initForm() {
+    this.updateDocuments();
     this.form = new FormGroup({
       ethicalCode: new FormControl(
         this.defaultValues.ethicalCode,
@@ -204,6 +213,18 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
         help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
       },
     ];
+  }
+
+  updateDocuments() {
+    Object.keys(this.defaultValues).forEach((key: string) => {
+      this.documentsFields.forEach(doc => {
+        if (doc.field === key) {
+          const keyComment = key as keyof DocumentsForm;
+          doc.comment =
+            this.defaultValues[(keyComment + 'Comment') as keyof DocumentsForm];
+        }
+      });
+    });
   }
 
   uploadDocument(e: Event, control: string, isImage = false) {

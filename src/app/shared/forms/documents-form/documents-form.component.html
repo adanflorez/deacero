@@ -33,6 +33,10 @@
         <app-form-error [control]="f[doc.field]"></app-form-error>
         <div class="small">- {{ doc.help }}</div>
       </div>
+      <app-alert
+        [show]="!!doc.comment"
+        [message]="doc.comment!"
+        [type]="alertType"></app-alert>
       <hr />
     </div>
   </ng-container>

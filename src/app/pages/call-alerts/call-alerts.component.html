@@ -198,6 +198,7 @@
       [defaultValues]="{
         contributions: formData.projectBudget.contributions,
         conversions: formData.projectBudget.conversions,
+        donations: formData.projectBudget.donations,
         comment: formData.projectBudget.comment
       }"></app-project-budget-form>
     <hr />
@@ -239,28 +240,33 @@
       }"></app-communication-form>
     <hr />
   </ng-container>
-  <app-documents-form
-    [updateParentModel]="updateData"
-    [defaultValues]="{
-      ethicalCode: formData.documents.ethicalCode,
-      governanceManual: formData.documents.governanceManual,
-      timelineActivities: formData.documents.timelineActivities,
-      workWithMinors: formData.documents.workWithMinors,
-      officialLetterOfAuthorizationOfDonees:
-        formData.documents.officialLetterOfAuthorizationOfDonees,
-      updatedCertificate: formData.documents.updatedCertificate,
-      publicationInAnnex14OfTheCurrentRMF:
-        formData.documents.publicationInAnnex14OfTheCurrentRMF,
-      constituentAct: formData.documents.constituentAct,
-      mostRecentMeeting: formData.documents.mostRecentMeeting,
-      legalRepresentativesPower: formData.documents.legalRepresentativesPower,
-      legalRepresentativesId: formData.documents.legalRepresentativesId,
-      documentRFC: formData.documents.documentRFC,
-      oldProofOfAddress: formData.documents.oldProofOfAddress,
-      updatedComplianceOpinion: formData.documents.updatedComplianceOpinion,
-      proofOfUpdatedTaxSituation: formData.documents.proofOfUpdatedTaxSituation,
-      logo: formData.documents.logo
-    }"></app-documents-form>
+  <ng-container *ngIf="!emptyDocuments">
+    <app-documents-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        ethicalCode: formData.documents.ethicalCode,
+        ethicalCodeComment: formData.documents.ethicalCodeComment,
+        governanceManual: formData.documents.governanceManual,
+        governanceManualComment: formData.documents.governanceManualComment,
+        timelineActivities: formData.documents.timelineActivities,
+        workWithMinors: formData.documents.workWithMinors,
+        officialLetterOfAuthorizationOfDonees:
+          formData.documents.officialLetterOfAuthorizationOfDonees,
+        updatedCertificate: formData.documents.updatedCertificate,
+        publicationInAnnex14OfTheCurrentRMF:
+          formData.documents.publicationInAnnex14OfTheCurrentRMF,
+        constituentAct: formData.documents.constituentAct,
+        mostRecentMeeting: formData.documents.mostRecentMeeting,
+        legalRepresentativesPower: formData.documents.legalRepresentativesPower,
+        legalRepresentativesId: formData.documents.legalRepresentativesId,
+        documentRFC: formData.documents.documentRFC,
+        oldProofOfAddress: formData.documents.oldProofOfAddress,
+        updatedComplianceOpinion: formData.documents.updatedComplianceOpinion,
+        proofOfUpdatedTaxSituation:
+          formData.documents.proofOfUpdatedTaxSituation,
+        logo: formData.documents.logo
+      }"></app-documents-form>
+  </ng-container>
 
   <button
     *ngIf="(infoSaved$ | async) === false"

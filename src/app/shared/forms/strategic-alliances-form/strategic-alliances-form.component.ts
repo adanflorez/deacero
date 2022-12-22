@@ -38,11 +38,21 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
+    this.initDonations();
+    this.initProducts();
     this.updateParentModel({}, this.isValidForm);
   }
 
   ngOnDestroy(): void {
     this.unsubscribe.forEach(sb => sb.unsubscribe());
+  }
+
+  initDonations() {
+    this.donations = (this.defaultValues?.donations as Donation[]) || [];
+  }
+
+  initProducts() {
+    this.products = (this.defaultValues?.products as Product[]) || [];
   }
 
   get f() {
