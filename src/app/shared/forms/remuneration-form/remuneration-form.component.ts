@@ -63,14 +63,17 @@ export class RemunerationFormComponent implements OnInit, OnDestroy {
 
   subscribeToForm() {
     const sub = this.form.valueChanges.subscribe(val => {
-      this.updateParentModel({ ...val }, this.isValid);
+      this.updateParentModel(
+        { ...val, remunerations: this.remunerations },
+        this.isValid
+      );
     });
     this.unsubscribe.push(sub);
   }
 
-  updateRemunerations(remuneration: Remuneration[]) {
-    this.remunerations = remuneration;
-    const data = { ...this.form.value, remuneration };
+  updateRemunerations(remunerations: Remuneration[]) {
+    this.remunerations = remunerations;
+    const data = { ...this.form.value, remunerations };
     this.updateParentModel(data, this.isValid);
   }
 

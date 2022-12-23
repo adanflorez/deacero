@@ -1,7 +1,7 @@
 <h2 class="mb-3">Documentos</h2>
 <div class="row" [formGroup]="form">
   <ng-container *ngFor="let doc of documentsFields">
-    <div class="col-md-12">
+    <div class="col-md-12" *ngIf="!doc.comment">
       <div class="mb-3">
         <label class="form-label" [for]="doc.field">{{ doc.name }}</label>
         <ng-container *ngIf="!f[doc.field].value">
@@ -40,7 +40,7 @@
       <hr />
     </div>
   </ng-container>
-  <div class="col-md-12">
+  <div class="col-md-12" *ngIf="!defaultValues.logoComment">
     <div class="mb-3">
       <label class="form-label" for="logo">Logotipo</label>
       <ng-container *ngIf="!f['logo'].value">
