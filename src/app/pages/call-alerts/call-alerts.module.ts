@@ -1,4 +1,3 @@
-import { AlertModule } from './../../shared/alert/alert.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -22,6 +21,8 @@ import { ProjectBudgetFormModule } from './../../shared/forms/project-budget-for
 import { DocumentsFormModule } from './../../shared/forms/documents-form/documents-form.module';
 import { ObjectivesFormModule } from './../../shared/forms/objectives-form/objectives-form.module';
 import { RatingFormModule } from './../../shared/forms/rating-form/rating-form.module';
+import { ModalModule } from './../../shared/modal/modal.module';
+import { AlertModule } from './../../shared/alert/alert.module';
 
 @NgModule({
   declarations: [CallAlertsComponent],
@@ -46,6 +47,7 @@ import { RatingFormModule } from './../../shared/forms/rating-form/rating-form.m
     ObjectivesFormModule,
     RatingFormModule,
     AlertModule,
+    ModalModule,
   ],
 })
 export class CallAlertsModule {}

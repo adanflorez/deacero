@@ -302,3 +302,12 @@
     Enviar
   </button>
 </div>
+<app-modal
+  title="Solicitud enviada"
+  acceptLabel="Aceptar"
+  [show]="showModal"
+  [showCancelButton]="false"
+  (closeModal)="closeModal()"
+  (confirm)="closeModal()">
+  <div class="modal-body" content>{{ alertMessage }}</div>
+</app-modal>

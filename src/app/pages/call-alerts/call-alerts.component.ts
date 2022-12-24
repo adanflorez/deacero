@@ -4,6 +4,7 @@ import CallForm from 'src/app/lib/models/call-form.model';
 import FormValid from 'src/app/lib/models/form-valid.model';
 import { CallService } from 'src/app/lib/services/call.service';
 import { AlertType } from 'src/app/lib/enums/alert-type';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-call-alerts',
@@ -17,8 +18,9 @@ export class CallAlertsComponent implements OnInit {
   showAlert: boolean;
   alertType: AlertType;
   alertMessage: string;
+  showModal: boolean;
 
-  constructor(private callService: CallService) {
+  constructor(private callService: CallService, private router: Router) {
     this.formsStatus = [];
     this.formData = {
       generalData: {},
@@ -42,6 +44,7 @@ export class CallAlertsComponent implements OnInit {
     this.showAlert = false;
     this.alertType = AlertType.Danger;
     this.alertMessage = '';
+    this.showModal = false;
   }
 
   ngOnInit(): void {
@@ -243,7 +246,7 @@ export class CallAlertsComponent implements OnInit {
     try {
       await firstValueFrom(this.callService.updateFeedback(form));
       await firstValueFrom(this.callService.saveInFlokzu());
-      this.showAlert = true;
+      this.showModal = true;
       this.alertMessage = 'Solicitud enviada correctamente';
     } catch (error) {
       console.error(error);
@@ -486,5 +489,10 @@ export class CallAlertsComponent implements OnInit {
         },
       };
     });
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.router.navigate(['/home']).finally(() => window.location.reload());
   }
 }

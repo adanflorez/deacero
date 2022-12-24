@@ -20,6 +20,7 @@
       <ng-content selector="content"> </ng-content>
       <div class="modal-footer">
         <button
+          *ngIf="showCancelButton"
           type="button"
           class="btn btn-secondary"
           (click)="closeModal.emit()">

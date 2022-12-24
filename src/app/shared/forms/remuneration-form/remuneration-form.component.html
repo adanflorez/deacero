@@ -3,12 +3,12 @@
   [show]="!!defaultValues.comment"
   [message]="defaultValues.comment!"
   [type]="alertType"></app-alert>
-<div class="row">
+<div class="row" [formGroup]="form">
   <div class="col-12">
     <div class="mb-3">
       <div class="d-flex align-items-center">
         <p class="m-0 me-3">¿Se remunera el trabajo en su organización?</p>
-        <div class="toggleWrapper" [formGroup]="form">
+        <div class="toggleWrapper">
           <input
             type="checkbox"
             name="toggle1"
