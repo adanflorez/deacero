@@ -27,6 +27,7 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
     help: string;
     comment?: string;
   }>;
+  atLeastOneComment: boolean;
 
   alertType: AlertType = AlertType.Warning;
 
@@ -36,6 +37,7 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
   constructor(private multimediaService: MultimediaService) {
     this.defaultValues = {};
     this.form = new FormGroup({});
+    this.atLeastOneComment = false;
     this.initDocuments();
     this.initForm();
   }
@@ -221,7 +223,12 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
         if (doc.field === key) {
           const keyComment = key as keyof DocumentsForm;
           doc.comment =
-            this.defaultValues[(keyComment + 'Comment') as keyof DocumentsForm];
+            this.defaultValues[
+              (keyComment + 'Comment') as keyof DocumentsForm
+            ] || '';
+          if (doc.comment !== '' && doc.comment !== null) {
+            this.atLeastOneComment = true;
+          }
         }
       });
     });
