@@ -38,9 +38,7 @@ export class CallService {
   }
 
   updateFeedback(form: unknown): Observable<Response<unknown>> {
-    return this.http.put<Response<unknown>>(`${this.apiFeedback}`, {
-      form,
-    });
+    return this.http.put<Response<unknown>>(`${this.apiFeedback}`, form);
   }
 
   feedbackStatus(): Observable<Response<unknown>> {

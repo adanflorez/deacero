@@ -122,7 +122,9 @@ export class CallsComponent implements OnInit, OnDestroy {
     return (
       this.form.valid &&
       this.members.length > 0 &&
-      this.remunerations.length > 0 &&
+      (this.f['remunerationQuestion'].value
+        ? this.remunerations.length > 0
+        : true) &&
       this.contributions.length > 0 &&
       this.conversions.length > 0 &&
       this.donations.length > 0
