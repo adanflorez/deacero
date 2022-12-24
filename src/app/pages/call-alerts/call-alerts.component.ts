@@ -244,6 +244,23 @@ export class CallAlertsComponent implements OnInit {
           this.formData.documents.proofOfUpdatedTaxSituation,
         logo: this.formData.documents.logo,
       },
+      selfAppraisal: {
+        improveLivingConditions: this.formData.rating.livingConditions,
+        improvementInQualityOfLife: this.formData.rating.lifeQuality,
+        selfManagementSkills: this.formData.rating.capacityBuilding,
+        supportType: this.formData.rating.supportType,
+        scopeOfSupport: this.formData.rating.supportScope,
+        resilienceBuilding: this.formData.rating.resilienceBuilding,
+        socialLag: this.formData.rating.socialBackwardness,
+        developmentOfSenseOfCommunity: this.formData.rating.communitySense,
+        sustainabilityProcess: this.formData.rating.sustainabilityProcesses,
+        improvementInTheStateOfTheOrganization:
+          this.formData.rating.statusImprovement,
+        urbanDevelopment: this.formData.rating.urbanDevelopment,
+        professionalizationProcess:
+          this.formData.rating.professionalizationProcess,
+        generationOfOpportunities: this.formData.rating.opportunityGeneration,
+      },
     };
     console.log(form);
     try {
