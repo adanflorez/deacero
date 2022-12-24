@@ -21,6 +21,7 @@ export class ModalComponent implements OnInit, OnChanges {
   @Input() closable = true;
   @Input() show = false;
   @Input() acceptLabel = 'Aceptar';
+  @Input() showCancelButton = true;
   @Output() closeModal = new EventEmitter();
   @Output() confirm = new EventEmitter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
