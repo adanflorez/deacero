@@ -52,9 +52,12 @@ export class CallAlertsComponent implements OnInit {
   }
 
   updateData = <T>(form: T, isFormValid: FormValid) => {
-    const currentData = this.formData;
-    const updatedData = { ...currentData, ...form };
-    this.formData = updatedData;
+    const sectionName = isFormValid.name as keyof CallForm;
+    const sectionBody = {
+      ...this.formData[sectionName],
+      ...form,
+    } as any;
+    this.formData[sectionName] = sectionBody;
     console.log(isFormValid);
     this.updateFormStatus(isFormValid);
   };
