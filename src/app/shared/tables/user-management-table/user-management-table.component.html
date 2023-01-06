@@ -52,7 +52,7 @@
           </td>
           <td>
             <ngb-highlight
-              [result]="user.role"
+              [result]="user.role | userRole"
               [term]="filter.value"></ngb-highlight>
           </td>
           <td>

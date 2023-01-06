@@ -1,4 +1,3 @@
-import { AlertType } from 'src/app/lib/enums/alert-type';
 import {
   Observable,
   map,
@@ -9,6 +8,8 @@ import {
 } from 'rxjs';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserRolePipe } from 'src/app/lib/pipes/user-role.pipe';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
 import { PASSWORD_PATERN } from 'src/app/lib/constants';
 import UserManagement from 'src/app/lib/models/user-management.model';
@@ -22,7 +23,7 @@ declare let window: any;
   selector: 'app-user-management-table',
   templateUrl: './user-management-table.component.html',
   styleUrls: ['./user-management-table.component.scss'],
-  providers: [UserStatusPipe],
+  providers: [UserStatusPipe, UserRolePipe],
 })
 export class UserManagementTableComponent implements OnInit, AfterViewInit {
   users$: Observable<UserManagement[]>;
@@ -42,6 +43,7 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
 
   constructor(
     private userStatusPipe: UserStatusPipe,
+    private userRolePipe: UserRolePipe,
     private userService: UserService
   ) {
     this.users$ = this.filter.valueChanges.pipe(
@@ -106,7 +108,10 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
       return (
         user.name.toLowerCase().includes(text.toLowerCase()) ||
         user.rfc.toLowerCase().includes(text.toLowerCase()) ||
-        user.role.toLowerCase().includes(text.toLowerCase()) ||
+        this.userRolePipe
+          .transform(user.role)
+          .toLowerCase()
+          .includes(text.toLowerCase()) ||
         this.userStatusPipe.transform(user.status).toLowerCase().includes(text)
       );
     });
