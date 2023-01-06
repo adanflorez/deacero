@@ -169,7 +169,13 @@
           class="form-control"
           type="text"
           placeholder="Usuario"
-          formControlName="user" />
+          formControlName="user"
+          [class.is-invalid]="f['user'].invalid && f['user'].touched" />
+        <app-form-error
+          [control]="f['user']"
+          [errors]="{
+            pattern: 'Solo debe ingresar números'
+          }"></app-form-error>
       </div>
       <div class="mb-3">
         <div class="input-group has-validation">
