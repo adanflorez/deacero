@@ -1,1 +1,125 @@
-<p>user-management-table works!</p>
+<div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  <div class="d-flex flex-column flex-md-row justify-content-between">
+    <form>
+      <div class="mb-3 row">
+        <label
+          for="table-filtering-search"
+          class="col-xs-3 col-sm-auto col-form-label"
+          >Filtrar:</label
+        >
+        <div class="col-xs-3 col-sm-auto">
+          <input
+            id="table-filtering-search"
+            class="form-control"
+            type="text"
+            [formControl]="filter" />
+        </div>
+      </div>
+    </form>
+    <div class="d-block">
+      <button class="btn btn-primary">Crear usuario</button>
+    </div>
+  </div>
+  <div class="d-none d-lg-flex">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Usuario</th>
+          <th scope="col">Razón social de la OSC</th>
+          <th scope="col">Rol</th>
+          <th scope="col">Estatus</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users$ | async; index as i">
+          <td>
+            <ngb-highlight
+              [result]="user.name"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="user.rfc"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="user.role"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="user.status"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <button
+              *ngIf="user.status === 'Inactive'; else active"
+              class="btn btn-sm btn-success">
+              Activar
+            </button>
+            <ng-template #active>
+              <button class="btn btn-sm btn-danger">Desactivar</button>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="d-block d-lg-none">
+  <div
+    class="bg-bright-gray border border-secondary rounded p-3 mb-4"
+    *ngFor="let user of users$ | async; index as i">
+    <table class="table table-striped mobile-table">
+      <tbody>
+        <tr>
+          <th style="width: 200px">Usuario</th>
+          <td>
+            <ngb-highlight
+              [result]="user.name"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th style="width: 200">Razón social de la OSC</th>
+          <td>
+            <ngb-highlight
+              [result]="user.rfc"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Rol</th>
+          <td>
+            <ngb-highlight
+              [result]="user.role"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Estatus</th>
+          <td>
+            <ngb-highlight
+              [result]="user.status | userStatus"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Acciones</th>
+          <td>
+            <button
+              *ngIf="user.status === 'Inactive'; else active"
+              class="btn btn-sm btn-success">
+              Activar
+            </button>
+            <ng-template #active>
+              <button class="btn btn-sm btn-danger">Desactivar</button>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
