@@ -23,6 +23,7 @@ export class ModalComponent implements OnChanges, AfterViewInit {
   @Input() show = false;
   @Input() acceptLabel = 'Aceptar';
   @Input() showCancelButton = true;
+  @Input() disableConfirmButton = false;
   @Output() closeModal = new EventEmitter();
   @Output() confirm = new EventEmitter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

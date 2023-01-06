@@ -26,7 +26,11 @@
           (click)="closeModal.emit()">
           Cancelar
         </button>
-        <button type="button" class="btn btn-primary" (click)="confirm.emit()">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="disableConfirmButton"
+          (click)="confirm.emit()">
           {{ acceptLabel }}
         </button>
       </div>
