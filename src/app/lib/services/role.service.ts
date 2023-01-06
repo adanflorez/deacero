@@ -6,7 +6,8 @@ import { Observable, of, switchMap } from 'rxjs';
 })
 export class RoleService {
   public role(): Observable<unknown> {
-    return of('ADMINISTRATOR');
+    const role = localStorage.getItem('role');
+    return of(role);
   }
 
   isAdmin(): Observable<boolean> {

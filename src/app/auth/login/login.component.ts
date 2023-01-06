@@ -50,6 +50,10 @@ export class LoginComponent implements OnInit {
               'token',
               (res as Response<boolean>).token as string
             );
+            localStorage.setItem(
+              'role',
+              (res as Response<boolean>).rol as string
+            );
             const isAdmin = await firstValueFrom(this.roleService.isAdmin());
             if (isAdmin) {
               this.router.navigate(['/user-management']);
