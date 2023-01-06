@@ -3,7 +3,7 @@
     *ngIf="show"
     [type]="type"
     [dismissible]="dismissible"
-    (closed)="show = false">
+    (closed)="hide()">
     {{ message }}
   </ngb-alert>
 </p>

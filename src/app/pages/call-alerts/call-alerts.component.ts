@@ -58,7 +58,6 @@ export class CallAlertsComponent implements OnInit {
       ...form,
     } as any;
     this.formData[sectionName] = sectionBody;
-    console.log(isFormValid);
     this.updateFormStatus(isFormValid);
   };
 
@@ -262,7 +261,6 @@ export class CallAlertsComponent implements OnInit {
         generationOfOpportunities: this.formData.rating.opportunityGeneration,
       },
     };
-    console.log(form);
     try {
       await firstValueFrom(this.callService.updateFeedback(form));
       await firstValueFrom(this.callService.saveInFlokzu());

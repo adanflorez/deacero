@@ -11,6 +11,7 @@ export const environment = {
   apiMultimedia: 'http://44.228.61.3:8080/multimedia/',
   apiCall: 'http://44.228.61.3:8080/call/',
   apiFeedback: 'http://44.228.61.3:8080/feedback/',
+  apiAdmin: 'http://44.228.61.3:8080/admin/',
 };
 
 /*

@@ -1,0 +1,246 @@
+<div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  <app-alert
+    [(show)]="showAlert"
+    [message]="alertMessage"
+    [type]="alertType"
+    [dismissible]="true"></app-alert>
+  <div class="d-flex flex-column flex-md-row justify-content-between">
+    <form>
+      <div class="mb-3 row">
+        <label
+          for="table-filtering-search"
+          class="col-xs-3 col-sm-auto col-form-label"
+          >Filtrar:</label
+        >
+        <div class="col-xs-3 col-sm-auto">
+          <input
+            id="table-filtering-search"
+            class="form-control"
+            type="text"
+            [formControl]="filter" />
+        </div>
+      </div>
+    </form>
+    <div class="d-block">
+      <button class="btn btn-primary" (click)="openCreateUserModal()">
+        Crear usuario
+      </button>
+    </div>
+  </div>
+  <div class="d-none d-lg-flex">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Usuario</th>
+          <th scope="col">Razón social de la OSC</th>
+          <th scope="col">Rol</th>
+          <th scope="col">Estatus</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users$ | async; index as i">
+          <td>
+            <ngb-highlight
+              [result]="user.name"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="user.rfc"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="user.role | userRole"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="user.status | userStatus"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ng-container
+              *ngTemplateOutlet="
+                activateDeactivateBtns;
+                context: { $implicit: user }
+              "></ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="d-block d-lg-none">
+  <div
+    class="bg-bright-gray border border-secondary rounded p-3 mb-4"
+    *ngFor="let user of users$ | async; index as i">
+    <table class="table table-striped mobile-table">
+      <tbody>
+        <tr>
+          <th style="width: 200px">Usuario</th>
+          <td>
+            <ngb-highlight
+              [result]="user.name"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th style="width: 200">Razón social de la OSC</th>
+          <td>
+            <ngb-highlight
+              [result]="user.rfc"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Rol</th>
+          <td>
+            <ngb-highlight
+              [result]="user.role | userRole"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Estatus</th>
+          <td>
+            <ngb-highlight
+              [result]="user.status | userStatus"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Acciones</th>
+          <td>
+            <ng-container
+              *ngTemplateOutlet="
+                activateDeactivateBtns;
+                context: { $implicit: user }
+              "></ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #activateDeactivateBtns let-user>
+  <button
+    *ngIf="!user.status; else active"
+    type="button"
+    class="btn btn-sm btn-success"
+    (click)="openModal(user.name, true)">
+    Activar
+  </button>
+  <ng-template #active>
+    <button
+      type="button"
+      class="btn btn-sm btn-danger"
+      (click)="openModal(user.name, false)">
+      Desactivar
+    </button>
+  </ng-template>
+</ng-template>
+
+<app-modal
+  title="Activar/Desactivar usuario"
+  acceptLabel="Aceptar"
+  [show]="showModal"
+  (closeModal)="closeModal()"
+  (confirm)="activateOrDeactivateUser()">
+  <div class="modal-body" content>{{ activateDeactivateMessage }}</div>
+</app-modal>
+
+<app-modal
+  title="Crear usuario"
+  acceptLabel="Aceptar"
+  modalId="createUserModal"
+  [show]="showCreateUserModal"
+  [disableConfirmButton]="createUserForm.invalid"
+  (closeModal)="closeCreateUserModal()"
+  (confirm)="confirmCreateUserModal()">
+  <div class="modal-body" content>
+    <form [formGroup]="createUserForm" class="p-3">
+      <div class="mb-3">
+        <label for="user" class="form-label">Usuario</label>
+        <input
+          id="user"
+          class="form-control"
+          type="text"
+          placeholder="Usuario"
+          formControlName="user"
+          [class.is-invalid]="f['user'].invalid && f['user'].touched" />
+        <app-form-error
+          [control]="f['user']"
+          [errors]="{
+            pattern: 'Solo debe ingresar números'
+          }"></app-form-error>
+      </div>
+      <div class="mb-3">
+        <div class="input-group has-validation">
+          <input
+            [type]="passwordFieldType"
+            class="form-control"
+            id="password"
+            placeholder="Contraseña"
+            formControlName="password"
+            [class.is-invalid]="f['password'].invalid && f['password'].touched"
+            aria-describedby="button-addon2" />
+
+          <button
+            class="btn btn-secondary"
+            type="button"
+            (click)="showHidePassword(1)">
+            <img
+              height="20"
+              [src]="'/assets/icons/' + passwordButonnIcon + '.png'"
+              alt="lock" />
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-default"
+            data-bs-toggle="tooltip"
+            data-bs-placement="left"
+            data-bs-html="true"
+            title="<p class='text-start'>La contraseña debe contener: <br /><br />- Mínimo 8 caracteres alfanuméricos<br /> - Al menos una letra mayúscula</p>"
+            id="button-addon2">
+            <span class="badge rounded-pill bg-dark">?</span>
+          </button>
+        </div>
+        <div
+          class="text-danger small"
+          *ngIf="f['password'].invalid && f['password'].touched">
+          Contraseña no válida
+        </div>
+
+        <div class="small">- Asigna una contraseña a tu cuenta</div>
+      </div>
+      <div class="mb-3">
+        <div class="input-group has-validation">
+          <input
+            [type]="confirmPasswordFieldType"
+            class="form-control"
+            id="confirmPassword"
+            placeholder="Confirma tu contraseña"
+            formControlName="confirmPassword"
+            [class.is-invalid]="passwordMatchError" />
+          <button
+            class="btn btn-secondary"
+            type="button"
+            (click)="showHidePassword(2)">
+            <img
+              height="20"
+              [src]="'/assets/icons/' + confirmPasswordButonnIcon + '.png'"
+              alt="lock" />
+          </button>
+          <div *ngIf="passwordMatchError" class="invalid-feedback">
+            Las contraseñas no coinciden
+          </div>
+        </div>
+        <div class="small">- Vuelva a repetir la contraseña</div>
+      </div>
+    </form>
+  </div>
+</app-modal>

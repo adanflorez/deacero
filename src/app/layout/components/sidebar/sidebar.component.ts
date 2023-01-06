@@ -1,3 +1,4 @@
+import { RoleService } from 'src/app/lib/services/role.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable, firstValueFrom } from 'rxjs';
 import { LayoutService } from 'src/app/lib/services/layout.service';
@@ -13,7 +14,11 @@ export class SidebarComponent implements OnInit {
   show: boolean;
   showAdministrationOption: boolean;
 
-  constructor(layout: LayoutService, private callService: CallService) {
+  constructor(
+    layout: LayoutService,
+    private callService: CallService,
+    private roleService: RoleService
+  ) {
     this.show = false;
     this.showAdministrationOption = false;
     this.data$ = layout.sidebarIsOpenSubject;
@@ -29,5 +34,9 @@ export class SidebarComponent implements OnInit {
   async validateMenu(): Promise<void> {
     const res = await firstValueFrom(this.callService.feedbackStatus());
     this.showAdministrationOption = res.data as boolean;
+  }
+
+  get isAdmin(): Observable<boolean> {
+    return this.roleService.isAdmin();
   }
 }

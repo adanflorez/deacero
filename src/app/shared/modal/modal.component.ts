@@ -1,9 +1,9 @@
 import {
+  AfterViewInit,
   Component,
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
@@ -16,20 +16,22 @@ declare let window: any;
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent implements OnInit, OnChanges {
+export class ModalComponent implements OnChanges, AfterViewInit {
+  @Input() modalId = 'myModal';
   @Input() title = '';
   @Input() closable = true;
   @Input() show = false;
   @Input() acceptLabel = 'Aceptar';
   @Input() showCancelButton = true;
+  @Input() disableConfirmButton = false;
   @Output() closeModal = new EventEmitter();
   @Output() confirm = new EventEmitter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formModal: any;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.formModal = new window.bootstrap.Modal(
-      document.getElementById('myModal')
+      document.getElementById(this.modalId)
     );
   }
 

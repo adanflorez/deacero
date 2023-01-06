@@ -2,33 +2,48 @@
   class="flex-column flex-shrink-0 p-3 text-white bg-dark sidebar"
   [ngClass]="{ 'd-flex': show }">
   <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item">
-      <a
-        routerLink="/home"
-        class="nav-link"
-        routerLinkActive="active"
-        aria-current="page">
-        Información de OSC
-      </a>
-    </li>
-    <li class="nav-item">
-      <a
-        routerLink="/calls"
-        class="nav-link"
-        routerLinkActive="active"
-        aria-current="page">
-        Aplicación a convocatoria
-      </a>
-    </li>
-    <li *ngIf="showAdministrationOption" class="nav-item">
-      <a
-        routerLink="/call-alerts"
-        class="nav-link"
-        routerLinkActive="active"
-        aria-current="page">
-        Corrección de administración de la solicitud
-      </a>
-    </li>
+    <ng-container *ngIf="isAdmin | async; then isAdminTmp; else noAdmin">
+    </ng-container>
+    <ng-template #isAdminTmp>
+      <li class="nav-item">
+        <a
+          routerLink="/user-management"
+          class="nav-link"
+          routerLinkActive="active"
+          aria-current="page">
+          Gestión de usuarios
+        </a>
+      </li>
+    </ng-template>
+    <ng-template #noAdmin>
+      <li class="nav-item">
+        <a
+          routerLink="/home"
+          class="nav-link"
+          routerLinkActive="active"
+          aria-current="page">
+          Información de OSC
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/calls"
+          class="nav-link"
+          routerLinkActive="active"
+          aria-current="page">
+          Aplicación a convocatoria
+        </a>
+      </li>
+      <li *ngIf="showAdministrationOption" class="nav-item">
+        <a
+          routerLink="/call-alerts"
+          class="nav-link"
+          routerLinkActive="active"
+          aria-current="page">
+          Corrección de administración de la solicitud
+        </a>
+      </li>
+    </ng-template>
   </ul>
   <hr />
   <div class="dropdown">

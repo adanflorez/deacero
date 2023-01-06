@@ -11,12 +11,17 @@ export class AlertComponent {
   @Input() message;
   @Input() show: boolean;
   @Input() dismissible: boolean;
-  @Output() hide = new EventEmitter();
+  @Output() showChange = new EventEmitter();
 
   constructor() {
     this.type = AlertType.Danger;
     this.message = '';
     this.show = false;
     this.dismissible = false;
+  }
+
+  hide() {
+    this.show = false;
+    this.showChange.emit(this.show);
   }
 }

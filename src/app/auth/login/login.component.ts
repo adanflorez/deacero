@@ -1,3 +1,5 @@
+import { firstValueFrom } from 'rxjs';
+import { RoleService } from 'src/app/lib/services/role.service';
 import { AlertType } from 'src/app/lib/enums/alert-type';
 import { AuthService } from 'src/app/lib/services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +18,11 @@ export class LoginComponent implements OnInit {
   message = '';
   alertType: AlertType = AlertType.Danger;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private roleService: RoleService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     localStorage.clear();
@@ -38,12 +44,25 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(this.f['username'].value, this.f['password'].value)
       .subscribe({
-        next: (res: Response<unknown>) => {
-          localStorage.setItem(
-            'token',
-            (res as Response<unknown>).token as string
-          );
-          this.router.navigate(['/home']);
+        next: async (res: any) => {
+          try {
+            localStorage.setItem(
+              'token',
+              (res as Response<boolean>).token as string
+            );
+            localStorage.setItem(
+              'role',
+              (res as Response<boolean>).rol as string
+            );
+            const isAdmin = await firstValueFrom(this.roleService.isAdmin());
+            if (isAdmin) {
+              this.router.navigate(['/user-management']);
+            } else {
+              this.router.navigate(['/home']);
+            }
+          } catch (error) {
+            console.error(error);
+          }
         },
         error: () => {
           this.setAlert(
