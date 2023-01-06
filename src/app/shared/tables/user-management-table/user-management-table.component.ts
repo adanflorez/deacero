@@ -4,17 +4,10 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
 import { PASSWORD_PATERN } from 'src/app/lib/constants';
+import UserManagement from 'src/app/lib/models/user-management.model';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare let window: any;
-
-interface UserManagement {
-  id?: string;
-  name: string;
-  rfc: string;
-  role: string;
-  status: string;
-}
 
 @Component({
   selector: 'app-user-management-table',
