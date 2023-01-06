@@ -149,12 +149,84 @@
   acceptLabel="Aceptar"
   modalId="createUserModal"
   [show]="showCreateUserModal"
+  [disableConfirmButton]="createUserForm.invalid"
   (closeModal)="closeCreateUserModal()"
-  (confirm)="closeCreateUserModal()">
+  (confirm)="confirmCreateUserModal()">
   <div class="modal-body" content>
     <form [formGroup]="createUserForm" class="p-3">
-      <label for="user" class="form-label">Usuario</label>
-      <input id="user" class="form-control" type="text" placeholder="Usuario" />
+      <div class="mb-3">
+        <label for="user" class="form-label">Usuario</label>
+        <input
+          id="user"
+          class="form-control"
+          type="text"
+          placeholder="Usuario"
+          formControlName="user" />
+      </div>
+      <div class="mb-3">
+        <div class="input-group has-validation">
+          <input
+            [type]="passwordFieldType"
+            class="form-control"
+            id="password"
+            placeholder="Contraseña"
+            formControlName="password"
+            [class.is-invalid]="f['password'].invalid && f['password'].touched"
+            aria-describedby="button-addon2" />
+
+          <button
+            class="btn btn-secondary"
+            type="button"
+            (click)="showHidePassword(1)">
+            <img
+              height="20"
+              [src]="'/assets/icons/' + passwordButonnIcon + '.png'"
+              alt="lock" />
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-default"
+            data-bs-toggle="tooltip"
+            data-bs-placement="left"
+            data-bs-html="true"
+            title="<p class='text-start'>La contraseña debe contener: <br /><br />- Mínimo 8 caracteres alfanuméricos<br /> - Al menos una letra mayúscula</p>"
+            id="button-addon2">
+            <span class="badge rounded-pill bg-dark">?</span>
+          </button>
+        </div>
+        <div
+          class="text-danger small"
+          *ngIf="f['password'].invalid && f['password'].touched">
+          Contraseña no válida
+        </div>
+
+        <div class="small">- Asigna una contraseña a tu cuenta</div>
+      </div>
+      <div class="mb-3">
+        <div class="input-group has-validation">
+          <input
+            [type]="confirmPasswordFieldType"
+            class="form-control"
+            id="confirmPassword"
+            placeholder="Confirma tu contraseña"
+            formControlName="confirmPassword"
+            [class.is-invalid]="passwordMatchError" />
+          <button
+            class="btn btn-secondary"
+            type="button"
+            (click)="showHidePassword(2)">
+            <img
+              height="20"
+              [src]="'/assets/icons/' + confirmPasswordButonnIcon + '.png'"
+              alt="lock" />
+          </button>
+          <div *ngIf="passwordMatchError" class="invalid-feedback">
+            Las contraseñas no coinciden
+          </div>
+        </div>
+        <div class="small">- Vuelva a repetir la contraseña</div>
+      </div>
     </form>
   </div>
 </app-modal>
