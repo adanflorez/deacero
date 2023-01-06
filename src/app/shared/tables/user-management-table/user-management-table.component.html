@@ -98,7 +98,7 @@
           <th>Rol</th>
           <td>
             <ngb-highlight
-              [result]="user.role"
+              [result]="user.role | userRole"
               [term]="filter.value"></ngb-highlight>
           </td>
         </tr>
@@ -127,14 +127,17 @@
 
 <ng-template #activateDeactivateBtns let-user>
   <button
-    *ngIf="user.status === 'Inactive'; else active"
+    *ngIf="!user.status; else active"
     type="button"
     class="btn btn-sm btn-success"
-    (click)="openModal(true)">
+    (click)="openModal(user.name, true)">
     Activar
   </button>
   <ng-template #active>
-    <button type="button" class="btn btn-sm btn-danger" (click)="openModal()">
+    <button
+      type="button"
+      class="btn btn-sm btn-danger"
+      (click)="openModal(user.name, false)">
       Desactivar
     </button>
   </ng-template>
@@ -145,7 +148,7 @@
   acceptLabel="Aceptar"
   [show]="showModal"
   (closeModal)="closeModal()"
-  (confirm)="closeModal()">
+  (confirm)="activateOrDeactivateUser()">
   <div class="modal-body" content>{{ activateDeactivateMessage }}</div>
 </app-modal>
 

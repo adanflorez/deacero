@@ -40,6 +40,8 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
   showAlert: boolean;
   alertMessage: string;
   alertType: AlertType;
+  emailToActivateOrDeactivate: string;
+  statusToActivateOrDeactivate: boolean;
 
   constructor(
     private userStatusPipe: UserStatusPipe,
@@ -62,6 +64,8 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
     this.showAlert = false;
     this.alertMessage = '';
     this.alertType = AlertType.Danger;
+    this.emailToActivateOrDeactivate = '';
+    this.statusToActivateOrDeactivate = false;
   }
 
   ngAfterViewInit(): void {
@@ -121,7 +125,9 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
     this.showModal = false;
   }
 
-  openModal(isActivate?: boolean) {
+  openModal(email: string, isActivate: boolean) {
+    this.emailToActivateOrDeactivate = email;
+    this.statusToActivateOrDeactivate = isActivate;
     this.activateDeactivateMessage = isActivate
       ? '¿Deseas activar el usuario?'
       : '¿Deseas desactivar el usuario?';
@@ -189,5 +195,24 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
       startWith(''),
       map(text => this.search(text))
     );
+  }
+
+  activateOrDeactivateUser() {
+    console.log(this.emailToActivateOrDeactivate);
+    if (!this.emailToActivateOrDeactivate) return;
+    this.userService
+      .activateOrDeactivateUser(
+        this.emailToActivateOrDeactivate,
+        this.statusToActivateOrDeactivate
+      )
+      .subscribe({
+        error: err => {
+          console.error(err);
+        },
+        complete: () => {
+          this.showModal = false;
+          this.userManagementList();
+        },
+      });
   }
 }
