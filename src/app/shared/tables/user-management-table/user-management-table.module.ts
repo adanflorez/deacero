@@ -1,3 +1,4 @@
+import { AlertModule } from 'src/app/shared/alert/alert.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,7 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     ModalModule,
     ReactiveFormsModule,
+    AlertModule,
   ],
   exports: [UserManagementTableComponent],
 })

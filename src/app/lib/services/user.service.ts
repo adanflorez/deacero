@@ -42,4 +42,8 @@ export class UserService {
       })
     );
   }
+
+  createUser(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiAdmin}user`, { email, password });
+  }
 }

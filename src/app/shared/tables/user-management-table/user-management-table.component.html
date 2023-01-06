@@ -1,4 +1,9 @@
 <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  <app-alert
+    [(show)]="showAlert"
+    [message]="alertMessage"
+    [type]="alertType"
+    [dismissible]="true"></app-alert>
   <div class="d-flex flex-column flex-md-row justify-content-between">
     <form>
       <div class="mb-3 row">

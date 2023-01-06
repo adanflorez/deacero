@@ -1,4 +1,12 @@
-import { Observable, map, startWith, firstValueFrom } from 'rxjs';
+import { AlertType } from 'src/app/lib/enums/alert-type';
+import {
+  Observable,
+  map,
+  startWith,
+  firstValueFrom,
+  catchError,
+  throwError,
+} from 'rxjs';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
@@ -28,6 +36,9 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
   confirmPasswordFieldType: string;
   passwordButonnIcon: string;
   confirmPasswordButonnIcon: string;
+  showAlert: boolean;
+  alertMessage: string;
+  alertType: AlertType;
 
   constructor(
     private userStatusPipe: UserStatusPipe,
@@ -46,6 +57,9 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
     this.confirmPasswordFieldType = 'password';
     this.passwordButonnIcon = 'lock';
     this.confirmPasswordButonnIcon = 'lock';
+    this.showAlert = false;
+    this.alertMessage = '';
+    this.alertType = AlertType.Danger;
   }
 
   ngAfterViewInit(): void {
@@ -118,7 +132,29 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
   }
 
   confirmCreateUserModal() {
-    console.log(this.createUserForm.value);
+    if (this.createUserForm.invalid) return;
+    this.userService
+      .createUser(this.f['user'].value, this.f['password'].value)
+      .pipe(
+        catchError(err => {
+          this.closeCreateUserModal();
+          this.createUserForm.reset();
+          this.alertType = AlertType.Danger;
+          this.alertMessage = 'No se pudo registrar el usuario';
+          this.showAlert = true;
+          return throwError(() => new Error(err));
+        })
+      )
+      .subscribe({
+        complete: () => {
+          this.closeCreateUserModal();
+          this.createUserForm.reset();
+          this.alertType = AlertType.Success;
+          this.alertMessage = 'Usuario registrado correctamente';
+          this.showAlert = true;
+          this.userManagementList();
+        },
+      });
   }
 
   showHidePassword(field: number): void {
