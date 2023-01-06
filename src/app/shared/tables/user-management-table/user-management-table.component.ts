@@ -21,6 +21,8 @@ export class UserManagementTableComponent {
   users$: Observable<UserManagement[]>;
   users: UserManagement[];
   filter = new FormControl('', { nonNullable: true });
+  showModal: boolean;
+  activateDeactivateMessage: string;
 
   constructor(private userStatusPipe: UserStatusPipe) {
     this.users$ = this.filter.valueChanges.pipe(
@@ -41,6 +43,8 @@ export class UserManagementTableComponent {
         name: 'Josesito el Fulanito de Tal',
       },
     ];
+    this.showModal = false;
+    this.activateDeactivateMessage = '';
   }
 
   search(text: string): UserManagement[] {
@@ -52,5 +56,16 @@ export class UserManagementTableComponent {
         this.userStatusPipe.transform(user.status).includes(text)
       );
     });
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  openModal(isActivate?: boolean) {
+    this.activateDeactivateMessage = isActivate
+      ? '¿Deseas activar el usuario?'
+      : '¿Deseas desactivar el usuario?';
+    this.showModal = true;
   }
 }

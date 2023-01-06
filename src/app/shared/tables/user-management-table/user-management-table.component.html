@@ -54,14 +54,11 @@
               [term]="filter.value"></ngb-highlight>
           </td>
           <td>
-            <button
-              *ngIf="user.status === 'Inactive'; else active"
-              class="btn btn-sm btn-success">
-              Activar
-            </button>
-            <ng-template #active>
-              <button class="btn btn-sm btn-danger">Desactivar</button>
-            </ng-template>
+            <ng-container
+              *ngTemplateOutlet="
+                activateDeactivateBtns;
+                context: { $implicit: user }
+              "></ng-container>
           </td>
         </tr>
       </tbody>
@@ -109,17 +106,38 @@
         <tr>
           <th>Acciones</th>
           <td>
-            <button
-              *ngIf="user.status === 'Inactive'; else active"
-              class="btn btn-sm btn-success">
-              Activar
-            </button>
-            <ng-template #active>
-              <button class="btn btn-sm btn-danger">Desactivar</button>
-            </ng-template>
+            <ng-container
+              *ngTemplateOutlet="
+                activateDeactivateBtns;
+                context: { $implicit: user }
+              "></ng-container>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<ng-template #activateDeactivateBtns let-user>
+  <button
+    *ngIf="user.status === 'Inactive'; else active"
+    type="button"
+    class="btn btn-sm btn-success"
+    (click)="openModal(true)">
+    Activar
+  </button>
+  <ng-template #active>
+    <button type="button" class="btn btn-sm btn-danger" (click)="openModal()">
+      Desactivar
+    </button>
+  </ng-template>
+</ng-template>
+
+<app-modal
+  title="Activar/Desactivar usuario"
+  acceptLabel="Aceptar"
+  [show]="showModal"
+  (closeModal)="closeModal()"
+  (confirm)="closeModal()">
+  <div class="modal-body" content>{{ activateDeactivateMessage }}</div>
+</app-modal>
