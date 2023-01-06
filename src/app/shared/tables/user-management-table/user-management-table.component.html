@@ -17,7 +17,9 @@
       </div>
     </form>
     <div class="d-block">
-      <button class="btn btn-primary">Crear usuario</button>
+      <button class="btn btn-primary" (click)="openCreateUserModal()">
+        Crear usuario
+      </button>
     </div>
   </div>
   <div class="d-none d-lg-flex">
@@ -140,4 +142,19 @@
   (closeModal)="closeModal()"
   (confirm)="closeModal()">
   <div class="modal-body" content>{{ activateDeactivateMessage }}</div>
+</app-modal>
+
+<app-modal
+  title="Crear usuario"
+  acceptLabel="Aceptar"
+  modalId="createUserModal"
+  [show]="showCreateUserModal"
+  (closeModal)="closeCreateUserModal()"
+  (confirm)="closeCreateUserModal()">
+  <div class="modal-body" content>
+    <form [formGroup]="createUserForm" class="p-3">
+      <label for="user" class="form-label">Usuario</label>
+      <input id="user" class="form-control" type="text" placeholder="Usuario" />
+    </form>
+  </div>
 </app-modal>

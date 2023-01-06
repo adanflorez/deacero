@@ -1,7 +1,7 @@
 import { UserStatusPipe } from 'src/app/lib/pipes/user-status.pipe';
 import { Observable, map, startWith } from 'rxjs';
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 interface UserManagement {
   id?: string;
@@ -23,6 +23,8 @@ export class UserManagementTableComponent {
   filter = new FormControl('', { nonNullable: true });
   showModal: boolean;
   activateDeactivateMessage: string;
+  createUserForm: FormGroup;
+  showCreateUserModal: boolean;
 
   constructor(private userStatusPipe: UserStatusPipe) {
     this.users$ = this.filter.valueChanges.pipe(
@@ -45,6 +47,8 @@ export class UserManagementTableComponent {
     ];
     this.showModal = false;
     this.activateDeactivateMessage = '';
+    this.createUserForm = new FormGroup({});
+    this.showCreateUserModal = false;
   }
 
   search(text: string): UserManagement[] {
@@ -67,5 +71,13 @@ export class UserManagementTableComponent {
       ? '¿Deseas activar el usuario?'
       : '¿Deseas desactivar el usuario?';
     this.showModal = true;
+  }
+
+  openCreateUserModal() {
+    this.showCreateUserModal = true;
+  }
+
+  closeCreateUserModal() {
+    this.showCreateUserModal = false;
   }
 }

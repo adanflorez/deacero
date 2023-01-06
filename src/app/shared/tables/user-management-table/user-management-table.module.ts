@@ -8,7 +8,13 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [UserManagementTableComponent, UserStatusPipe],
-  imports: [CommonModule, NgbTypeaheadModule, ReactiveFormsModule, ModalModule],
+  imports: [
+    CommonModule,
+    NgbTypeaheadModule,
+    ReactiveFormsModule,
+    ModalModule,
+    ReactiveFormsModule,
+  ],
   exports: [UserManagementTableComponent],
 })
 export class UserManagementTableModule {}
