@@ -52,7 +52,7 @@
           </td>
           <td>
             <ngb-highlight
-              [result]="user.status"
+              [result]="user.status | userStatus"
               [term]="filter.value"></ngb-highlight>
           </td>
           <td>

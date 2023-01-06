@@ -1,10 +1,11 @@
-import { UserStatusPipe } from 'src/app/lib/pipes/user-status.pipe';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, map, startWith, firstValueFrom } from 'rxjs';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
 import { PASSWORD_PATERN } from 'src/app/lib/constants';
 import UserManagement from 'src/app/lib/models/user-management.model';
+import { UserService } from 'src/app/lib/services/user.service';
+import { UserStatusPipe } from 'src/app/lib/pipes/user-status.pipe';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare let window: any;
@@ -28,25 +29,15 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
   passwordButonnIcon: string;
   confirmPasswordButonnIcon: string;
 
-  constructor(private userStatusPipe: UserStatusPipe) {
+  constructor(
+    private userStatusPipe: UserStatusPipe,
+    private userService: UserService
+  ) {
     this.users$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))
     );
-    this.users = [
-      {
-        rfc: '123',
-        role: 'Administrator',
-        status: 'Active',
-        name: 'Adan Jahir Florez Bermudez',
-      },
-      {
-        rfc: '456',
-        role: 'Usuario',
-        status: 'Inactive',
-        name: 'Josesito el Fulanito de Tal',
-      },
-    ];
+    this.users = [];
     this.showModal = false;
     this.activateDeactivateMessage = '';
     this.createUserForm = new FormGroup({});
@@ -56,6 +47,7 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
     this.passwordButonnIcon = 'lock';
     this.confirmPasswordButonnIcon = 'lock';
   }
+
   ngAfterViewInit(): void {
     const tooltipTriggerList = [].slice.call(
       document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -67,6 +59,7 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.userManagementList();
   }
 
   get f() {
@@ -100,7 +93,7 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
         user.name.toLowerCase().includes(text.toLowerCase()) ||
         user.rfc.toLowerCase().includes(text.toLowerCase()) ||
         user.role.toLowerCase().includes(text.toLowerCase()) ||
-        this.userStatusPipe.transform(user.status).includes(text)
+        this.userStatusPipe.transform(user.status).toLowerCase().includes(text)
       );
     });
   }
@@ -146,5 +139,14 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
       this.confirmPasswordFieldType = 'password';
       this.confirmPasswordButonnIcon = 'lock';
     }
+  }
+
+  async userManagementList(): Promise<void> {
+    const data = await firstValueFrom(this.userService.userManagementList());
+    this.users = data;
+    this.users$ = this.filter.valueChanges.pipe(
+      startWith(''),
+      map(text => this.search(text))
+    );
   }
 }

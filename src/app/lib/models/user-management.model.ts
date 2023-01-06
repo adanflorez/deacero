@@ -3,5 +3,5 @@ export default interface UserManagement {
   name: string;
   rfc: string;
   role: string;
-  status: string;
+  status: boolean;
 }

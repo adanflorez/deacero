@@ -4,8 +4,8 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'userStatus',
 })
 export class UserStatusPipe implements PipeTransform {
-  transform(value: string): string {
-    if (value == 'Inactive') {
+  transform(value: boolean): string {
+    if (!value) {
       return 'Inactivo';
     } else {
       return 'Activo';
