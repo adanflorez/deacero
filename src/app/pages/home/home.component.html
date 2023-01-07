@@ -51,150 +51,19 @@
         comment: ''
       }"></app-organizational-information-form>
     <hr />
-    <h2>Sostenibilidad y alianzas estratégicas</h2>
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label for="alliances" class="form-label"
-            >En caso de pertenecer a alguna red de alianzas, escribe en
-            cuáles.</label
-          >
-          <textarea
-            class="form-control"
-            id="alliances"
-            rows="3"
-            formControlName="alliances"
-            [class.is-invalid]="
-              f['alliances'].invalid && f['alliances'].touched
-            "></textarea>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label for="courses" class="form-label"
-            >Enlista los cursos de actualización a los que han asistido en el
-            último año.
-          </label>
-          <textarea
-            class="form-control"
-            id="courses"
-            rows="3"
-            formControlName="courses"
-            [class.is-invalid]="
-              f['courses'].invalid && f['courses'].touched
-            "></textarea>
-          <app-form-error [control]="f['courses']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label for="issuesToStrengthen" class="form-label"
-            >Selecciona, ¿En cuáles de los siguientes temas te gustaría
-            fortalecerte como organización?
-          </label>
-          <ng-select
-            #category
-            labelForId="category"
-            formControlName="issuesToStrengthen"
-            [class.is-invalid]="
-              f['issuesToStrengthen'].invalid && f['issuesToStrengthen'].touched
-            "
-            [multiple]="true">
-            <ng-option value="Gobernanza">Gobernanza</ng-option>
-            <ng-option value="Obligaciones fiscales"
-              >Obligaciones fiscales</ng-option
-            >
-            <ng-option value="Causales de revocación"
-              >Causales de revocación</ng-option
-            >
-            <ng-option value="Desarrollo Institucional"
-              >Desarrollo Institucional</ng-option
-            >
-            <ng-option value="Procuración de fondos"
-              >Procuración de fondos</ng-option
-            >
-            <ng-option value="Creación de proyectos con impacto social"
-              >Creación de proyectos con impacto social</ng-option
-            >
-            <ng-option value="Generación de reportes de impacto social"
-              >Generación de reportes de impacto social</ng-option
-            >
-            <ng-option value="Medición de impacto social"
-              >Medición de impacto social</ng-option
-            >
-            <ng-option value="Creación de matriz de indicadores"
-              >Creación de matriz de indicadores</ng-option
-            >
-            <ng-option value="Intervenciones efectivas"
-              >Intervenciones efectivas</ng-option
-            >
-            <ng-option value="Otros">Otros</ng-option>
-          </ng-select>
-          <app-form-error [control]="f['issuesToStrengthen']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label for="whichTopics" class="form-label">¿Cuáles Temas? </label>
-          <input
-            type="text"
-            class="form-control"
-            id="whichTopics"
-            placeholder="Ingrese los temas separados por una “,”"
-            formControlName="whichTopics"
-            [class.is-invalid]="
-              f['whichTopics'].invalid && f['whichTopics'].touched
-            " />
-          <app-form-error [control]="f['whichTopics']"></app-form-error>
-          <div class="small">Ingrese los temas separados por una “,”</div>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="flexCheckDefault"
-              formControlName="previousDonations" />
-            <label class="form-check-label" for="flexCheckDefault">
-              Ha recibido previamente una donación de Fundación DEACERO A.C.
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="col-12">
-        <app-donations-table
-          *ngIf="showDonationsTable"
-          [donations]="donations"
-          [readOnly]="infoSaved$ | async"
-          (donationsList)="donations = $event"></app-donations-table>
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="mb-3">
-        <label for="strategicAlliances" class="form-label"
-          >En fundación DEACERO A.C., buscamos generar alianzas estratégicas
-          (ganar/ganar) para beneficio mutuo. A continuación, enlista por lo
-          menos 5 actividades específicas que permitan lograrlo.</label
-        >
-        <textarea
-          class="form-control"
-          id="strategicAlliances"
-          rows="3"
-          formControlName="strategicAlliances"
-          [class.is-invalid]="
-            f['strategicAlliances'].invalid && f['strategicAlliances'].touched
-          "></textarea>
-        <app-form-error [control]="f['strategicAlliances']"></app-form-error>
-      </div>
-    </div>
-    <div class="col-12">
-      <app-product-table
-        (productsList)="products = $event"
-        [products]="products"
-        [readOnly]="infoSaved$ | async"></app-product-table>
-    </div>
+    <app-strategic-alliances-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        alliances: formData.strategicAlliances?.alliances,
+        courses: formData.strategicAlliances?.courses,
+        issuesToStrengthen: formData.strategicAlliances?.issuesToStrengthen,
+        whichTopics: formData.strategicAlliances?.whichTopics,
+        previousDonations: formData.strategicAlliances?.previousDonations,
+        strategicalAlliances: formData.strategicAlliances?.strategicalAlliances,
+        comment: '',
+        products: formData.strategicAlliances?.products,
+        donations: formData.strategicAlliances?.donations
+      }"></app-strategic-alliances-form>
     <hr />
     <h2>Trabajo digno</h2>
     <div class="row">

@@ -92,6 +92,7 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
     this.subscribeToForm();
     this.subscribeToIssues();
     this.subscribeToPreviousDonations();
+    this.form.markAllAsTouched();
   }
 
   private subscribeToForm(): void {

@@ -85,7 +85,6 @@ export class HomeComponent implements OnInit {
             name: res.data.procuringFunds?.nombre,
           },
           organizationalInformation: {
-            comment: res.data.organizationalInformation?.comments,
             generalManagement:
               res.data.organizationalInformation?.direccionGeneral,
             operationalManagement:
@@ -103,7 +102,20 @@ export class HomeComponent implements OnInit {
             ethicalValues: res.data.organizationalInformation?.valores,
             vision: res.data.organizationalInformation?.vision,
           },
-          strategicAlliances: {},
+          strategicAlliances: {
+            donations: res.data.sustainabilityAndStrategic?.donation,
+            products: res.data.sustainabilityAndStrategic?.product,
+            previousDonations:
+              res.data.sustainabilityAndStrategic?.recibioUnaDonacion,
+            strategicalAlliances:
+              res.data.sustainabilityAndStrategic?.actividadesEspecificasFDA,
+            issuesToStrengthen:
+              res.data.sustainabilityAndStrategic?.temasAFortalecer,
+            whichTopics: res.data.sustainabilityAndStrategic?.temasDescripcion,
+            alliances: res.data.sustainabilityAndStrategic?.redDeAlianzas,
+            courses:
+              res.data.sustainabilityAndStrategic?.listaCursosDeActualizacion,
+          },
           decentWork: {},
         };
         this.oscData = res.data;
@@ -128,27 +140,6 @@ export class HomeComponent implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      alliances: new FormControl(this.oscData.redDeAlianzas),
-      courses: new FormControl(
-        this.oscData.listaCursosDeActualizacion,
-        Validators.required
-      ),
-      issuesToStrengthen: new FormControl(
-        this.oscData.temasAFortalecer,
-        Validators.required
-      ),
-      whichTopics: new FormControl(
-        { value: this.oscData.temasDescripcion, disabled: true },
-        Validators.required
-      ),
-      previousDonations: new FormControl(
-        this.oscData.recibioUnaDonacion || true,
-        Validators.required
-      ),
-      strategicAlliances: new FormControl(
-        this.oscData.actividadesEspecificasFDA,
-        Validators.required
-      ),
       whyYourOSC: new FormControl(
         this.oscData.porqueTrabajarEnTuOSC,
         Validators.required
@@ -166,22 +157,6 @@ export class HomeComponent implements OnInit {
         Validators.required
       ),
     });
-
-    this.form
-      .get('issuesToStrengthen')
-      ?.valueChanges.subscribe((res: string[]) => {
-        if (res.includes('Otros')) {
-          this.f['whichTopics'].enable();
-          return;
-        }
-        this.f['whichTopics'].disable();
-        this.f['whichTopics'].reset();
-      });
-    this.form.get('previousDonations')?.valueChanges.subscribe(val => {
-      this.showDonationsTable = val;
-      this.donations = [];
-    });
-    this.showDonationsTable = this.f.previousDonations.value;
     this.form.markAllAsTouched();
   }
 
