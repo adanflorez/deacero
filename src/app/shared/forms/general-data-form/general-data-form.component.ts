@@ -28,6 +28,7 @@ export class GeneralDataFormComponent implements OnInit, OnDestroy {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: GeneralDataForm;
+  @Input() disable: boolean;
   form: FormGroup;
 
   alertType: AlertType = AlertType.Warning;
@@ -37,6 +38,7 @@ export class GeneralDataFormComponent implements OnInit, OnDestroy {
   constructor() {
     this.form = new FormGroup({});
     this.defaultValues = {};
+    this.disable = false;
   }
 
   ngOnInit(): void {
@@ -88,6 +90,7 @@ export class GeneralDataFormComponent implements OnInit, OnDestroy {
     });
     this.subscribeToForm();
     this.form.markAllAsTouched();
+    this.disable && this.form.disable();
   }
 
   subscribeToForm() {
