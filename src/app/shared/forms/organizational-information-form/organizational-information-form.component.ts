@@ -1,5 +1,12 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { MULTIPLE_EMAIL_PATTERN } from 'src/app/lib/constants';
 import FormValid from 'src/app/lib/models/form-valid.model';
 import OrganizationalInformationForm from 'src/app/lib/models/organizational-information-form.model';
@@ -13,7 +20,7 @@ import { AlertType } from 'src/app/lib/enums/alert-type';
   styleUrls: ['./organizational-information-form.component.scss'],
 })
 export class OrganizationalInformationFormComponent
-  implements OnInit, OnDestroy
+  implements OnInit, OnDestroy, OnChanges
 {
   @Input() updateParentModel: (
     part: OrganizationalInformationForm,
@@ -21,6 +28,7 @@ export class OrganizationalInformationFormComponent
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: OrganizationalInformationForm;
+  @Input() disable: boolean;
   form: FormGroup;
   alertType: AlertType = AlertType.Warning;
 
@@ -29,11 +37,19 @@ export class OrganizationalInformationFormComponent
   constructor() {
     this.form = new FormGroup({});
     this.defaultValues = {};
+    this.disable = false;
   }
 
   ngOnInit(): void {
     this.initForm();
     this.updateParentModel({}, this.isValidForm);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable.currentValue) {
+      this.form.disable();
+    }
   }
 
   ngOnDestroy(): void {

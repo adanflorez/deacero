@@ -4,7 +4,14 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { validateRFC } from 'src/app/lib/helpers/rfc-validator';
 import {
   MULTIPLE_EMAIL_PATTERN,
@@ -21,7 +28,7 @@ import { AlertType } from 'src/app/lib/enums/alert-type';
   templateUrl: './general-data-form.component.html',
   styleUrls: ['./general-data-form.component.scss'],
 })
-export class GeneralDataFormComponent implements OnInit, OnDestroy {
+export class GeneralDataFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() updateParentModel: (
     part: GeneralDataForm,
     formValid: FormValid
@@ -44,6 +51,13 @@ export class GeneralDataFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
     this.updateParentModel({}, this.isValidForm);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable.currentValue) {
+      this.form.disable();
+    }
   }
 
   ngOnDestroy(): void {
@@ -90,7 +104,6 @@ export class GeneralDataFormComponent implements OnInit, OnDestroy {
     });
     this.subscribeToForm();
     this.form.markAllAsTouched();
-    this.disable && this.form.disable();
   }
 
   subscribeToForm() {
