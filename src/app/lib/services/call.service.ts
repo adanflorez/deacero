@@ -21,7 +21,7 @@ export class CallService {
   }
 
   saveInFlokzu() {
-    return this.http.put(`${this.apiApplication}/send`, {});
+    return this.http.put(`${this.apiApplication}send`, {});
   }
 
   status(): Observable<Response<unknown>> {
