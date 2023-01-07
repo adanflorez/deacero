@@ -128,34 +128,6 @@ export class HomeComponent implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      founder: new FormControl(this.oscData.fundador, Validators.required),
-      generalManagement: new FormControl(
-        this.oscData.direccionGeneral,
-        Validators.required
-      ),
-      operationalManagement: new FormControl(
-        this.oscData.direccionOperativa,
-        Validators.required
-      ),
-      legalRepresentative: new FormControl(
-        this.oscData.representanteLegal,
-        Validators.required
-      ),
-      legalRepresentativeEmail: new FormControl(
-        this.oscData.emailDelRepresentanteLegal,
-        [Validators.required, Validators.pattern(MULTIPLE_EMAIL_PATTERN)]
-      ),
-      operationsStartDate: new FormControl(
-        this.oscData.fechaInicioOperaciones,
-        Validators.required
-      ),
-      incorporationsStartDate: new FormControl(
-        this.oscData.fechaDeConstitucion,
-        Validators.required
-      ),
-      mision: new FormControl(this.oscData.mision, Validators.required),
-      vision: new FormControl(this.oscData.vision, Validators.required),
-      ethicalValues: new FormControl(this.oscData.valores, Validators.required),
       alliances: new FormControl(this.oscData.redDeAlianzas),
       courses: new FormControl(
         this.oscData.listaCursosDeActualizacion,
