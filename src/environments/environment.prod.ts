@@ -4,6 +4,7 @@ export const environment = {
   apiUser: 'http://44.228.61.3:8080/user',
   apiRegister: 'http://44.228.61.3:8080/register/',
   apiOSC: 'http://44.228.61.3:8080/osc/',
+  apiApplication: 'http://44.228.61.3:8080/application/',
   apiMultimedia: 'http://44.228.61.3:8080/multimedia/',
   apiCall: 'http://44.228.61.3:8080/call/',
   apiAdmin: 'http://44.228.61.3:8080/admin/',

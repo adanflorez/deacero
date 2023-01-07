@@ -1,12 +1,13 @@
 <div
-  *ngIf="!loading"
-  class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  [ngClass]="{
+    'bg-bright-gray border border-secondary rounded p-3 mb-4': !loading
+  }">
   <app-alert
-    [show]="showAlert"
+    [(show)]="showAlert"
     [type]="alertType"
     [message]="alertMessage"
     [dismissible]="true"></app-alert>
-  <form [formGroup]="form">
+  <form [formGroup]="form" *ngIf="!loading">
     <h2>Datos generales</h2>
     <div class="row">
       <div class="col-12 col-md-4">

@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, throwError } from 'rxjs';
 import {
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
@@ -47,14 +47,24 @@ export class HomeComponent implements OnInit {
 
   getOSC() {
     this.loading = true;
-    this.userService.getOSC().subscribe((res: Response<unknown>) => {
-      this.oscData = res.data;
-      this.products = (res.data as { product: never[] }).product || [];
-      this.donations = (res.data as { donation: never[] }).donation || [];
-      this.initForm();
-      this.getCallStatus();
-      this.loading = false;
-    });
+    this.userService
+      .getOSC()
+      .pipe(
+        catchError(error => {
+          this.showAlert = true;
+          this.alertMessage = error.error.message;
+          this.alertType = AlertType.Danger;
+          return throwError(() => Error(error));
+        })
+      )
+      .subscribe((res: Response<unknown>) => {
+        this.oscData = res.data;
+        this.products = (res.data as { product: never[] })?.product || [];
+        this.donations = (res.data as { donation: never[] })?.donation || [];
+        this.initForm();
+        this.getCallStatus();
+        this.loading = false;
+      });
   }
 
   getCallStatus(): void {
