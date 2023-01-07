@@ -1,5 +1,12 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import FormValid from 'src/app/lib/models/form-valid.model';
 import StrategicAlliancesForm from 'src/app/lib/models/strategic-alliances-form.model';
@@ -13,13 +20,16 @@ import Product from 'src/app/lib/models/product.model';
   templateUrl: './strategic-alliances-form.component.html',
   styleUrls: ['./strategic-alliances-form.component.scss'],
 })
-export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
+export class StrategicAlliancesFormComponent
+  implements OnInit, OnDestroy, OnChanges
+{
   @Input() updateParentModel: (
     part: StrategicAlliancesForm,
     formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: StrategicAlliancesForm;
+  @Input() disable: boolean;
   form: FormGroup;
   alertType: AlertType = AlertType.Warning;
   showDonationsTable: boolean;
@@ -34,6 +44,7 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
     this.products = [];
     this.form = new FormGroup({});
     this.defaultValues = {};
+    this.disable = false;
   }
 
   ngOnInit(): void {
@@ -41,6 +52,13 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
     this.initDonations();
     this.initProducts();
     this.updateParentModel({}, this.isValidForm);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable?.currentValue) {
+      this.initForm();
+    }
   }
 
   ngOnDestroy(): void {
@@ -81,9 +99,7 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
         { value: this.defaultValues.whichTopics, disabled: true },
         Validators.required
       ),
-      previousDonations: new FormControl(
-        this.defaultValues.previousDonations || true
-      ),
+      previousDonations: new FormControl(true),
       strategicalAlliances: new FormControl(
         this.defaultValues.strategicalAlliances,
         Validators.required
@@ -93,6 +109,7 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
     this.subscribeToIssues();
     this.subscribeToPreviousDonations();
     this.form.markAllAsTouched();
+    this.disable && this.form.disable();
   }
 
   private subscribeToForm(): void {
@@ -124,7 +141,7 @@ export class StrategicAlliancesFormComponent implements OnInit, OnDestroy {
       .get('previousDonations')
       ?.valueChanges.subscribe((check: boolean) => {
         this.showDonationsTable = check;
-        this.donations = [];
+        !check && (this.donations = []);
       });
     this.unsubscribe.push(sub as Subscription);
   }
