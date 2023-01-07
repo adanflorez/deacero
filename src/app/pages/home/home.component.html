@@ -23,6 +23,7 @@
     <hr />
     <app-fund-manager-form
       [updateParentModel]="updateData"
+      [disable]="(infoSaved$ | async)!"
       [defaultValues]="{
         name: formData.fundManager?.name,
         responsibleEmail: formData.fundManager?.responsibleEmail,

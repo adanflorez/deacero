@@ -1,5 +1,12 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import {
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
@@ -15,13 +22,14 @@ import { AlertType } from 'src/app/lib/enums/alert-type';
   templateUrl: './fund-manager-form.component.html',
   styleUrls: ['./fund-manager-form.component.scss'],
 })
-export class FundManagerFormComponent implements OnInit, OnDestroy {
+export class FundManagerFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() updateParentModel: (
     part: FundManagerForm,
     formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: FundManagerForm;
+  @Input() disable: boolean;
   form: FormGroup;
 
   alertType: AlertType = AlertType.Warning;
@@ -31,11 +39,19 @@ export class FundManagerFormComponent implements OnInit, OnDestroy {
   constructor() {
     this.defaultValues = {};
     this.form = new FormGroup({});
+    this.disable = false;
   }
 
   ngOnInit(): void {
     this.initForm();
     this.updateParentModel({}, this.isValidForm);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable.currentValue) {
+      this.form.disable();
+    }
   }
 
   ngOnDestroy(): void {
