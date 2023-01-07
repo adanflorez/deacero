@@ -15,6 +15,8 @@ import { CallService } from 'src/app/lib/services/call.service';
 import { UserService } from 'src/app/lib/services/user.service';
 import Response from 'src/app/lib/models/response.model';
 import { validateRFC } from 'src/app/lib/helpers/rfc-validator';
+import CallForm from 'src/app/lib/models/call-form.model';
+import FormValid from 'src/app/lib/models/form-valid.model';
 
 @Component({
   selector: 'app-home',
@@ -33,12 +35,22 @@ export class HomeComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   oscData: any = {};
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  formData: Partial<CallForm>;
+  formsStatus: FormValid[];
 
   constructor(
     private userService: UserService,
     private callService: CallService
   ) {
     this.form = new FormGroup({});
+    this.formsStatus = [];
+    this.formData = {
+      generalData: {},
+      fundManager: {},
+      organizationalInformation: {},
+      strategicAlliances: {},
+      decentWork: {},
+    };
   }
 
   ngOnInit(): void {
@@ -57,7 +69,22 @@ export class HomeComponent implements OnInit {
           return throwError(() => Error(error));
         })
       )
-      .subscribe((res: Response<unknown>) => {
+      .subscribe((res: any) => {
+        this.formData = {
+          generalData: {
+            comment: res.data.generalData.comments,
+            rfc: res.data.generalData.RFC,
+            emails: res.data.generalData.email,
+            businessname: res.data.generalData.razonSocial,
+            position: res.data.generalData.position,
+            tradename: res.data.generalData.nombreComercial,
+            phone: res.data.generalData.telefono,
+          },
+          fundManager: {},
+          organizationalInformation: {},
+          strategicAlliances: {},
+          decentWork: {},
+        };
         this.oscData = res.data;
         this.products = (res.data as { product: never[] })?.product || [];
         this.donations = (res.data as { donation: never[] })?.donation || [];
@@ -80,28 +107,6 @@ export class HomeComponent implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      tradename: new FormControl(
-        this.oscData.nombreComercial,
-        Validators.required
-      ),
-      businessname: new FormControl(
-        this.oscData.razonSocial,
-        Validators.required
-      ),
-      rfc: new FormControl(
-        { value: this.oscData.rfc, disabled: true },
-        Validators.required
-      ),
-      phone: new FormControl(this.oscData.telefono, [
-        Validators.required,
-        Validators.pattern(ONLY_NUMBERS_PATTERN),
-        Validators.maxLength(12),
-      ]),
-      emails: new FormControl(this.oscData.email, [
-        Validators.required,
-        Validators.pattern(MULTIPLE_EMAIL_PATTERN),
-      ]),
-      position: new FormControl(this.oscData.position, [Validators.required]),
       name: new FormControl(this.oscData.nombre, Validators.required),
       responsibleEmail: new FormControl(this.oscData.emailDelResponsable, [
         Validators.required,
@@ -201,6 +206,12 @@ export class HomeComponent implements OnInit {
     return this.form.controls;
   }
 
+  get isInvalidForm(): boolean {
+    return this.formsStatus.length > 0
+      ? this.formsStatus.some(form => !form.valid)
+      : true;
+  }
+
   update() {
     const form = {
       nombreComercial: this.f.tradename.value,
@@ -253,5 +264,27 @@ export class HomeComponent implements OnInit {
 
   validateRFC(input: Event, control: AbstractControl) {
     validateRFC(input, control);
+  }
+
+  updateData = <T>(form: T, isFormValid: FormValid) => {
+    const sectionName = isFormValid.name as keyof CallForm;
+    const sectionBody = {
+      ...this.formData[sectionName],
+      ...form,
+    } as any;
+    this.formData[sectionName] = sectionBody;
+    this.updateFormStatus(isFormValid);
+  };
+
+  private updateFormStatus(formValid: FormValid): void {
+    const index = this.formsStatus.findIndex(
+      item => item.name === formValid.name
+    );
+    if (index === -1) {
+      this.formsStatus.push(formValid);
+    } else {
+      this.formsStatus.splice(index, 1);
+      this.formsStatus.push(formValid);
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { GeneralDataFormModule } from './../../shared/forms/general-data-form/general-data-form.module';
 import { FormErrorModule } from './../../shared/form-error/form-error.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -25,6 +26,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgbModalModule,
     NgxMaskModule.forChild(),
     NgSelectModule,
+    GeneralDataFormModule,
   ],
 })
 export class HomeModule {}
