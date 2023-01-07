@@ -12,6 +12,8 @@ import { AlertModule } from 'src/app/shared/alert/alert.module';
 import { FundManagerFormModule } from 'src/app/shared/forms/fund-manager-form/fund-manager-form.module';
 import { GeneralDataFormModule } from 'src/app/shared/forms/general-data-form/general-data-form.module';
 import { FormErrorModule } from 'src/app/shared/form-error/form-error.module';
+import { OrganizationalInformationFormModule } from './../../shared/forms/organizational-information-form/organizational-information-form.module';
+
 import { ProductTableComponent } from './components/product-table/product-table.component';
 import { DonationsTableComponent } from './components/donations-table/donations-table.component';
 
@@ -29,6 +31,7 @@ import { DonationsTableComponent } from './components/donations-table/donations-
     NgSelectModule,
     GeneralDataFormModule,
     FundManagerFormModule,
+    OrganizationalInformationFormModule,
   ],
 })
 export class HomeModule {}

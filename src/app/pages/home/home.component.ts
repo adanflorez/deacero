@@ -84,7 +84,25 @@ export class HomeComponent implements OnInit {
             responsibleEmail: res.data.procuringFunds?.emailDelResponsable,
             name: res.data.procuringFunds?.nombre,
           },
-          organizationalInformation: {},
+          organizationalInformation: {
+            comment: res.data.organizationalInformation?.comments,
+            generalManagement:
+              res.data.organizationalInformation?.direccionGeneral,
+            operationalManagement:
+              res.data.organizationalInformation?.direccionOperativa,
+            legalRepresentativeEmail:
+              res.data.organizationalInformation?.emailDelRepresentanteLegal,
+            incorporationsStartDate:
+              res.data.organizationalInformation?.fechaDeConstitucion,
+            operationsStartDate:
+              res.data.organizationalInformation?.fechaInicioOperaciones,
+            founder: res.data.organizationalInformation?.fundador,
+            mission: res.data.organizationalInformation?.mision,
+            legalRepresentative:
+              res.data.organizationalInformation?.representanteLegal,
+            ethicalValues: res.data.organizationalInformation?.valores,
+            vision: res.data.organizationalInformation?.vision,
+          },
           strategicAlliances: {},
           decentWork: {},
         };

@@ -29,176 +29,27 @@
         comment: ''
       }"></app-fund-manager-form>
     <hr />
-    <h2>Información organizacional</h2>
-    <div class="row">
-      <div class="col-12 col-md-4">
-        <div class="mb-3">
-          <label for="founder" class="form-label">Fundador(a)</label>
-          <input
-            type="text"
-            class="form-control"
-            id="founder"
-            placeholder="Fundador(a)"
-            formControlName="founder"
-            [class.is-invalid]="f['founder'].invalid && f['founder'].touched" />
-          <app-form-error [control]="f['founder']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="mb-3">
-          <label for="generalManagement" class="form-label"
-            >Dirección general</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="generalManagement"
-            placeholder="Dirección general"
-            formControlName="generalManagement"
-            [class.is-invalid]="
-              f['generalManagement'].invalid && f['generalManagement'].touched
-            " />
-          <app-form-error [control]="f['generalManagement']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="mb-3">
-          <label for="operationalManagement" class="form-label"
-            >Dirección operativa</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="operationalManagement"
-            placeholder="Dirección operativa"
-            formControlName="operationalManagement"
-            [class.is-invalid]="
-              f['operationalManagement'].invalid &&
-              f['operationalManagement'].touched
-            " />
-          <app-form-error
-            [control]="f['operationalManagement']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label for="legalRepresentative" class="form-label"
-            >Representante legal</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="legalRepresentative"
-            placeholder="Representante legal"
-            formControlName="legalRepresentative"
-            [class.is-invalid]="
-              f['legalRepresentative'].invalid &&
-              f['legalRepresentative'].touched
-            " />
-          <app-form-error [control]="f['legalRepresentative']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label for="legalRepresentativeEmail" class="form-label"
-            >E-mail del representante legal</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="legalRepresentativeEmail"
-            placeholder="Usa ; ó , para separar los correos electrónicos"
-            formControlName="legalRepresentativeEmail"
-            [class.is-invalid]="
-              f['legalRepresentativeEmail'].invalid &&
-              f['legalRepresentativeEmail'].touched
-            " />
-          <app-form-error
-            [control]="f['legalRepresentativeEmail']"
-            [errors]="{ pattern: 'Correos no válidos' }"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label for="operationsStartDate" class="form-label"
-            >Fecha de inicio de operaciones</label
-          >
-          <input
-            type="date"
-            class="form-control"
-            id="operationsStartDate"
-            placeholder="Usa ; ó , para separar los correos electrónicos"
-            formControlName="operationsStartDate"
-            [class.is-invalid]="
-              f['operationsStartDate'].invalid &&
-              f['operationsStartDate'].touched
-            " />
-          <app-form-error [control]="f['operationsStartDate']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label for="incorporationsStartDate" class="form-label"
-            >Fecha de constitución</label
-          >
-          <input
-            type="date"
-            class="form-control"
-            id="incorporationsStartDate"
-            placeholder="Usa ; ó , para separar los correos electrónicos"
-            formControlName="incorporationsStartDate"
-            [class.is-invalid]="
-              f['incorporationsStartDate'].invalid &&
-              f['incorporationsStartDate'].touched
-            " />
-          <app-form-error
-            [control]="f['incorporationsStartDate']"></app-form-error>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-4">
-        <div class="mb-3">
-          <label for="mision" class="form-label">Misión</label>
-          <textarea
-            class="form-control"
-            id="mision"
-            rows="3"
-            formControlName="mision"
-            [class.is-invalid]="
-              f['mision'].invalid && f['mision'].touched
-            "></textarea>
-          <app-form-error [control]="f['mision']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="mb-3">
-          <label for="vision" class="form-label">Visión</label>
-          <textarea
-            class="form-control"
-            id="vision"
-            rows="3"
-            formControlName="vision"
-            [class.is-invalid]="
-              f['vision'].invalid && f['vision'].touched
-            "></textarea>
-          <app-form-error [control]="f['vision']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="mb-3">
-          <label for="ethicalValues" class="form-label">Valores</label>
-          <textarea
-            class="form-control"
-            id="ethicalValues"
-            rows="3"
-            formControlName="ethicalValues"
-            [class.is-invalid]="
-              f['ethicalValues'].invalid && f['ethicalValues'].touched
-            "></textarea>
-          <app-form-error [control]="f['ethicalValues']"></app-form-error>
-        </div>
-      </div>
-    </div>
+    <app-organizational-information-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        founder: formData.organizationalInformation?.founder,
+        generalManagement:
+          formData.organizationalInformation?.generalManagement,
+        operationalManagement:
+          formData.organizationalInformation?.operationalManagement,
+        legalRepresentative:
+          formData.organizationalInformation?.legalRepresentative,
+        legalRepresentativeEmail:
+          formData.organizationalInformation?.legalRepresentativeEmail,
+        operationsStartDate:
+          formData.organizationalInformation?.operationsStartDate,
+        incorporationsStartDate:
+          formData.organizationalInformation?.incorporationsStartDate,
+        mission: formData.organizationalInformation?.mission,
+        vision: formData.organizationalInformation?.vision,
+        ethicalValues: formData.organizationalInformation?.ethicalValues,
+        comment: ''
+      }"></app-organizational-information-form>
     <hr />
     <h2>Sostenibilidad y alianzas estratégicas</h2>
     <div class="row">
