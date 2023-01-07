@@ -1,5 +1,12 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import FormValid from 'src/app/lib/models/form-valid.model';
 import DecentWorkForm from 'src/app/lib/models/decent-work-form.model';
@@ -11,13 +18,14 @@ import { AlertType } from 'src/app/lib/enums/alert-type';
   templateUrl: './decent-work-form.component.html',
   styleUrls: ['./decent-work-form.component.scss'],
 })
-export class DecentWorkFormComponent implements OnInit, OnDestroy {
+export class DecentWorkFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() updateParentModel: (
     part: DecentWorkForm,
     formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: DecentWorkForm;
+  @Input() disable: boolean;
   form: FormGroup;
   alertType: AlertType = AlertType.Warning;
 
@@ -26,11 +34,19 @@ export class DecentWorkFormComponent implements OnInit, OnDestroy {
   constructor() {
     this.form = new FormGroup({});
     this.defaultValues = {};
+    this.disable = false;
   }
 
   ngOnInit(): void {
     this.initForm();
     this.updateParentModel({}, this.isValidForm);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable.currentValue) {
+      this.form.disable();
+    }
   }
 
   ngOnDestroy(): void {

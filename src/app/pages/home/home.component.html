@@ -71,6 +71,7 @@
     <hr />
     <app-decent-work-form
       [updateParentModel]="updateData"
+      [disable]="(infoSaved$ | async)!"
       [defaultValues]="{
         whyYourOSC: formData.decentWork?.whyYourOSC,
         whatMakesYouDifferent: formData.decentWork?.whatMakesYouDifferent,
