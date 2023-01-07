@@ -86,6 +86,7 @@ export class OrganizationalInformationFormComponent
       ),
     });
     this.subscribeToForm();
+    this.form.markAllAsTouched();
   }
 
   subscribeToForm() {

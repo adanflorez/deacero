@@ -5,20 +5,20 @@ const Routing: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
-    data: { role: 'OTHER' },
+    data: { role: 'CLIENT' },
     canActivate: [RoleGuard],
   },
   {
     path: 'calls',
     loadChildren: () => import('./calls/calls.module').then(m => m.CallsModule),
-    data: { role: 'OTHER' },
+    data: { role: 'CLIENT' },
     canActivate: [RoleGuard],
   },
   {
     path: 'call-alerts',
     loadChildren: () =>
       import('./call-alerts/call-alerts.module').then(m => m.CallAlertsModule),
-    data: { role: 'OTHER' },
+    data: { role: 'CLIENT' },
     canActivate: [RoleGuard],
   },
   {

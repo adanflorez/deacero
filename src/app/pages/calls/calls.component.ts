@@ -146,7 +146,9 @@ export class CallsComponent implements OnInit, OnDestroy {
       remunerationQuestion: res?.remunerations.workInYourOrganizationIsPaid,
       // General project data
       projectName: res?.generalProjectData.projectName,
-      category: res?.generalProjectData.category[0],
+      category: res?.generalProjectData.category
+        ? res?.generalProjectData.category[0]
+        : '',
       // Location
       locationQuestion: res?.location.locationIsVirtual,
       street: res?.location.streetAndNumber,
@@ -156,7 +158,9 @@ export class CallsComponent implements OnInit, OnDestroy {
       postalCode: res?.location.postalCode,
       video: res?.location.urlProyect,
       daysAndHours: res?.location.daysAndHoursOfAttention,
-      aboutCall: res?.location.howDidYouFindOutAboutTheCall[0],
+      aboutCall: res?.location.howDidYouFindOutAboutTheCall
+        ? res?.location.howDidYouFindOutAboutTheCall[0]
+        : '',
       whichMedia: res?.location.whichMeans,
       // Responsible
       responsibleName: res?.projectManager.responsibleName,
