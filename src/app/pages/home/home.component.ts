@@ -72,7 +72,6 @@ export class HomeComponent implements OnInit {
       .subscribe((res: any) => {
         this.formData = {
           generalData: {
-            comment: res.data.generalData.comments,
             rfc: res.data.generalData.RFC,
             emails: res.data.generalData.email,
             businessname: res.data.generalData.razonSocial,
@@ -80,7 +79,11 @@ export class HomeComponent implements OnInit {
             tradename: res.data.generalData.nombreComercial,
             phone: res.data.generalData.telefono,
           },
-          fundManager: {},
+          fundManager: {
+            cellphone: res.data.procuringFunds?.celular,
+            responsibleEmail: res.data.procuringFunds?.emailDelResponsable,
+            name: res.data.procuringFunds?.nombre,
+          },
           organizationalInformation: {},
           strategicAlliances: {},
           decentWork: {},
@@ -107,16 +110,6 @@ export class HomeComponent implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      name: new FormControl(this.oscData.nombre, Validators.required),
-      responsibleEmail: new FormControl(this.oscData.emailDelResponsable, [
-        Validators.required,
-        Validators.pattern(MULTIPLE_EMAIL_PATTERN),
-      ]),
-      cellphone: new FormControl(this.oscData.celular, [
-        Validators.required,
-        Validators.pattern(ONLY_NUMBERS_PATTERN),
-        Validators.maxLength(12),
-      ]),
       founder: new FormControl(this.oscData.fundador, Validators.required),
       generalManagement: new FormControl(
         this.oscData.direccionGeneral,

@@ -20,59 +20,14 @@
         comment: ''
       }"></app-general-data-form>
     <hr />
-    <h2>Datos del responsable de procuración de fondos</h2>
-    <div class="row">
-      <div class="col-12 col-md-4">
-        <div class="mb-3">
-          <label for="name" class="form-label">Nombre</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            placeholder="Nombre"
-            formControlName="name"
-            [class.is-invalid]="f['name'].invalid && f['name'].touched" />
-          <app-form-error [control]="f['name']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="mb-3">
-          <label for="name" class="form-label">E-mail del responsable</label>
-          <input
-            type="text"
-            class="form-control"
-            id="responsibleEmail"
-            placeholder="Usa ; ó , para separar los correos electrónicos"
-            formControlName="responsibleEmail"
-            [class.is-invalid]="
-              f['responsibleEmail'].invalid && f['responsibleEmail'].touched
-            " />
-          <app-form-error
-            [control]="f['responsibleEmail']"
-            [errors]="{ pattern: 'Correos no válidos' }"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="mb-3">
-          <label for="cellphone" class="form-label">Celular</label>
-          <input
-            type="text"
-            class="form-control"
-            id="cellphone"
-            placeholder="Celular"
-            formControlName="cellphone"
-            [class.is-invalid]="
-              f['cellphone'].invalid && f['cellphone'].touched
-            " />
-          <app-form-error
-            [control]="f['cellphone']"
-            [errors]="{
-              pattern: 'Solo debe ingresar números',
-              maxLength: 'Máximo 12 caracteres'
-            }"></app-form-error>
-        </div>
-      </div>
-    </div>
+    <app-fund-manager-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        name: formData.fundManager?.name,
+        responsibleEmail: formData.fundManager?.responsibleEmail,
+        cellphone: formData.fundManager?.cellphone,
+        comment: ''
+      }"></app-fund-manager-form>
     <hr />
     <h2>Información organizacional</h2>
     <div class="row">
