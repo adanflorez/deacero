@@ -33,6 +33,7 @@
     <hr />
     <app-organizational-information-form
       [updateParentModel]="updateData"
+      [disable]="(infoSaved$ | async)!"
       [defaultValues]="{
         founder: formData.organizationalInformation?.founder,
         generalManagement:
