@@ -10,6 +10,7 @@
   <ng-container *ngIf="!loading">
     <app-general-data-form
       [updateParentModel]="updateData"
+      [disable]="(infoSaved$ | async)!"
       [defaultValues]="{
         tradename: formData.generalData?.tradename,
         businessname: formData.generalData?.businessname,

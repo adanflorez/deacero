@@ -54,73 +54,80 @@ export class HomeComponent implements OnInit {
           return throwError(() => Error(error));
         })
       )
-      .subscribe((res: any) => {
-        this.formData = {
-          generalData: {
-            rfc: res.data.generalData.RFC,
-            emails: res.data.generalData.email,
-            businessname: res.data.generalData.razonSocial,
-            position: res.data.generalData.position,
-            tradename: res.data.generalData.nombreComercial,
-            phone: res.data.generalData.telefono,
-          },
-          fundManager: {
-            cellphone: res.data.procuringFunds?.celular,
-            responsibleEmail: res.data.procuringFunds?.emailDelResponsable,
-            name: res.data.procuringFunds?.nombre,
-          },
-          organizationalInformation: {
-            generalManagement:
-              res.data.organizationalInformation?.direccionGeneral,
-            operationalManagement:
-              res.data.organizationalInformation?.direccionOperativa,
-            legalRepresentativeEmail:
-              res.data.organizationalInformation?.emailDelRepresentanteLegal,
-            incorporationsStartDate:
-              res.data.organizationalInformation?.fechaDeConstitucion,
-            operationsStartDate:
-              res.data.organizationalInformation?.fechaInicioOperaciones,
-            founder: res.data.organizationalInformation?.fundador,
-            mission: res.data.organizationalInformation?.mision,
-            legalRepresentative:
-              res.data.organizationalInformation?.representanteLegal,
-            ethicalValues: res.data.organizationalInformation?.valores,
-            vision: res.data.organizationalInformation?.vision,
-          },
-          strategicAlliances: {
-            donations: res.data.sustainabilityAndStrategic?.donation,
-            products: res.data.sustainabilityAndStrategic?.product,
-            previousDonations:
-              res.data.sustainabilityAndStrategic?.recibioUnaDonacion,
-            strategicalAlliances:
-              res.data.sustainabilityAndStrategic?.actividadesEspecificasFDA,
-            issuesToStrengthen:
-              res.data.sustainabilityAndStrategic?.temasAFortalecer,
-            whichTopics: res.data.sustainabilityAndStrategic?.temasDescripcion,
-            alliances: res.data.sustainabilityAndStrategic?.redDeAlianzas,
-            courses:
-              res.data.sustainabilityAndStrategic?.listaCursosDeActualizacion,
-          },
-          decentWork: {
-            whyYourOSC: res.data.hardWork?.porqueTrabajarEnTuOSC,
-            personalGrowth: res.data.hardWork?.crecimientoPersonal,
-            whatMakesYouDifferent: res.data.hardWork?.descripcionOSC,
-            benefitsSystem: res.data.hardWork?.diferenciasDeTuOsc,
-          },
-        };
-        this.getCallStatus();
-        this.loading = false;
+      .subscribe({
+        next: (res: any) => {
+          this.formData = {
+            generalData: {
+              rfc: res.data.generalData.RFC,
+              emails: res.data.generalData.email,
+              businessname: res.data.generalData.razonSocial,
+              position: res.data.generalData.position,
+              tradename: res.data.generalData.nombreComercial,
+              phone: res.data.generalData.telefono,
+            },
+            fundManager: {
+              cellphone: res.data.procuringFunds?.celular,
+              responsibleEmail: res.data.procuringFunds?.emailDelResponsable,
+              name: res.data.procuringFunds?.nombre,
+            },
+            organizationalInformation: {
+              generalManagement:
+                res.data.organizationalInformation?.direccionGeneral,
+              operationalManagement:
+                res.data.organizationalInformation?.direccionOperativa,
+              legalRepresentativeEmail:
+                res.data.organizationalInformation?.emailDelRepresentanteLegal,
+              incorporationsStartDate:
+                res.data.organizationalInformation?.fechaDeConstitucion,
+              operationsStartDate:
+                res.data.organizationalInformation?.fechaInicioOperaciones,
+              founder: res.data.organizationalInformation?.fundador,
+              mission: res.data.organizationalInformation?.mision,
+              legalRepresentative:
+                res.data.organizationalInformation?.representanteLegal,
+              ethicalValues: res.data.organizationalInformation?.valores,
+              vision: res.data.organizationalInformation?.vision,
+            },
+            strategicAlliances: {
+              donations: res.data.sustainabilityAndStrategic?.donation,
+              products: res.data.sustainabilityAndStrategic?.product,
+              previousDonations:
+                res.data.sustainabilityAndStrategic?.recibioUnaDonacion,
+              strategicalAlliances:
+                res.data.sustainabilityAndStrategic?.actividadesEspecificasFDA,
+              issuesToStrengthen:
+                res.data.sustainabilityAndStrategic?.temasAFortalecer,
+              whichTopics:
+                res.data.sustainabilityAndStrategic?.temasDescripcion,
+              alliances: res.data.sustainabilityAndStrategic?.redDeAlianzas,
+              courses:
+                res.data.sustainabilityAndStrategic?.listaCursosDeActualizacion,
+            },
+            decentWork: {
+              whyYourOSC: res.data.hardWork?.porqueTrabajarEnTuOSC,
+              personalGrowth: res.data.hardWork?.crecimientoPersonal,
+              whatMakesYouDifferent: res.data.hardWork?.descripcionOSC,
+              benefitsSystem: res.data.hardWork?.diferenciasDeTuOsc,
+            },
+          };
+        },
+        complete: () => {
+          this.getCallStatus();
+          this.loading = false;
+        },
       });
   }
 
   getCallStatus(): void {
-    if (!this.isInvalidForm) {
-      this.callService.status().subscribe((res: unknown) => {
-        if ((res as Response<unknown>).data) {
-          this.infoSaved$.next(true);
-        }
-      });
-    }
+    setTimeout(() => {
+      if (!this.isInvalidForm) {
+        this.callService.status().subscribe((res: unknown) => {
+          if ((res as Response<unknown>).data) {
+            this.infoSaved$.next(true);
+          }
+        });
+      }
+    }, 500);
   }
 
   get isInvalidForm(): boolean {
