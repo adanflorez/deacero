@@ -14,6 +14,7 @@ import { GeneralDataFormModule } from 'src/app/shared/forms/general-data-form/ge
 import { FormErrorModule } from 'src/app/shared/form-error/form-error.module';
 import { OrganizationalInformationFormModule } from 'src/app/shared/forms/organizational-information-form/organizational-information-form.module';
 import { StrategicAlliancesFormModule } from 'src/app/shared/forms/strategic-alliances-form/strategic-alliances-form.module';
+import { DecentWorkFormModule } from 'src/app/shared/forms/decent-work-form/decent-work-form.module';
 
 import { ProductTableComponent } from './components/product-table/product-table.component';
 import { DonationsTableComponent } from './components/donations-table/donations-table.component';
@@ -34,6 +35,7 @@ import { DonationsTableComponent } from './components/donations-table/donations-
     FundManagerFormModule,
     OrganizationalInformationFormModule,
     StrategicAlliancesFormModule,
+    DecentWorkFormModule,
   ],
 })
 export class HomeModule {}

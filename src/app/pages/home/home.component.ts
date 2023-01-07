@@ -116,7 +116,12 @@ export class HomeComponent implements OnInit {
             courses:
               res.data.sustainabilityAndStrategic?.listaCursosDeActualizacion,
           },
-          decentWork: {},
+          decentWork: {
+            whyYourOSC: res.data.hardWork?.porqueTrabajarEnTuOSC,
+            personalGrowth: res.data.hardWork?.crecimientoPersonal,
+            whatMakesYouDifferent: res.data.hardWork?.descripcionOSC,
+            benefitsSystem: res.data.hardWork?.diferenciasDeTuOsc,
+          },
         };
         this.oscData = res.data;
         this.products = (res.data as { product: never[] })?.product || [];
@@ -139,24 +144,7 @@ export class HomeComponent implements OnInit {
   }
 
   initForm() {
-    this.form = new FormGroup({
-      whyYourOSC: new FormControl(
-        this.oscData.porqueTrabajarEnTuOSC,
-        Validators.required
-      ),
-      whatMakesYouDifferent: new FormControl(
-        this.oscData.diferenciasDeTuOsc,
-        Validators.required
-      ),
-      benefitsSystem: new FormControl(
-        this.oscData.descripcionOSC,
-        Validators.required
-      ),
-      personalGrowth: new FormControl(
-        this.oscData.crecimientoPersonal,
-        Validators.required
-      ),
-    });
+    this.form = new FormGroup({});
     this.form.markAllAsTouched();
   }
 

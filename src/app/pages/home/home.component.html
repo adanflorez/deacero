@@ -65,78 +65,15 @@
         donations: formData.strategicAlliances?.donations
       }"></app-strategic-alliances-form>
     <hr />
-    <h2>Trabajo digno</h2>
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label for="whyYourOSC" class="form-label"
-            >¿Por qué las personas quieren trabajar en tu OSC?
-          </label>
-          <textarea
-            rows="3"
-            class="form-control"
-            id="whyYourOSC"
-            formControlName="whyYourOSC"
-            [class.is-invalid]="
-              f['whyYourOSC'].invalid && f['whyYourOSC'].touched
-            "></textarea>
-          <app-form-error [control]="f['whyYourOSC']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label for="whatMakesYouDifferent" class="form-label"
-            >¿Qué te hace diferente de quienes ofrecen una propuesta de valor
-            similar a la tuya?
-          </label>
-          <textarea
-            rows="3"
-            class="form-control"
-            id="whatMakesYouDifferent"
-            formControlName="whatMakesYouDifferent"
-            [class.is-invalid]="
-              f['whatMakesYouDifferent'].invalid &&
-              f['whatMakesYouDifferent'].touched
-            "></textarea>
-          <app-form-error
-            [control]="f['whatMakesYouDifferent']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label for="benefitsSystem" class="form-label"
-            >Describe el sistema de prestaciones y compensaciones para todo el
-            personal.
-          </label>
-          <textarea
-            rows="3"
-            class="form-control"
-            id="benefitsSystem"
-            formControlName="benefitsSystem"
-            [class.is-invalid]="
-              f['benefitsSystem'].invalid && f['benefitsSystem'].touched
-            "></textarea>
-          <app-form-error [control]="f['benefitsSystem']"></app-form-error>
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label for="personalGrowth" class="form-label"
-            >¿Cuáles opciones de crecimiento personal ofreces a tus
-            colaboradores?
-          </label>
-          <textarea
-            id="personalGrowth"
-            rows="3"
-            class="form-control"
-            formControlName="personalGrowth"
-            [class.is-invalid]="
-              f['personalGrowth'].invalid && f['personalGrowth'].touched
-            "></textarea>
-          <app-form-error [control]="f['personalGrowth']"></app-form-error>
-        </div>
-      </div>
-    </div>
+    <app-decent-work-form
+      [updateParentModel]="updateData"
+      [defaultValues]="{
+        whyYourOSC: formData.decentWork?.whyYourOSC,
+        whatMakesYouDifferent: formData.decentWork?.whatMakesYouDifferent,
+        benefitsSystem: formData.decentWork?.benefitsSystem,
+        personalGrowth: formData.decentWork?.personalGrowth,
+        comment: ''
+      }"></app-decent-work-form>
 
     <button
       class="btn btn-primary"
