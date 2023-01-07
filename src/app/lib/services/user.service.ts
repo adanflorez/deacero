@@ -9,7 +9,6 @@ import Response from '../models/response.model';
   providedIn: 'root',
 })
 export class UserService {
-  private apiOSC = environment.apiOSC;
   private apiApplication = environment.apiApplication;
   private apiAdmin = environment.apiAdmin;
 
@@ -24,7 +23,9 @@ export class UserService {
   }
 
   OSCstatus(): Observable<Response<unknown>> {
-    return this.http.get<Response<unknown>>(`${this.apiOSC}status`);
+    return this.http.get<Response<unknown>>(
+      `${this.apiApplication}field/validation/status`
+    );
   }
 
   userManagementList(): Observable<any> {

@@ -118,7 +118,6 @@ export class HomeComponent implements OnInit {
       this.callService.status().subscribe((res: unknown) => {
         if ((res as Response<unknown>).data) {
           this.infoSaved$.next(true);
-          // this.form.disable();
         }
       });
     }

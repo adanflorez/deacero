@@ -8,28 +8,25 @@ import Response from '../models/response.model';
   providedIn: 'root',
 })
 export class CallService {
-  private apiCall = environment.apiCall;
   private apiFeedback = environment.apiFeedback;
+  private apiApplication = environment.apiApplication;
   constructor(private http: HttpClient) {}
 
   applicateToCall(data: unknown): Observable<Response<unknown>> {
-    return this.http.post<Response<unknown>>(
-      `${this.apiCall}application/`,
-      data
-    );
+    return this.http.post<Response<unknown>>(`${this.apiApplication}`, data);
   }
 
   application() {
-    return this.http.get(`${this.apiCall}application/`);
+    return this.http.get(`${this.apiApplication}`);
   }
 
   saveInFlokzu() {
-    return this.http.put(`${this.apiCall}application/send`, {});
+    return this.http.put(`${this.apiApplication}/send`, {});
   }
 
   status(): Observable<Response<unknown>> {
     return this.http.get<Response<unknown>>(
-      `${this.apiCall}application/status`
+      `${this.apiApplication}send/request/status`
     );
   }
 
