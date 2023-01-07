@@ -1,15 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { BehaviorSubject, catchError, throwError } from 'rxjs';
-import {
-  MULTIPLE_EMAIL_PATTERN,
-  ONLY_NUMBERS_PATTERN,
-} from 'src/app/lib/constants';
+
 import { AlertType } from 'src/app/lib/enums/alert-type';
 import { CallService } from 'src/app/lib/services/call.service';
 import { UserService } from 'src/app/lib/services/user.service';
@@ -24,16 +16,10 @@ import FormValid from 'src/app/lib/models/form-valid.model';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  form: FormGroup;
   showAlert = false;
   alertType: AlertType = AlertType.Danger;
   alertMessage = '';
-  showDonationsTable = false;
-  products = [];
-  donations = [];
   loading = false;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  oscData: any = {};
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   formData: Partial<CallForm>;
   formsStatus: FormValid[];
@@ -42,7 +28,6 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private callService: CallService
   ) {
-    this.form = new FormGroup({});
     this.formsStatus = [];
     this.formData = {
       generalData: {},
@@ -123,33 +108,20 @@ export class HomeComponent implements OnInit {
             benefitsSystem: res.data.hardWork?.diferenciasDeTuOsc,
           },
         };
-        this.oscData = res.data;
-        this.products = (res.data as { product: never[] })?.product || [];
-        this.donations = (res.data as { donation: never[] })?.donation || [];
-        this.initForm();
         this.getCallStatus();
         this.loading = false;
       });
   }
 
   getCallStatus(): void {
-    if (this.form.valid) {
+    if (!this.isInvalidForm) {
       this.callService.status().subscribe((res: unknown) => {
         if ((res as Response<unknown>).data) {
           this.infoSaved$.next(true);
-          this.form.disable();
+          // this.form.disable();
         }
       });
     }
-  }
-
-  initForm() {
-    this.form = new FormGroup({});
-    this.form.markAllAsTouched();
-  }
-
-  get f() {
-    return this.form.controls;
   }
 
   get isInvalidForm(): boolean {
@@ -160,41 +132,57 @@ export class HomeComponent implements OnInit {
 
   update() {
     const form = {
-      nombreComercial: this.f.tradename.value,
-      razonSocial: this.f.businessname.value,
-      rfc: this.f.rfc.value,
-      telefono: this.f.phone.value,
-      email: this.f.emails.value,
-      position: this.f.position.value,
-      nombre: this.f.name.value,
-      emailDelResponsable: this.f.responsibleEmail.value,
-      celular: this.f.cellphone.value,
-      fundador: this.f.founder.value,
-      direccionGeneral: this.f.generalManagement.value,
-      direccionOperativa: this.f.operationalManagement.value,
-      representanteLegal: this.f.legalRepresentative.value,
-      emailDelRepresentanteLegal: this.f.legalRepresentativeEmail.value,
-      fechaInicioOperaciones: this.f.operationsStartDate.value,
-      fechaDeConstitucion: this.f.incorporationsStartDate.value,
-      mision: this.f.mision.value,
-      vision: this.f.vision.value,
-      valores: this.f.ethicalValues.value,
-      redDeAlianzas: this.f.alliances.value,
-      listaCursosDeActualizacion: this.f.courses.value,
-      temasAFortalecer: this.f.issuesToStrengthen.value,
-      temasDescripcion: this.f.whichTopics.value,
-      recibioUnaDonacion: this.f.previousDonations.value,
-      actividadesEspecificasFDA: this.f.strategicAlliances.value,
-      porqueTrabajarEnTuOSC: this.f.whyYourOSC.value,
-      diferenciasDeTuOsc: this.f.whatMakesYouDifferent.value,
-      descripcionOSC: this.f.benefitsSystem.value,
-      crecimientoPersonal: this.f.personalGrowth.value,
-      product: this.products,
-      donation: this.donations,
+      generalData: {
+        RFC: this.formData.generalData?.rfc,
+        email: this.formData.generalData?.emails,
+        razonSocial: this.formData.generalData?.businessname,
+        position: this.formData.generalData?.position,
+        nombreComercial: this.formData.generalData?.tradename,
+        telefono: this.formData.generalData?.phone,
+      },
+      procuringFunds: {
+        celular: this.formData.fundManager?.cellphone,
+        emailDelResponsable: this.formData.fundManager?.responsibleEmail,
+        nombre: this.formData.fundManager?.name,
+      },
+      organizationalInformation: {
+        direccionGeneral:
+          this.formData.organizationalInformation?.generalManagement,
+        direccionOperativa:
+          this.formData.organizationalInformation?.operationalManagement,
+        emailDelRepresentanteLegal:
+          this.formData.organizationalInformation?.legalRepresentativeEmail,
+        fechaDeConstitucion:
+          this.formData.organizationalInformation?.incorporationsStartDate,
+        fechaInicioOperaciones:
+          this.formData.organizationalInformation?.operationsStartDate,
+        fundador: this.formData.organizationalInformation?.founder,
+        mision: this.formData.organizationalInformation?.mission,
+        representanteLegal:
+          this.formData.organizationalInformation?.legalRepresentative,
+        valores: this.formData.organizationalInformation?.ethicalValues,
+        vision: this.formData.organizationalInformation?.vision,
+      },
+      sustainabilityAndStrategic: {
+        donation: this.formData.strategicAlliances?.donations,
+        product: this.formData.strategicAlliances?.products,
+        recibioUnaDonacion: this.formData.strategicAlliances?.previousDonations,
+        actividadesEspecificasFDA:
+          this.formData.strategicAlliances?.strategicalAlliances,
+        temasAFortalecer: this.formData.strategicAlliances?.issuesToStrengthen,
+        temasDescripcion: this.formData.strategicAlliances?.whichTopics,
+        redDeAlianzas: this.formData.strategicAlliances?.alliances,
+        listaCursosDeActualizacion: this.formData.strategicAlliances?.courses,
+      },
+      hardWork: {
+        porqueTrabajarEnTuOSC: this.formData.decentWork?.whyYourOSC,
+        crecimientoPersonal: this.formData.decentWork?.personalGrowth,
+        descripcionOSC: this.formData.decentWork?.whatMakesYouDifferent,
+        diferenciasDeTuOsc: this.formData.decentWork?.benefitsSystem,
+      },
     };
     this.userService.updateOSC(form).subscribe({
       next: () => {
-        this.form.reset();
         this.showAlert = true;
         this.alertMessage = 'Información de OSC actualizada';
         this.alertType = AlertType.Success;

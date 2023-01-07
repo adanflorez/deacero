@@ -7,7 +7,7 @@
     [type]="alertType"
     [message]="alertMessage"
     [dismissible]="true"></app-alert>
-  <form [formGroup]="form" *ngIf="!loading">
+  <ng-container *ngIf="!loading">
     <app-general-data-form
       [updateParentModel]="updateData"
       [defaultValues]="{
@@ -82,5 +82,5 @@
       (click)="update()">
       Guardar
     </button>
-  </form>
+  </ng-container>
 </div>
