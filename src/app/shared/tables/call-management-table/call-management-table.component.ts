@@ -2,8 +2,11 @@ import { AnnouncementService } from 'src/app/lib/services/announcement.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable, firstValueFrom, map, startWith } from 'rxjs';
 import Announcement from 'src/app/lib/models/announcement.model';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+type AnnouncementAction = 'Create' | 'Edit' | 'Delete' | 'Confirm';
 
 @Component({
   selector: 'app-call-management-table',
@@ -15,20 +18,26 @@ export class CallManagementTableComponent implements OnInit {
   announcements$: Observable<Announcement[]>;
   announcements: Announcement[];
   filter = new FormControl('', { nonNullable: true });
+  modalType: AnnouncementAction;
+  announcementForm: FormGroup;
 
   constructor(
     private announcementService: AnnouncementService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private modalService: NgbModal
   ) {
     this.announcements$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))
     );
     this.announcements = [];
+    this.modalType = 'Create';
+    this.announcementForm = new FormGroup({});
   }
 
   ngOnInit(): void {
     this.announcementManagementList();
+    this.initAnnouncementForm();
   }
 
   async announcementManagementList(): Promise<void> {
@@ -59,5 +68,66 @@ export class CallManagementTableComponent implements OnInit {
         announcement.status?.toLowerCase().includes(text.toLowerCase())
       );
     });
+  }
+
+  openModal(content: unknown, type?: AnnouncementAction): void {
+    this.modalType = type || this.modalType;
+    this.modalService
+      .open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        backdrop: 'static',
+      })
+      .result.then(
+        result => {
+          // this.closeResult = `Closed with: ${result}`;
+        },
+        () => {
+          // this.form.reset();
+        }
+      );
+  }
+
+  closeModal(modal: any) {
+    modal.dismiss();
+  }
+
+  initAnnouncementForm() {
+    this.announcementForm = new FormGroup({
+      type: new FormControl('', Validators.required),
+      startDate: new FormControl('', Validators.required),
+      endRegisterDate: new FormControl('', Validators.required),
+      bases: new FormControl('', Validators.required),
+    });
+  }
+
+  get isCreate(): boolean {
+    return this.modalType === 'Create';
+  }
+
+  get isEdit(): boolean {
+    return this.modalType === 'Edit';
+  }
+
+  get modalStructure(): { title: string; confirmationMessage: string } {
+    if (this.isCreate) {
+      return {
+        title: 'Programar',
+        confirmationMessage:
+          '¿Está seguro que desea programar la convocatoria?',
+      };
+    } else if (this.isEdit) {
+      return {
+        title: 'Editar',
+        confirmationMessage: '¿Está seguro que desea editar la convocatoria?',
+      };
+    }
+    return {
+      title: 'Programar',
+      confirmationMessage: '¿Está seguro que desea programar la convocatoria?',
+    };
+  }
+
+  get announcementF() {
+    return this.announcementForm?.controls;
   }
 }

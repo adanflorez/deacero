@@ -18,7 +18,11 @@
       </div>
     </form>
     <div class="d-block">
-      <button class="btn btn-primary">Programar convocatoria</button>
+      <button
+        class="btn btn-primary"
+        (click)="openModal(announcementAction, 'Create')">
+        Programar convocatoria
+      </button>
     </div>
   </div>
   <div class="d-none d-lg-flex">
@@ -78,7 +82,13 @@
               [result]="announcement.status"
               [term]="filter.value"></ngb-highlight>
           </td>
-          <td></td>
+          <td>
+            <button
+              class="btn btn-outline-primary"
+              (click)="openModal(announcementAction, 'Edit')">
+              Editar
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -162,3 +172,114 @@
     </table>
   </div>
 </div>
+<ng-template #announcementAction let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      {{ modalStructure.title }} convocatoria
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="closeModal(modal)"></button>
+  </div>
+  <div class="modal-body">
+    <form *ngIf="isCreate" [formGroup]="announcementForm">
+      <div class="mb-3">
+        <label class="form-label" for="type">Tipo</label>
+        <select
+          class="form-select"
+          formControlName="type"
+          id="type"
+          [class.is-invalid]="
+            announcementF['type'].invalid &&
+            (announcementF['type'].dirty || announcementF['type'].touched)
+          ">
+          <option value="">Seleccionar</option>
+          <option value="Normal">Normal</option>
+          <option value="Extemporanea">Extemporanea</option>
+        </select>
+        <app-form-error [control]="announcementF['type']"></app-form-error>
+      </div>
+      <div class="mb-3">
+        <label for="startDate" class="form-label">Fecha inicio</label>
+        <input
+          type="date"
+          class="form-control"
+          id="startDate"
+          formControlName="startDate"
+          [class.is-invalid]="
+            announcementF['startDate'].invalid &&
+            announcementF['startDate'].touched
+          " />
+        <app-form-error [control]="announcementF['startDate']"></app-form-error>
+      </div>
+      <div class="mb-3">
+        <label for="endRegisterDate" class="form-label">Fecha fin</label>
+        <input
+          type="date"
+          class="form-control"
+          id="endRegisterDate"
+          formControlName="endRegisterDate"
+          [class.is-invalid]="
+            announcementF['endRegisterDate'].invalid &&
+            announcementF['endRegisterDate'].touched
+          " />
+        <app-form-error
+          [control]="announcementF['endRegisterDate']"></app-form-error>
+      </div>
+      <div class="mb-3">
+        <label for="bases" class="form-label">Bases</label>
+        <input
+          type="text"
+          class="form-control"
+          id="bases"
+          formControlName="bases"
+          [class.is-invalid]="
+            announcementF['bases'].invalid && announcementF['bases'].touched
+          " />
+        <app-form-error [control]="announcementF['bases']"></app-form-error>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary me-2" (click)="modal.close()">
+      Cancelar
+    </button>
+    <button
+      *ngIf="isCreate"
+      class="btn btn-primary"
+      [disabled]="announcementForm.invalid"
+      (click)="openModal(confirmCreateAnnouncement)">
+      Programar
+    </button>
+    <button
+      *ngIf="isEdit"
+      class="btn btn-primary"
+      (click)="openModal(confirmCreateAnnouncement)">
+      Guardar cambios
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #confirmCreateAnnouncement let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmación</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="closeModal(modal)"></button>
+  </div>
+  <div class="modal-body">
+    {{ modalStructure.confirmationMessage }}
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary me-2" (click)="modal.close()">
+      Cancelar
+    </button>
+    <button class="btn btn-primary" [disabled]="announcementForm.invalid">
+      Aceptar
+    </button>
+  </div>
+</ng-template>
