@@ -20,6 +20,7 @@ export class CallManagementTableComponent implements OnInit {
   filter = new FormControl('', { nonNullable: true });
   modalType: AnnouncementAction;
   announcementForm: FormGroup;
+  currentAnnouncement: Announcement;
 
   constructor(
     private announcementService: AnnouncementService,
@@ -33,6 +34,7 @@ export class CallManagementTableComponent implements OnInit {
     this.announcements = [];
     this.modalType = 'Create';
     this.announcementForm = new FormGroup({});
+    this.currentAnnouncement = {};
   }
 
   ngOnInit(): void {
@@ -108,6 +110,10 @@ export class CallManagementTableComponent implements OnInit {
     return this.modalType === 'Edit';
   }
 
+  get isDelete(): boolean {
+    return this.modalType === 'Delete';
+  }
+
   get modalStructure(): { title: string; confirmationMessage: string } {
     if (this.isCreate) {
       return {
@@ -120,14 +126,25 @@ export class CallManagementTableComponent implements OnInit {
         title: 'Editar',
         confirmationMessage: '¿Está seguro que desea editar la convocatoria?',
       };
+    } else {
+      return {
+        title: 'Programar',
+        confirmationMessage:
+          '¿Está seguro que desea eliminar la convocatoria programada?',
+      };
     }
-    return {
-      title: 'Programar',
-      confirmationMessage: '¿Está seguro que desea programar la convocatoria?',
-    };
   }
 
   get announcementF() {
     return this.announcementForm?.controls;
+  }
+
+  setForm(announcement: Announcement) {
+    this.announcementForm.setValue({
+      type: announcement.type,
+      startDate: announcement.startDate,
+      endRegisterDate: announcement.endRegisterDate,
+      bases: announcement.bases || '',
+    });
   }
 }

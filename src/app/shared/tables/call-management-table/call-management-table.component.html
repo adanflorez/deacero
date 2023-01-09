@@ -86,7 +86,9 @@
             <button
               *ngIf="announcement.status === 'programada'"
               class="btn btn-outline-primary"
-              (click)="openModal(announcementAction, 'Edit')">
+              (click)="
+                setForm(announcement); openModal(announcementAction, 'Edit')
+              ">
               Editar
             </button>
           </td>
@@ -185,8 +187,16 @@
       (click)="closeModal(modal)"></button>
   </div>
   <div class="modal-body">
-    <form *ngIf="isCreate" [formGroup]="announcementForm">
-      <div class="mb-3">
+    <div class="d-grid gap-2 mb-3" *ngIf="isEdit || isDelete">
+      <button
+        class="btn btn-danger"
+        type="button"
+        (click)="openModal(confirmCreateAnnouncement, 'Delete')">
+        Eliminar convocatoria
+      </button>
+    </div>
+    <form [formGroup]="announcementForm">
+      <div class="mb-3" *ngIf="isCreate">
         <label class="form-label" for="type">Tipo</label>
         <select
           class="form-select"
@@ -229,7 +239,7 @@
         <app-form-error
           [control]="announcementF['endRegisterDate']"></app-form-error>
       </div>
-      <div class="mb-3">
+      <div class="mb-3" *ngIf="isCreate">
         <label for="bases" class="form-label">Bases</label>
         <input
           type="text"
@@ -255,7 +265,7 @@
       Programar
     </button>
     <button
-      *ngIf="isEdit"
+      *ngIf="isEdit || isDelete"
       class="btn btn-primary"
       (click)="openModal(confirmCreateAnnouncement)">
       Guardar cambios
