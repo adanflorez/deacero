@@ -84,6 +84,7 @@
           </td>
           <td>
             <button
+              *ngIf="announcement.status === 'programada'"
               class="btn btn-outline-primary"
               (click)="openModal(announcementAction, 'Edit')">
               Editar
