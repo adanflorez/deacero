@@ -1,5 +1,86 @@
 <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
-  <div class="d-flex justify-content-between">
-    <h2>Convocatorias</h2>
+  <h2>Convocatorias</h2>
+  <div class="d-flex flex-column flex-md-row justify-content-between">
+    <form>
+      <div class="mb-3 row">
+        <label
+          for="table-filtering-search"
+          class="col-xs-3 col-sm-auto col-form-label"
+          >Filtrar:</label
+        >
+        <div class="col-xs-3 col-sm-auto">
+          <input
+            id="table-filtering-search"
+            class="form-control"
+            type="text"
+            [formControl]="filter" />
+        </div>
+      </div>
+    </form>
+    <div class="d-block">
+      <button class="btn btn-primary">Programar convocatoria</button>
+    </div>
+  </div>
+  <div class="d-none d-lg-flex">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Año</th>
+          <th scope="col">Número</th>
+          <th scope="col">Fecha inicio</th>
+          <th scope="col">Fecha fin registro</th>
+          <th scope="col">Bases</th>
+          <th scope="col">Estatus</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let announcement of announcements$ | async; index as i">
+          <td>
+            <ngb-highlight
+              [result]="announcement.id"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="announcement.type"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="announcement.year"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="announcement.number"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="announcement.startDate | date : 'dd/MM/YYYY'"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="announcement.endRegisterDate | date : 'dd/MM/YYYY'"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="announcement.bases"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="announcement.status"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
