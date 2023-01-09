@@ -5,5 +5,6 @@ export default interface GeneralData {
   phone?: string;
   emails?: string;
   position?: string;
+  accountBankManager?: string;
   comment?: string;
 }
