@@ -84,3 +84,81 @@
     </table>
   </div>
 </div>
+<div class="d-block d-lg-none">
+  <div
+    class="bg-bright-gray border border-secondary rounded p-3 mb-4"
+    *ngFor="let announcement of announcements$ | async; index as i">
+    <table class="table table-striped mobile-table">
+      <tbody>
+        <tr>
+          <th style="width: 200px">ID</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.id"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th style="width: 200">Tipo</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.type"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Año</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.year"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Número</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.number"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Fecha inicio</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.startDate | date : 'dd/MM/YYYY'"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Fecha fin registro</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.endRegisterDate | date : 'dd/MM/YYYY'"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Bases</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.bases"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Estatus</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.status"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Acciones</th>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
