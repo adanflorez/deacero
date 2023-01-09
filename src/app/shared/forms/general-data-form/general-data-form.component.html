@@ -92,4 +92,21 @@
       <app-form-error [control]="f['position']"></app-form-error>
     </div>
   </div>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="accountBankManager" class="form-label"
+        >Nombre de quien administra la cuenta bancaria en la OSC</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="accountBankManager"
+        placeholder="Nombre"
+        formControlName="accountBankManager"
+        [class.is-invalid]="
+          f['accountBankManager'].invalid && f['accountBankManager'].touched
+        " />
+      <app-form-error [control]="f['position']"></app-form-error>
+    </div>
+  </div>
 </div>

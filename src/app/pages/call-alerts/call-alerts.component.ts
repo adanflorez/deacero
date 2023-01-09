@@ -92,6 +92,7 @@ export class CallAlertsComponent implements OnInit {
         position: this.formData.generalData.position,
         nombreComercial: this.formData.generalData.tradename,
         telefono: this.formData.generalData.phone,
+        manageTheBankAccount: this.formData.generalData?.accountBankManager,
       },
       procuringFunds: {
         celular: this.formData.fundManager.cellphone,
@@ -285,6 +286,7 @@ export class CallAlertsComponent implements OnInit {
           position: res.data.generalData.position,
           tradename: res.data.generalData.nombreComercial,
           phone: res.data.generalData.telefono,
+          accountBankManager: res.data.generalData.manageTheBankAccount,
         },
         fundManager: {
           cellphone: res.data.procuringFunds.celular,

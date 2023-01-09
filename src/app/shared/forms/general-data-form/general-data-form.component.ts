@@ -101,6 +101,10 @@ export class GeneralDataFormComponent implements OnInit, OnDestroy, OnChanges {
       position: new FormControl(this.defaultValues.position, [
         Validators.required,
       ]),
+      accountBankManager: new FormControl(
+        this.defaultValues.accountBankManager,
+        [Validators.required]
+      ),
     });
     this.subscribeToForm();
     this.form.markAllAsTouched();
