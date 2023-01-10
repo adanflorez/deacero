@@ -35,7 +35,7 @@
           <th scope="col">Número</th>
           <th scope="col">Fecha inicio</th>
           <th scope="col">Fecha fin registro</th>
-          <th scope="col">Bases</th>
+          <!-- <th scope="col">Bases</th> -->
           <th scope="col">Estatus</th>
           <th scope="col">Acciones</th>
         </tr>
@@ -72,11 +72,11 @@
               [result]="announcement.endRegisterDate | date : 'dd/MM/YYYY'"
               [term]="filter.value"></ngb-highlight>
           </td>
-          <td>
+          <!-- <td>
             <ngb-highlight
               [result]="announcement.bases"
               [term]="filter.value"></ngb-highlight>
-          </td>
+          </td> -->
           <td>
             <ngb-highlight
               [result]="announcement.status"
@@ -151,14 +151,14 @@
               [term]="filter.value"></ngb-highlight>
           </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <th>Bases</th>
           <td>
             <ngb-highlight
               [result]="announcement.bases"
               [term]="filter.value"></ngb-highlight>
           </td>
-        </tr>
+        </tr> -->
         <tr>
           <th>Estatus</th>
           <td>
@@ -239,7 +239,7 @@
         <app-form-error
           [control]="announcementF['endRegisterDate']"></app-form-error>
       </div>
-      <div class="mb-3" *ngIf="isCreate">
+      <!-- <div class="mb-3" *ngIf="isCreate">
         <label for="bases" class="form-label">Bases</label>
         <input
           type="text"
@@ -250,7 +250,7 @@
             announcementF['bases'].invalid && announcementF['bases'].touched
           " />
         <app-form-error [control]="announcementF['bases']"></app-form-error>
-      </div>
+      </div> -->
     </form>
   </div>
   <div class="modal-footer">
