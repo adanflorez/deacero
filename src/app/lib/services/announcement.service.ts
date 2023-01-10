@@ -33,4 +33,12 @@ export class AnnouncementService {
       })
     );
   }
+
+  create(startDate: string, endDate: string, type: 1 | 2): Observable<any> {
+    return this.http.post(this.apiAnnouncement, {
+      initDate: startDate,
+      endDate,
+      typeId: Number(type),
+    });
+  }
 }

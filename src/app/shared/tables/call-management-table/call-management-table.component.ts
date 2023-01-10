@@ -1,10 +1,11 @@
-import { AnnouncementService } from 'src/app/lib/services/announcement.service';
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, firstValueFrom, map, startWith } from 'rxjs';
 import Announcement from 'src/app/lib/models/announcement.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DatePipe } from '@angular/common';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertType } from 'src/app/lib/enums/alert-type';
+import { AnnouncementService } from 'src/app/lib/services/announcement.service';
 
 type AnnouncementAction = 'Create' | 'Edit' | 'Delete' | 'Confirm';
 
@@ -21,6 +22,9 @@ export class CallManagementTableComponent implements OnInit {
   modalType: AnnouncementAction;
   announcementForm: FormGroup;
   currentAnnouncement: Announcement;
+  showAlert: boolean;
+  alertType: AlertType;
+  alertMessage: string;
 
   constructor(
     private announcementService: AnnouncementService,
@@ -35,6 +39,9 @@ export class CallManagementTableComponent implements OnInit {
     this.modalType = 'Create';
     this.announcementForm = new FormGroup({});
     this.currentAnnouncement = {};
+    this.showAlert = false;
+    this.alertType = AlertType.Success;
+    this.alertMessage = '';
   }
 
   ngOnInit(): void {
@@ -59,11 +66,11 @@ export class CallManagementTableComponent implements OnInit {
         announcement.year?.toLowerCase().includes(text.toLowerCase()) ||
         announcement.number?.toLowerCase().includes(text.toLowerCase()) ||
         this.datePipe
-          .transform(announcement.startDate, 'dd/MM/YYYY')
+          .transform(announcement.startDate, 'YYYY-MM-dd')
           ?.toLowerCase()
           .includes(text.toLowerCase()) ||
         this.datePipe
-          .transform(announcement.endRegisterDate, 'dd/MM/YYYY')
+          .transform(announcement.endRegisterDate, 'YYYY-MM-dd')
           ?.toLowerCase()
           .includes(text.toLowerCase()) ||
         announcement.bases?.toLowerCase().includes(text.toLowerCase()) ||
@@ -98,7 +105,7 @@ export class CallManagementTableComponent implements OnInit {
       type: new FormControl('', Validators.required),
       startDate: new FormControl('', Validators.required),
       endRegisterDate: new FormControl('', Validators.required),
-      bases: new FormControl('', Validators.required),
+      // bases: new FormControl('', Validators.required),
     });
   }
 
@@ -144,7 +151,38 @@ export class CallManagementTableComponent implements OnInit {
       type: announcement.type,
       startDate: announcement.startDate,
       endRegisterDate: announcement.endRegisterDate,
-      bases: announcement.bases || '',
+      // bases: announcement.bases || '',
     });
+  }
+
+  save() {
+    this.modalService.dismissAll();
+    const { startDate, type, endRegisterDate } = this.announcementForm.value;
+    if (this.isCreate) {
+      this.announcementService
+        .create(
+          this.datePipe.transform(startDate, 'YYYY-MM-dd hh:mm:ss') as string,
+          this.datePipe.transform(
+            endRegisterDate,
+            'YYYY-MM-dd hh:mm:ss'
+          ) as string,
+          type
+        )
+        .subscribe({
+          next: response => {
+            console.log(response);
+            this.alertMessage = 'Convocatoria programada';
+            this.alertType = AlertType.Success;
+            this.showAlert = true;
+            this.announcementManagementList();
+          },
+          error: err => {
+            console.error(err);
+            this.alertMessage = 'No se pudo programar la convocatoria';
+            this.alertType = AlertType.Danger;
+            this.showAlert = true;
+          },
+        });
+    }
   }
 }

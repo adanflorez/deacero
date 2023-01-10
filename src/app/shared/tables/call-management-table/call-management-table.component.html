@@ -1,5 +1,10 @@
 <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
   <h2>Convocatorias</h2>
+  <app-alert
+    [(show)]="showAlert"
+    [type]="alertType"
+    [message]="alertMessage"
+    [dismissible]="true"></app-alert>
   <div class="d-flex flex-column flex-md-row justify-content-between">
     <form>
       <div class="mb-3 row">
@@ -64,12 +69,12 @@
           </td>
           <td>
             <ngb-highlight
-              [result]="announcement.startDate | date : 'dd/MM/YYYY'"
+              [result]="announcement.startDate | date : 'YYYY-MM-dd'"
               [term]="filter.value"></ngb-highlight>
           </td>
           <td>
             <ngb-highlight
-              [result]="announcement.endRegisterDate | date : 'dd/MM/YYYY'"
+              [result]="announcement.endRegisterDate | date : 'YYYY-MM-dd'"
               [term]="filter.value"></ngb-highlight>
           </td>
           <!-- <td>
@@ -84,7 +89,7 @@
           </td>
           <td>
             <button
-              *ngIf="announcement.status === 'programada'"
+              *ngIf="announcement.status === 'Programada'"
               class="btn btn-outline-primary"
               (click)="
                 setForm(announcement); openModal(announcementAction, 'Edit')
@@ -139,7 +144,7 @@
           <th>Fecha inicio</th>
           <td>
             <ngb-highlight
-              [result]="announcement.startDate | date : 'dd/MM/YYYY'"
+              [result]="announcement.startDate | date : 'YYYY-MM-dd'"
               [term]="filter.value"></ngb-highlight>
           </td>
         </tr>
@@ -147,7 +152,7 @@
           <th>Fecha fin registro</th>
           <td>
             <ngb-highlight
-              [result]="announcement.endRegisterDate | date : 'dd/MM/YYYY'"
+              [result]="announcement.endRegisterDate | date : 'YYYY-MM-dd'"
               [term]="filter.value"></ngb-highlight>
           </td>
         </tr>
@@ -169,7 +174,16 @@
         </tr>
         <tr>
           <th>Acciones</th>
-          <td></td>
+          <td>
+            <button
+              *ngIf="announcement.status === 'Programada'"
+              class="btn btn-outline-primary"
+              (click)="
+                setForm(announcement); openModal(announcementAction, 'Edit')
+              ">
+              Editar
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -207,8 +221,8 @@
             (announcementF['type'].dirty || announcementF['type'].touched)
           ">
           <option value="">Seleccionar</option>
-          <option value="Normal">Normal</option>
-          <option value="Extemporanea">Extemporanea</option>
+          <option value="1">Normal</option>
+          <option value="2">Extemporanea</option>
         </select>
         <app-form-error [control]="announcementF['type']"></app-form-error>
       </div>
@@ -289,8 +303,6 @@
     <button class="btn btn-secondary me-2" (click)="modal.close()">
       Cancelar
     </button>
-    <button class="btn btn-primary" [disabled]="announcementForm.invalid">
-      Aceptar
-    </button>
+    <button class="btn btn-primary" (click)="save()">Aceptar</button>
   </div>
 </ng-template>
