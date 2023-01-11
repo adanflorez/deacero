@@ -170,7 +170,7 @@ export class CallManagementTableComponent implements OnInit {
   save() {
     this.modalService.dismissAll();
     const { startDate, type, endRegisterDate } = this.announcementForm.value;
-    if (this.isCreate && this.announcementForm.valid) {
+    if (this.isCreate) {
       this.announcementService
         .create(
           this.datePipe.transform(startDate, 'YYYY-MM-dd hh:mm:ss') as string,
