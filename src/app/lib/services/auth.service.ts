@@ -1,6 +1,6 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BYPASS_AUTH } from '../interceptors/token.interceptor';
 import Response from '../models/response.model';
@@ -55,5 +55,15 @@ export class AuthService {
       `${this.apiUser}/validate?code=${code}&derivation=${derivation}&email=${email}`,
       this.byPASS
     );
+  }
+
+  validateRFCExists(rfc: string): Observable<boolean> {
+    return this.http
+      .get<Response<unknown>>(`${this.apiRegister}?rfc=${rfc}`)
+      .pipe(
+        map((res: any) => {
+          return res.data as boolean;
+        })
+      );
   }
 }

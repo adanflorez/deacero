@@ -1,16 +1,17 @@
-import { AlertType } from 'src/app/lib/enums/alert-type';
-import { AuthService } from 'src/app/lib/services/auth.service';
 import {
   FormGroup,
   FormControl,
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PASSWORD_PATERN } from 'src/app/lib/constants';
 import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
 import { validateRFC } from 'src/app/lib/helpers/rfc-validator';
+import { AuthService } from 'src/app/lib/services/auth.service';
+import { AlertType } from 'src/app/lib/enums/alert-type';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare let window: any;
@@ -29,6 +30,8 @@ export class SignupComponent implements OnInit {
   confirmPasswordFieldType = 'password';
   passwordButonnIcon = 'lock';
   confirmPasswordButonnIcon = 'lock';
+  rfcValidated$: BehaviorSubject<boolean>;
+  rfcValidatedExists$: BehaviorSubject<boolean>;
 
   constructor(private authService: AuthService, private router: Router) {
     this.signupForm = new FormGroup(
@@ -43,6 +46,8 @@ export class SignupComponent implements OnInit {
       },
       [CustomValidators.MatchValidator('password', 'confirmPassword')]
     );
+    this.rfcValidated$ = new BehaviorSubject(false);
+    this.rfcValidatedExists$ = new BehaviorSubject(false);
   }
 
   ngOnInit(): void {
@@ -107,6 +112,19 @@ export class SignupComponent implements OnInit {
   }
 
   validateRFC(input: Event, control: AbstractControl<unknown, unknown>) {
+    this.rfcValidated$.next(false);
     validateRFC(input, control);
+  }
+
+  validateRFCExists(rfc: string) {
+    this.authService.validateRFCExists(rfc).subscribe({
+      next: response => {
+        this.rfcValidated$.next(true);
+        this.rfcValidatedExists$.next(response);
+      },
+      error: err => {
+        console.error(err);
+      },
+    });
   }
 }
