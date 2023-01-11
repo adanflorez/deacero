@@ -31,11 +31,11 @@ export class CallService {
   }
 
   feedback(): Observable<Response<unknown>> {
-    return this.http.get<Response<unknown>>(`${this.apiFeedback}`);
+    return this.http.get<Response<unknown>>(`${this.apiApplication}`);
   }
 
   updateFeedback(form: unknown): Observable<Response<unknown>> {
-    return this.http.put<Response<unknown>>(`${this.apiFeedback}`, form);
+    return this.http.put<Response<unknown>>(`${this.apiApplication}`, form);
   }
 
   feedbackStatus(): Observable<Response<unknown>> {
