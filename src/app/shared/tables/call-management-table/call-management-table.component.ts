@@ -220,6 +220,22 @@ export class CallManagementTableComponent implements OnInit {
             this.showAlert = true;
           },
         });
+    } else if (this.isDelete) {
+      this.announcementService.delete(this.currentAnnouncementId).subscribe({
+        next: response => {
+          console.log(response);
+          this.alertMessage = 'Convocatoria eliminada';
+          this.alertType = AlertType.Success;
+          this.showAlert = true;
+          this.announcementManagementList();
+        },
+        error: err => {
+          console.error(err);
+          this.alertMessage = 'No se pudo eliminar la convocatoria';
+          this.alertType = AlertType.Danger;
+          this.showAlert = true;
+        },
+      });
     }
   }
 }
