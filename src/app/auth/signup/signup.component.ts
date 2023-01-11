@@ -32,11 +32,14 @@ export class SignupComponent implements OnInit {
   confirmPasswordButonnIcon = 'lock';
   rfcValidated$: BehaviorSubject<boolean>;
   rfcValidatedExists$: BehaviorSubject<boolean>;
+  showMultisiteField: boolean;
+  showMultisiteAlert: boolean;
 
   constructor(private authService: AuthService, private router: Router) {
     this.signupForm = new FormGroup(
       {
-        name: new FormControl('', Validators.required),
+        name: new FormControl('FDE050318P80', Validators.required),
+        siteName: new FormControl('', { nonNullable: true }),
         email: new FormControl('', [Validators.email, Validators.required]),
         password: new FormControl('', [
           Validators.required,
@@ -48,6 +51,8 @@ export class SignupComponent implements OnInit {
     );
     this.rfcValidated$ = new BehaviorSubject(false);
     this.rfcValidatedExists$ = new BehaviorSubject(false);
+    this.showMultisiteField = false;
+    this.showMultisiteAlert = false;
   }
 
   ngOnInit(): void {
@@ -112,19 +117,36 @@ export class SignupComponent implements OnInit {
   }
 
   validateRFC(input: Event, control: AbstractControl<unknown, unknown>) {
-    this.rfcValidated$.next(false);
+    this.resetForm();
     validateRFC(input, control);
   }
 
   validateRFCExists(rfc: string) {
+    this.showMultisiteAlert = false;
     this.authService.validateRFCExists(rfc).subscribe({
       next: response => {
         this.rfcValidated$.next(true);
         this.rfcValidatedExists$.next(response);
+        this.showMultisiteAlert = true;
       },
       error: err => {
         console.error(err);
       },
     });
+  }
+
+  enableSiteNameField() {
+    this.showMultisiteField = true;
+    this.showMultisiteAlert = false;
+    this.signupForm.get('siteName')?.setValidators(Validators.required);
+    this.signupForm.markAllAsTouched();
+  }
+
+  private resetForm() {
+    this.rfcValidated$.next(false);
+    this.showMultisiteAlert = false;
+    this.showMultisiteField = false;
+    this.signupForm.get('siteName')?.reset();
+    this.signupForm.get('siteName')?.setValidators(null);
   }
 }
