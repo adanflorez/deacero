@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, firstValueFrom, map, startWith } from 'rxjs';
@@ -25,6 +25,7 @@ export class CallManagementTableComponent implements OnInit {
   showAlert: boolean;
   alertType: AlertType;
   alertMessage: string;
+  currentAnnouncementId: string;
 
   constructor(
     private announcementService: AnnouncementService,
@@ -42,6 +43,7 @@ export class CallManagementTableComponent implements OnInit {
     this.showAlert = false;
     this.alertType = AlertType.Success;
     this.alertMessage = '';
+    this.currentAnnouncementId = '';
   }
 
   ngOnInit(): void {
@@ -61,7 +63,7 @@ export class CallManagementTableComponent implements OnInit {
   search(text: string): Announcement[] {
     return this.announcements.filter(announcement => {
       return (
-        announcement.id?.toLowerCase().includes(text.toLowerCase()) ||
+        announcement.callId?.toLowerCase().includes(text.toLowerCase()) ||
         announcement.type?.toLowerCase().includes(text.toLowerCase()) ||
         announcement.year?.toLowerCase().includes(text.toLowerCase()) ||
         announcement.number?.toLowerCase().includes(text.toLowerCase()) ||
@@ -73,7 +75,7 @@ export class CallManagementTableComponent implements OnInit {
           .transform(announcement.endRegisterDate, 'YYYY-MM-dd')
           ?.toLowerCase()
           .includes(text.toLowerCase()) ||
-        announcement.bases?.toLowerCase().includes(text.toLowerCase()) ||
+        // announcement.bases?.toLowerCase().includes(text.toLowerCase()) ||
         announcement.status?.toLowerCase().includes(text.toLowerCase())
       );
     });
@@ -147,10 +149,19 @@ export class CallManagementTableComponent implements OnInit {
   }
 
   setForm(announcement: Announcement) {
+    this.currentAnnouncementId = announcement.id as string;
     this.announcementForm.setValue({
       type: announcement.type,
-      startDate: announcement.startDate,
-      endRegisterDate: announcement.endRegisterDate,
+      startDate: formatDate(
+        announcement.startDate as string,
+        'yyyy-MM-dd',
+        'en'
+      ),
+      endRegisterDate: formatDate(
+        announcement.endRegisterDate as string,
+        'yyyy-MM-dd',
+        'en'
+      ),
       // bases: announcement.bases || '',
     });
   }
@@ -158,7 +169,7 @@ export class CallManagementTableComponent implements OnInit {
   save() {
     this.modalService.dismissAll();
     const { startDate, type, endRegisterDate } = this.announcementForm.value;
-    if (this.isCreate) {
+    if (this.isCreate && this.announcementForm.valid) {
       this.announcementService
         .create(
           this.datePipe.transform(startDate, 'YYYY-MM-dd hh:mm:ss') as string,
@@ -179,6 +190,31 @@ export class CallManagementTableComponent implements OnInit {
           error: err => {
             console.error(err);
             this.alertMessage = 'No se pudo programar la convocatoria';
+            this.alertType = AlertType.Danger;
+            this.showAlert = true;
+          },
+        });
+    } else if (this.isEdit) {
+      this.announcementService
+        .edit(
+          this.currentAnnouncementId,
+          this.datePipe.transform(startDate, 'YYYY-MM-dd hh:mm:ss') as string,
+          this.datePipe.transform(
+            endRegisterDate,
+            'YYYY-MM-dd hh:mm:ss'
+          ) as string
+        )
+        .subscribe({
+          next: response => {
+            console.log(response);
+            this.alertMessage = 'Convocatoria editada';
+            this.alertType = AlertType.Success;
+            this.showAlert = true;
+            this.announcementManagementList();
+          },
+          error: err => {
+            console.error(err);
+            this.alertMessage = 'No se pudo editar la convocatoria';
             this.alertType = AlertType.Danger;
             this.showAlert = true;
           },

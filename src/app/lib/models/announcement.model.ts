@@ -1,5 +1,6 @@
 export default interface Announcement {
   id?: string;
+  callId?: string;
   type?: string;
   year?: string;
   number?: string;

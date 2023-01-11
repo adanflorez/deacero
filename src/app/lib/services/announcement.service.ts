@@ -19,7 +19,8 @@ export class AnnouncementService {
         const userManagement: Announcement[] = announcements.map(
           announcement => {
             return {
-              id: announcement.callId,
+              id: announcement.id,
+              callId: announcement.callId,
               type: announcement.type,
               year: announcement.year,
               number: announcement.callNumber,
@@ -39,6 +40,14 @@ export class AnnouncementService {
       initDate: startDate,
       endDate,
       typeId: Number(type),
+    });
+  }
+
+  edit(id: string, startDate: string, endDate: string): Observable<any> {
+    return this.http.put(this.apiAnnouncement, {
+      id: Number(id),
+      initDate: startDate,
+      endDate,
     });
   }
 }
