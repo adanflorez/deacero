@@ -1,0 +1,308 @@
+<div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  <h2>Convocatorias</h2>
+  <app-alert
+    [(show)]="showAlert"
+    [type]="alertType"
+    [message]="alertMessage"
+    [dismissible]="true"></app-alert>
+  <div class="d-flex flex-column flex-md-row justify-content-between">
+    <form>
+      <div class="mb-3 row">
+        <label
+          for="table-filtering-search"
+          class="col-xs-3 col-sm-auto col-form-label"
+          >Filtrar:</label
+        >
+        <div class="col-xs-3 col-sm-auto">
+          <input
+            id="table-filtering-search"
+            class="form-control"
+            type="text"
+            [formControl]="filter" />
+        </div>
+      </div>
+    </form>
+    <div class="d-block">
+      <button
+        class="btn btn-primary"
+        (click)="openModal(announcementAction, 'Create')">
+        Programar convocatoria
+      </button>
+    </div>
+  </div>
+  <div class="d-none d-lg-flex">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Año</th>
+          <th scope="col">Número</th>
+          <th scope="col">Fecha inicio</th>
+          <th scope="col">Fecha fin registro</th>
+          <!-- <th scope="col">Bases</th> -->
+          <th scope="col">Estatus</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let announcement of announcements$ | async; index as i">
+          <td>
+            <ngb-highlight
+              [result]="announcement.callId"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="announcement.type"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="announcement.year"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="announcement.number"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="announcement.startDate | date : 'YYYY-MM-dd'"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="announcement.endRegisterDate | date : 'YYYY-MM-dd'"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <!-- <td>
+            <ngb-highlight
+              [result]="announcement.bases"
+              [term]="filter.value"></ngb-highlight>
+          </td> -->
+          <td>
+            <ngb-highlight
+              [result]="announcement.status"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+          <td>
+            <button
+              *ngIf="announcement.status === 'Programada'"
+              class="btn btn-outline-primary"
+              (click)="
+                setForm(announcement); openModal(announcementAction, 'Edit')
+              ">
+              Editar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="d-block d-lg-none">
+  <div
+    class="bg-bright-gray border border-secondary rounded p-3 mb-4"
+    *ngFor="let announcement of announcements$ | async; index as i">
+    <table class="table table-striped mobile-table">
+      <tbody>
+        <tr>
+          <th style="width: 200px">ID</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.callId"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th style="width: 200">Tipo</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.type"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Año</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.year"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Número</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.number"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Fecha inicio</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.startDate | date : 'YYYY-MM-dd'"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Fecha fin registro</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.endRegisterDate | date : 'YYYY-MM-dd'"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <!-- <tr>
+          <th>Bases</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.bases"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr> -->
+        <tr>
+          <th>Estatus</th>
+          <td>
+            <ngb-highlight
+              [result]="announcement.status"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Acciones</th>
+          <td>
+            <button
+              *ngIf="announcement.status === 'Programada'"
+              class="btn btn-outline-primary"
+              (click)="
+                setForm(announcement); openModal(announcementAction, 'Edit')
+              ">
+              Editar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<ng-template #announcementAction let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      {{ modalStructure.title }} convocatoria
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="closeModal(modal)"></button>
+  </div>
+  <div class="modal-body">
+    <div class="d-grid gap-2 mb-3" *ngIf="isEdit || isDelete">
+      <button
+        class="btn btn-danger"
+        type="button"
+        (click)="openModal(confirmCreateAnnouncement, 'Delete')">
+        Eliminar convocatoria
+      </button>
+    </div>
+    <form [formGroup]="announcementForm">
+      <div class="mb-3" *ngIf="isCreate">
+        <label class="form-label" for="type">Tipo</label>
+        <select
+          class="form-select"
+          formControlName="type"
+          id="type"
+          [class.is-invalid]="
+            announcementF['type'].invalid &&
+            (announcementF['type'].dirty || announcementF['type'].touched)
+          ">
+          <option value="">Seleccionar</option>
+          <option value="1">Normal</option>
+          <option value="2">Extemporanea</option>
+        </select>
+        <app-form-error [control]="announcementF['type']"></app-form-error>
+      </div>
+      <div class="mb-3">
+        <label for="startDate" class="form-label">Fecha inicio</label>
+        <input
+          type="date"
+          class="form-control"
+          id="startDate"
+          formControlName="startDate"
+          [class.is-invalid]="
+            announcementF['startDate'].invalid &&
+            announcementF['startDate'].touched
+          " />
+        <app-form-error [control]="announcementF['startDate']"></app-form-error>
+      </div>
+      <div class="mb-3">
+        <label for="endRegisterDate" class="form-label">Fecha fin</label>
+        <input
+          type="date"
+          class="form-control"
+          id="endRegisterDate"
+          formControlName="endRegisterDate"
+          [class.is-invalid]="
+            announcementF['endRegisterDate'].invalid &&
+            announcementF['endRegisterDate'].touched
+          " />
+        <app-form-error
+          [control]="announcementF['endRegisterDate']"></app-form-error>
+      </div>
+      <!-- <div class="mb-3" *ngIf="isCreate">
+        <label for="bases" class="form-label">Bases</label>
+        <input
+          type="text"
+          class="form-control"
+          id="bases"
+          formControlName="bases"
+          [class.is-invalid]="
+            announcementF['bases'].invalid && announcementF['bases'].touched
+          " />
+        <app-form-error [control]="announcementF['bases']"></app-form-error>
+      </div> -->
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary me-2" (click)="modal.close()">
+      Cancelar
+    </button>
+    <button
+      *ngIf="isCreate"
+      class="btn btn-primary"
+      [disabled]="announcementForm.invalid"
+      (click)="openModal(confirmCreateAnnouncement)">
+      Programar
+    </button>
+    <button
+      *ngIf="isEdit || isDelete"
+      class="btn btn-primary"
+      (click)="openModal(confirmCreateAnnouncement)">
+      Guardar cambios
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #confirmCreateAnnouncement let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmación</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="closeModal(modal)"></button>
+  </div>
+  <div class="modal-body">
+    {{ modalStructure.confirmationMessage }}
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary me-2" (click)="modal.close()">
+      Cancelar
+    </button>
+    <button class="btn btn-primary" (click)="save()">Aceptar</button>
+  </div>
+</ng-template>

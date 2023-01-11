@@ -31,6 +31,15 @@ const Routing: Routes = [
     canActivate: [RoleGuard],
   },
   {
+    path: 'call-management',
+    loadChildren: () =>
+      import('./call-management/call-management.module').then(
+        m => m.CallManagementModule
+      ),
+    data: { role: 'ADMINISTRATOR' },
+    canActivate: [RoleGuard],
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full',
