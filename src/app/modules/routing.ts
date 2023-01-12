@@ -40,6 +40,15 @@ const Routing: Routes = [
     canActivate: [RoleGuard],
   },
   {
+    path: 'multisite-management',
+    loadChildren: () =>
+      import('./multisite-management/multisite-management.module').then(
+        m => m.MultisiteManagementModule
+      ),
+    data: { role: 'ADMINISTRATOR' },
+    canActivate: [RoleGuard],
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full',
