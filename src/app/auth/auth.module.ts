@@ -14,6 +14,7 @@ import { SignupComponent } from './signup/signup.component';
 import { CallComponent } from './call/call.component';
 import { ValidateComponent } from './validate/validate.component';
 import { AuthComponent } from './auth.component';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AuthComponent } from './auth.component';
     NavbarModule,
     FormErrorModule,
     DaButtonModule,
+    NgbAlertModule,
   ],
 })
 export class AuthModule {}

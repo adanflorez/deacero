@@ -17,18 +17,71 @@
         <h3 class="text-independence text-center">Pre - Registro de Acceso</h3>
         <form [formGroup]="signupForm">
           <div class="mb-3">
+            <div class="input-group has-validation">
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="RFC"
+                formControlName="name"
+                [class.is-invalid]="
+                  f['name'].invalid && (f['name'].dirty || f['name'].touched)
+                "
+                (input)="validateRFC($event, f['name'])" />
+              <button
+                class="btn btn-secondary"
+                type="button"
+                [disabled]="f['name'].invalid"
+                (click)="validateRFCExists(f['name'].value)">
+                Validar existencia
+              </button>
+              <div class="invalid-feedback">
+                <app-form-error [control]="f['name']"></app-form-error>
+              </div>
+            </div>
+            <div class="small">- Registro Federal de Contribuyentes</div>
+            <p *ngIf="rfcValidated$ | async" class="mt-2">
+              <ngb-alert
+                *ngIf="(rfcValidatedExists$ | async) && showMultisiteAlert"
+                type="warning"
+                [dismissible]="false">
+                El RFC <strong>{{ f['name'].value }}</strong> ya existe, ¿Desea
+                crear una organización de múltiples sedes/delegaciones?
+                <br />
+                <button
+                  class="btn btn-primary mt-2"
+                  (click)="enableSiteNameField()">
+                  Aceptar
+                </button>
+              </ngb-alert>
+              <ngb-alert
+                *ngIf="(rfcValidatedExists$ | async) === false"
+                type="success"
+                [dismissible]="false">
+                El RFC no se encuentra registrado
+              </ngb-alert>
+            </p>
+          </div>
+          <div
+            class="mb-3"
+            *ngIf="
+              (rfcValidated$ | async) &&
+              (rfcValidatedExists$ | async) &&
+              showMultisiteField
+            ">
             <input
               type="text"
               class="form-control"
-              id="name"
-              placeholder="RFC"
-              formControlName="name"
+              id="siteName"
+              placeholder="Nombre de la sede"
+              formControlName="siteName"
               [class.is-invalid]="
-                f['name'].invalid && (f['name'].dirty || f['name'].touched)
-              "
-              (change)="validateRFC($event, f['name'])" />
-            <app-form-error [control]="f['name']"></app-form-error>
-            <div class="small">- Registro Federal de Contribuyentes</div>
+                f['siteName'].invalid && f['siteName'].touched
+              " />
+            <div class="invalid-feedback">
+              <app-form-error [control]="f['siteName']"></app-form-error>
+            </div>
+            <div class="small">- El nombre de la sede</div>
           </div>
           <div class="mb-3">
             <input
@@ -134,7 +187,11 @@
             <button
               class="btn btn-primary"
               type="button"
-              [disabled]="signupForm.invalid"
+              [disabled]="
+                signupForm.invalid ||
+                (rfcValidated$ | async) === false ||
+                ((rfcValidatedExists$ | async) && !showMultisiteField)
+              "
               (click)="signup()">
               Enviar
             </button>
