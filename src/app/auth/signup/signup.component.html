@@ -187,7 +187,11 @@
             <button
               class="btn btn-primary"
               type="button"
-              [disabled]="signupForm.invalid"
+              [disabled]="
+                signupForm.invalid ||
+                (rfcValidated$ | async) === false ||
+                ((rfcValidatedExists$ | async) && !showMultisiteField)
+              "
               (click)="signup()">
               Enviar
             </button>

@@ -80,7 +80,8 @@ export class SignupComponent implements OnInit {
       .signup(
         this.f['email'].value,
         this.f['password'].value,
-        this.f['name'].value
+        this.f['name'].value,
+        this.f['siteName'].value
       )
       .subscribe({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

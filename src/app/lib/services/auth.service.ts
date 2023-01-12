@@ -19,13 +19,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  signup(username: string, password: string, rfc: string) {
+  signup(username: string, password: string, rfc: string, siteName?: string) {
     return this.http.post(
       this.apiRegister,
       {
         correoElectronico: username,
         rfc,
         clave: password,
+        nameSite: siteName,
       },
       this.byPASS
     );
