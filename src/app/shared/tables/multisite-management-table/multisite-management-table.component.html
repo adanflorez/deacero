@@ -57,3 +57,49 @@
     </table>
   </div>
 </div>
+<div class="d-block d-lg-none">
+  <div
+    class="bg-bright-gray border border-secondary rounded p-3 mb-4"
+    *ngFor="let site of sites$ | async; index as i">
+    <table class="table table-striped mobile-table">
+      <tbody>
+        <tr>
+          <th style="width: 200px">RFC</th>
+          <td>
+            <ngb-highlight
+              [result]="site.rfc"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th style="width: 200">Razón social de la OSC</th>
+          <td>
+            <ngb-highlight
+              [result]="site.businessName"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Nombre de la sede</th>
+          <td>
+            <ngb-highlight
+              [result]="site.siteName"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Usuario</th>
+          <td>
+            <ngb-highlight
+              [result]="site.user"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Acciones</th>
+          <td>boton</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
