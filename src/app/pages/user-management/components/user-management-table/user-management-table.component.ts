@@ -12,9 +12,9 @@ import { UserRolePipe } from 'src/app/lib/pipes/user-role.pipe';
 import { AlertType } from 'src/app/lib/enums/alert-type';
 import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
 import { PASSWORD_PATERN } from 'src/app/lib/constants';
-import UserManagement from 'src/app/lib/models/user-management.model';
 import { UserService } from 'src/app/lib/services/user.service';
 import { UserStatusPipe } from 'src/app/lib/pipes/user-status.pipe';
+import { UserModel } from 'src/domain/models/user.model';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare let window: any;
@@ -26,8 +26,8 @@ declare let window: any;
   providers: [UserStatusPipe, UserRolePipe],
 })
 export class UserManagementTableComponent implements OnInit, AfterViewInit {
-  users$: Observable<UserManagement[]>;
-  users: UserManagement[];
+  users$: Observable<UserModel[]>;
+  users: UserModel[];
   filter = new FormControl('', { nonNullable: true });
   showModal: boolean;
   activateDeactivateMessage: string;
@@ -107,11 +107,11 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
     );
   }
 
-  search(text: string): UserManagement[] {
+  search(text: string): UserModel[] {
     return this.users.filter(user => {
       return (
-        user.name.toLowerCase().includes(text.toLowerCase()) ||
-        user.rfc.toLowerCase().includes(text.toLowerCase()) ||
+        user.name?.toLowerCase().includes(text.toLowerCase()) ||
+        user.rfc?.toLowerCase().includes(text.toLowerCase()) ||
         this.userRolePipe
           .transform(user.role)
           .toLowerCase()

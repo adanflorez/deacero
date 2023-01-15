@@ -11,6 +11,10 @@ import { TokenInterceptor } from './lib/interceptors/token.interceptor';
 import { NgxMaskModule } from 'ngx-mask';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { UserImplementationRepository } from 'src/data/repositories/user/user-implementation.repository';
+import { UserRepository } from 'src/domain/repositories/user.repository';
+import { GetUserUseCases } from 'src/domain/usecases/user/get-user.usecase';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -24,6 +28,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    {
+      provide: GetUserUseCases,
+      useFactory: (userRepo: UserRepository) => new GetUserUseCases(userRepo),
+      deps: [UserRepository],
+    },
+    {
+      provide: UserRepository,
+      useClass: UserImplementationRepository,
+    },
   ],
   bootstrap: [AppComponent],
 })

@@ -1,9 +1,13 @@
-import UserManagement from 'src/app/lib/models/user-management.model';
-import { Observable, map } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 import { environment } from 'src/environments/environment';
+
 import Response from '../models/response.model';
+
+import { UserModel } from 'src/domain/models/user.model';
+import { GetUserUseCases } from 'src/domain/usecases/user/get-user.usecase';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +16,10 @@ export class UserService {
   private apiApplication = environment.apiApplication;
   private apiAdmin = environment.apiAdmin;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private getUserUseCases: GetUserUseCases
+  ) {}
 
   updateOSC(form: unknown): Observable<Response<unknown>> {
     return this.http.post<Response<unknown>>(`${this.apiApplication}`, form);
@@ -28,21 +35,8 @@ export class UserService {
     );
   }
 
-  userManagementList(): Observable<any> {
-    return this.http.get(`${this.apiAdmin}user`).pipe(
-      map((response: any) => {
-        const users: Array<any> = response.data.users;
-        const userManagement: UserManagement[] = users.map(user => {
-          return {
-            name: user.email,
-            rfc: user.businessName,
-            role: user.rol,
-            status: user.status,
-          };
-        });
-        return userManagement;
-      })
-    );
+  userManagementList(): Observable<UserModel[]> {
+    return this.getUserUseCases.list();
   }
 
   createUser(email: string, password: string): Observable<any> {
