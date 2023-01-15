@@ -20,75 +20,73 @@
       </div>
     </div>
   </div>
-  <ng-container *ngIf="f['locationQuestion'].value">
-    <div class="col-12 col-md-4">
-      <div class="mb-3">
-        <label for="street" class="form-label">Calle y número</label>
-        <input
-          type="text"
-          class="form-control"
-          id="street"
-          placeholder="Calle y número"
-          formControlName="street"
-          [class.is-invalid]="f['street'].invalid && f['street'].touched" />
-        <app-form-error [control]="f['street']"></app-form-error>
-      </div>
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="street" class="form-label">Calle y número</label>
+      <input
+        type="text"
+        class="form-control"
+        id="street"
+        placeholder="Calle y número"
+        formControlName="street"
+        [class.is-invalid]="f['street'].invalid && f['street'].touched" />
+      <app-form-error [control]="f['street']"></app-form-error>
     </div>
-    <div class="col-12 col-md-4">
-      <div class="mb-3">
-        <label for="colony" class="form-label">Colonia</label>
-        <input
-          type="text"
-          class="form-control"
-          id="colony"
-          placeholder="Colonia"
-          formControlName="colony"
-          [class.is-invalid]="f['colony'].invalid && f['colony'].touched" />
-        <app-form-error [control]="f['colony']"></app-form-error>
-      </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="colony" class="form-label">Colonia</label>
+      <input
+        type="text"
+        class="form-control"
+        id="colony"
+        placeholder="Colonia"
+        formControlName="colony"
+        [class.is-invalid]="f['colony'].invalid && f['colony'].touched" />
+      <app-form-error [control]="f['colony']"></app-form-error>
     </div>
-    <div class="col-12 col-md-4">
-      <div class="mb-3">
-        <label for="town" class="form-label">Municipio</label>
-        <input
-          type="text"
-          class="form-control"
-          id="town"
-          placeholder="Municipio"
-          formControlName="town"
-          [class.is-invalid]="f['town'].invalid && f['town'].touched" />
-        <app-form-error [control]="f['town']"></app-form-error>
-      </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="mb-3">
+      <label for="town" class="form-label">Municipio</label>
+      <input
+        type="text"
+        class="form-control"
+        id="town"
+        placeholder="Municipio"
+        formControlName="town"
+        [class.is-invalid]="f['town'].invalid && f['town'].touched" />
+      <app-form-error [control]="f['town']"></app-form-error>
     </div>
-    <div class="col-12 col-md-6">
-      <div class="mb-3">
-        <label for="state" class="form-label">Estado</label>
-        <input
-          type="text"
-          class="form-control"
-          id="state"
-          placeholder="Estado"
-          formControlName="state"
-          [class.is-invalid]="f['state'].invalid && f['state'].touched" />
-        <app-form-error [control]="f['state']"></app-form-error>
-      </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="state" class="form-label">Estado</label>
+      <input
+        type="text"
+        class="form-control"
+        id="state"
+        placeholder="Estado"
+        formControlName="state"
+        [class.is-invalid]="f['state'].invalid && f['state'].touched" />
+      <app-form-error [control]="f['state']"></app-form-error>
     </div>
-    <div class="col-12 col-md-6">
-      <div class="mb-3">
-        <label for="postalCode" class="form-label">Código postal</label>
-        <input
-          type="text"
-          class="form-control"
-          id="postalCode"
-          placeholder="Código postal"
-          formControlName="postalCode"
-          [class.is-invalid]="
-            f['postalCode'].invalid && f['postalCode'].touched
-          " />
-        <app-form-error [control]="f['postalCode']"></app-form-error>
-      </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="postalCode" class="form-label">Código postal</label>
+      <input
+        type="text"
+        class="form-control"
+        id="postalCode"
+        placeholder="Código postal"
+        formControlName="postalCode"
+        [class.is-invalid]="
+          f['postalCode'].invalid && f['postalCode'].touched
+        " />
+      <app-form-error [control]="f['postalCode']"></app-form-error>
     </div>
-  </ng-container>
+  </div>
   <div class="col-12 col-md-6">
     <div class="mb-3">
       <label for="video" class="form-label"
