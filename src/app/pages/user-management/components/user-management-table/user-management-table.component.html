@@ -42,7 +42,7 @@
         <tr *ngFor="let user of users$ | async; index as i">
           <td>
             <ngb-highlight
-              [result]="user.name"
+              [result]="user.email"
               [term]="filter.value"></ngb-highlight>
           </td>
           <td>
@@ -82,7 +82,7 @@
           <th style="width: 200px">Usuario</th>
           <td>
             <ngb-highlight
-              [result]="user.name"
+              [result]="user.email"
               [term]="filter.value"></ngb-highlight>
           </td>
         </tr>
@@ -130,14 +130,14 @@
     *ngIf="!user.status; else active"
     type="button"
     class="btn btn-sm btn-success"
-    (click)="openModal(user.name, true)">
+    (click)="openModal(user.email, true)">
     Activar
   </button>
   <ng-template #active>
     <button
       type="button"
       class="btn btn-sm btn-danger"
-      (click)="openModal(user.name, false)">
+      (click)="openModal(user.email, false)">
       Desactivar
     </button>
   </ng-template>
