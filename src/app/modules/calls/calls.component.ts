@@ -386,6 +386,9 @@ export class CallsComponent implements OnInit, OnDestroy {
       youtube: new FormControl(this.call?.youtube, [
         Validators.pattern(URL_PATTERN),
       ]),
+      webpage: new FormControl(this.call?.youtube, [
+        Validators.pattern(URL_PATTERN),
+      ]),
       ethicalCode: new FormControl(this.call?.ethicalCode, Validators.required),
       governanceManual: new FormControl(
         this.call?.governanceManual,

@@ -5,5 +5,6 @@ export interface SocialMediaForm {
   twitter?: string;
   tiktok?: string;
   youtube?: string;
+  webpage?: string;
   comment?: string;
 }

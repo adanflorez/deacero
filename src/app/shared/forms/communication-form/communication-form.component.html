@@ -94,4 +94,19 @@
         [errors]="{ pattern: 'Url no válida' }"></app-form-error>
     </div>
   </div>
+  <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="webpage" class="form-label">Página web</label>
+      <input
+        type="text"
+        class="form-control"
+        id="webpage"
+        placeholder="https://..."
+        formControlName="webpage"
+        [class.is-invalid]="f['webpage'].invalid && f['webpage'].touched" />
+      <app-form-error
+        [control]="f['webpage']"
+        [errors]="{ pattern: 'Url no válida' }"></app-form-error>
+    </div>
+  </div>
 </div>

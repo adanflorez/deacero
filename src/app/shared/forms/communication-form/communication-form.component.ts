@@ -63,6 +63,9 @@ export class CommunicationFormComponent implements OnInit, OnDestroy {
       youtube: new FormControl(this.defaultValues.youtube, [
         Validators.pattern(URL_PATTERN),
       ]),
+      webpage: new FormControl(this.defaultValues.webpage, [
+        Validators.pattern(URL_PATTERN),
+      ]),
     });
     this.subscribeToForm();
   }
