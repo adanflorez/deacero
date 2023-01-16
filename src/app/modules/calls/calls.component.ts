@@ -1,8 +1,7 @@
-import { UserService } from 'src/app/core/services/user.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import {
   MULTIPLE_EMAIL_PATTERN,
   OBJECTIVES,
@@ -10,12 +9,11 @@ import {
   RATING,
   URL_PATTERN,
 } from 'src/app/core/constants';
-import Member from 'src/app/core/models/member.model';
 import ProjectBudget from 'src/app/core/models/project-budget.model';
-import Remuneration from 'src/app/core/models/remuneration.model';
 import Response from 'src/app/core/models/response.model';
-import { MultimediaService } from 'src/app/core/services/multimedia.service';
 import { CallService } from 'src/app/core/services/call.service';
+import { MultimediaService } from 'src/app/core/services/multimedia.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-calls',
@@ -25,7 +23,6 @@ import { CallService } from 'src/app/core/services/call.service';
 export class CallsComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
   form!: FormGroup;
-  remunerations: Remuneration[] = [];
   groups: string[] = [];
   categories = [
     'Alimentación',
@@ -120,9 +117,6 @@ export class CallsComponent implements OnInit, OnDestroy {
   get isValidForm(): boolean {
     return (
       this.form.valid &&
-      (this.f['remunerationQuestion'].value
-        ? this.remunerations.length > 0
-        : true) &&
       this.contributions.length > 0 &&
       this.conversions.length > 0 &&
       this.donations.length > 0
@@ -131,13 +125,10 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private parseResponse(res: any) {
-    this.remunerations = res?.remunerations.tableRemunerations || [];
     this.contributions = res?.projectBudget.organizationContribution || [];
     this.conversions = res?.projectBudget.jointVenture || [];
     this.donations = res?.projectBudget.donationDeaceroFoundation || [];
     this.call = {
-      // Remunerations
-      remunerationQuestion: res?.remunerations.workInYourOrganizationIsPaid,
       // General project data
       projectName: res?.generalProjectData.projectName,
       category: res?.generalProjectData.category
@@ -244,11 +235,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   private initForm() {
     this.form = new FormGroup({
-      remunerationQuestion: new FormControl(
-        this.call?.remunerationQuestion == null
-          ? true
-          : this.call?.remunerationQuestion
-      ),
       projectName: new FormControl(this.call?.projectName, [
         Validators.required,
       ]),
@@ -427,7 +413,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.handleLocation();
     this.handleAboutCall();
     this.handleObjectives();
-    this.handleRemunerationQuestion();
     this.initDocuments();
     this.changeCategory();
     this.form.markAllAsTouched();
@@ -657,17 +642,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.unsubscribe.push(sub as Subscription);
   }
 
-  private handleRemunerationQuestion() {
-    const sub = this.form
-      .get('remunerationQuestion')
-      ?.valueChanges.subscribe(res => {
-        if (!res) {
-          this.remunerations = [];
-        }
-      });
-    this.unsubscribe.push(sub as Subscription);
-  }
-
   uploadDocument(e: Event, control: string, isImage = false) {
     if (!this.fileValidation(control, isImage)) return;
     const formData = new FormData();
@@ -728,7 +702,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   save(modal?: unknown, updateAndSave?: boolean) {
     const {
-      remunerationQuestion,
       projectName,
       category,
       locationQuestion,
@@ -811,10 +784,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     } = this.form.value;
 
     const body = {
-      remunerations: {
-        workInYourOrganizationIsPaid: remunerationQuestion,
-        tableRemunerations: this.remunerations,
-      },
       generalProjectData: {
         projectName: projectName,
         category: [category],

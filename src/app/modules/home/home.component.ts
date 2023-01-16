@@ -63,6 +63,12 @@ export class HomeComponent implements OnInit {
               members: res.data.governingBody.membersOfTheGoverning,
               meetings: res.data.governingBody.numberOfMeetingsPerYear,
             },
+            remuneration: {
+              comment: res.data.remunerations.comments,
+              remunerationQuestion:
+                res.data.remunerations.workInYourOrganizationIsPaid,
+              remunerations: res.data.remunerations.tableRemunerations,
+            },
             generalData: {
               rfc: res.data.generalData.RFC,
               emails: res.data.generalData.email,
@@ -149,6 +155,11 @@ export class HomeComponent implements OnInit {
         boardRenewalFrequency: this.formData.governingBody?.renewalFrequency,
         membersOfTheGoverning: this.formData.governingBody?.members,
         numberOfMeetingsPerYear: this.formData.governingBody?.meetings,
+      },
+      remunerations: {
+        workInYourOrganizationIsPaid:
+          this.formData.remuneration?.remunerationQuestion,
+        tableRemunerations: this.formData.remuneration?.remunerations,
       },
       generalData: {
         RFC: this.formData.generalData?.rfc,

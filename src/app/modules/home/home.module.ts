@@ -9,6 +9,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { AlertModule } from 'src/app/shared/alert/alert.module';
+import { GoverningBodyModule } from 'src/app/shared/forms/governing-body/governing-body.module';
+import { RemunerationFormModule } from 'src/app/shared/forms/remuneration-form/remuneration-form.module';
 import { FundManagerFormModule } from 'src/app/shared/forms/fund-manager-form/fund-manager-form.module';
 import { GeneralDataFormModule } from 'src/app/shared/forms/general-data-form/general-data-form.module';
 import { FormErrorModule } from 'src/app/shared/form-error/form-error.module';
@@ -18,7 +20,6 @@ import { DecentWorkFormModule } from 'src/app/shared/forms/decent-work-form/dece
 
 import { ProductTableComponent } from './components/product-table/product-table.component';
 import { DonationsTableComponent } from './components/donations-table/donations-table.component';
-import { GoverningBodyModule } from 'src/app/shared/forms/governing-body/governing-body.module';
 
 @NgModule({
   declarations: [HomeComponent, ProductTableComponent, DonationsTableComponent],
@@ -38,6 +39,7 @@ import { GoverningBodyModule } from 'src/app/shared/forms/governing-body/governi
     StrategicAlliancesFormModule,
     DecentWorkFormModule,
     GoverningBodyModule,
+    RemunerationFormModule,
   ],
 })
 export class HomeModule {}

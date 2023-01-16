@@ -17,6 +17,16 @@
         members: formData.governingBody?.members,
         comment: formData.governingBody?.comment
       }"></app-governing-body>
+    <hr />
+    <app-remuneration-form
+      [updateParentModel]="updateData"
+      [disable]="(infoSaved$ | async)!"
+      [defaultValues]="{
+        remunerationQuestion: formData.remuneration?.remunerationQuestion,
+        comment: formData.remuneration?.comment,
+        remunerations: formData.remuneration?.remunerations
+      }"></app-remuneration-form>
+    <hr />
     <app-general-data-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
