@@ -15,6 +15,7 @@ import FormValid from 'src/app/core/models/form-valid.model';
 import Product from 'src/app/core/models/product.model';
 
 import { StrategicAlliancesForm } from './domain';
+import { StrategicAllianceActivity } from 'src/app/core/models/strategic-alliances-activity.model';
 
 @Component({
   selector: 'app-strategic-alliances-form',
@@ -36,6 +37,7 @@ export class StrategicAlliancesFormComponent
   showDonationsTable: boolean;
   donations: Donation[];
   products: Product[];
+  strategicAlliancesActivities: StrategicAllianceActivity[];
 
   private unsubscribe: Subscription[] = [];
 
@@ -46,6 +48,7 @@ export class StrategicAlliancesFormComponent
     this.form = new FormGroup({});
     this.defaultValues = {};
     this.disable = false;
+    this.strategicAlliancesActivities = [];
   }
 
   ngOnInit(): void {
@@ -84,7 +87,10 @@ export class StrategicAlliancesFormComponent
       valid:
         this.form.valid &&
         this.products.length > 0 &&
-        (this.f['previousDonations'].value ? this.donations.length > 0 : true),
+        (this.f['previousDonations'].value
+          ? this.donations.length > 0
+          : true) &&
+        this.strategicAlliancesActivities.length >= 5,
     };
   }
 
@@ -101,10 +107,6 @@ export class StrategicAlliancesFormComponent
         Validators.required
       ),
       previousDonations: new FormControl(true),
-      strategicalAlliances: new FormControl(
-        this.defaultValues.strategicalAlliances,
-        Validators.required
-      ),
     });
     this.subscribeToForm();
     this.subscribeToIssues();
@@ -153,6 +155,7 @@ export class StrategicAlliancesFormComponent
       ...this.form.value,
       products: this.products,
       donations: this.donations,
+      strategicalAlliances: this.strategicAlliancesActivities,
     };
     this.updateParentModel(data, this.isValidForm);
   }
@@ -163,6 +166,20 @@ export class StrategicAlliancesFormComponent
       ...this.form.value,
       products: this.products,
       donations: this.donations,
+      strategicalAlliances: this.strategicAlliancesActivities,
+    };
+    this.updateParentModel(data, this.isValidForm);
+  }
+
+  updateStrategicAlliancesActivities(
+    strategicAlliancesActivities: StrategicAllianceActivity[]
+  ) {
+    this.strategicAlliancesActivities = strategicAlliancesActivities;
+    const data = {
+      ...this.form.value,
+      products: this.products,
+      donations: this.donations,
+      strategicalAlliances: this.strategicAlliancesActivities,
     };
     this.updateParentModel(data, this.isValidForm);
   }
