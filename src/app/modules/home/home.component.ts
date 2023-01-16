@@ -57,6 +57,12 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (res: any) => {
           this.formData = {
+            governingBody: {
+              comment: res.data.governingBody.comments,
+              renewalFrequency: res.data.governingBody.boardRenewalFrequency,
+              members: res.data.governingBody.membersOfTheGoverning,
+              meetings: res.data.governingBody.numberOfMeetingsPerYear,
+            },
             generalData: {
               rfc: res.data.generalData.RFC,
               emails: res.data.generalData.email,
@@ -139,6 +145,11 @@ export class HomeComponent implements OnInit {
 
   update() {
     const form = {
+      governingBody: {
+        boardRenewalFrequency: this.formData.governingBody?.renewalFrequency,
+        membersOfTheGoverning: this.formData.governingBody?.members,
+        numberOfMeetingsPerYear: this.formData.governingBody?.meetings,
+      },
       generalData: {
         RFC: this.formData.generalData?.rfc,
         email: this.formData.generalData?.emails,

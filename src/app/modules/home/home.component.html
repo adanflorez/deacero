@@ -8,6 +8,15 @@
     [message]="alertMessage"
     [dismissible]="true"></app-alert>
   <ng-container *ngIf="!loading">
+    <app-governing-body
+      [updateParentModel]="updateData"
+      [disable]="(infoSaved$ | async)!"
+      [defaultValues]="{
+        meetings: formData.governingBody?.meetings,
+        renewalFrequency: formData.governingBody?.renewalFrequency,
+        members: formData.governingBody?.members,
+        comment: formData.governingBody?.comment
+      }"></app-governing-body>
     <app-general-data-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"

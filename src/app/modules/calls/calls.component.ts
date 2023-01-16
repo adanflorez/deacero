@@ -25,7 +25,6 @@ import { CallService } from 'src/app/core/services/call.service';
 export class CallsComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
   form!: FormGroup;
-  members: Member[] = [];
   remunerations: Remuneration[] = [];
   groups: string[] = [];
   categories = [
@@ -121,7 +120,6 @@ export class CallsComponent implements OnInit, OnDestroy {
   get isValidForm(): boolean {
     return (
       this.form.valid &&
-      this.members.length > 0 &&
       (this.f['remunerationQuestion'].value
         ? this.remunerations.length > 0
         : true) &&
@@ -133,15 +131,11 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private parseResponse(res: any) {
-    this.members = res?.governingBody.membersOfTheGoverning || [];
     this.remunerations = res?.remunerations.tableRemunerations || [];
     this.contributions = res?.projectBudget.organizationContribution || [];
     this.conversions = res?.projectBudget.jointVenture || [];
     this.donations = res?.projectBudget.donationDeaceroFoundation || [];
     this.call = {
-      // Governing Body
-      meetings: res?.governingBody.numberOfMeetingsPerYear,
-      renewalFrequency: res?.governingBody.boardRenewalFrequency,
       // Remunerations
       remunerationQuestion: res?.remunerations.workInYourOrganizationIsPaid,
       // General project data
@@ -250,14 +244,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   private initForm() {
     this.form = new FormGroup({
-      meetings: new FormControl(this.call?.meetings, [
-        Validators.required,
-        Validators.pattern(ONLY_NUMBERS_PATTERN),
-      ]),
-      renewalFrequency: new FormControl(this.call?.renewalFrequency, [
-        Validators.required,
-        Validators.pattern(ONLY_NUMBERS_PATTERN),
-      ]),
       remunerationQuestion: new FormControl(
         this.call?.remunerationQuestion == null
           ? true
@@ -742,8 +728,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   save(modal?: unknown, updateAndSave?: boolean) {
     const {
-      meetings,
-      renewalFrequency,
       remunerationQuestion,
       projectName,
       category,
@@ -827,11 +811,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     } = this.form.value;
 
     const body = {
-      governingBody: {
-        membersOfTheGoverning: this.members,
-        numberOfMeetingsPerYear: meetings,
-        boardRenewalFrequency: renewalFrequency,
-      },
       remunerations: {
         workInYourOrganizationIsPaid: remunerationQuestion,
         tableRemunerations: this.remunerations,

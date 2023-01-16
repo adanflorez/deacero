@@ -18,6 +18,7 @@ import { DecentWorkFormModule } from 'src/app/shared/forms/decent-work-form/dece
 
 import { ProductTableComponent } from './components/product-table/product-table.component';
 import { DonationsTableComponent } from './components/donations-table/donations-table.component';
+import { GoverningBodyModule } from 'src/app/shared/forms/governing-body/governing-body.module';
 
 @NgModule({
   declarations: [HomeComponent, ProductTableComponent, DonationsTableComponent],
@@ -36,6 +37,7 @@ import { DonationsTableComponent } from './components/donations-table/donations-
     OrganizationalInformationFormModule,
     StrategicAlliancesFormModule,
     DecentWorkFormModule,
+    GoverningBodyModule,
   ],
 })
 export class HomeModule {}
