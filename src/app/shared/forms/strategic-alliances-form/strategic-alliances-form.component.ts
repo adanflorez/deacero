@@ -54,6 +54,7 @@ export class StrategicAlliancesFormComponent
     this.initForm();
     this.initDonations();
     this.initProducts();
+    this.initStrategicAlliancesActivities();
     this.updateParentModel({}, this.isValidForm);
   }
 
@@ -74,6 +75,12 @@ export class StrategicAlliancesFormComponent
 
   initProducts() {
     this.products = (this.defaultValues?.products as Product[]) || [];
+  }
+
+  initStrategicAlliancesActivities() {
+    this.strategicAlliancesActivities =
+      (this.defaultValues
+        ?.strategicalAlliances as StrategicAllianceActivity[]) || [];
   }
 
   get f() {
