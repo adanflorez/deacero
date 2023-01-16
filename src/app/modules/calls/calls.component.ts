@@ -389,19 +389,13 @@ export class CallsComponent implements OnInit, OnDestroy {
       webpage: new FormControl(this.call?.youtube, [
         Validators.pattern(URL_PATTERN),
       ]),
-      ethicalCode: new FormControl(this.call?.ethicalCode, Validators.required),
-      governanceManual: new FormControl(
-        this.call?.governanceManual,
-        Validators.required
-      ),
+      ethicalCode: new FormControl(this.call?.ethicalCode),
+      governanceManual: new FormControl(this.call?.governanceManual),
       timelineActivities: new FormControl(
         this.call?.timelineActivities,
         Validators.required
       ),
-      workWithMinors: new FormControl(
-        this.call?.workWithMinors,
-        Validators.required
-      ),
+      workWithMinors: new FormControl(this.call?.workWithMinors),
       officialLetterOfAuthorizationOfDonees: new FormControl(
         this.call?.officialLetterOfAuthorizationOfDonees,
         Validators.required
@@ -418,13 +412,9 @@ export class CallsComponent implements OnInit, OnDestroy {
         this.call?.constituentAct,
         Validators.required
       ),
-      mostRecentMeeting: new FormControl(
-        this.call?.mostRecentMeeting,
-        Validators.required
-      ),
+      mostRecentMeeting: new FormControl(this.call?.mostRecentMeeting),
       legalRepresentativesPower: new FormControl(
-        this.call?.legalRepresentativesPower,
-        Validators.required
+        this.call?.legalRepresentativesPower
       ),
       legalRepresentativesId: new FormControl(
         this.call?.legalRepresentativesId,
