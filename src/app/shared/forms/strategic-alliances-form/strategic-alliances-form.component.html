@@ -122,23 +122,12 @@
       (donationsList)="updateDonations($event)"></app-donations-table>
   </div>
   <div class="col-12">
-    <app-strategic-alliances-activities-table></app-strategic-alliances-activities-table>
-    <!-- <div class="mb-3">
-      <label for="strategicalAlliances" class="form-label"
-        >En fundación DEACERO A.C., buscamos generar alianzas estratégicas
-        (ganar/ganar) para beneficio mutuo. A continuación, enlista por lo menos
-        5 actividades específicas que permitan lograrlo.</label
-      >
-      <textarea
-        class="form-control"
-        id="strategicalAlliances"
-        rows="3"
-        formControlName="strategicalAlliances"
-        [class.is-invalid]="
-          f['strategicalAlliances'].invalid && f['strategicalAlliances'].touched
-        "></textarea>
-      <app-form-error [control]="f['strategicalAlliances']"></app-form-error>
-    </div> -->
+    <app-strategic-alliances-activities-table
+      [records]="strategicAlliancesActivities"
+      [readOnly]="disable"
+      (recordChange)="
+        updateStrategicAlliancesActivities($event)
+      "></app-strategic-alliances-activities-table>
   </div>
   <div class="col-12">
     <app-product-table

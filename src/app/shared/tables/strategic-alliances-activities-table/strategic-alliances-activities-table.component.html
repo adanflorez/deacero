@@ -1,1 +1,88 @@
-<p>strategic-alliances-activities-table works!</p>
+<h5>
+  En fundación DEACERO A.C., buscamos generar alianzas estratégicas
+  (ganar/ganar) para beneficio mutuo. A continuación, enlista por lo menos 5
+  actividades específicas que permitan lograrlo.
+</h5>
+<div class="d-none d-md-flex">
+  <table class="table table-light table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Actividad</th>
+        <th scope="col" style="width: 100px">*</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let record of records">
+        <td>{{ record.activity }}</td>
+        <td>
+          <ng-container *ngIf="!isEditMode && !readOnly">
+            <button
+              class="btn btn-secondary p-1 me-2"
+              (click)="loadRecordInFields(record.id, modal)">
+              <img height="18" src="/assets/icons/edit.png" alt="edit" />
+            </button>
+            <button
+              class="btn btn-secondary p-1"
+              (click)="removeRecord(record.id)">
+              <img height="18" src="/assets/icons/trash.png" alt="trash" />
+            </button>
+          </ng-container>
+        </td>
+      </tr>
+      <tr *ngIf="!readOnly">
+        <td colspan="6">
+          <button class="btn btn-primary" (click)="open(modal)">
+            Agregar registro
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Registro</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" class="px-4">
+      <label for="activity" class="form-label">Actividad</label>
+      <input
+        type="text"
+        class="form-control mb-4"
+        id="activity"
+        placeholder="Actividad"
+        formControlName="activity" />
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      class="btn btn-secondary me-2"
+      (click)="cancelEdit(); modal.close()">
+      Cancelar
+    </button>
+    <ng-container *ngIf="isEditMode; else save">
+      <button
+        class="btn btn-primary"
+        (click)="editRecord(); modal.close()"
+        [disabled]="!validForm">
+        Editar
+      </button>
+    </ng-container>
+    <ng-template #save>
+      <button
+        *ngIf="!isEditMode"
+        class="btn btn-primary"
+        (click)="addRecord(); modal.close()"
+        [disabled]="!validForm">
+        Guardar
+      </button>
+    </ng-template>
+  </div>
+</ng-template>
