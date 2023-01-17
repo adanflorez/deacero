@@ -19,6 +19,7 @@ export class LocationFormComponent implements OnInit, OnDestroy {
   ) => void = () => {};
   @Input() defaultValues: LocationForm;
   form: FormGroup;
+  locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
   alertType: AlertType = AlertType.Warning;
 
   private unsubscribe: Subscription[] = [];
@@ -67,6 +68,7 @@ export class LocationFormComponent implements OnInit, OnDestroy {
       ),
       whichMedia: new FormControl(this.defaultValues.whichMedia),
     });
+    this.handleLocation();
     this.subscribeToForm();
   }
 
@@ -84,5 +86,23 @@ export class LocationFormComponent implements OnInit, OnDestroy {
       name: CallSection.LOCATION,
       valid: this.form.valid,
     };
+  }
+
+  private handleLocation() {
+    const locationQuestionSub = this.form
+      .get('locationQuestion')
+      ?.valueChanges.subscribe(res => {
+        if (!res) {
+          this.locationFields.forEach(field => {
+            this.form.get(field)?.setValidators(Validators.required);
+            this.form.get(field)?.reset();
+          });
+        } else {
+          this.locationFields.forEach(field => {
+            this.form.get(field)?.clearValidators();
+          });
+        }
+      });
+    this.unsubscribe.push(locationQuestionSub as Subscription);
   }
 }
