@@ -55,7 +55,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     'Salud mental',
   ];
   rating = RATING;
-  // locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
+  locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
   objectivesOptions = OBJECTIVES;
   objectivesFields = [
     'povertyEnd',
@@ -445,6 +445,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     });
 
     this.handleCategory();
+    this.handleLocation();
     this.handleAboutCall();
     this.handleObjectives();
     this.handleRemunerationQuestion();
@@ -619,6 +620,34 @@ export class CallsComponent implements OnInit, OnDestroy {
       .get('category')
       ?.valueChanges.subscribe(() => this.changeCategory());
     this.unsubscribe.push(sub as Subscription);
+  }
+
+  private handleLocation() {
+    if (!this.f.locationQuestion.value) {
+      this.locationFields.forEach(field => {
+        this.form.get(field)?.setValidators(Validators.required);
+        this.form.get(field)?.reset();
+      });
+    } else {
+      this.locationFields.forEach(field => {
+        this.form.get(field)?.clearValidators();
+      });
+    }
+    const locationQuestionSub = this.form
+      .get('locationQuestion')
+      ?.valueChanges.subscribe(res => {
+        if (!res) {
+          this.locationFields.forEach(field => {
+            this.form.get(field)?.setValidators(Validators.required);
+            this.form.get(field)?.reset();
+          });
+        } else {
+          this.locationFields.forEach(field => {
+            this.form.get(field)?.clearValidators();
+          });
+        }
+      });
+    this.unsubscribe.push(locationQuestionSub as Subscription);
   }
 
   private handleAboutCall() {
