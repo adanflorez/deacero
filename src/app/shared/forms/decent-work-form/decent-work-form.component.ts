@@ -44,7 +44,7 @@ export class DecentWorkFormComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const { disable } = changes;
-    if (disable.currentValue) {
+    if (disable?.currentValue) {
       this.form.disable();
     }
   }
