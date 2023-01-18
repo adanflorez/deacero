@@ -1,4 +1,4 @@
-import { RFC_PATTERN, ALPHABET } from './../constants';
+import { RFC_PATTERN, ALPHABET } from '../constants';
 import { AbstractControl } from '@angular/forms';
 
 export const validateRFC = (

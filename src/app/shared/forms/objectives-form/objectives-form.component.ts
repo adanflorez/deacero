@@ -1,11 +1,11 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { OBJECTIVES } from 'src/app/lib/constants';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import ObjectivesForm from 'src/app/lib/models/objectives-form.model';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
+import { OBJECTIVES } from 'src/app/core/constants';
+import FormValid from 'src/app/core/models/form-valid.model';
+import ObjectivesForm from 'src/app/core/models/objectives-form.model';
+import { CallSection } from 'src/app/core/enums/sections.enum';
 import { Subscription } from 'rxjs';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import { AlertType } from 'src/app/core/enums/alert-type';
 
 @Component({
   selector: 'app-objectives-form',

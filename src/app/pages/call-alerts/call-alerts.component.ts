@@ -1,9 +1,9 @@
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import CallForm from 'src/app/lib/models/call-form.model';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import { CallService } from 'src/app/lib/services/call.service';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import CallForm from 'src/app/core/models/call-form.model';
+import FormValid from 'src/app/core/models/form-valid.model';
+import { CallService } from 'src/app/core/services/call.service';
+import { AlertType } from 'src/app/core/enums/alert-type';
 import { Router } from '@angular/router';
 
 @Component({

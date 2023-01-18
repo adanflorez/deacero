@@ -1,12 +1,12 @@
 import { BehaviorSubject } from 'rxjs';
-import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
+import { ONLY_NUMBERS_PATTERN } from 'src/app/core/constants';
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import Response from 'src/app/lib/models/response.model';
-import Product from 'src/app/lib/models/product.model';
-import { MultimediaService } from 'src/app/lib/services/multimedia.service';
+import Response from 'src/app/core/models/response.model';
+import Product from 'src/app/core/models/product.model';
+import { MultimediaService } from 'src/app/core/services/multimedia.service';
 
 @Component({
   selector: 'app-product-table',

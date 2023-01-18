@@ -2,9 +2,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
-import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
-import Donation from 'src/app/lib/models/donation.model';
+import { ONLY_NUMBERS_PATTERN } from 'src/app/core/constants';
+import { CustomValidators } from 'src/app/core/helpers/custom-validators';
+import Donation from 'src/app/core/models/donation.model';
 
 @Component({
   selector: 'app-donations-table',

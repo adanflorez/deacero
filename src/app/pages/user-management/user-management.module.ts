@@ -11,8 +11,8 @@ import { FormErrorModule } from 'src/app/shared/form-error/form-error.module';
 import { ModalModule } from 'src/app/shared/modal/modal.module';
 import { AlertModule } from 'src/app/shared/alert/alert.module';
 
-import { UserStatusPipe } from 'src/app/lib/pipes/user-status.pipe';
-import { UserRolePipe } from 'src/app/lib/pipes/user-role.pipe';
+import { UserStatusPipe } from 'src/app/core/pipes/user-status.pipe';
+import { UserRolePipe } from 'src/app/core/pipes/user-role.pipe';
 
 @NgModule({
   declarations: [

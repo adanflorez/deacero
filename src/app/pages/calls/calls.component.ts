@@ -1,4 +1,4 @@
-import { UserService } from 'src/app/lib/services/user.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -9,13 +9,13 @@ import {
   ONLY_NUMBERS_PATTERN,
   RATING,
   URL_PATTERN,
-} from 'src/app/lib/constants';
-import Member from 'src/app/lib/models/member.model';
-import ProjectBudget from 'src/app/lib/models/project-budget.model';
-import Remuneration from 'src/app/lib/models/remuneration.model';
-import Response from 'src/app/lib/models/response.model';
-import { MultimediaService } from 'src/app/lib/services/multimedia.service';
-import { CallService } from 'src/app/lib/services/call.service';
+} from 'src/app/core/constants';
+import Member from 'src/app/core/models/member.model';
+import ProjectBudget from 'src/app/core/models/project-budget.model';
+import Remuneration from 'src/app/core/models/remuneration.model';
+import Response from 'src/app/core/models/response.model';
+import { MultimediaService } from 'src/app/core/services/multimedia.service';
+import { CallService } from 'src/app/core/services/call.service';
 
 @Component({
   selector: 'app-calls',

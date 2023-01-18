@@ -8,10 +8,10 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import DecentWorkForm from 'src/app/lib/models/decent-work-form.model';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import FormValid from 'src/app/core/models/form-valid.model';
+import DecentWorkForm from 'src/app/core/models/decent-work-form.model';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import { AlertType } from 'src/app/core/enums/alert-type';
 
 @Component({
   selector: 'app-decent-work-form',

@@ -1,10 +1,10 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import LocationForm from 'src/app/lib/models/location-form.model';
+import FormValid from 'src/app/core/models/form-valid.model';
+import LocationForm from 'src/app/core/models/location-form.model';
 import { Subscription } from 'rxjs';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import { AlertType } from 'src/app/core/enums/alert-type';
 
 @Component({
   selector: 'app-location-form',

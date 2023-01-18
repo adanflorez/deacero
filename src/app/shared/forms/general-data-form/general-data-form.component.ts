@@ -12,16 +12,16 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { validateRFC } from 'src/app/lib/helpers/rfc-validator';
+import { validateRFC } from 'src/app/core/helpers/rfc-validator';
 import {
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
-} from 'src/app/lib/constants';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import GeneralDataForm from 'src/app/lib/models/general-data-form.model';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
+} from 'src/app/core/constants';
+import FormValid from 'src/app/core/models/form-valid.model';
+import GeneralDataForm from 'src/app/core/models/general-data-form.model';
+import { CallSection } from 'src/app/core/enums/sections.enum';
 import { Subscription } from 'rxjs';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import { AlertType } from 'src/app/core/enums/alert-type';
 
 @Component({
   selector: 'app-general-data-form',

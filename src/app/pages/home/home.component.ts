@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { BehaviorSubject, catchError, throwError } from 'rxjs';
 
-import { AlertType } from 'src/app/lib/enums/alert-type';
-import { CallService } from 'src/app/lib/services/call.service';
-import { UserService } from 'src/app/lib/services/user.service';
-import Response from 'src/app/lib/models/response.model';
-import { validateRFC } from 'src/app/lib/helpers/rfc-validator';
-import CallForm from 'src/app/lib/models/call-form.model';
-import FormValid from 'src/app/lib/models/form-valid.model';
+import { AlertType } from 'src/app/core/enums/alert-type';
+import { CallService } from 'src/app/core/services/call.service';
+import { UserService } from 'src/app/core/services/user.service';
+import Response from 'src/app/core/models/response.model';
+import { validateRFC } from 'src/app/core/helpers/rfc-validator';
+import CallForm from 'src/app/core/models/call-form.model';
+import FormValid from 'src/app/core/models/form-valid.model';
 
 @Component({
   selector: 'app-home',

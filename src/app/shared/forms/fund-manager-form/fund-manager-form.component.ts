@@ -10,12 +10,12 @@ import {
 import {
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
-} from 'src/app/lib/constants';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import FundManagerForm from 'src/app/lib/models/fund-manager-form.model';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
+} from 'src/app/core/constants';
+import FormValid from 'src/app/core/models/form-valid.model';
+import FundManagerForm from 'src/app/core/models/fund-manager-form.model';
+import { CallSection } from 'src/app/core/enums/sections.enum';
 import { Subscription } from 'rxjs';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import { AlertType } from 'src/app/core/enums/alert-type';
 
 @Component({
   selector: 'app-fund-manager-form',

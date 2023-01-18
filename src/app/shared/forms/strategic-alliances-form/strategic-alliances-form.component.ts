@@ -8,12 +8,12 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import StrategicAlliancesForm from 'src/app/lib/models/strategic-alliances-form.model';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
-import { AlertType } from 'src/app/lib/enums/alert-type';
-import Donation from 'src/app/lib/models/donation.model';
-import Product from 'src/app/lib/models/product.model';
+import FormValid from 'src/app/core/models/form-valid.model';
+import StrategicAlliancesForm from 'src/app/core/models/strategic-alliances-form.model';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import { AlertType } from 'src/app/core/enums/alert-type';
+import Donation from 'src/app/core/models/donation.model';
+import Product from 'src/app/core/models/product.model';
 
 @Component({
   selector: 'app-strategic-alliances-form',

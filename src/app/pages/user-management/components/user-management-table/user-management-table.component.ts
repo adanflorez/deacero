@@ -8,12 +8,12 @@ import {
 } from 'rxjs';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserRolePipe } from 'src/app/lib/pipes/user-role.pipe';
-import { AlertType } from 'src/app/lib/enums/alert-type';
-import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
-import { PASSWORD_PATERN } from 'src/app/lib/constants';
-import { UserService } from 'src/app/lib/services/user.service';
-import { UserStatusPipe } from 'src/app/lib/pipes/user-status.pipe';
+import { UserRolePipe } from 'src/app/core/pipes/user-role.pipe';
+import { AlertType } from 'src/app/core/enums/alert-type';
+import { CustomValidators } from 'src/app/core/helpers/custom-validators';
+import { PASSWORD_PATERN } from 'src/app/core/constants';
+import { UserService } from 'src/app/core/services/user.service';
+import { UserStatusPipe } from 'src/app/core/pipes/user-status.pipe';
 import { UserModel } from 'src/app/domain/models/user.model';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

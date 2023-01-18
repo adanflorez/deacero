@@ -1,4 +1,4 @@
-import { RoleService } from './../services/role.service';
+import { RoleService } from '../services/role.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,

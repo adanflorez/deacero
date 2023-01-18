@@ -1,4 +1,4 @@
-import Announcement from 'src/app/lib/models/announcement.model';
+import Announcement from 'src/app/core/models/announcement.model';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

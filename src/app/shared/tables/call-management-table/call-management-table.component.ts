@@ -2,10 +2,10 @@ import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, firstValueFrom, map, startWith } from 'rxjs';
-import Announcement from 'src/app/lib/models/announcement.model';
+import Announcement from 'src/app/core/models/announcement.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertType } from 'src/app/lib/enums/alert-type';
-import { AnnouncementService } from 'src/app/lib/services/announcement.service';
+import { AlertType } from 'src/app/core/enums/alert-type';
+import { AnnouncementService } from 'src/app/core/services/announcement.service';
 
 type AnnouncementAction = 'Create' | 'Edit' | 'Delete' | 'Confirm';
 

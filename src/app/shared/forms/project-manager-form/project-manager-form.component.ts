@@ -3,12 +3,12 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
-} from 'src/app/lib/constants';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import ProjectManagerForm from 'src/app/lib/models/project-manager-form.model';
+} from 'src/app/core/constants';
+import FormValid from 'src/app/core/models/form-valid.model';
+import ProjectManagerForm from 'src/app/core/models/project-manager-form.model';
 import { Subscription } from 'rxjs';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import { AlertType } from 'src/app/core/enums/alert-type';
 
 @Component({
   selector: 'app-project-manager-form',

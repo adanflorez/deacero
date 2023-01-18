@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import ProjectBudget from 'src/app/lib/models/project-budget.model';
-import ProjectBudgetForm from 'src/app/lib/models/project-budget-form.model';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import FormValid from 'src/app/core/models/form-valid.model';
+import ProjectBudget from 'src/app/core/models/project-budget.model';
+import ProjectBudgetForm from 'src/app/core/models/project-budget-form.model';
+import { AlertType } from 'src/app/core/enums/alert-type';
 
 @Component({
   selector: 'app-project-budget-form',

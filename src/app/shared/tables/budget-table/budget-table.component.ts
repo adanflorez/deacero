@@ -1,9 +1,9 @@
-import { TableComponent } from 'src/app/lib/models/table.model';
+import { TableComponent } from 'src/app/core/models/table.model';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import ProjectBudget from 'src/app/lib/models/project-budget.model';
+import ProjectBudget from 'src/app/core/models/project-budget.model';
 
 @Component({
   selector: 'app-budget-table',
