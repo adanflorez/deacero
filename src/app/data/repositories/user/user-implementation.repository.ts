@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserRepository } from 'src/domain/repositories/user.repository';
-import { UserModel } from 'src/domain/models/user.model';
+import { UserRepository } from 'src/app/domain/repositories/user.repository';
+import { UserModel } from 'src/app/domain/models/user.model';
 import { UserEntity } from './entities/user-entity';
 import { UserImplementationRepositoryMapper } from './mappers/user-repository.mapper';
 

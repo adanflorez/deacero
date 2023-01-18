@@ -6,8 +6,8 @@ import { environment } from 'src/environments/environment';
 
 import Response from '../models/response.model';
 
-import { UserModel } from 'src/domain/models/user.model';
-import { GetUserUseCases } from 'src/domain/usecases/user/get-user.usecase';
+import { UserModel } from 'src/app/domain/models/user.model';
+import { GetUserUseCases } from 'src/app/domain/usecases/user/get-user.usecase';
 
 @Injectable({
   providedIn: 'root',

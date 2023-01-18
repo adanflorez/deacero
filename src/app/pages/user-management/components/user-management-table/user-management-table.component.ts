@@ -14,7 +14,7 @@ import { CustomValidators } from 'src/app/lib/helpers/custom-validators';
 import { PASSWORD_PATERN } from 'src/app/lib/constants';
 import { UserService } from 'src/app/lib/services/user.service';
 import { UserStatusPipe } from 'src/app/lib/pipes/user-status.pipe';
-import { UserModel } from 'src/domain/models/user.model';
+import { UserModel } from 'src/app/domain/models/user.model';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare let window: any;
