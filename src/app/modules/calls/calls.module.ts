@@ -1,4 +1,4 @@
-import { FormErrorModule } from './../../shared/form-error/form-error.module';
+import { FormErrorModule } from '../../shared/form-error/form-error.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
