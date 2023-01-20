@@ -1,4 +1,4 @@
-export default interface ProjectDevelopmentForm {
+export interface ProjectDevelopmentForm {
   whichProblem?: string;
   generalObjective?: string;
   numberOfBeneficiaries?: string;

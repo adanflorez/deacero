@@ -1,4 +1,3 @@
-import ProjectDevelopmentForm from 'src/app/core/models/project-development-form.model';
 import ProjectManagerForm from 'src/app/core/models/project-manager-form.model';
 import RatingForm from 'src/app/core/models/rating-form.model';
 import StrategicAlliancesForm from 'src/app/core/models/strategic-alliances-form.model';
@@ -14,6 +13,7 @@ import {
   OrganizationalInformationForm,
   PeriodForm,
   ProjectBudgetForm,
+  ProjectDevelopmentForm,
   SocialMediaForm,
 } from 'src/app/shared/forms';
 

@@ -1,11 +1,12 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/core/constants';
-import FormValid from 'src/app/core/models/form-valid.model';
-import ProjectDevelopmentForm from 'src/app/core/models/project-development-form.model';
-import { CallSection } from 'src/app/core/enums/sections.enum';
 import { AlertType } from 'src/app/core/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import FormValid from 'src/app/core/models/form-valid.model';
+
+import { ProjectDevelopmentForm } from './domain';
 
 @Component({
   selector: 'app-project-development-form',
