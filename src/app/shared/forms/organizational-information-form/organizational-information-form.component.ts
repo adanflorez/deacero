@@ -9,10 +9,10 @@ import {
 } from '@angular/core';
 import { MULTIPLE_EMAIL_PATTERN } from 'src/app/core/constants';
 import FormValid from 'src/app/core/models/form-valid.model';
-import OrganizationalInformationForm from 'src/app/core/models/organizational-information-form.model';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import { Subscription } from 'rxjs';
 import { AlertType } from 'src/app/core/enums/alert-type';
+import { OrganizationalInformationForm } from './domain';
 
 @Component({
   selector: 'app-organizational-information-form',

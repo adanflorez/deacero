@@ -7,4 +7,5 @@ export * from './general-data-form';
 export * from './general-project-data-form';
 export * from './governing-body-form';
 export * from './objectives-form';
+export * from './organizational-information-form';
 export * from './modules';

@@ -1,4 +1,4 @@
-export default interface OrganizationalInformationForm {
+export interface OrganizationalInformationForm {
   founder?: string;
   generalManagement?: string;
   operationalManagement?: string;
