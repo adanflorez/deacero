@@ -1,27 +1,28 @@
 import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import {
   AbstractControl,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import {
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
-import { validateRFC } from 'src/app/core/helpers/rfc-validator';
+import { Subscription } from 'rxjs';
 import {
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
 } from 'src/app/core/constants';
-import FormValid from 'src/app/core/models/form-valid.model';
-import GeneralDataForm from 'src/app/core/models/general-data-form.model';
-import { CallSection } from 'src/app/core/enums/sections.enum';
-import { Subscription } from 'rxjs';
 import { AlertType } from 'src/app/core/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import { validateRFC } from 'src/app/core/helpers/rfc-validator';
+import FormValid from 'src/app/core/models/form-valid.model';
+
+import { GeneralDataForm } from './domain';
 
 @Component({
   selector: 'app-general-data-form',

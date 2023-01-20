@@ -1,4 +1,4 @@
-export default interface GeneralData {
+export interface GeneralDataForm {
   tradename?: string;
   businessname?: string;
   rfc?: string;
