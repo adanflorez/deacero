@@ -1,8 +1,8 @@
-import { RoleService } from 'src/app/lib/services/role.service';
+import { RoleService } from 'src/app/core/services/role.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable, firstValueFrom } from 'rxjs';
-import { LayoutService } from 'src/app/lib/services/layout.service';
-import { CallService } from 'src/app/lib/services/call.service';
+import { LayoutService } from 'src/app/core/services/layout.service';
+import { CallService } from 'src/app/core/services/call.service';
 
 @Component({
   selector: 'app-sidebar',

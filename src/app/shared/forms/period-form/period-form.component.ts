@@ -1,10 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AlertType } from 'src/app/lib/enums/alert-type';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import PeriodForm from 'src/app/lib/models/period-form.model';
+import { AlertType } from 'src/app/core/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import FormValid from 'src/app/core/models/form-valid.model';
+import PeriodForm from 'src/app/core/models/period-form.model';
 
 @Component({
   selector: 'app-period-form',

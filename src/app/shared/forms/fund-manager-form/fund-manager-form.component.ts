@@ -1,21 +1,22 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   Component,
   Input,
-  OnInit,
-  OnDestroy,
   OnChanges,
+  OnDestroy,
+  OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import {
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
-} from 'src/app/lib/constants';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import FundManagerForm from 'src/app/lib/models/fund-manager-form.model';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
-import { Subscription } from 'rxjs';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+} from 'src/app/core/constants';
+import { AlertType } from 'src/app/core/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import FormValid from 'src/app/core/models/form-valid.model';
+
+import { FundManagerForm } from './domain';
 
 @Component({
   selector: 'app-fund-manager-form',

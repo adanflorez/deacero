@@ -1,12 +1,12 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ONLY_NUMBERS_PATTERN } from 'src/app/lib/constants';
-import GoverningBody from 'src/app/lib/models/governing-body.model';
-import Member from 'src/app/lib/models/member.model';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import { ONLY_NUMBERS_PATTERN } from 'src/app/core/constants';
+import GoverningBody from 'src/app/core/models/governing-body.model';
+import Member from 'src/app/core/models/member.model';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import FormValid from 'src/app/core/models/form-valid.model';
+import { AlertType } from 'src/app/core/enums/alert-type';
 
 @Component({
   selector: 'app-governing-body',

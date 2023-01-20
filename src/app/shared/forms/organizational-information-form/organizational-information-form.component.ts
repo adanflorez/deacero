@@ -7,12 +7,12 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { MULTIPLE_EMAIL_PATTERN } from 'src/app/lib/constants';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import OrganizationalInformationForm from 'src/app/lib/models/organizational-information-form.model';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
+import { MULTIPLE_EMAIL_PATTERN } from 'src/app/core/constants';
+import FormValid from 'src/app/core/models/form-valid.model';
+import OrganizationalInformationForm from 'src/app/core/models/organizational-information-form.model';
+import { CallSection } from 'src/app/core/enums/sections.enum';
 import { Subscription } from 'rxjs';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import { AlertType } from 'src/app/core/enums/alert-type';
 
 @Component({
   selector: 'app-organizational-information-form',

@@ -1,10 +1,11 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import LocationForm from 'src/app/lib/models/location-form.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import { AlertType } from 'src/app/core/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import FormValid from 'src/app/core/models/form-valid.model';
+
+import { LocationForm } from './domain';
 
 @Component({
   selector: 'app-location-form',
@@ -96,10 +97,13 @@ export class LocationFormComponent implements OnInit, OnDestroy {
           this.locationFields.forEach(field => {
             this.form.get(field)?.setValidators(Validators.required);
             this.form.get(field)?.reset();
+            this.form.updateValueAndValidity();
           });
         } else {
           this.locationFields.forEach(field => {
             this.form.get(field)?.clearValidators();
+            this.form.get(field)?.reset();
+            this.form.updateValueAndValidity();
           });
         }
       });

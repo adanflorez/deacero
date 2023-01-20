@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { LayoutService } from './../../lib/services/layout.service';
+import { LayoutService } from '../../core/services/layout.service';
 import { Component } from '@angular/core';
 
 @Component({

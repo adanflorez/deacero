@@ -5,15 +5,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoadingInterceptor } from './lib/interceptors/loading.interceptor';
-import { TokenInterceptor } from './lib/interceptors/token.interceptor';
+import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { UserImplementationRepository } from 'src/data/repositories/user/user-implementation.repository';
-import { UserRepository } from 'src/domain/repositories/user.repository';
-import { GetUserUseCases } from 'src/domain/usecases/user/get-user.usecase';
+import { UserImplementationRepository } from 'src/app/data/repositories/user/user-implementation.repository';
+import { UserRepository } from 'src/app/domain/repositories/user.repository';
+import { GetUserUseCases } from 'src/app/domain/usecases/user/get-user.usecase';
 
 @NgModule({
   declarations: [AppComponent],

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import { AlertType } from 'src/app/core/enums/alert-type';
 
 @Component({
   selector: 'app-alert',

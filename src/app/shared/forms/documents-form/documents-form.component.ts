@@ -1,12 +1,13 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import FormValid from 'src/app/lib/models/form-valid.model';
-import DocumentsForm from 'src/app/lib/models/documents-form.model';
-import Response from 'src/app/lib/models/response.model';
-import { CallSection } from 'src/app/lib/enums/sections.enum';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { MultimediaService } from 'src/app/lib/services/multimedia.service';
-import { AlertType } from 'src/app/lib/enums/alert-type';
+import { AlertType } from 'src/app/core/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import FormValid from 'src/app/core/models/form-valid.model';
+import Response from 'src/app/core/models/response.model';
+import { MultimediaService } from 'src/app/core/services/multimedia.service';
+
+import { DocumentsForm } from './domain';
 
 @Component({
   selector: 'app-documents-form',
