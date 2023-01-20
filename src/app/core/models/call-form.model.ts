@@ -14,10 +14,9 @@ import {
   ProjectDevelopmentForm,
   ProjectManagerForm,
   RatingForm,
+  RemunerationForm,
   SocialMediaForm,
 } from 'src/app/shared/forms';
-
-import RemunerationForm from './remuneration-form.model';
 
 export default interface CallForm {
   generalData: GeneralDataForm;

@@ -14,3 +14,4 @@ export * from './project-budget-form';
 export * from './project-development-form';
 export * from './project-manager-form';
 export * from './rating-form';
+export * from './remuneration-form';

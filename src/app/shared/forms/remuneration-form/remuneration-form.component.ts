@@ -1,11 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import Remuneration from 'src/app/core/models/remuneration.model';
-import FormValid from 'src/app/core/models/form-valid.model';
-import RemunerationForm from 'src/app/core/models/remuneration-form.model';
-import { CallSection } from 'src/app/core/enums/sections.enum';
 import { AlertType } from 'src/app/core/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import FormValid from 'src/app/core/models/form-valid.model';
+import Remuneration from 'src/app/core/models/remuneration.model';
+
+import { RemunerationForm } from './domain';
 
 @Component({
   selector: 'app-remuneration-form',
