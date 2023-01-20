@@ -1,4 +1,4 @@
-export default interface GeneralProjectDataForm {
+export interface GeneralProjectDataForm {
   projectName?: string;
   category?: string;
   comment?: string;

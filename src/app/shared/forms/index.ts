@@ -4,4 +4,5 @@ export * from './documents-form';
 export * from './fund-manager-form';
 export * from './location-form';
 export * from './general-data-form';
+export * from './general-project-data-form';
 export * from './modules';

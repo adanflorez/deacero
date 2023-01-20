@@ -1,4 +1,3 @@
-import GeneralProjectDataForm from 'src/app/core/models/general-project-data-form.model';
 import ObjectivesForm from 'src/app/core/models/objectives-form.model';
 import OrganizationalInformationForm from 'src/app/core/models/organizational-information-form.model';
 import PeriodForm from 'src/app/core/models/period-form.model';
@@ -15,6 +14,7 @@ import {
   DocumentsForm,
   FundManagerForm,
   GeneralDataForm,
+  GeneralProjectDataForm,
   LocationForm,
   SocialMediaForm,
 } from 'src/app/shared/forms';
