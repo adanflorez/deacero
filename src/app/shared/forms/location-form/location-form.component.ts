@@ -97,10 +97,13 @@ export class LocationFormComponent implements OnInit, OnDestroy {
           this.locationFields.forEach(field => {
             this.form.get(field)?.setValidators(Validators.required);
             this.form.get(field)?.reset();
+            this.form.updateValueAndValidity();
           });
         } else {
           this.locationFields.forEach(field => {
             this.form.get(field)?.clearValidators();
+            this.form.get(field)?.reset();
+            this.form.updateValueAndValidity();
           });
         }
       });
