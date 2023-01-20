@@ -1,4 +1,4 @@
-export default interface Announcement {
+export interface Announcement {
   id?: string;
   callId?: string;
   type?: string;

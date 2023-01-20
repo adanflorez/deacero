@@ -1,8 +1,9 @@
-import Announcement from 'src/app/core/models/announcement.model';
-import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+
+import { Announcement } from '../../../domain';
 
 @Injectable({
   providedIn: 'root',
