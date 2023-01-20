@@ -1,4 +1,3 @@
-import RatingForm from 'src/app/core/models/rating-form.model';
 import StrategicAlliancesForm from 'src/app/core/models/strategic-alliances-form.model';
 import {
   DecentWorkForm,
@@ -14,6 +13,7 @@ import {
   ProjectBudgetForm,
   ProjectDevelopmentForm,
   ProjectManagerForm,
+  RatingForm,
   SocialMediaForm,
 } from 'src/app/shared/forms';
 

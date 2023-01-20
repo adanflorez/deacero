@@ -1,4 +1,4 @@
-export default interface RatingForm {
+export interface RatingForm {
   livingConditions?: string;
   lifeQuality?: string;
   capacityBuilding?: string;
