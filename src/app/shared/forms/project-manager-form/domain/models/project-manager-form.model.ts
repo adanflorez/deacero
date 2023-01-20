@@ -1,4 +1,4 @@
-export default interface ProjectManagerForm {
+export interface ProjectManagerForm {
   responsibleName?: string;
   emails?: string;
   phone?: string;

@@ -1,14 +1,15 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import {
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
 } from 'src/app/core/constants';
-import FormValid from 'src/app/core/models/form-valid.model';
-import ProjectManagerForm from 'src/app/core/models/project-manager-form.model';
-import { Subscription } from 'rxjs';
-import { CallSection } from 'src/app/core/enums/sections.enum';
 import { AlertType } from 'src/app/core/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import FormValid from 'src/app/core/models/form-valid.model';
+
+import { ProjectManagerForm } from './domain';
 
 @Component({
   selector: 'app-project-manager-form',

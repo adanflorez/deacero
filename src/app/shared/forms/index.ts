@@ -12,3 +12,4 @@ export * from './organizational-information-form';
 export * from './period-form';
 export * from './project-budget-form';
 export * from './project-development-form';
+export * from './project-manager-form';
