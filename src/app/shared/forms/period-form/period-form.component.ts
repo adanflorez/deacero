@@ -4,7 +4,8 @@ import { Subscription } from 'rxjs';
 import { AlertType } from 'src/app/core/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
-import PeriodForm from 'src/app/core/models/period-form.model';
+
+import { PeriodForm } from './domain';
 
 @Component({
   selector: 'app-period-form',

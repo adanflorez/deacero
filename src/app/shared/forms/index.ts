@@ -8,4 +8,5 @@ export * from './general-project-data-form';
 export * from './governing-body-form';
 export * from './objectives-form';
 export * from './organizational-information-form';
+export * from './period-form';
 export * from './modules';

@@ -1,4 +1,4 @@
-export default interface PeriodForm {
+export interface PeriodForm {
   startDate?: string;
   endDate?: string;
   comment?: string;

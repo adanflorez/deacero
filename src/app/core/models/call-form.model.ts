@@ -1,11 +1,8 @@
-import PeriodForm from 'src/app/core/models/period-form.model';
 import ProjectBudgetForm from 'src/app/core/models/project-budget-form.model';
 import ProjectDevelopmentForm from 'src/app/core/models/project-development-form.model';
 import ProjectManagerForm from 'src/app/core/models/project-manager-form.model';
 import RatingForm from 'src/app/core/models/rating-form.model';
 import StrategicAlliancesForm from 'src/app/core/models/strategic-alliances-form.model';
-
-import RemunerationForm from './remuneration-form.model';
 import {
   DecentWorkForm,
   DocumentsForm,
@@ -14,10 +11,13 @@ import {
   GeneralProjectDataForm,
   GoverningBodyForm,
   LocationForm,
-  SocialMediaForm,
   ObjectivesForm,
   OrganizationalInformationForm,
+  PeriodForm,
+  SocialMediaForm,
 } from 'src/app/shared/forms';
+
+import RemunerationForm from './remuneration-form.model';
 
 export default interface CallForm {
   generalData: GeneralDataForm;
