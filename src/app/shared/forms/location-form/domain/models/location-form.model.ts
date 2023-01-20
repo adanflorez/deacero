@@ -1,4 +1,4 @@
-export default interface LocationForm {
+export interface LocationForm {
   locationQuestion?: boolean;
   street?: string;
   colony?: string;

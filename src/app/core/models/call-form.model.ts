@@ -10,12 +10,12 @@ import RatingForm from 'src/app/core/models/rating-form.model';
 import StrategicAlliancesForm from 'src/app/core/models/strategic-alliances-form.model';
 
 import GoverningBody from './governing-body.model';
-import LocationForm from './location-form.model';
 import RemunerationForm from './remuneration-form.model';
 import {
   DecentWorkForm,
   DocumentsForm,
   FundManagerForm,
+  LocationForm,
   SocialMediaForm,
 } from 'src/app/shared/forms';
 
