@@ -1,12 +1,13 @@
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/core/constants';
-import GoverningBody from 'src/app/core/models/governing-body.model';
-import Member from 'src/app/core/models/member.model';
+import { AlertType } from 'src/app/core/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
-import { AlertType } from 'src/app/core/enums/alert-type';
+import Member from 'src/app/core/models/member.model';
+
+import { GoverningBodyForm } from './domain';
 
 @Component({
   selector: 'app-governing-body',
@@ -15,11 +16,11 @@ import { AlertType } from 'src/app/core/enums/alert-type';
 })
 export class GoverningBodyComponent implements OnInit, OnDestroy {
   @Input() updateParentModel: (
-    part: GoverningBody,
+    part: GoverningBodyForm,
     formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
-  @Input() defaultValues: GoverningBody;
+  @Input() defaultValues: GoverningBodyForm;
   form: FormGroup;
   members: Member[];
   alertType: AlertType = AlertType.Warning;

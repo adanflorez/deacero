@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { MembersTableModule } from './../../tables/members-table/members-table.module';
+import { MembersTableModule } from '../../tables/members-table/members-table.module';
 import { GoverningBodyComponent } from './governing-body.component';
-import { formModules } from './../modules';
+import { formModules } from '../modules';
 
 @NgModule({
   declarations: [GoverningBodyComponent],

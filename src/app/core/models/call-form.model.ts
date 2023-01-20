@@ -7,7 +7,6 @@ import ProjectManagerForm from 'src/app/core/models/project-manager-form.model';
 import RatingForm from 'src/app/core/models/rating-form.model';
 import StrategicAlliancesForm from 'src/app/core/models/strategic-alliances-form.model';
 
-import GoverningBody from './governing-body.model';
 import RemunerationForm from './remuneration-form.model';
 import {
   DecentWorkForm,
@@ -15,6 +14,7 @@ import {
   FundManagerForm,
   GeneralDataForm,
   GeneralProjectDataForm,
+  GoverningBodyForm,
   LocationForm,
   SocialMediaForm,
 } from 'src/app/shared/forms';
@@ -25,7 +25,7 @@ export default interface CallForm {
   organizationalInformation: OrganizationalInformationForm;
   strategicAlliances: StrategicAlliancesForm;
   decentWork: DecentWorkForm;
-  governingBody: GoverningBody;
+  governingBody: GoverningBodyForm;
   remuneration: RemunerationForm;
   generalProjectData: GeneralProjectDataForm;
   location: LocationForm;

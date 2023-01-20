@@ -1,5 +1,5 @@
 import Member from 'src/app/core/models/member.model';
-export default interface GoverningBody {
+export interface GoverningBodyForm {
   meetings?: number;
   renewalFrequency?: number;
   members?: Member[];
