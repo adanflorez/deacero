@@ -9,4 +9,5 @@ export * from './governing-body-form';
 export * from './objectives-form';
 export * from './organizational-information-form';
 export * from './period-form';
+export * from './project-budget-form';
 export * from './modules';
