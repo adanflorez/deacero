@@ -1,4 +1,4 @@
-export default interface SocialMediaForm {
+export interface SocialMediaForm {
   facebook?: string;
   instagram?: string;
   linkedin?: string;

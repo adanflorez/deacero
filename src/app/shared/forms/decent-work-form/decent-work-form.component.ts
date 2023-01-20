@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import FormValid from 'src/app/core/models/form-valid.model';
-import DecentWorkForm from 'src/app/core/models/decent-work-form.model';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import { AlertType } from 'src/app/core/enums/alert-type';
+import { DecentWorkForm } from './domain';
 
 @Component({
   selector: 'app-decent-work-form',

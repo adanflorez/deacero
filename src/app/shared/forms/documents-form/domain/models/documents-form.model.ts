@@ -1,4 +1,4 @@
-export default interface DocumentsForm {
+export interface DocumentsForm {
   ethicalCode?: string;
   ethicalCodeComment?: string;
   governanceManual?: string;

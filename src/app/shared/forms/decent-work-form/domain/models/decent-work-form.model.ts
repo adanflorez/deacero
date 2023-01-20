@@ -1,4 +1,4 @@
-export default interface DecentWorkForm {
+export interface DecentWorkForm {
   whyYourOSC?: string;
   whatMakesYouDifferent?: string;
   benefitsSystem?: string;

@@ -1,4 +1,4 @@
-export default interface FundManagerForm {
+export interface FundManagerForm {
   name?: string;
   responsibleEmail?: string;
   cellphone?: string;
