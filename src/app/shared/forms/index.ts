@@ -6,4 +6,5 @@ export * from './location-form';
 export * from './general-data-form';
 export * from './general-project-data-form';
 export * from './governing-body-form';
+export * from './objectives-form';
 export * from './modules';

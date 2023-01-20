@@ -1,4 +1,4 @@
-export default interface ObjectivesForm {
+export interface ObjectivesForm {
   objectives?: string;
   povertyEnd?: string;
   zeroHunger?: string;

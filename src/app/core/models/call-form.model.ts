@@ -1,4 +1,3 @@
-import ObjectivesForm from 'src/app/core/models/objectives-form.model';
 import OrganizationalInformationForm from 'src/app/core/models/organizational-information-form.model';
 import PeriodForm from 'src/app/core/models/period-form.model';
 import ProjectBudgetForm from 'src/app/core/models/project-budget-form.model';
@@ -17,6 +16,7 @@ import {
   GoverningBodyForm,
   LocationForm,
   SocialMediaForm,
+  ObjectivesForm,
 } from 'src/app/shared/forms';
 
 export default interface CallForm {
