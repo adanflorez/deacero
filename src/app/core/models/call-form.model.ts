@@ -1,4 +1,3 @@
-import StrategicAlliancesForm from 'src/app/core/models/strategic-alliances-form.model';
 import {
   DecentWorkForm,
   DocumentsForm,
@@ -16,6 +15,7 @@ import {
   RatingForm,
   RemunerationForm,
   SocialMediaForm,
+  StrategicAlliancesForm,
 } from 'src/app/shared/forms';
 
 export default interface CallForm {

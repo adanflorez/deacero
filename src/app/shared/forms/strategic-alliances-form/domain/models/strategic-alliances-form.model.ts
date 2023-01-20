@@ -1,7 +1,7 @@
-import Donation from './donation.model';
-import Product from './product.model';
+import Donation from 'src/app/core/models/donation.model';
+import Product from 'src/app/core/models/product.model';
 
-export default interface StrategicAlliancesForm {
+export interface StrategicAlliancesForm {
   alliances?: string;
   courses?: string;
   issuesToStrengthen?: string;

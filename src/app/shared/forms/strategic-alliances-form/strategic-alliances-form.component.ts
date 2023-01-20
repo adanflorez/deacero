@@ -1,19 +1,20 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   Component,
   Input,
-  OnInit,
-  OnDestroy,
   OnChanges,
+  OnDestroy,
+  OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import FormValid from 'src/app/core/models/form-valid.model';
-import StrategicAlliancesForm from 'src/app/core/models/strategic-alliances-form.model';
-import { CallSection } from 'src/app/core/enums/sections.enum';
 import { AlertType } from 'src/app/core/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
 import Donation from 'src/app/core/models/donation.model';
+import FormValid from 'src/app/core/models/form-valid.model';
 import Product from 'src/app/core/models/product.model';
+
+import { StrategicAlliancesForm } from './domain';
 
 @Component({
   selector: 'app-strategic-alliances-form',
