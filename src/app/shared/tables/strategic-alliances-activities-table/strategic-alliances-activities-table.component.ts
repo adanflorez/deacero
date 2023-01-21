@@ -1,9 +1,9 @@
-import { TableComponent } from 'src/app/lib/models/table.model';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { StrategicAllianceActivity } from 'src/app/lib/models/strategic-alliances-activity.model';
+import { StrategicAllianceActivity } from 'src/app/core/models/strategic-alliances-activity.model';
+import { TableComponent } from 'src/app/core/models/table.model';
 
 @Component({
   selector: 'app-strategic-alliances-activities-table',

@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {
     this.signupForm = new FormGroup(
       {
-        name: new FormControl('FDE050318P80', Validators.required),
+        name: new FormControl('', Validators.required),
         siteName: new FormControl('', { nonNullable: true }),
         email: new FormControl('', [Validators.email, Validators.required]),
         password: new FormControl('', [
