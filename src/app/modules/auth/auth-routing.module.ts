@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthComponent } from './auth.component';
-import { SignupComponent } from './signup/signup.component';
 import { ValidateComponent } from './validate/validate.component';
 
 const routes: Routes = [
@@ -25,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: 'sign-up',
-        component: SignupComponent,
+        loadChildren: () => import('./pages/signup').then(m => m.SignupModule),
       },
       {
         path: 'validate',
