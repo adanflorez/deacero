@@ -2251,7 +2251,8 @@
                   accept="application/pdf"
                   [class.is-invalid]="
                     f[doc.field].invalid && f[doc.field].touched
-                  " />
+                  "
+                  [disabled]="infoSaved$ | async" />
               </ng-container>
               <ng-container *ngIf="f[doc.field].value">
                 <div class="input-group">
