@@ -1,11 +1,12 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { RATING } from 'src/app/core/constants';
-import FormValid from 'src/app/core/models/form-valid.model';
-import RatingForm from 'src/app/core/models/rating-form.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { CallSection } from 'src/app/core/enums/sections.enum';
+import { RATING } from 'src/app/core/constants';
 import { AlertType } from 'src/app/core/enums/alert-type';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import FormValid from 'src/app/core/models/form-valid.model';
+
+import { RatingForm } from './domain';
 
 @Component({
   selector: 'app-rating-form',

@@ -1,11 +1,12 @@
 import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, firstValueFrom, map, startWith } from 'rxjs';
-import Announcement from 'src/app/core/models/announcement.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { firstValueFrom, map, Observable, startWith } from 'rxjs';
 import { AlertType } from 'src/app/core/enums/alert-type';
-import { AnnouncementService } from 'src/app/core/services/announcement.service';
+
+import { Announcement } from './domain';
+import { AnnouncementService } from './infrastructure';
 
 type AnnouncementAction = 'Create' | 'Edit' | 'Delete' | 'Confirm';
 
@@ -83,7 +84,6 @@ export class CallManagementTableComponent implements OnInit {
 
   openModal(content: unknown, type?: AnnouncementAction): void {
     this.modalType = type || this.modalType;
-    if (this.isCreate) this.announcementForm.reset();
     this.modalService
       .open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -181,15 +181,13 @@ export class CallManagementTableComponent implements OnInit {
           type
         )
         .subscribe({
-          next: response => {
-            console.log(response);
+          next: () => {
             this.alertMessage = 'Convocatoria programada';
             this.alertType = AlertType.Success;
             this.showAlert = true;
             this.announcementManagementList();
           },
-          error: err => {
-            console.error(err);
+          error: () => {
             this.alertMessage = 'No se pudo programar la convocatoria';
             this.alertType = AlertType.Danger;
             this.showAlert = true;
@@ -206,15 +204,13 @@ export class CallManagementTableComponent implements OnInit {
           ) as string
         )
         .subscribe({
-          next: response => {
-            console.log(response);
+          next: () => {
             this.alertMessage = 'Convocatoria editada';
             this.alertType = AlertType.Success;
             this.showAlert = true;
             this.announcementManagementList();
           },
-          error: err => {
-            console.error(err);
+          error: () => {
             this.alertMessage = 'No se pudo editar la convocatoria';
             this.alertType = AlertType.Danger;
             this.showAlert = true;
@@ -222,20 +218,19 @@ export class CallManagementTableComponent implements OnInit {
         });
     } else if (this.isDelete) {
       this.announcementService.delete(this.currentAnnouncementId).subscribe({
-        next: response => {
-          console.log(response);
+        next: () => {
           this.alertMessage = 'Convocatoria eliminada';
           this.alertType = AlertType.Success;
           this.showAlert = true;
           this.announcementManagementList();
         },
-        error: err => {
-          console.error(err);
+        error: () => {
           this.alertMessage = 'No se pudo eliminar la convocatoria';
           this.alertType = AlertType.Danger;
           this.showAlert = true;
         },
       });
     }
+    this.announcementForm.reset();
   }
 }

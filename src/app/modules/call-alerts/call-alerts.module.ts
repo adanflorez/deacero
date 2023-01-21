@@ -10,7 +10,7 @@ import { OrganizationalInformationFormModule } from '../../shared/forms/organiza
 import { StrategicAlliancesFormModule } from '../../shared/forms/strategic-alliances-form/strategic-alliances-form.module';
 import { DecentWorkFormModule } from '../../shared/forms/decent-work-form/decent-work-form.module';
 import { RemunerationFormModule } from '../../shared/forms/remuneration-form/remuneration-form.module';
-import { GoverningBodyModule } from '../../shared/forms/governing-body/governing-body.module';
+import { GoverningBodyModule } from '../../shared/forms/governing-body-form/governing-body.module';
 import { GeneralProjectDataFormModule } from '../../shared/forms/general-project-data-form/general-project-data-form.module';
 import { LocationFormModule } from '../../shared/forms/location-form/location-form.module';
 import { ProjectManagerFormModule } from '../../shared/forms/project-manager-form/project-manager-form.module';
