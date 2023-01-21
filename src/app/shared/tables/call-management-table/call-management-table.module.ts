@@ -1,4 +1,3 @@
-import { AnnouncementService } from './infrastructure/driven-adapters/services/announcement.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,9 +6,11 @@ import { AlertModule } from 'src/app/shared/alert/alert.module';
 import { FormErrorModule } from 'src/app/shared/form-error/form-error.module';
 
 import { CallManagementTableComponent } from './call-management-table.component';
-import { AnnouncementGateway } from './domain/gateway';
-import { GetAnnouncementUseCase } from './domain/usecase/announcement/get-announcement.use-case';
-import { AnnouncementImplementation } from './infrastructure/implementations/announcement-implementation';
+import { AnnouncementGateway, AnnouncementUseCase } from './domain';
+import {
+  AnnouncementImplementation,
+  AnnouncementService,
+} from './infrastructure';
 
 @NgModule({
   declarations: [CallManagementTableComponent],
@@ -24,9 +25,9 @@ import { AnnouncementImplementation } from './infrastructure/implementations/ann
   providers: [
     AnnouncementService,
     {
-      provide: GetAnnouncementUseCase,
+      provide: AnnouncementUseCase,
       useFactory: (announcementRepo: AnnouncementGateway) =>
-        new GetAnnouncementUseCase(announcementRepo),
+        new AnnouncementUseCase(announcementRepo),
       deps: [AnnouncementGateway],
     },
     {

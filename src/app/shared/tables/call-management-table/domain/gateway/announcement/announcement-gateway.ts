@@ -8,5 +8,5 @@ export abstract class AnnouncementGateway {
     startDate: string,
     endDate: string,
     type: 1 | 2
-  ): Observable<Array<Announcement>>;
+  ): Observable<void>;
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { Announcement, GetAnnouncementUseCase } from '../../../domain';
+import { Announcement, AnnouncementUseCase } from '../../../domain';
 
 @Injectable()
 export class AnnouncementService {
@@ -11,7 +11,7 @@ export class AnnouncementService {
 
   constructor(
     private http: HttpClient,
-    private announcementUseCase: GetAnnouncementUseCase
+    private announcementUseCase: AnnouncementUseCase
   ) {}
 
   get(): Observable<Array<Announcement>> {
@@ -19,11 +19,7 @@ export class AnnouncementService {
   }
 
   create(startDate: string, endDate: string, type: 1 | 2): Observable<any> {
-    return this.http.post(this.apiAnnouncement, {
-      initDate: startDate,
-      endDate,
-      typeId: Number(type),
-    });
+    return this.announcementUseCase.create(startDate, endDate, type);
   }
 
   edit(id: string, startDate: string, endDate: string): Observable<any> {

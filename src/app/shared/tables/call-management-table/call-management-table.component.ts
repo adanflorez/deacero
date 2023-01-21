@@ -84,7 +84,6 @@ export class CallManagementTableComponent implements OnInit {
 
   openModal(content: unknown, type?: AnnouncementAction): void {
     this.modalType = type || this.modalType;
-    if (this.isCreate) this.announcementForm.reset();
     this.modalService
       .open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -182,8 +181,7 @@ export class CallManagementTableComponent implements OnInit {
           type
         )
         .subscribe({
-          next: response => {
-            console.log(response);
+          next: () => {
             this.alertMessage = 'Convocatoria programada';
             this.alertType = AlertType.Success;
             this.showAlert = true;
@@ -238,5 +236,6 @@ export class CallManagementTableComponent implements OnInit {
         },
       });
     }
+    this.announcementForm.reset();
   }
 }

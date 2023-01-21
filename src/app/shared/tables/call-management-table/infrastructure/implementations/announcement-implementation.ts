@@ -30,11 +30,13 @@ export class AnnouncementImplementation extends AnnouncementGateway {
     );
   }
 
-  create(
-    startDate: string,
-    endDate: string,
-    type: 1 | 2
-  ): Observable<Announcement[]> {
-    throw new Error('Method not implemented.');
+  create(startDate: string, endDate: string, type: 1 | 2): Observable<void> {
+    return this.http
+      .post(this.apiAnnouncement, {
+        initDate: startDate,
+        endDate,
+        typeId: Number(type),
+      })
+      .pipe(map(() => undefined));
   }
 }
