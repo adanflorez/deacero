@@ -14,4 +14,5 @@ export abstract class AnnouncementGateway {
     startDate: string,
     endDate: string
   ): Observable<void>;
+  abstract delete(id: string): Observable<void>;
 }

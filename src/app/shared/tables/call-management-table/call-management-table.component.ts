@@ -187,8 +187,7 @@ export class CallManagementTableComponent implements OnInit {
             this.showAlert = true;
             this.announcementManagementList();
           },
-          error: err => {
-            console.error(err);
+          error: () => {
             this.alertMessage = 'No se pudo programar la convocatoria';
             this.alertType = AlertType.Danger;
             this.showAlert = true;
@@ -211,8 +210,7 @@ export class CallManagementTableComponent implements OnInit {
             this.showAlert = true;
             this.announcementManagementList();
           },
-          error: err => {
-            console.error(err);
+          error: () => {
             this.alertMessage = 'No se pudo editar la convocatoria';
             this.alertType = AlertType.Danger;
             this.showAlert = true;
@@ -220,15 +218,13 @@ export class CallManagementTableComponent implements OnInit {
         });
     } else if (this.isDelete) {
       this.announcementService.delete(this.currentAnnouncementId).subscribe({
-        next: response => {
-          console.log(response);
+        next: () => {
           this.alertMessage = 'Convocatoria eliminada';
           this.alertType = AlertType.Success;
           this.showAlert = true;
           this.announcementManagementList();
         },
-        error: err => {
-          console.error(err);
+        error: () => {
           this.alertMessage = 'No se pudo eliminar la convocatoria';
           this.alertType = AlertType.Danger;
           this.showAlert = true;

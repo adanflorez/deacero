@@ -17,4 +17,8 @@ export class AnnouncementUseCase {
   edit(id: string, startDate: string, endDate: string): Observable<void> {
     return this.announcementGateway.edit(id, startDate, endDate);
   }
+
+  delete(id: string): Observable<void> {
+    return this.announcementGateway.delete(id);
+  }
 }

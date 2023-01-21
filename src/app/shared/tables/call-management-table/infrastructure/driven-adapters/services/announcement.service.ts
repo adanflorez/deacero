@@ -1,18 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 import { Announcement, AnnouncementUseCase } from '../../../domain';
 
 @Injectable()
 export class AnnouncementService {
-  private apiAnnouncement = environment.apiAnnouncement;
-
-  constructor(
-    private http: HttpClient,
-    private announcementUseCase: AnnouncementUseCase
-  ) {}
+  constructor(private announcementUseCase: AnnouncementUseCase) {}
 
   get(): Observable<Array<Announcement>> {
     return this.announcementUseCase.get();
@@ -26,7 +19,7 @@ export class AnnouncementService {
     return this.announcementUseCase.edit(id, startDate, endDate);
   }
 
-  delete(id: string): Observable<any> {
-    return this.http.delete(`${this.apiAnnouncement}?id=${id}`);
+  delete(id: string): Observable<void> {
+    return this.announcementUseCase.delete(id);
   }
 }

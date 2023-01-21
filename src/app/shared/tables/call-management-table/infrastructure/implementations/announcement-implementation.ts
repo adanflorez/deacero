@@ -7,9 +7,7 @@ import { Announcement, AnnouncementGateway } from '../../domain';
 import { AnnouncementEntity } from './../driven-adapters/entities/announcement-entity';
 import { AnnouncementImplementationMapper } from './../helpers/maps/announcement-mapper';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AnnouncementImplementation extends AnnouncementGateway {
   private apiAnnouncement = environment.apiAnnouncement;
   announcementMapper = new AnnouncementImplementationMapper();
@@ -21,11 +19,12 @@ export class AnnouncementImplementation extends AnnouncementGateway {
   get(): Observable<Announcement[]> {
     return this.http.get(this.apiAnnouncement).pipe(
       map((response: any) => {
-        const announcements: Array<any> = response.data.announcements;
-        const userManagement: AnnouncementEntity[] = announcements.map(
-          announcement => this.announcementMapper.mapFrom(announcement)
+        const announcements: Array<AnnouncementEntity> =
+          response.data.announcements;
+        const mappedAnnouncement: Array<Announcement> = announcements.map(
+          this.announcementMapper.mapFrom
         );
-        return userManagement;
+        return mappedAnnouncement;
       })
     );
   }
@@ -47,6 +46,12 @@ export class AnnouncementImplementation extends AnnouncementGateway {
         initDate: startDate,
         endDate,
       })
+      .pipe(map(() => undefined));
+  }
+
+  delete(id: string): Observable<void> {
+    return this.http
+      .delete(`${this.apiAnnouncement}?id=${id}`)
       .pipe(map(() => undefined));
   }
 }
