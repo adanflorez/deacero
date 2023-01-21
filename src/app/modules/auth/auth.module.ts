@@ -10,17 +10,11 @@ import { ModalModule } from '../../shared/modal/modal.module';
 import { NavbarModule } from '../../shared/navbar/navbar.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
-import { CallComponent } from './call/call.component';
 import { SignupComponent } from './signup/signup.component';
 import { ValidateComponent } from './validate/validate.component';
 
 @NgModule({
-  declarations: [
-    SignupComponent,
-    CallComponent,
-    ValidateComponent,
-    AuthComponent,
-  ],
+  declarations: [SignupComponent, ValidateComponent, AuthComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
