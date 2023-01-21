@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { BehaviorSubject, catchError, throwError } from 'rxjs';
-
 import { AlertType } from 'src/app/core/enums/alert-type';
-import { CallService } from 'src/app/core/services/call.service';
-import { UserService } from 'src/app/core/services/user.service';
-import Response from 'src/app/core/models/response.model';
 import { validateRFC } from 'src/app/core/helpers/rfc-validator';
 import CallForm from 'src/app/core/models/call-form.model';
 import FormValid from 'src/app/core/models/form-valid.model';
+import Response from 'src/app/core/models/response.model';
+import { CallService } from 'src/app/core/services/call.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -58,25 +57,25 @@ export class HomeComponent implements OnInit {
         next: (res: any) => {
           this.formData = {
             governingBody: {
-              comment: res.data.governingBody.comments,
-              renewalFrequency: res.data.governingBody.boardRenewalFrequency,
-              members: res.data.governingBody.membersOfTheGoverning,
-              meetings: res.data.governingBody.numberOfMeetingsPerYear,
+              comment: res.data.governingBody?.comments,
+              renewalFrequency: res.data.governingBody?.boardRenewalFrequency,
+              members: res.data.governingBody?.membersOfTheGoverning,
+              meetings: res.data.governingBody?.numberOfMeetingsPerYear,
             },
             remuneration: {
-              comment: res.data.remunerations.comments,
+              comment: res.data.remunerations?.comments,
               remunerationQuestion:
-                res.data.remunerations.workInYourOrganizationIsPaid,
-              remunerations: res.data.remunerations.tableRemunerations,
+                res.data.remunerations?.workInYourOrganizationIsPaid,
+              remunerations: res.data.remunerations?.tableRemunerations,
             },
             generalData: {
-              rfc: res.data.generalData.RFC,
-              emails: res.data.generalData.email,
-              businessname: res.data.generalData.razonSocial,
-              position: res.data.generalData.position,
-              tradename: res.data.generalData.nombreComercial,
-              phone: res.data.generalData.telefono,
-              accountBankManager: res.data.generalData.manageTheBankAccount,
+              rfc: res.data.generalData?.RFC,
+              emails: res.data.generalData?.email,
+              businessname: res.data.generalData?.razonSocial,
+              position: res.data.generalData?.position,
+              tradename: res.data.generalData?.nombreComercial,
+              phone: res.data.generalData?.telefono,
+              accountBankManager: res.data.generalData?.manageTheBankAccount,
             },
             fundManager: {
               cellphone: res.data.procuringFunds?.celular,
