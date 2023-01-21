@@ -1,10 +1,10 @@
-import { AuthComponent } from './auth.component';
-import { ValidateComponent } from './validate/validate.component';
-import { CallComponent } from './call/call.component';
-import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { AuthComponent } from './auth.component';
+import { CallComponent } from './call/call.component';
+import { SignupComponent } from './signup/signup.component';
+import { ValidateComponent } from './validate/validate.component';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        component: LoginComponent,
+        loadChildren: () => import('./pages/login').then(m => m.LoginModule),
       },
       {
         path: 'call',
