@@ -12,9 +12,9 @@ import {
   MULTIPLE_EMAIL_PATTERN,
   ONLY_NUMBERS_PATTERN,
 } from 'src/app/core/constants';
-import { AlertType } from 'src/app/core/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
+import { AlertType } from 'src/app/shared/alert';
 
 import { FundManagerForm } from './domain';
 

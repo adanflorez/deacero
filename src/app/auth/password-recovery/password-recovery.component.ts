@@ -1,7 +1,7 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AlertType } from 'src/app/core/enums/alert-type';
+import { AlertType } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-password-recovery',

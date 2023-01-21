@@ -1,17 +1,17 @@
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { PASSWORD_PATERN } from 'src/app/core/constants';
 import { CustomValidators } from 'src/app/core/helpers/custom-validators';
 import { validateRFC } from 'src/app/core/helpers/rfc-validator';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { AlertType } from 'src/app/core/enums/alert-type';
+import { AlertType } from 'src/app/shared/alert';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare let window: any;

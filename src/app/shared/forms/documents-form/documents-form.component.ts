@@ -1,11 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { AlertType } from 'src/app/core/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
 import Response from 'src/app/core/models/response.model';
 import { MultimediaService } from 'src/app/core/services/multimedia.service';
+import { AlertType } from 'src/app/shared/alert';
 
 import { DocumentsForm } from './domain';
 

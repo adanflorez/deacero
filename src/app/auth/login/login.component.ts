@@ -1,11 +1,11 @@
-import { firstValueFrom } from 'rxjs';
-import { RoleService } from 'src/app/core/services/role.service';
-import { AlertType } from 'src/app/core/enums/alert-type';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import Response from 'src/app/core/models/response.model';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { RoleService } from 'src/app/core/services/role.service';
+import { AlertType } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-login',

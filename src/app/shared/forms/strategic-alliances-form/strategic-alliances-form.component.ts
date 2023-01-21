@@ -8,14 +8,14 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AlertType } from 'src/app/core/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import Donation from 'src/app/core/models/donation.model';
 import FormValid from 'src/app/core/models/form-valid.model';
 import Product from 'src/app/core/models/product.model';
+import { StrategicAllianceActivity } from 'src/app/core/models/strategic-alliances-activity.model';
+import { AlertType } from 'src/app/shared/alert';
 
 import { StrategicAlliancesForm } from './domain';
-import { StrategicAllianceActivity } from 'src/app/core/models/strategic-alliances-activity.model';
 
 @Component({
   selector: 'app-strategic-alliances-form',

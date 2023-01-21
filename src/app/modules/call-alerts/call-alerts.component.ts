@@ -1,10 +1,10 @@
-import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import CallForm from 'src/app/core/models/call-form.model';
 import FormValid from 'src/app/core/models/form-valid.model';
 import { CallService } from 'src/app/core/services/call.service';
-import { AlertType } from 'src/app/core/enums/alert-type';
-import { Router } from '@angular/router';
+import { AlertType } from 'src/app/shared/alert';
 
 @Component({
   selector: 'app-call-alerts',

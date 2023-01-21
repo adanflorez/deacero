@@ -1,17 +1,17 @@
 import {
   Component,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   SimpleChanges,
-  OnChanges,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AlertType } from 'src/app/core/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
 import Remuneration from 'src/app/core/models/remuneration.model';
+import { AlertType } from 'src/app/shared/alert';
 
 import { RemunerationForm } from './domain';
 
