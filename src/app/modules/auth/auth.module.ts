@@ -1,8 +1,8 @@
-import { DaButtonModule } from '../shared/da-button/da-button.module';
-import { FormErrorModule } from './../shared/form-error/form-error.module';
-import { NavbarModule } from './../shared/navbar/navbar.module';
-import { AlertModule } from './../shared/alert/alert.module';
-import { ModalModule } from './../shared/modal/modal.module';
+import { DaButtonModule } from '../../shared/da-button/da-button.module';
+import { FormErrorModule } from '../../shared/form-error/form-error.module';
+import { NavbarModule } from '../../shared/navbar/navbar.module';
+import { AlertModule } from '../../shared/alert/alert.module';
+import { ModalModule } from '../../shared/modal/modal.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
