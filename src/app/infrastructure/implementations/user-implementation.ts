@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserRepository } from 'src/app/domain/repositories/user.repository';
 import { UserModel } from 'src/app/domain/models/user.model';
-import { UserEntity } from './entities/user-entity';
-import { UserImplementationRepositoryMapper } from './mappers/user-repository.mapper';
+import { UserEntity } from '../driven-adapters/entities/user-entity';
+import { UserGateway } from 'src/app/domain';
+import { UserImplementationMapper } from '../helpers';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserImplementationRepository extends UserRepository {
+export class UserImplementation extends UserGateway {
   private apiAdmin = environment.apiAdmin;
-  userMapper = new UserImplementationRepositoryMapper();
+  userMapper = new UserImplementationMapper();
 
   constructor(private http: HttpClient) {
     super();

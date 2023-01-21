@@ -1,10 +1,7 @@
 import { UserModel } from 'src/app/domain/models/user.model';
 import { Mapper } from 'src/app/base/utils/mapper';
-import { UserEntity } from '../entities/user-entity';
-export class UserImplementationRepositoryMapper extends Mapper<
-  UserEntity,
-  UserModel
-> {
+import { UserEntity } from '../../driven-adapters/entities/user-entity';
+export class UserImplementationMapper extends Mapper<UserEntity, UserModel> {
   mapFrom(param: UserEntity): UserModel {
     return {
       id: param.id,

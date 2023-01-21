@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
 import { UserModel } from 'src/app/domain/models/user.model';
-import { UserRepository } from 'src/app/domain/repositories/user.repository';
+import { UserGateway } from '../../gateway';
 export class GetUserUseCases {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userGateway: UserGateway) {}
   list(): Observable<UserModel[]> {
-    return this.userRepository.list();
+    return this.userGateway.list();
   }
 }
