@@ -416,14 +416,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.initDocuments();
     this.changeCategory();
     this.form.markAllAsTouched();
-    if (this.form.valid) {
-      this.callService.status().subscribe((res: unknown) => {
-        if ((res as Response<unknown>).data) {
-          this.form.disable();
-          this.infoSaved$.next(true);
-        }
-      });
-    }
+    this.validateFormCompleted();
   }
 
   initDocuments() {
@@ -504,6 +497,19 @@ export class CallsComponent implements OnInit, OnDestroy {
         help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
       },
     ];
+  }
+
+  private validateFormCompleted(): void {
+    setTimeout(() => {
+      if (this.form.valid) {
+        this.callService.status().subscribe((res: unknown) => {
+          if ((res as Response<unknown>).data) {
+            this.form.disable();
+            this.infoSaved$.next(true);
+          }
+        });
+      }
+    }, 500);
   }
 
   private changeCategory() {
