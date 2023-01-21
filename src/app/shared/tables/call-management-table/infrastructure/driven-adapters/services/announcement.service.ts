@@ -18,16 +18,12 @@ export class AnnouncementService {
     return this.announcementUseCase.get();
   }
 
-  create(startDate: string, endDate: string, type: 1 | 2): Observable<any> {
+  create(startDate: string, endDate: string, type: 1 | 2): Observable<void> {
     return this.announcementUseCase.create(startDate, endDate, type);
   }
 
-  edit(id: string, startDate: string, endDate: string): Observable<any> {
-    return this.http.put(this.apiAnnouncement, {
-      id: Number(id),
-      initDate: startDate,
-      endDate,
-    });
+  edit(id: string, startDate: string, endDate: string): Observable<void> {
+    return this.announcementUseCase.edit(id, startDate, endDate);
   }
 
   delete(id: string): Observable<any> {

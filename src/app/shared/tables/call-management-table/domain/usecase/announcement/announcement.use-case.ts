@@ -13,4 +13,8 @@ export class AnnouncementUseCase {
   create(startDate: string, endDate: string, type: 1 | 2): Observable<void> {
     return this.announcementGateway.create(startDate, endDate, type);
   }
+
+  edit(id: string, startDate: string, endDate: string): Observable<void> {
+    return this.announcementGateway.edit(id, startDate, endDate);
+  }
 }

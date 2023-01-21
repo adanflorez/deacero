@@ -9,4 +9,9 @@ export abstract class AnnouncementGateway {
     endDate: string,
     type: 1 | 2
   ): Observable<void>;
+  abstract edit(
+    id: string,
+    startDate: string,
+    endDate: string
+  ): Observable<void>;
 }

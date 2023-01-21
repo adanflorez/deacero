@@ -205,8 +205,7 @@ export class CallManagementTableComponent implements OnInit {
           ) as string
         )
         .subscribe({
-          next: response => {
-            console.log(response);
+          next: () => {
             this.alertMessage = 'Convocatoria editada';
             this.alertType = AlertType.Success;
             this.showAlert = true;

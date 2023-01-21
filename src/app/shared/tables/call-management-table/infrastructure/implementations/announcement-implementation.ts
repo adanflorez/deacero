@@ -39,4 +39,14 @@ export class AnnouncementImplementation extends AnnouncementGateway {
       })
       .pipe(map(() => undefined));
   }
+
+  edit(id: string, startDate: string, endDate: string): Observable<void> {
+    return this.http
+      .put(this.apiAnnouncement, {
+        id: Number(id),
+        initDate: startDate,
+        endDate,
+      })
+      .pipe(map(() => undefined));
+  }
 }
