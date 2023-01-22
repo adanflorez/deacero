@@ -1,8 +1,7 @@
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TableComponent } from 'src/app/core/models/table.model';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import Remuneration from 'src/app/core/models/remuneration.model';
+import { FormControl, FormGroup } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Remuneration, TableComponent } from 'src/app/core/models';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({

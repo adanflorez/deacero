@@ -1,4 +1,4 @@
-export default interface Remuneration {
+export interface Remuneration {
   id: string;
   position: string;
   schema: string;

@@ -25,10 +25,6 @@ export class UserService {
     return this.http.post<Response<unknown>>(`${this.apiApplication}`, form);
   }
 
-  getOSC(): Observable<Response<unknown>> {
-    return this.http.get<Response<unknown>>(`${this.apiApplication}`);
-  }
-
   OSCstatus(): Observable<Response<unknown>> {
     return this.http.get<Response<unknown>>(
       `${this.apiApplication}field/validation/status`

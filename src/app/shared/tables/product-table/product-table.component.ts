@@ -1,12 +1,12 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/core/constants';
-import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { v4 as uuidv4 } from 'uuid';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Product } from 'src/app/core/models';
 import Response from 'src/app/core/models/response.model';
-import Product from 'src/app/core/models/product.model';
 import { MultimediaService } from 'src/app/core/services/multimedia.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-product-table',

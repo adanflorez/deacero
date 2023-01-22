@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { BehaviorSubject, catchError, throwError } from 'rxjs';
 import { validateRFC } from 'src/app/core/helpers/rfc-validator';
-import CallForm from 'src/app/core/models/call-form.model';
 import FormValid from 'src/app/core/models/form-valid.model';
 import Response from 'src/app/core/models/response.model';
 import { CallService } from 'src/app/core/services/call.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { AlertType } from 'src/app/shared/alert';
+
+import { HomeForm } from './domain';
+import { HomeService } from './infrastructure';
 
 @Component({
   selector: 'app-home',
@@ -20,15 +22,18 @@ export class HomeComponent implements OnInit {
   alertMessage = '';
   loading = false;
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  formData: Partial<CallForm>;
+  formData: HomeForm;
   formsStatus: FormValid[];
 
   constructor(
     private userService: UserService,
-    private callService: CallService
+    private callService: CallService,
+    private homeService: HomeService
   ) {
     this.formsStatus = [];
     this.formData = {
+      governingBody: {},
+      remuneration: {},
       generalData: {},
       fundManager: {},
       organizationalInformation: {},
@@ -43,10 +48,11 @@ export class HomeComponent implements OnInit {
 
   getOSC() {
     this.loading = true;
-    this.userService
-      .getOSC()
+    this.homeService
+      .get()
       .pipe(
         catchError(error => {
+          console.error(error);
           this.showAlert = true;
           this.alertMessage = error.error.message;
           this.alertType = AlertType.Danger;
@@ -54,74 +60,8 @@ export class HomeComponent implements OnInit {
         })
       )
       .subscribe({
-        next: (res: any) => {
-          this.formData = {
-            governingBody: {
-              comment: res.data.governingBody?.comments,
-              renewalFrequency: res.data.governingBody?.boardRenewalFrequency,
-              members: res.data.governingBody?.membersOfTheGoverning,
-              meetings: res.data.governingBody?.numberOfMeetingsPerYear,
-            },
-            remuneration: {
-              comment: res.data.remunerations?.comments,
-              remunerationQuestion:
-                res.data.remunerations?.workInYourOrganizationIsPaid,
-              remunerations: res.data.remunerations?.tableRemunerations,
-            },
-            generalData: {
-              rfc: res.data.generalData?.RFC,
-              emails: res.data.generalData?.email,
-              businessname: res.data.generalData?.razonSocial,
-              position: res.data.generalData?.position,
-              tradename: res.data.generalData?.nombreComercial,
-              phone: res.data.generalData?.telefono,
-              accountBankManager: res.data.generalData?.manageTheBankAccount,
-            },
-            fundManager: {
-              cellphone: res.data.procuringFunds?.celular,
-              responsibleEmail: res.data.procuringFunds?.emailDelResponsable,
-              name: res.data.procuringFunds?.nombre,
-            },
-            organizationalInformation: {
-              generalManagement:
-                res.data.organizationalInformation?.direccionGeneral,
-              operationalManagement:
-                res.data.organizationalInformation?.direccionOperativa,
-              legalRepresentativeEmail:
-                res.data.organizationalInformation?.emailDelRepresentanteLegal,
-              incorporationsStartDate:
-                res.data.organizationalInformation?.fechaDeConstitucion,
-              operationsStartDate:
-                res.data.organizationalInformation?.fechaInicioOperaciones,
-              founder: res.data.organizationalInformation?.fundador,
-              mission: res.data.organizationalInformation?.mision,
-              legalRepresentative:
-                res.data.organizationalInformation?.representanteLegal,
-              ethicalValues: res.data.organizationalInformation?.valores,
-              vision: res.data.organizationalInformation?.vision,
-            },
-            strategicAlliances: {
-              donations: res.data.sustainabilityAndStrategic?.donation,
-              products: res.data.sustainabilityAndStrategic?.product,
-              previousDonations:
-                res.data.sustainabilityAndStrategic?.recibioUnaDonacion,
-              strategicalAlliances:
-                res.data.sustainabilityAndStrategic?.actividadesEspecificasFDA,
-              issuesToStrengthen:
-                res.data.sustainabilityAndStrategic?.temasAFortalecer,
-              whichTopics:
-                res.data.sustainabilityAndStrategic?.temasDescripcion,
-              alliances: res.data.sustainabilityAndStrategic?.redDeAlianzas,
-              courses:
-                res.data.sustainabilityAndStrategic?.listaCursosDeActualizacion,
-            },
-            decentWork: {
-              whyYourOSC: res.data.hardWork?.porqueTrabajarEnTuOSC,
-              personalGrowth: res.data.hardWork?.crecimientoPersonal,
-              whatMakesYouDifferent: res.data.hardWork?.descripcionOSC,
-              benefitsSystem: res.data.hardWork?.diferenciasDeTuOsc,
-            },
-          };
+        next: (res: HomeForm) => {
+          this.formData = res;
         },
         complete: () => {
           this.getCallStatus();
@@ -230,7 +170,7 @@ export class HomeComponent implements OnInit {
   }
 
   updateData = <T>(form: T, isFormValid: FormValid) => {
-    const sectionName = isFormValid.name as keyof CallForm;
+    const sectionName = isFormValid.name as keyof HomeForm;
     const sectionBody = {
       ...this.formData[sectionName],
       ...form,

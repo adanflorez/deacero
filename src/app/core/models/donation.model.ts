@@ -1,4 +1,4 @@
-export default interface Donation {
+export interface Donation {
   id: string;
   year: string;
   amount: number;
