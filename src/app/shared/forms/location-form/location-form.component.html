@@ -114,20 +114,7 @@
     </div>
   </div>
   <div class="col-12 col-md-6">
-    <div class="mb-3">
-      <label for="daysAndHours" class="form-label"
-        >Días y horas de atención</label
-      >
-      <textarea
-        class="form-control"
-        id="daysAndHours"
-        rows="3"
-        formControlName="daysAndHours"
-        [class.is-invalid]="
-          f['daysAndHours'].invalid && f['daysAndHours'].touched
-        "></textarea>
-      <app-form-error [control]="f['daysAndHours']"></app-form-error>
-    </div>
+    <app-opening-hours-table [readOnly]="disable"></app-opening-hours-table>
   </div>
   <div class="col-12 col-md-6">
     <div class="mb-3">

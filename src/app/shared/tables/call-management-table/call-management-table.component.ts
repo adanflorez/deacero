@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { firstValueFrom, map, Observable, startWith } from 'rxjs';
-import { AlertType } from 'src/app/core/enums/alert-type';
+import { AlertType } from 'src/app/shared/alert';
 
 import { Announcement } from './domain';
 import { AnnouncementService } from './infrastructure';

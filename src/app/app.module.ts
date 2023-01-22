@@ -1,19 +1,16 @@
-import { NavbarModule } from './shared/navbar/navbar.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskModule } from 'ngx-mask';
+import { GetUserUseCases, UserGateway } from 'src/app/domain';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
-
-import { NgxMaskModule } from 'ngx-mask';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-import { UserImplementationRepository } from 'src/app/data/repositories/user/user-implementation.repository';
-import { UserRepository } from 'src/app/domain/repositories/user.repository';
-import { GetUserUseCases } from 'src/app/domain/usecases/user/get-user.usecase';
+import { UserImplementation } from './infrastructure/implementations/user-implementation';
+import { NavbarModule } from './shared/navbar/navbar.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,12 +27,13 @@ import { GetUserUseCases } from 'src/app/domain/usecases/user/get-user.usecase';
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     {
       provide: GetUserUseCases,
-      useFactory: (userRepo: UserRepository) => new GetUserUseCases(userRepo),
-      deps: [UserRepository],
+      useFactory: (userGateway: UserGateway) =>
+        new GetUserUseCases(userGateway),
+      deps: [UserGateway],
     },
     {
-      provide: UserRepository,
-      useClass: UserImplementationRepository,
+      provide: UserGateway,
+      useClass: UserImplementation,
     },
   ],
   bootstrap: [AppComponent],

@@ -2,9 +2,9 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { URL_PATTERN } from 'src/app/core/constants';
-import { AlertType } from 'src/app/core/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
+import { AlertType } from 'src/app/shared/alert';
 
 import { SocialMediaForm } from './domain';
 
@@ -61,6 +61,9 @@ export class CommunicationFormComponent implements OnInit, OnDestroy {
         Validators.pattern(URL_PATTERN),
       ]),
       youtube: new FormControl(this.defaultValues.youtube, [
+        Validators.pattern(URL_PATTERN),
+      ]),
+      webpage: new FormControl(this.defaultValues.webpage, [
         Validators.pattern(URL_PATTERN),
       ]),
     });

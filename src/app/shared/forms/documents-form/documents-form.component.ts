@@ -1,11 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { AlertType } from 'src/app/core/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
 import Response from 'src/app/core/models/response.model';
 import { MultimediaService } from 'src/app/core/services/multimedia.service';
+import { AlertType } from 'src/app/shared/alert';
 
 import { DocumentsForm } from './domain';
 
@@ -66,22 +66,13 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
   initForm() {
     this.updateDocuments();
     this.form = new FormGroup({
-      ethicalCode: new FormControl(
-        this.defaultValues.ethicalCode,
-        Validators.required
-      ),
-      governanceManual: new FormControl(
-        this.defaultValues.governanceManual,
-        Validators.required
-      ),
+      ethicalCode: new FormControl(this.defaultValues.ethicalCode),
+      governanceManual: new FormControl(this.defaultValues.governanceManual),
       timelineActivities: new FormControl(
         this.defaultValues.timelineActivities,
         Validators.required
       ),
-      workWithMinors: new FormControl(
-        this.defaultValues.workWithMinors,
-        Validators.required
-      ),
+      workWithMinors: new FormControl(this.defaultValues.workWithMinors),
       officialLetterOfAuthorizationOfDonees: new FormControl(
         this.defaultValues.officialLetterOfAuthorizationOfDonees,
         Validators.required
@@ -98,13 +89,9 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
         this.defaultValues.constituentAct,
         Validators.required
       ),
-      mostRecentMeeting: new FormControl(
-        this.defaultValues.mostRecentMeeting,
-        Validators.required
-      ),
+      mostRecentMeeting: new FormControl(this.defaultValues.mostRecentMeeting),
       legalRepresentativesPower: new FormControl(
-        this.defaultValues.legalRepresentativesPower,
-        Validators.required
+        this.defaultValues.legalRepresentativesPower
       ),
       legalRepresentativesId: new FormControl(
         this.defaultValues.legalRepresentativesId,

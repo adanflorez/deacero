@@ -1,11 +1,18 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/core/constants';
-import { AlertType } from 'src/app/core/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
 import Member from 'src/app/core/models/member.model';
+import { AlertType } from 'src/app/shared/alert';
 
 import { GoverningBodyForm } from './domain';
 
@@ -14,13 +21,14 @@ import { GoverningBodyForm } from './domain';
   templateUrl: './governing-body.component.html',
   styleUrls: ['./governing-body.component.scss'],
 })
-export class GoverningBodyComponent implements OnInit, OnDestroy {
+export class GoverningBodyComponent implements OnInit, OnDestroy, OnChanges {
   @Input() updateParentModel: (
     part: GoverningBodyForm,
     formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: GoverningBodyForm;
+  @Input() disable: boolean;
   form: FormGroup;
   members: Member[];
   alertType: AlertType = AlertType.Warning;
@@ -29,6 +37,7 @@ export class GoverningBodyComponent implements OnInit, OnDestroy {
   constructor() {
     this.form = new FormGroup({});
     this.defaultValues = {};
+    this.disable = false;
     this.members = [];
   }
 
@@ -36,6 +45,13 @@ export class GoverningBodyComponent implements OnInit, OnDestroy {
     this.initForm();
     this.initMembers();
     this.updateParentModel({}, this.isValidForm);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable.currentValue) {
+      this.form.disable();
+    }
   }
 
   ngOnDestroy(): void {

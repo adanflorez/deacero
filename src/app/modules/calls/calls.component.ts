@@ -1,8 +1,7 @@
-import { UserService } from 'src/app/core/services/user.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import {
   MULTIPLE_EMAIL_PATTERN,
   OBJECTIVES,
@@ -10,12 +9,12 @@ import {
   RATING,
   URL_PATTERN,
 } from 'src/app/core/constants';
-import Member from 'src/app/core/models/member.model';
 import ProjectBudget from 'src/app/core/models/project-budget.model';
-import Remuneration from 'src/app/core/models/remuneration.model';
 import Response from 'src/app/core/models/response.model';
-import { MultimediaService } from 'src/app/core/services/multimedia.service';
 import { CallService } from 'src/app/core/services/call.service';
+import { MultimediaService } from 'src/app/core/services/multimedia.service';
+import { UserService } from 'src/app/core/services/user.service';
+import { OpeningHours } from 'src/app/shared/tables/opening-hours-table';
 
 @Component({
   selector: 'app-calls',
@@ -25,8 +24,6 @@ import { CallService } from 'src/app/core/services/call.service';
 export class CallsComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
   form!: FormGroup;
-  members: Member[] = [];
-  remunerations: Remuneration[] = [];
   groups: string[] = [];
   categories = [
     'Alimentación',
@@ -80,6 +77,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   contributions: ProjectBudget[] = [];
   conversions: ProjectBudget[] = [];
   donations: ProjectBudget[] = [];
+  openingHours: Array<OpeningHours> = [];
   tempDocumentUrl: BehaviorSubject<string> = new BehaviorSubject<string>('');
   closeResult: string;
   hideForm$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -121,29 +119,20 @@ export class CallsComponent implements OnInit, OnDestroy {
   get isValidForm(): boolean {
     return (
       this.form.valid &&
-      this.members.length > 0 &&
-      (this.f['remunerationQuestion'].value
-        ? this.remunerations.length > 0
-        : true) &&
       this.contributions.length > 0 &&
       this.conversions.length > 0 &&
-      this.donations.length > 0
+      this.donations.length > 0 &&
+      this.openingHours.length > 0
     );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private parseResponse(res: any) {
-    this.members = res?.governingBody.membersOfTheGoverning || [];
-    this.remunerations = res?.remunerations.tableRemunerations || [];
     this.contributions = res?.projectBudget.organizationContribution || [];
     this.conversions = res?.projectBudget.jointVenture || [];
     this.donations = res?.projectBudget.donationDeaceroFoundation || [];
+    this.openingHours = res?.location.daysAndHoursOfAttention || [];
     this.call = {
-      // Governing Body
-      meetings: res?.governingBody.numberOfMeetingsPerYear,
-      renewalFrequency: res?.governingBody.boardRenewalFrequency,
-      // Remunerations
-      remunerationQuestion: res?.remunerations.workInYourOrganizationIsPaid,
       // General project data
       projectName: res?.generalProjectData.projectName,
       category: res?.generalProjectData.category
@@ -157,7 +146,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       state: res?.location.status,
       postalCode: res?.location.postalCode,
       video: res?.location.urlProyect,
-      daysAndHours: res?.location.daysAndHoursOfAttention,
       aboutCall: res?.location.howDidYouFindOutAboutTheCall
         ? res?.location.howDidYouFindOutAboutTheCall[0]
         : '',
@@ -250,19 +238,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   private initForm() {
     this.form = new FormGroup({
-      meetings: new FormControl(this.call?.meetings, [
-        Validators.required,
-        Validators.pattern(ONLY_NUMBERS_PATTERN),
-      ]),
-      renewalFrequency: new FormControl(this.call?.renewalFrequency, [
-        Validators.required,
-        Validators.pattern(ONLY_NUMBERS_PATTERN),
-      ]),
-      remunerationQuestion: new FormControl(
-        this.call?.remunerationQuestion == null
-          ? true
-          : this.call?.remunerationQuestion
-      ),
       projectName: new FormControl(this.call?.projectName, [
         Validators.required,
       ]),
@@ -293,10 +268,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       state: new FormControl(this.call?.state, Validators.required),
       postalCode: new FormControl(this.call?.postalCode, Validators.required),
       video: new FormControl(this.call?.video, Validators.required),
-      daysAndHours: new FormControl(
-        this.call?.daysAndHours,
-        Validators.required
-      ),
       aboutCall: new FormControl(this.call?.aboutCall, Validators.required),
       whichMedia: new FormControl(this.call?.whichMedia),
       responsibleName: new FormControl(
@@ -386,19 +357,16 @@ export class CallsComponent implements OnInit, OnDestroy {
       youtube: new FormControl(this.call?.youtube, [
         Validators.pattern(URL_PATTERN),
       ]),
-      ethicalCode: new FormControl(this.call?.ethicalCode, Validators.required),
-      governanceManual: new FormControl(
-        this.call?.governanceManual,
-        Validators.required
-      ),
+      webpage: new FormControl(this.call?.youtube, [
+        Validators.pattern(URL_PATTERN),
+      ]),
+      ethicalCode: new FormControl(this.call?.ethicalCode),
+      governanceManual: new FormControl(this.call?.governanceManual),
       timelineActivities: new FormControl(
         this.call?.timelineActivities,
         Validators.required
       ),
-      workWithMinors: new FormControl(
-        this.call?.workWithMinors,
-        Validators.required
-      ),
+      workWithMinors: new FormControl(this.call?.workWithMinors),
       officialLetterOfAuthorizationOfDonees: new FormControl(
         this.call?.officialLetterOfAuthorizationOfDonees,
         Validators.required
@@ -415,13 +383,9 @@ export class CallsComponent implements OnInit, OnDestroy {
         this.call?.constituentAct,
         Validators.required
       ),
-      mostRecentMeeting: new FormControl(
-        this.call?.mostRecentMeeting,
-        Validators.required
-      ),
+      mostRecentMeeting: new FormControl(this.call?.mostRecentMeeting),
       legalRepresentativesPower: new FormControl(
-        this.call?.legalRepresentativesPower,
-        Validators.required
+        this.call?.legalRepresentativesPower
       ),
       legalRepresentativesId: new FormControl(
         this.call?.legalRepresentativesId,
@@ -448,18 +412,10 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.handleLocation();
     this.handleAboutCall();
     this.handleObjectives();
-    this.handleRemunerationQuestion();
     this.initDocuments();
     this.changeCategory();
     this.form.markAllAsTouched();
-    if (this.form.valid) {
-      this.callService.status().subscribe((res: unknown) => {
-        if ((res as Response<unknown>).data) {
-          this.form.disable();
-          this.infoSaved$.next(true);
-        }
-      });
-    }
+    this.validateFormCompleted();
   }
 
   initDocuments() {
@@ -540,6 +496,19 @@ export class CallsComponent implements OnInit, OnDestroy {
         help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
       },
     ];
+  }
+
+  private validateFormCompleted(): void {
+    setTimeout(() => {
+      if (this.form.valid) {
+        this.callService.status().subscribe((res: unknown) => {
+          if ((res as Response<unknown>).data) {
+            this.form.disable();
+            this.infoSaved$.next(true);
+          }
+        });
+      }
+    }, 500);
   }
 
   private changeCategory() {
@@ -678,17 +647,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.unsubscribe.push(sub as Subscription);
   }
 
-  private handleRemunerationQuestion() {
-    const sub = this.form
-      .get('remunerationQuestion')
-      ?.valueChanges.subscribe(res => {
-        if (!res) {
-          this.remunerations = [];
-        }
-      });
-    this.unsubscribe.push(sub as Subscription);
-  }
-
   uploadDocument(e: Event, control: string, isImage = false) {
     if (!this.fileValidation(control, isImage)) return;
     const formData = new FormData();
@@ -749,9 +707,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   save(modal?: unknown, updateAndSave?: boolean) {
     const {
-      meetings,
-      renewalFrequency,
-      remunerationQuestion,
       projectName,
       category,
       locationQuestion,
@@ -761,7 +716,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       state,
       postalCode,
       video,
-      daysAndHours,
       aboutCall,
       whichMedia,
       responsibleName,
@@ -834,15 +788,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     } = this.form.value;
 
     const body = {
-      governingBody: {
-        membersOfTheGoverning: this.members,
-        numberOfMeetingsPerYear: meetings,
-        boardRenewalFrequency: renewalFrequency,
-      },
-      remunerations: {
-        workInYourOrganizationIsPaid: remunerationQuestion,
-        tableRemunerations: this.remunerations,
-      },
       generalProjectData: {
         projectName: projectName,
         category: [category],
@@ -855,7 +800,7 @@ export class CallsComponent implements OnInit, OnDestroy {
         status: state,
         postalCode: postalCode,
         urlProyect: video,
-        daysAndHoursOfAttention: daysAndHours,
+        daysAndHoursOfAttention: this.openingHours,
         howDidYouFindOutAboutTheCall: [aboutCall],
         whichMeans: whichMedia,
       },

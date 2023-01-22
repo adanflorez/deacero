@@ -1,10 +1,17 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AlertType } from 'src/app/core/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
 import Remuneration from 'src/app/core/models/remuneration.model';
+import { AlertType } from 'src/app/shared/alert';
 
 import { RemunerationForm } from './domain';
 
@@ -13,13 +20,14 @@ import { RemunerationForm } from './domain';
   templateUrl: './remuneration-form.component.html',
   styleUrls: ['./remuneration-form.component.scss'],
 })
-export class RemunerationFormComponent implements OnInit, OnDestroy {
+export class RemunerationFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() updateParentModel: (
     part: RemunerationForm,
     isFormValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues!: RemunerationForm;
+  @Input() disable: boolean;
   form: FormGroup;
   remunerations: Remuneration[];
   alertType: AlertType = AlertType.Warning;
@@ -29,12 +37,20 @@ export class RemunerationFormComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({});
     this.remunerations = [];
     this.defaultValues = {};
+    this.disable = false;
   }
 
   ngOnInit(): void {
     this.initForm();
     this.initRemunerations();
     this.updateParentModel({}, this.isValid);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable.currentValue) {
+      this.form.disable();
+    }
   }
 
   ngOnDestroy(): void {

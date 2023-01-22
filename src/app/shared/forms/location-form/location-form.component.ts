@@ -1,9 +1,17 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AlertType } from 'src/app/core/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
+import { AlertType } from 'src/app/shared/alert';
+import { OpeningHours } from 'src/app/shared/tables/opening-hours-table';
 
 import { LocationForm } from './domain';
 
@@ -12,27 +20,38 @@ import { LocationForm } from './domain';
   templateUrl: './location-form.component.html',
   styleUrls: ['./location-form.component.scss'],
 })
-export class LocationFormComponent implements OnInit, OnDestroy {
+export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() updateParentModel: (
     part: LocationForm,
     formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: LocationForm;
+  @Input() disable: boolean;
   form: FormGroup;
   locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
   alertType: AlertType = AlertType.Warning;
+  openingHours: Array<OpeningHours>;
 
   private unsubscribe: Subscription[] = [];
 
   constructor() {
     this.form = new FormGroup({});
     this.defaultValues = {};
+    this.disable = false;
+    this.openingHours = [];
   }
 
   ngOnInit(): void {
     this.initForm();
     this.updateParentModel({}, this.isValidForm);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable.currentValue) {
+      this.form.disable();
+    }
   }
 
   ngOnDestroy(): void {
@@ -59,10 +78,6 @@ export class LocationFormComponent implements OnInit, OnDestroy {
         Validators.required
       ),
       video: new FormControl(this.defaultValues.video, Validators.required),
-      daysAndHours: new FormControl(
-        this.defaultValues.daysAndHours,
-        Validators.required
-      ),
       aboutCall: new FormControl(
         this.defaultValues.aboutCall,
         Validators.required
@@ -76,7 +91,10 @@ export class LocationFormComponent implements OnInit, OnDestroy {
   subscribeToForm() {
     const sub = this.form.valueChanges.subscribe(val => {
       setTimeout(() => {
-        this.updateParentModel(val, this.isValidForm);
+        this.updateParentModel(
+          { ...val, daysAndHours: this.openingHours },
+          this.isValidForm
+        );
       }, 500);
     });
     this.unsubscribe.push(sub);
@@ -108,5 +126,14 @@ export class LocationFormComponent implements OnInit, OnDestroy {
         }
       });
     this.unsubscribe.push(locationQuestionSub as Subscription);
+  }
+
+  updateOpeningHours(openingHours: Array<OpeningHours>): void {
+    this.openingHours = openingHours || [];
+    const data = {
+      ...this.form.value,
+      daysAndHours: this.openingHours,
+    };
+    this.updateParentModel(data, this.isValidForm);
   }
 }

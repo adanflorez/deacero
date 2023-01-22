@@ -8,11 +8,12 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AlertType } from 'src/app/core/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import Donation from 'src/app/core/models/donation.model';
 import FormValid from 'src/app/core/models/form-valid.model';
 import Product from 'src/app/core/models/product.model';
+import { StrategicAllianceActivity } from 'src/app/core/models/strategic-alliances-activity.model';
+import { AlertType } from 'src/app/shared/alert';
 
 import { StrategicAlliancesForm } from './domain';
 
@@ -36,6 +37,7 @@ export class StrategicAlliancesFormComponent
   showDonationsTable: boolean;
   donations: Donation[];
   products: Product[];
+  strategicAlliancesActivities: StrategicAllianceActivity[];
 
   private unsubscribe: Subscription[] = [];
 
@@ -46,12 +48,14 @@ export class StrategicAlliancesFormComponent
     this.form = new FormGroup({});
     this.defaultValues = {};
     this.disable = false;
+    this.strategicAlliancesActivities = [];
   }
 
   ngOnInit(): void {
     this.initForm();
     this.initDonations();
     this.initProducts();
+    this.initStrategicAlliancesActivities();
     this.updateParentModel({}, this.isValidForm);
   }
 
@@ -74,6 +78,12 @@ export class StrategicAlliancesFormComponent
     this.products = (this.defaultValues?.products as Product[]) || [];
   }
 
+  initStrategicAlliancesActivities() {
+    this.strategicAlliancesActivities =
+      (this.defaultValues
+        ?.strategicalAlliances as StrategicAllianceActivity[]) || [];
+  }
+
   get f() {
     return this.form.controls;
   }
@@ -84,7 +94,10 @@ export class StrategicAlliancesFormComponent
       valid:
         this.form.valid &&
         this.products.length > 0 &&
-        (this.f['previousDonations'].value ? this.donations.length > 0 : true),
+        (this.f['previousDonations'].value
+          ? this.donations.length > 0
+          : true) &&
+        this.strategicAlliancesActivities.length >= 5,
     };
   }
 
@@ -101,10 +114,6 @@ export class StrategicAlliancesFormComponent
         Validators.required
       ),
       previousDonations: new FormControl(true),
-      strategicalAlliances: new FormControl(
-        this.defaultValues.strategicalAlliances,
-        Validators.required
-      ),
     });
     this.subscribeToForm();
     this.subscribeToIssues();
@@ -153,6 +162,7 @@ export class StrategicAlliancesFormComponent
       ...this.form.value,
       products: this.products,
       donations: this.donations,
+      strategicalAlliances: this.strategicAlliancesActivities,
     };
     this.updateParentModel(data, this.isValidForm);
   }
@@ -163,6 +173,20 @@ export class StrategicAlliancesFormComponent
       ...this.form.value,
       products: this.products,
       donations: this.donations,
+      strategicalAlliances: this.strategicAlliancesActivities,
+    };
+    this.updateParentModel(data, this.isValidForm);
+  }
+
+  updateStrategicAlliancesActivities(
+    strategicAlliancesActivities: StrategicAllianceActivity[]
+  ) {
+    this.strategicAlliancesActivities = strategicAlliancesActivities;
+    const data = {
+      ...this.form.value,
+      products: this.products,
+      donations: this.donations,
+      strategicalAlliances: this.strategicAlliancesActivities,
     };
     this.updateParentModel(data, this.isValidForm);
   }

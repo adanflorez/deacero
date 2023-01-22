@@ -1,3 +1,4 @@
+import { OpeningHoursTableModule } from './../../shared/tables/opening-hours-table/opening-hours-table.module';
 import { FormErrorModule } from '../../shared/form-error/form-error.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -29,6 +30,7 @@ import { BudgetTableComponent } from './components/budget-table/budget-table.com
     NgxMaskModule.forChild(),
     NgSelectModule,
     NgbAlertModule,
+    OpeningHoursTableModule,
   ],
 })
 export class CallsModule {}

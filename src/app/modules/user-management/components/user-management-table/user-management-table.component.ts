@@ -1,20 +1,20 @@
-import {
-  Observable,
-  map,
-  startWith,
-  firstValueFrom,
-  catchError,
-  throwError,
-} from 'rxjs';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserRolePipe } from 'src/app/core/pipes/user-role.pipe';
-import { AlertType } from 'src/app/core/enums/alert-type';
-import { CustomValidators } from 'src/app/core/helpers/custom-validators';
+import {
+  catchError,
+  firstValueFrom,
+  map,
+  Observable,
+  startWith,
+  throwError,
+} from 'rxjs';
 import { PASSWORD_PATERN } from 'src/app/core/constants';
-import { UserService } from 'src/app/core/services/user.service';
+import { CustomValidators } from 'src/app/core/helpers/custom-validators';
+import { UserRolePipe } from 'src/app/core/pipes/user-role.pipe';
 import { UserStatusPipe } from 'src/app/core/pipes/user-status.pipe';
+import { UserService } from 'src/app/core/services/user.service';
 import { UserModel } from 'src/app/domain/models/user.model';
+import { AlertType } from 'src/app/shared/alert';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare let window: any;

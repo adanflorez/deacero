@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { OBJECTIVES } from 'src/app/core/constants';
-import { AlertType } from 'src/app/core/enums/alert-type';
+import { AlertType } from 'src/app/shared/alert/enums/alert-type';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
 

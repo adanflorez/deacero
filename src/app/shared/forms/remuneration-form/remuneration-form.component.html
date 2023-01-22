@@ -24,6 +24,7 @@
     <app-remuneration-table
       *ngIf="f['remunerationQuestion'].value"
       [records]="remunerations"
+      [readOnly]="disable"
       (recordChange)="updateRemunerations($event)"></app-remuneration-table>
   </div>
 </div>

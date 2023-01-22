@@ -1,17 +1,18 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   Component,
   Input,
-  OnInit,
-  OnDestroy,
   OnChanges,
+  OnDestroy,
+  OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { MULTIPLE_EMAIL_PATTERN } from 'src/app/core/constants';
-import FormValid from 'src/app/core/models/form-valid.model';
-import { CallSection } from 'src/app/core/enums/sections.enum';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AlertType } from 'src/app/core/enums/alert-type';
+import { MULTIPLE_EMAIL_PATTERN } from 'src/app/core/constants';
+import { CallSection } from 'src/app/core/enums/sections.enum';
+import FormValid from 'src/app/core/models/form-valid.model';
+import { AlertType } from 'src/app/shared/alert';
+
 import { OrganizationalInformationForm } from './domain';
 
 @Component({
