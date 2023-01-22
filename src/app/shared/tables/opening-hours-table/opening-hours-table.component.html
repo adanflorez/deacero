@@ -30,7 +30,7 @@
           </ng-container>
         </td>
       </tr>
-      <tr *ngIf="!readOnly">
+      <tr *ngIf="!readOnly && !isMaximumRecords">
         <td colspan="6">
           <button class="btn btn-primary" (click)="open(modal)">
             Agregar registro
@@ -71,7 +71,7 @@
         </tr>
         <tr style="height: 10px" class="bg-gray"></tr>
       </ng-container>
-      <tr *ngIf="!readOnly">
+      <tr *ngIf="!readOnly && !isMaximumRecords">
         <td colspan="6">
           <button class="btn btn-primary" (click)="open(modal)">
             Agregar registro

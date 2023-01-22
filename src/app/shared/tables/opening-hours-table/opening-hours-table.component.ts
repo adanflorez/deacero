@@ -24,6 +24,7 @@ export class OpeningHoursTableComponent
   isEditMode: boolean;
   recordToEdit!: OpeningHours;
   hours = HOURS;
+  daysQuantity: number;
 
   constructor(private modalService: NgbModal) {
     this.records = [];
@@ -35,6 +36,7 @@ export class OpeningHoursTableComponent
     this.validForm = false;
     this.closeResult = '';
     this.isEditMode = false;
+    this.daysQuantity = 7;
 
     this.form.valueChanges.subscribe(values => {
       const { day, entryTime, departureTime } = values;
@@ -105,7 +107,12 @@ export class OpeningHoursTableComponent
     this.isEditMode = false;
     this.form.reset();
   }
+
   get f(): unknown {
     throw new Error('Method not implemented.');
+  }
+
+  get isMaximumRecords(): boolean {
+    return this.records.length === this.daysQuantity;
   }
 }
