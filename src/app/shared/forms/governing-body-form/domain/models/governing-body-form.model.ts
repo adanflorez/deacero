@@ -1,4 +1,4 @@
-import Member from 'src/app/core/models/member.model';
+import { Member } from 'src/app/core/models';
 export interface GoverningBodyForm {
   meetings?: number;
   renewalFrequency?: number;

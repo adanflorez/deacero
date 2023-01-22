@@ -9,8 +9,8 @@ import {
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CallSection } from 'src/app/core/enums/sections.enum';
+import { Remuneration } from 'src/app/core/models';
 import FormValid from 'src/app/core/models/form-valid.model';
-import Remuneration from 'src/app/core/models/remuneration.model';
 import { AlertType } from 'src/app/shared/alert';
 
 import { RemunerationForm } from './domain';
@@ -48,7 +48,7 @@ export class RemunerationFormComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const { disable } = changes;
-    if (disable.currentValue) {
+    if (disable?.currentValue) {
       this.form.disable();
     }
   }

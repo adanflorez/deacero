@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/core/constants';
 import { CustomValidators } from 'src/app/core/helpers/custom-validators';
-import Donation from 'src/app/core/models/donation.model';
+import { Donation } from 'src/app/core/models';
 
 @Component({
   selector: 'app-donations-table',
