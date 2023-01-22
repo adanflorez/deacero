@@ -1,4 +1,11 @@
 import { Mapper } from 'src/app/base/utils/mapper';
+import {
+  Donation,
+  Member,
+  Product,
+  Remuneration,
+  StrategicAllianceActivity,
+} from 'src/app/core/models';
 
 import { HomeForm } from '../../../domain';
 import { HomeEntity } from '../../driven-adapters';
@@ -75,6 +82,69 @@ export class HomeApplicationImplementationMapper extends Mapper<
     };
   }
   override mapTo(param: HomeForm): HomeEntity {
-    throw new Error('Method not implemented.');
+    return {
+      governingBody: {
+        boardRenewalFrequency: param.governingBody?.renewalFrequency as number,
+        membersOfTheGoverning: param.governingBody?.members as Array<Member>,
+        numberOfMeetingsPerYear: param.governingBody?.meetings as number,
+      },
+      remunerations: {
+        workInYourOrganizationIsPaid: param.remuneration
+          ?.remunerationQuestion as boolean,
+        tableRemunerations: param.remuneration
+          ?.remunerations as Array<Remuneration>,
+      },
+      generalData: {
+        RFC: param.generalData?.rfc as string,
+        email: param.generalData?.emails as string,
+        razonSocial: param.generalData?.businessname as string,
+        position: param.generalData?.position as string,
+        nombreComercial: param.generalData?.tradename as string,
+        telefono: param.generalData?.phone as string,
+        manageTheBankAccount: param.generalData?.accountBankManager as string,
+      },
+      procuringFunds: {
+        celular: param.fundManager?.cellphone as string,
+        emailDelResponsable: param.fundManager?.responsibleEmail as string,
+        nombre: param.fundManager?.name as string,
+      },
+      organizationalInformation: {
+        direccionGeneral: param.organizationalInformation
+          ?.generalManagement as string,
+        direccionOperativa: param.organizationalInformation
+          ?.operationalManagement as string,
+        emailDelRepresentanteLegal: param.organizationalInformation
+          ?.legalRepresentativeEmail as string,
+        fechaDeConstitucion: param.organizationalInformation
+          ?.incorporationsStartDate as string,
+        fechaInicioOperaciones: param.organizationalInformation
+          ?.operationsStartDate as string,
+        fundador: param.organizationalInformation?.founder as string,
+        mision: param.organizationalInformation?.mission as string,
+        representanteLegal: param.organizationalInformation
+          ?.legalRepresentative as string,
+        valores: param.organizationalInformation?.ethicalValues as string,
+        vision: param.organizationalInformation?.vision as string,
+      },
+      sustainabilityAndStrategic: {
+        donation: param.strategicAlliances?.donations as Array<Donation>,
+        product: param.strategicAlliances?.products as Array<Product>,
+        recibioUnaDonacion: param.strategicAlliances
+          ?.previousDonations as boolean,
+        actividadesEspecificasFDA: param.strategicAlliances
+          ?.strategicalAlliances as Array<StrategicAllianceActivity>,
+        temasAFortalecer: param.strategicAlliances
+          ?.issuesToStrengthen as Array<string>,
+        temasDescripcion: param.strategicAlliances?.whichTopics as string,
+        redDeAlianzas: param.strategicAlliances?.alliances as string,
+        listaCursosDeActualizacion: param.strategicAlliances?.courses as string,
+      },
+      hardWork: {
+        porqueTrabajarEnTuOSC: param.decentWork?.whyYourOSC as string,
+        crecimientoPersonal: param.decentWork?.personalGrowth as string,
+        descripcionOSC: param.decentWork?.whatMakesYouDifferent as string,
+        diferenciasDeTuOsc: param.decentWork?.benefitsSystem as string,
+      },
+    };
   }
 }
