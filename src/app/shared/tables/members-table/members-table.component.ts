@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import Member from 'src/app/core/models/member.model';
+import { Member } from 'src/app/core/models';
 import { TableComponent } from 'src/app/core/models/table.model';
 import { v4 as uuidv4 } from 'uuid';
 
