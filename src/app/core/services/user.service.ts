@@ -21,10 +21,6 @@ export class UserService {
     private getUserUseCases: GetUserUseCases
   ) {}
 
-  updateOSC(form: unknown): Observable<Response<unknown>> {
-    return this.http.post<Response<unknown>>(`${this.apiApplication}`, form);
-  }
-
   OSCstatus(): Observable<Response<unknown>> {
     return this.http.get<Response<unknown>>(
       `${this.apiApplication}field/validation/status`

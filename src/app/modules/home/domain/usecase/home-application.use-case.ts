@@ -8,4 +8,8 @@ export class HomeApplicationUseCase {
   get(): Observable<HomeForm> {
     return this.homeApplicationGateway.get();
   }
+
+  update(form: HomeForm): Observable<void> {
+    return this.homeApplicationGateway.update(form);
+  }
 }

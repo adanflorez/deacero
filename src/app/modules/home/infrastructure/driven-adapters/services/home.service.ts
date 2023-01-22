@@ -10,4 +10,8 @@ export class HomeService {
   get(): Observable<HomeForm> {
     return this.homeApplicationUseCase.get();
   }
+
+  update(form: HomeForm): Observable<void> {
+    return this.homeApplicationUseCase.update(form);
+  }
 }

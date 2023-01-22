@@ -25,4 +25,10 @@ export class HomeApplicationImplementation extends HomeApplicationGateway {
       })
     );
   }
+
+  override update(form: HomeForm): Observable<void> {
+    return this.http
+      .post(`${this.apiApplication}`, this.homeApplicationMapper.mapTo(form))
+      .pipe(map(() => undefined));
+  }
 }
