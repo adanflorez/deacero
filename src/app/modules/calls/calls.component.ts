@@ -14,6 +14,7 @@ import Response from 'src/app/core/models/response.model';
 import { CallService } from 'src/app/core/services/call.service';
 import { MultimediaService } from 'src/app/core/services/multimedia.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { OpeningHours } from 'src/app/shared/tables/opening-hours-table';
 
 @Component({
   selector: 'app-calls',
@@ -76,6 +77,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   contributions: ProjectBudget[] = [];
   conversions: ProjectBudget[] = [];
   donations: ProjectBudget[] = [];
+  openingHours: Array<OpeningHours> = [];
   tempDocumentUrl: BehaviorSubject<string> = new BehaviorSubject<string>('');
   closeResult: string;
   hideForm$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -119,7 +121,8 @@ export class CallsComponent implements OnInit, OnDestroy {
       this.form.valid &&
       this.contributions.length > 0 &&
       this.conversions.length > 0 &&
-      this.donations.length > 0
+      this.donations.length > 0 &&
+      this.openingHours.length > 0
     );
   }
 
@@ -128,6 +131,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.contributions = res?.projectBudget.organizationContribution || [];
     this.conversions = res?.projectBudget.jointVenture || [];
     this.donations = res?.projectBudget.donationDeaceroFoundation || [];
+    this.openingHours = res?.location.daysAndHoursOfAttention || [];
     this.call = {
       // General project data
       projectName: res?.generalProjectData.projectName,
@@ -142,7 +146,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       state: res?.location.status,
       postalCode: res?.location.postalCode,
       video: res?.location.urlProyect,
-      daysAndHours: res?.location.daysAndHoursOfAttention,
       aboutCall: res?.location.howDidYouFindOutAboutTheCall
         ? res?.location.howDidYouFindOutAboutTheCall[0]
         : '',
@@ -265,10 +268,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       state: new FormControl(this.call?.state, Validators.required),
       postalCode: new FormControl(this.call?.postalCode, Validators.required),
       video: new FormControl(this.call?.video, Validators.required),
-      daysAndHours: new FormControl(
-        this.call?.daysAndHours,
-        Validators.required
-      ),
       aboutCall: new FormControl(this.call?.aboutCall, Validators.required),
       whichMedia: new FormControl(this.call?.whichMedia),
       responsibleName: new FormControl(
@@ -717,7 +716,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       state,
       postalCode,
       video,
-      daysAndHours,
       aboutCall,
       whichMedia,
       responsibleName,
@@ -802,7 +800,7 @@ export class CallsComponent implements OnInit, OnDestroy {
         status: state,
         postalCode: postalCode,
         urlProyect: video,
-        daysAndHoursOfAttention: daysAndHours,
+        daysAndHoursOfAttention: this.openingHours,
         howDidYouFindOutAboutTheCall: [aboutCall],
         whichMeans: whichMedia,
       },
