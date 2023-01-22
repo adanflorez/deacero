@@ -69,12 +69,14 @@
           </td>
           <td>
             <ngb-highlight
-              [result]="announcement.startDate | date : 'YYYY-MM-dd'"
+              [result]="announcement.startDate | date : 'YYYY-MM-dd hh:mm:ss'"
               [term]="filter.value"></ngb-highlight>
           </td>
           <td>
             <ngb-highlight
-              [result]="announcement.endRegisterDate | date : 'YYYY-MM-dd'"
+              [result]="
+                announcement.endRegisterDate | date : 'YYYY-MM-dd hh:mm:ss'
+              "
               [term]="filter.value"></ngb-highlight>
           </td>
           <!-- <td>
@@ -144,7 +146,7 @@
           <th>Fecha inicio</th>
           <td>
             <ngb-highlight
-              [result]="announcement.startDate | date : 'YYYY-MM-dd'"
+              [result]="announcement.startDate | date : 'YYYY-MM-dd hh:mm:ss'"
               [term]="filter.value"></ngb-highlight>
           </td>
         </tr>
@@ -152,7 +154,9 @@
           <th>Fecha fin registro</th>
           <td>
             <ngb-highlight
-              [result]="announcement.endRegisterDate | date : 'YYYY-MM-dd'"
+              [result]="
+                announcement.endRegisterDate | date : 'YYYY-MM-dd hh:mm:ss'
+              "
               [term]="filter.value"></ngb-highlight>
           </td>
         </tr>
@@ -229,7 +233,7 @@
       <div class="mb-3">
         <label for="startDate" class="form-label">Fecha inicio</label>
         <input
-          type="date"
+          type="datetime-local"
           class="form-control"
           id="startDate"
           formControlName="startDate"
@@ -242,7 +246,7 @@
       <div class="mb-3">
         <label for="endRegisterDate" class="form-label">Fecha fin</label>
         <input
-          type="date"
+          type="datetime-local"
           class="form-control"
           id="endRegisterDate"
           formControlName="endRegisterDate"
