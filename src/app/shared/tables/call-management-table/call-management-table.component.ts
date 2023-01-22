@@ -155,12 +155,12 @@ export class CallManagementTableComponent implements OnInit {
       type: announcement.type,
       startDate: formatDate(
         announcement.startDate as string,
-        'yyyy-MM-dd',
+        'yyyy-MM-dd hh:mm:ss',
         'en'
       ),
       endRegisterDate: formatDate(
         announcement.endRegisterDate as string,
-        'yyyy-MM-dd',
+        'yyyy-MM-dd hh:mm:ss',
         'en'
       ),
       // bases: announcement.bases || '',
