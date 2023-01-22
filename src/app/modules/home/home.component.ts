@@ -5,7 +5,6 @@ import { validateRFC } from 'src/app/core/helpers/rfc-validator';
 import FormValid from 'src/app/core/models/form-valid.model';
 import Response from 'src/app/core/models/response.model';
 import { CallService } from 'src/app/core/services/call.service';
-import { UserService } from 'src/app/core/services/user.service';
 import { AlertType } from 'src/app/shared/alert';
 
 import { HomeForm } from './domain';
@@ -26,7 +25,6 @@ export class HomeComponent implements OnInit {
   formsStatus: FormValid[];
 
   constructor(
-    private userService: UserService,
     private callService: CallService,
     private homeService: HomeService
   ) {
@@ -43,16 +41,15 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getOSC();
+    this.getApplication();
   }
 
-  getOSC() {
+  getApplication() {
     this.loading = true;
     this.homeService
       .get()
       .pipe(
         catchError(error => {
-          console.error(error);
           this.showAlert = true;
           this.alertMessage = error.error.message;
           this.alertType = AlertType.Danger;
@@ -89,68 +86,7 @@ export class HomeComponent implements OnInit {
   }
 
   update() {
-    const form = {
-      governingBody: {
-        boardRenewalFrequency: this.formData.governingBody?.renewalFrequency,
-        membersOfTheGoverning: this.formData.governingBody?.members,
-        numberOfMeetingsPerYear: this.formData.governingBody?.meetings,
-      },
-      remunerations: {
-        workInYourOrganizationIsPaid:
-          this.formData.remuneration?.remunerationQuestion,
-        tableRemunerations: this.formData.remuneration?.remunerations,
-      },
-      generalData: {
-        RFC: this.formData.generalData?.rfc,
-        email: this.formData.generalData?.emails,
-        razonSocial: this.formData.generalData?.businessname,
-        position: this.formData.generalData?.position,
-        nombreComercial: this.formData.generalData?.tradename,
-        telefono: this.formData.generalData?.phone,
-        manageTheBankAccount: this.formData.generalData?.accountBankManager,
-      },
-      procuringFunds: {
-        celular: this.formData.fundManager?.cellphone,
-        emailDelResponsable: this.formData.fundManager?.responsibleEmail,
-        nombre: this.formData.fundManager?.name,
-      },
-      organizationalInformation: {
-        direccionGeneral:
-          this.formData.organizationalInformation?.generalManagement,
-        direccionOperativa:
-          this.formData.organizationalInformation?.operationalManagement,
-        emailDelRepresentanteLegal:
-          this.formData.organizationalInformation?.legalRepresentativeEmail,
-        fechaDeConstitucion:
-          this.formData.organizationalInformation?.incorporationsStartDate,
-        fechaInicioOperaciones:
-          this.formData.organizationalInformation?.operationsStartDate,
-        fundador: this.formData.organizationalInformation?.founder,
-        mision: this.formData.organizationalInformation?.mission,
-        representanteLegal:
-          this.formData.organizationalInformation?.legalRepresentative,
-        valores: this.formData.organizationalInformation?.ethicalValues,
-        vision: this.formData.organizationalInformation?.vision,
-      },
-      sustainabilityAndStrategic: {
-        donation: this.formData.strategicAlliances?.donations,
-        product: this.formData.strategicAlliances?.products,
-        recibioUnaDonacion: this.formData.strategicAlliances?.previousDonations,
-        actividadesEspecificasFDA:
-          this.formData.strategicAlliances?.strategicalAlliances,
-        temasAFortalecer: this.formData.strategicAlliances?.issuesToStrengthen,
-        temasDescripcion: this.formData.strategicAlliances?.whichTopics,
-        redDeAlianzas: this.formData.strategicAlliances?.alliances,
-        listaCursosDeActualizacion: this.formData.strategicAlliances?.courses,
-      },
-      hardWork: {
-        porqueTrabajarEnTuOSC: this.formData.decentWork?.whyYourOSC,
-        crecimientoPersonal: this.formData.decentWork?.personalGrowth,
-        descripcionOSC: this.formData.decentWork?.whatMakesYouDifferent,
-        diferenciasDeTuOsc: this.formData.decentWork?.benefitsSystem,
-      },
-    };
-    this.userService.updateOSC(form).subscribe({
+    this.homeService.update(this.formData).subscribe({
       next: () => {
         this.showAlert = true;
         this.alertMessage = 'Información de OSC actualizada';
@@ -161,7 +97,7 @@ export class HomeComponent implements OnInit {
         this.alertMessage = 'Error al actualizar';
         this.alertType = AlertType.Danger;
       },
-      complete: () => this.getOSC(),
+      complete: () => this.getApplication(),
     });
   }
 
