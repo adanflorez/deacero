@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
 import { AlertType } from 'src/app/shared/alert';
+import { OpeningHours } from 'src/app/shared/tables/opening-hours-table';
 
 import { LocationForm } from './domain';
 
@@ -30,6 +31,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
   form: FormGroup;
   locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
   alertType: AlertType = AlertType.Warning;
+  openingHours: Array<OpeningHours>;
 
   private unsubscribe: Subscription[] = [];
 
@@ -37,6 +39,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
     this.form = new FormGroup({});
     this.defaultValues = {};
     this.disable = false;
+    this.openingHours = [];
   }
 
   ngOnInit(): void {
@@ -88,7 +91,10 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
   subscribeToForm() {
     const sub = this.form.valueChanges.subscribe(val => {
       setTimeout(() => {
-        this.updateParentModel(val, this.isValidForm);
+        this.updateParentModel(
+          { ...val, daysAndHours: this.openingHours },
+          this.isValidForm
+        );
       }, 500);
     });
     this.unsubscribe.push(sub);
@@ -120,5 +126,14 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
         }
       });
     this.unsubscribe.push(locationQuestionSub as Subscription);
+  }
+
+  updateOpeningHours(openingHours: Array<OpeningHours>): void {
+    this.openingHours = openingHours || [];
+    const data = {
+      ...this.form.value,
+      daysAndHours: this.openingHours,
+    };
+    this.updateParentModel(data, this.isValidForm);
   }
 }

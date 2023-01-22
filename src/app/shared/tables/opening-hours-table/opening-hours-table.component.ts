@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TableComponent } from 'src/app/core/models/table.model';
 import { v4 as uuidv4 } from 'uuid';
 
-import { OpeningHours } from './domain';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HOURS, OpeningHours } from './domain';
 
 @Component({
   selector: 'app-opening-hours-table',
@@ -23,6 +23,7 @@ export class OpeningHoursTableComponent
   closeResult: string;
   isEditMode: boolean;
   recordToEdit!: OpeningHours;
+  hours = HOURS;
 
   constructor(private modalService: NgbModal) {
     this.records = [];

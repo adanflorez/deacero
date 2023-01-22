@@ -1,3 +1,5 @@
+import { OpeningHours } from 'src/app/shared/tables/opening-hours-table/';
+
 export interface LocationForm {
   locationQuestion?: boolean;
   street?: string;
@@ -6,7 +8,7 @@ export interface LocationForm {
   state?: string;
   postalCode?: string;
   video?: string;
-  daysAndHours?: string;
+  daysAndHours?: Array<OpeningHours>;
   aboutCall?: string;
   whichMedia?: string;
   comment?: string;

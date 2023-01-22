@@ -109,13 +109,9 @@
         formControlName="entryTime"
         id="entryTime">
         <option selected value="">Click para seleccionar</option>
-        <option value="Lunes">Lunes</option>
-        <option value="Martes">Martes</option>
-        <option value="Miercoles">Miercoles</option>
-        <option value="Jueves">Jueves</option>
-        <option value="Viernes">Viernes</option>
-        <option value="Sabado">Sabado</option>
-        <option value="Domingo">Domingo</option>
+        <option *ngFor="let hour of hours" [value]="hour.value">
+          {{ hour.label }}
+        </option>
       </select>
       <label class="form-label" for="departureTime">Hora salida</label>
       <select
@@ -123,13 +119,9 @@
         formControlName="departureTime"
         id="departureTime">
         <option selected value="">Click para seleccionar</option>
-        <option value="Lunes">Lunes</option>
-        <option value="Martes">Martes</option>
-        <option value="Miercoles">Miercoles</option>
-        <option value="Jueves">Jueves</option>
-        <option value="Viernes">Viernes</option>
-        <option value="Sabado">Sabado</option>
-        <option value="Domingo">Domingo</option>
+        <option *ngFor="let hour of hours" [value]="hour.value">
+          {{ hour.label }}
+        </option>
       </select>
     </form>
   </div>
