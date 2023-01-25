@@ -595,7 +595,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     if (!this.f.locationQuestion.value) {
       this.locationFields.forEach(field => {
         this.form.get(field)?.setValidators(Validators.required);
-        this.form.get(field)?.reset();
+        // this.form.get(field)?.reset();
       });
     } else {
       this.locationFields.forEach(field => {
