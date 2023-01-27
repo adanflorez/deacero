@@ -38,7 +38,7 @@ export class ManagementTableComponent implements OnInit {
   }
 
   loadSites() {
-    this.multisiteService.get().subscribe({
+    this.multisiteService.get(0, 5).subscribe({
       next: response => {
         console.log(response);
       },

@@ -4,7 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ManagementTableComponent } from './components';
-import { MultisiteService } from './infrastructure';
+import { MultisiteGateway, MultisiteUseCase } from './domain';
+import { MultisiteImplementation, MultisiteService } from './infrastructure';
 import { MultisiteManagementRoutingModule } from './multisite-management-routing.module';
 import { MultisiteManagementComponent } from './multisite-management.component';
 
@@ -16,6 +17,18 @@ import { MultisiteManagementComponent } from './multisite-management.component';
     ReactiveFormsModule,
     MultisiteManagementRoutingModule,
   ],
-  providers: [MultisiteService],
+  providers: [
+    MultisiteService,
+    {
+      provide: MultisiteUseCase,
+      useFactory: (multisiteGateway: MultisiteGateway) =>
+        new MultisiteUseCase(multisiteGateway),
+      deps: [MultisiteGateway],
+    },
+    {
+      provide: MultisiteGateway,
+      useClass: MultisiteImplementation,
+    },
+  ],
 })
 export class MultisiteManagementModule {}

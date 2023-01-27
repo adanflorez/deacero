@@ -1,22 +1,14 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Multisite } from 'src/app/modules/multisite-management/domain';
-import { environment } from 'src/environments/environment';
+
+import { MultisiteUseCase } from './../../../domain';
 
 @Injectable()
 export class MultisiteService {
-  apiAdmin = environment.apiAdmin;
+  constructor(private multisiteUseCase: MultisiteUseCase) {}
 
-  constructor(private http: HttpClient) {}
-
-  get(page = 0, perPage = 5): Observable<Multisite[]> {
-    return this.http
-      .get(`${this.apiAdmin}osc?page=${page}&size=${perPage}`)
-      .pipe(
-        map((response: any) => {
-          return response.data.multiSite;
-        })
-      );
+  get(page: number, perPage: number): Observable<Multisite[]> {
+    return this.multisiteUseCase.get(page, perPage);
   }
 }
