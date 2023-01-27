@@ -1,16 +1,22 @@
-import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { MultisiteManagementRoutingModule } from './multisite-management-routing.module';
 import { MultisiteManagementComponent } from './multisite-management.component';
-import { MultisiteManagementTableModule } from 'src/app/shared/tables/multisite-management-table/multisite-management-table.module';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { MultisiteManagementTableComponent } from './components';
 
 @NgModule({
-  declarations: [MultisiteManagementComponent],
+  declarations: [
+    MultisiteManagementComponent,
+    MultisiteManagementTableComponent,
+  ],
   imports: [
     CommonModule,
+    NgbTypeaheadModule,
+    ReactiveFormsModule,
     MultisiteManagementRoutingModule,
-    MultisiteManagementTableModule,
   ],
 })
 export class MultisiteManagementModule {}
