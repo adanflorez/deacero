@@ -54,6 +54,9 @@ export class GeneralProjectDataFormComponent implements OnInit {
       // 'Promoción y difusión cultural',
       // 'Reinserción social',
       // 'Salud mental',
+      'Primera infancia', //24
+      'Ciencia y tecnología calidad de vida', //25
+      'Emprendimiento',   //26
     ];
     this.groups = [];
     this.form = new FormGroup({});
@@ -122,6 +125,24 @@ export class GeneralProjectDataFormComponent implements OnInit {
           'supportType',
           'supportScope',
           'resilienceBuilding',
+        ];
+        break;
+        case this.categories[25]:
+          this.groups = [
+            'livingConditions',
+            'lifeQuality',
+            'capacityBuilding',
+            'supportType',
+            'supportScope',
+            'resilienceBuilding',
+          ];
+          break;
+      case this.categories[26]:
+        this.groups = [
+          'socialBackwardness',
+          'capacityBuilding',
+          'communitySense',
+          'sustainabilityProcesses',
         ];
         break;
       case this.categories[1]:
