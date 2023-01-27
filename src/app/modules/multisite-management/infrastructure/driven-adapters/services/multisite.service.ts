@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { Multisite } from 'src/app/core/models/multisite.model';
+import { map, Observable } from 'rxjs';
+import { Multisite } from 'src/app/modules/multisite-management/domain';
 import { environment } from 'src/environments/environment';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MultisiteService {
   apiAdmin = environment.apiAdmin;
 
