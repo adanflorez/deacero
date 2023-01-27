@@ -50,6 +50,9 @@ export class CallsComponent implements OnInit, OnDestroy {
     // 'Promoción y difusión cultural',
     // 'Reinserción social',
     // 'Salud mental',
+    'Primera infancia', //24
+    'Ciencia y tecnología calidad de vida', //25
+    'Emprendimiento',   //26
   ];
   rating = RATING;
   locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
@@ -530,6 +533,24 @@ export class CallsComponent implements OnInit, OnDestroy {
           'supportType',
           'supportScope',
           'resilienceBuilding',
+        ];
+        break;
+        case this.categories[25]:
+          this.groups = [
+            'livingConditions',
+            'lifeQuality',
+            'capacityBuilding',
+            'supportType',
+            'supportScope',
+            'resilienceBuilding',
+          ];
+          break;
+      case this.categories[26]:
+        this.groups = [
+          'socialBackwardness',
+          'capacityBuilding',
+          'communitySense',
+          'sustainabilityProcesses',
         ];
         break;
       case this.categories[1]:
