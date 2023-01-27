@@ -5,11 +5,11 @@ import { MultisiteService } from 'src/app/core/services/multisite.service';
 import { Multisite } from 'src/app/core/models/multisite.model';
 
 @Component({
-  selector: 'app-multisite-management-table',
-  templateUrl: './multisite-management-table.component.html',
-  styleUrls: ['./multisite-management-table.component.scss'],
+  selector: 'app-management-table',
+  templateUrl: './management-table.component.html',
+  styleUrls: ['./management-table.component.scss'],
 })
-export class MultisiteManagementTableComponent implements OnInit {
+export class ManagementTableComponent implements OnInit {
   sites$: Observable<Multisite[]>;
   sites: Multisite[];
   filter = new FormControl('', { nonNullable: true });

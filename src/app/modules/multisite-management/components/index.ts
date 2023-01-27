@@ -1,1 +1,1 @@
-export * from './multisite-management-table';
+export * from './management-table';

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MultisiteManagementTableComponent } from './multisite-management-table.component';
+import { ManagementTableComponent } from './management-table.component';
 
 describe('MultisiteManagementTableComponent', () => {
-  let component: MultisiteManagementTableComponent;
-  let fixture: ComponentFixture<MultisiteManagementTableComponent>;
+  let component: ManagementTableComponent;
+  let fixture: ComponentFixture<ManagementTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MultisiteManagementTableComponent],
+      declarations: [ManagementTableComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MultisiteManagementTableComponent);
+    fixture = TestBed.createComponent(ManagementTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

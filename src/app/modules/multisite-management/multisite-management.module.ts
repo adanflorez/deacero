@@ -5,13 +5,10 @@ import { NgModule } from '@angular/core';
 import { MultisiteManagementRoutingModule } from './multisite-management-routing.module';
 import { MultisiteManagementComponent } from './multisite-management.component';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-import { MultisiteManagementTableComponent } from './components';
+import { ManagementTableComponent } from './components';
 
 @NgModule({
-  declarations: [
-    MultisiteManagementComponent,
-    MultisiteManagementTableComponent,
-  ],
+  declarations: [MultisiteManagementComponent, ManagementTableComponent],
   imports: [
     CommonModule,
     NgbTypeaheadModule,
