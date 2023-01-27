@@ -1,8 +1,8 @@
 import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Observable, map, startWith } from 'rxjs';
-import { MultisiteService } from 'src/app/lib/services/multisite.service';
-import { Multisite } from 'src/app/lib/models/multisite.model';
+import { MultisiteService } from 'src/app/core/services/multisite.service';
+import { Multisite } from 'src/app/core/models/multisite.model';
 
 @Component({
   selector: 'app-multisite-management-table',

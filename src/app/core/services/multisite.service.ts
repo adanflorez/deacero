@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Multisite } from 'src/app/lib/models/multisite.model';
+import { Multisite } from 'src/app/core/models/multisite.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
