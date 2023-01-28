@@ -9,4 +9,8 @@ export class MultisiteUseCase {
   get(page: number, perPage: number): Observable<Array<Multisite>> {
     return this.multisiteGateway.get(page, perPage);
   }
+
+  allowMultisite(siteId: string, allow: boolean): Observable<void> {
+    return this.multisiteGateway.allowMultisite(siteId, allow);
+  }
 }

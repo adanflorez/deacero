@@ -28,4 +28,10 @@ export class MultisiteImplementation extends MultisiteGateway {
         })
       );
   }
+
+  allowMultisite(siteId: string, allow: boolean): Observable<void> {
+    return this.http
+      .put(`${this.apiAdmin}osc?id=${siteId}&status=${allow}`, {})
+      .pipe(map(() => undefined));
+  }
 }
