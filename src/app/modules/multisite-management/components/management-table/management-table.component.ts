@@ -1,7 +1,8 @@
-import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Observable, map, startWith } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { firstValueFrom, map, Observable, startWith } from 'rxjs';
 import { Multisite } from 'src/app/modules/multisite-management/domain';
+
 import { MultisiteService } from '../../infrastructure';
 
 @Component({
@@ -23,7 +24,7 @@ export class ManagementTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadSites();
+    this.sitesList();
   }
 
   search(text: string): Multisite[] {
@@ -37,14 +38,12 @@ export class ManagementTableComponent implements OnInit {
     });
   }
 
-  loadSites() {
-    this.multisiteService.get(0, 5).subscribe({
-      next: response => {
-        console.log(response);
-      },
-      error: err => {
-        console.error(err);
-      },
-    });
+  async sitesList(): Promise<void> {
+    const data = await firstValueFrom(this.multisiteService.get(0, 5));
+    this.sites = data;
+    this.sites$ = this.filter.valueChanges.pipe(
+      startWith(''),
+      map(text => this.search(text))
+    );
   }
 }
