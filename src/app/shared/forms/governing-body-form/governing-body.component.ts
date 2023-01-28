@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/core/constants';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
-import Member from 'src/app/core/models/member.model';
+import { Member } from 'src/app/core/models';
 import { AlertType } from 'src/app/shared/alert';
 
 import { GoverningBodyForm } from './domain';
@@ -49,7 +49,7 @@ export class GoverningBodyComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const { disable } = changes;
-    if (disable.currentValue) {
+    if (disable?.currentValue) {
       this.form.disable();
     }
   }

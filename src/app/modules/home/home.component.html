@@ -11,94 +11,41 @@
     <app-general-data-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="{
-        tradename: formData.generalData?.tradename,
-        businessname: formData.generalData?.businessname,
-        rfc: formData.generalData?.rfc,
-        phone: formData.generalData?.phone,
-        emails: formData.generalData?.emails,
-        position: formData.generalData?.position,
-        accountBankManager: formData.generalData?.accountBankManager,
-        comment: ''
-      }"></app-general-data-form>
+      [defaultValues]="formData.generalData"></app-general-data-form>
     <hr />
     <app-fund-manager-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="{
-        name: formData.fundManager?.name,
-        responsibleEmail: formData.fundManager?.responsibleEmail,
-        cellphone: formData.fundManager?.cellphone,
-        comment: ''
-      }"></app-fund-manager-form>
+      [defaultValues]="formData.fundManager"></app-fund-manager-form>
     <hr />
     <app-organizational-information-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="{
-        founder: formData.organizationalInformation?.founder,
-        generalManagement:
-          formData.organizationalInformation?.generalManagement,
-        operationalManagement:
-          formData.organizationalInformation?.operationalManagement,
-        legalRepresentative:
-          formData.organizationalInformation?.legalRepresentative,
-        legalRepresentativeEmail:
-          formData.organizationalInformation?.legalRepresentativeEmail,
-        operationsStartDate:
-          formData.organizationalInformation?.operationsStartDate,
-        incorporationsStartDate:
-          formData.organizationalInformation?.incorporationsStartDate,
-        mission: formData.organizationalInformation?.mission,
-        vision: formData.organizationalInformation?.vision,
-        ethicalValues: formData.organizationalInformation?.ethicalValues,
-        comment: ''
-      }"></app-organizational-information-form>
+      [defaultValues]="
+        formData.organizationalInformation
+      "></app-organizational-information-form>
     <hr />
     <app-strategic-alliances-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="{
-        alliances: formData.strategicAlliances?.alliances,
-        courses: formData.strategicAlliances?.courses,
-        issuesToStrengthen: formData.strategicAlliances?.issuesToStrengthen,
-        whichTopics: formData.strategicAlliances?.whichTopics,
-        previousDonations: formData.strategicAlliances?.previousDonations,
-        strategicalAlliances: formData.strategicAlliances?.strategicalAlliances,
-        comment: '',
-        products: formData.strategicAlliances?.products,
-        donations: formData.strategicAlliances?.donations
-      }"></app-strategic-alliances-form>
+      [defaultValues]="
+        formData.strategicAlliances
+      "></app-strategic-alliances-form>
     <hr />
     <app-decent-work-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="{
-        whyYourOSC: formData.decentWork?.whyYourOSC,
-        whatMakesYouDifferent: formData.decentWork?.whatMakesYouDifferent,
-        benefitsSystem: formData.decentWork?.benefitsSystem,
-        personalGrowth: formData.decentWork?.personalGrowth,
-        comment: ''
-      }"></app-decent-work-form>
+      [defaultValues]="formData.decentWork"></app-decent-work-form>
     <hr />
     <app-governing-body
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="{
-        meetings: formData.governingBody?.meetings,
-        renewalFrequency: formData.governingBody?.renewalFrequency,
-        members: formData.governingBody?.members,
-        comment: formData.governingBody?.comment
-      }"></app-governing-body>
+      [defaultValues]="formData.governingBody"></app-governing-body>
     <hr />
     <app-remuneration-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="{
-        remunerationQuestion: formData.remuneration?.remunerationQuestion,
-        comment: formData.remuneration?.comment,
-        remunerations: formData.remuneration?.remunerations
-      }"></app-remuneration-form>
+      [defaultValues]="formData.remuneration"></app-remuneration-form>
 
     <button
       class="btn btn-primary"

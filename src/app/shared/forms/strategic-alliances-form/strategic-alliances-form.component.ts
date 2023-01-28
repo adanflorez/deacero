@@ -9,9 +9,8 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CallSection } from 'src/app/core/enums/sections.enum';
-import Donation from 'src/app/core/models/donation.model';
+import { Donation, Product } from 'src/app/core/models';
 import FormValid from 'src/app/core/models/form-valid.model';
-import Product from 'src/app/core/models/product.model';
 import { StrategicAllianceActivity } from 'src/app/core/models/strategic-alliances-activity.model';
 import { AlertType } from 'src/app/shared/alert';
 

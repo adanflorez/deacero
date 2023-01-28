@@ -1,13 +1,15 @@
-import Donation from 'src/app/core/models/donation.model';
-import Product from 'src/app/core/models/product.model';
-import { StrategicAllianceActivity } from 'src/app/core/models/strategic-alliances-activity.model';
+import {
+  Donation,
+  Product,
+  StrategicAllianceActivity,
+} from 'src/app/core/models';
 
 export interface StrategicAlliancesForm {
   alliances?: string;
   courses?: string;
-  issuesToStrengthen?: string;
+  issuesToStrengthen?: Array<string>;
   whichTopics?: string;
-  previousDonations?: string;
+  previousDonations?: boolean;
   strategicalAlliances?: StrategicAllianceActivity[];
   donations?: Donation[];
   products?: Product[];
