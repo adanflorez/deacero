@@ -25,7 +25,6 @@
           <th scope="col">RFC</th>
           <th scope="col">Razón social de la OSC</th>
           <th scope="col">Nombre de la sede</th>
-          <th scope="col">Usuario</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
@@ -44,11 +43,6 @@
           <td>
             <ngb-highlight
               [result]="site.siteName"
-              [term]="filter.value"></ngb-highlight>
-          </td>
-          <td>
-            <ngb-highlight
-              [result]="site.user"
               [term]="filter.value"></ngb-highlight>
           </td>
           <td>boton</td>
@@ -84,14 +78,6 @@
           <td>
             <ngb-highlight
               [result]="site.siteName"
-              [term]="filter.value"></ngb-highlight>
-          </td>
-        </tr>
-        <tr>
-          <th>Usuario</th>
-          <td>
-            <ngb-highlight
-              [result]="site.user"
               [term]="filter.value"></ngb-highlight>
           </td>
         </tr>
