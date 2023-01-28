@@ -35,32 +35,17 @@
     <app-decent-work-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="{
-        whyYourOSC: formData.decentWork?.whyYourOSC,
-        whatMakesYouDifferent: formData.decentWork?.whatMakesYouDifferent,
-        benefitsSystem: formData.decentWork?.benefitsSystem,
-        personalGrowth: formData.decentWork?.personalGrowth,
-        comment: ''
-      }"></app-decent-work-form>
+      [defaultValues]="formData.decentWork"></app-decent-work-form>
     <hr />
     <app-governing-body
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="{
-        meetings: formData.governingBody?.meetings,
-        renewalFrequency: formData.governingBody?.renewalFrequency,
-        members: formData.governingBody?.members,
-        comment: formData.governingBody?.comment
-      }"></app-governing-body>
+      [defaultValues]="formData.governingBody"></app-governing-body>
     <hr />
     <app-remuneration-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="{
-        remunerationQuestion: formData.remuneration?.remunerationQuestion,
-        comment: formData.remuneration?.comment,
-        remunerations: formData.remuneration?.remunerations
-      }"></app-remuneration-form>
+      [defaultValues]="formData.remuneration"></app-remuneration-form>
 
     <button
       class="btn btn-primary"
