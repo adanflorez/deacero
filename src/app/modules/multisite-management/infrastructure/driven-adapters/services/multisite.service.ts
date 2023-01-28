@@ -11,4 +11,8 @@ export class MultisiteService {
   get(page: number, perPage: number): Observable<Multisite[]> {
     return this.multisiteUseCase.get(page, perPage);
   }
+
+  allowMultisite(siteId: string, allow: boolean) {
+    return this.multisiteUseCase.allowMultisite(siteId, allow);
+  }
 }

@@ -45,7 +45,13 @@
               [result]="site.siteName"
               [term]="filter.value"></ngb-highlight>
           </td>
-          <td>boton</td>
+          <td>
+            <button
+              class="btn btn-primary"
+              (click)="openCurrentSiteModal(allowMultisiteModal, site.id!)">
+              Permitir multisede
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -83,9 +89,41 @@
         </tr>
         <tr>
           <th>Acciones</th>
-          <td>boton</td>
+          <td>
+            <button
+              class="btn btn-primary"
+              (click)="openCurrentSiteModal(allowMultisiteModal, site.id!)">
+              Permitir multisede
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<ng-template #allowMultisiteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmación</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="closeModal(modal)"></button>
+  </div>
+  <div class="modal-body">
+    ¿Desea permitir múltiples sedes/delegaciones para esta organización?
+  </div>
+  <div class="modal-footer">
+    <button
+      class="btn btn-danger me-2"
+      (click)="allowMultisite(currentSite, false); closeModal(modal)">
+      No
+    </button>
+    <button
+      class="btn btn-success"
+      (click)="allowMultisite(currentSite, true); closeModal(modal)">
+      Si
+    </button>
+  </div>
+</ng-template>
