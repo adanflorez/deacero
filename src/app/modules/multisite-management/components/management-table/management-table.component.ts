@@ -16,6 +16,8 @@ export class ManagementTableComponent implements OnInit {
   sites: Multisite[];
   filter = new FormControl('', { nonNullable: true });
   currentSite: string;
+  page: number;
+  totalSites: number;
 
   constructor(
     private multisiteService: MultisiteService,
@@ -27,6 +29,8 @@ export class ManagementTableComponent implements OnInit {
     );
     this.sites = [];
     this.currentSite = '';
+    this.page = 0;
+    this.totalSites = 0;
   }
 
   ngOnInit(): void {
@@ -45,7 +49,7 @@ export class ManagementTableComponent implements OnInit {
   }
 
   async sitesList(): Promise<void> {
-    const data = await firstValueFrom(this.multisiteService.get(0, 100000));
+    const data = await firstValueFrom(this.multisiteService.get(this.page, 10));
     this.sites = data;
     this.sites$ = this.filter.valueChanges.pipe(
       startWith(''),

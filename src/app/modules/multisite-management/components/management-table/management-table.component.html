@@ -65,6 +65,11 @@
       </tbody>
     </table>
   </div>
+  <ngb-pagination
+    *ngIf="totalSites"
+    [collectionSize]="totalSites"
+    [(page)]="page"
+    aria-label="Default pagination"></ngb-pagination>
 </div>
 <div class="d-block d-lg-none">
   <div
@@ -109,6 +114,11 @@
       </tbody>
     </table>
   </div>
+  <ngb-pagination
+    *ngIf="totalSites"
+    [collectionSize]="70"
+    [(page)]="page"
+    aria-label="Default pagination"></ngb-pagination>
 </div>
 
 <ng-template #allowMultisiteModal let-modal>

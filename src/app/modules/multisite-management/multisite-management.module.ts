@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbPaginationModule,
+  NgbTypeaheadModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 import { ManagementTableComponent } from './components';
 import { MultisiteGateway, MultisiteUseCase } from './domain';
@@ -14,6 +17,7 @@ import { MultisiteManagementComponent } from './multisite-management.component';
   imports: [
     CommonModule,
     NgbTypeaheadModule,
+    NgbPaginationModule,
     ReactiveFormsModule,
     MultisiteManagementRoutingModule,
   ],
