@@ -5,3 +5,8 @@ export interface Multisite {
   siteName?: string;
   user?: string;
 }
+
+export interface MultisiteResponse {
+  sites: Array<Multisite>;
+  total: number;
+}

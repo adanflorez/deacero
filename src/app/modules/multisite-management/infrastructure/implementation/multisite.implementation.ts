@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { Multisite, MultisiteGateway } from '../../domain';
+import { Multisite, MultisiteGateway, MultisiteResponse } from '../../domain';
 import { MultisiteImplementationMapper } from '../helpers';
 import { MultisiteEntity } from './../driven-adapters/entities/multisite.entity';
 
@@ -15,7 +15,7 @@ export class MultisiteImplementation extends MultisiteGateway {
     super();
   }
 
-  get(page: number, perPage: number): Observable<Multisite[]> {
+  get(page: number, perPage: number): Observable<MultisiteResponse> {
     return this.http
       .get(`${this.apiAdmin}osc?page=${page}&size=${perPage}`)
       .pipe(
@@ -24,7 +24,7 @@ export class MultisiteImplementation extends MultisiteGateway {
           const mappedMultisite: Array<Multisite> = multisites.map(
             this.multisiteMapper.mapFrom
           );
-          return mappedMultisite;
+          return { sites: mappedMultisite, total: response.data.size };
         })
       );
   }

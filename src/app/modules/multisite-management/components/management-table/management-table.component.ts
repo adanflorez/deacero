@@ -50,7 +50,8 @@ export class ManagementTableComponent implements OnInit {
 
   async sitesList(): Promise<void> {
     const data = await firstValueFrom(this.multisiteService.get(this.page, 10));
-    this.sites = data;
+    this.sites = data.sites;
+    this.totalSites = data.total;
     this.sites$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))
