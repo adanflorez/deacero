@@ -29,30 +29,39 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let site of sites$ | async; index as i">
-          <td>
-            <ngb-highlight
-              [result]="site.rfc"
-              [term]="filter.value"></ngb-highlight>
-          </td>
-          <td>
-            <ngb-highlight
-              [result]="site.businessName"
-              [term]="filter.value"></ngb-highlight>
-          </td>
-          <td>
-            <ngb-highlight
-              [result]="site.siteName"
-              [term]="filter.value"></ngb-highlight>
-          </td>
-          <td>
-            <button
-              class="btn btn-primary"
-              (click)="openCurrentSiteModal(allowMultisiteModal, site.id!)">
-              Permitir multisede
-            </button>
-          </td>
-        </tr>
+        <ng-container *ngFor="let site of sites$ | async as sites; index as i">
+          <tr>
+            <ng-container *ngIf="sites.length">
+              <td>
+                <ngb-highlight
+                  [result]="site.rfc"
+                  [term]="filter.value"></ngb-highlight>
+              </td>
+              <td>
+                <ngb-highlight
+                  [result]="site.businessName"
+                  [term]="filter.value"></ngb-highlight>
+              </td>
+              <td>
+                <ngb-highlight
+                  [result]="site.siteName"
+                  [term]="filter.value"></ngb-highlight>
+              </td>
+              <td>
+                <button
+                  class="btn btn-primary"
+                  (click)="openCurrentSiteModal(allowMultisiteModal, site.id!)">
+                  Permitir multisede
+                </button>
+              </td>
+            </ng-container>
+            <ng-container *ngIf="!sites.length">
+              <td colspan="4" class="text-center">
+                <p class="p-2 m-0">Sin solicitudes pendientes</p>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>
