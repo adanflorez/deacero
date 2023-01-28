@@ -1,0 +1,148 @@
+<div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  <h2 class="mb-3">Multisedes</h2>
+  <div class="d-flex flex-column flex-md-row justify-content-between">
+    <form>
+      <div class="mb-3 row">
+        <label
+          for="table-filtering-search"
+          class="col-xs-3 col-sm-auto col-form-label"
+          >Filtrar:</label
+        >
+        <div class="col-xs-3 col-sm-auto">
+          <input
+            id="table-filtering-search"
+            class="form-control"
+            type="text"
+            [formControl]="filter" />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="d-none d-lg-flex">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">RFC</th>
+          <th scope="col">Razón social de la OSC</th>
+          <th scope="col">Nombre de la sede</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let site of sites$ | async as sites; index as i">
+          <tr>
+            <ng-container *ngIf="sites.length">
+              <td>
+                <ngb-highlight
+                  [result]="site.rfc"
+                  [term]="filter.value"></ngb-highlight>
+              </td>
+              <td>
+                <ngb-highlight
+                  [result]="site.businessName"
+                  [term]="filter.value"></ngb-highlight>
+              </td>
+              <td>
+                <ngb-highlight
+                  [result]="site.siteName"
+                  [term]="filter.value"></ngb-highlight>
+              </td>
+              <td>
+                <button
+                  class="btn btn-primary"
+                  (click)="openCurrentSiteModal(allowMultisiteModal, site.id!)">
+                  Permitir multisede
+                </button>
+              </td>
+            </ng-container>
+            <ng-container *ngIf="!sites.length">
+              <td colspan="4" class="text-center">
+                <p class="p-2 m-0">Sin solicitudes pendientes</p>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <ngb-pagination
+    *ngIf="totalSites"
+    [collectionSize]="totalSites"
+    [(page)]="page"
+    aria-label="Default pagination"></ngb-pagination>
+</div>
+<div class="d-block d-lg-none">
+  <div
+    class="bg-bright-gray border border-secondary rounded p-3 mb-4"
+    *ngFor="let site of sites$ | async; index as i">
+    <table class="table table-striped mobile-table">
+      <tbody>
+        <tr>
+          <th style="width: 200px">RFC</th>
+          <td>
+            <ngb-highlight
+              [result]="site.rfc"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th style="width: 200">Razón social de la OSC</th>
+          <td>
+            <ngb-highlight
+              [result]="site.businessName"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Nombre de la sede</th>
+          <td>
+            <ngb-highlight
+              [result]="site.siteName"
+              [term]="filter.value"></ngb-highlight>
+          </td>
+        </tr>
+        <tr>
+          <th>Acciones</th>
+          <td>
+            <button
+              class="btn btn-primary"
+              (click)="openCurrentSiteModal(allowMultisiteModal, site.id!)">
+              Permitir multisede
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ngb-pagination
+    *ngIf="totalSites"
+    [collectionSize]="70"
+    [(page)]="page"
+    aria-label="Default pagination"></ngb-pagination>
+</div>
+
+<ng-template #allowMultisiteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmación</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="closeModal(modal)"></button>
+  </div>
+  <div class="modal-body">
+    ¿Desea permitir múltiples sedes/delegaciones para esta organización?
+  </div>
+  <div class="modal-footer">
+    <button
+      class="btn btn-danger me-2"
+      (click)="allowMultisite(currentSite, false); closeModal(modal)">
+      No
+    </button>
+    <button
+      class="btn btn-success"
+      (click)="allowMultisite(currentSite, true); closeModal(modal)">
+      Si
+    </button>
+  </div>
+</ng-template>
