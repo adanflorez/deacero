@@ -12,6 +12,7 @@ export class CallComponent implements OnInit {
   ngOnInit(): void {
     this.callForm = new FormGroup({
       acceptTerms: new FormControl(false, Validators.requiredTrue),
+      convocatoría: new FormControl(false, Validators.requiredTrue),
     });
   }
 }
