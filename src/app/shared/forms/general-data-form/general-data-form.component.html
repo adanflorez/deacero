@@ -79,19 +79,7 @@
         [errors]="{ pattern: 'Correos no válidos' }"></app-form-error>
     </div>
   </div>
-  <div class="col-12 col-md-6">
-    <div class="mb-3">
-      <label for="position" class="form-label">Puesto</label>
-      <input
-        type="text"
-        class="form-control"
-        id="position"
-        placeholder="Puesto"
-        formControlName="position"
-        [class.is-invalid]="f['position'].invalid && f['position'].touched" />
-      <app-form-error [control]="f['position']"></app-form-error>
-    </div>
-  </div>
+ 
   <div class="col-12 col-md-6">
     <div class="mb-3">
       <label for="accountBankManager" class="form-label"
@@ -106,6 +94,20 @@
         [class.is-invalid]="
           f['accountBankManager'].invalid && f['accountBankManager'].touched
         " />
+      <app-form-error [control]="f['position']"></app-form-error>
+    </div>
+  </div>
+  
+   <div class="col-12 col-md-6">
+    <div class="mb-3">
+      <label for="position" class="form-label">Puesto</label>
+      <input
+        type="text"
+        class="form-control"
+        id="position"
+        placeholder="Puesto"
+        formControlName="position"
+        [class.is-invalid]="f['position'].invalid && f['position'].touched" />
       <app-form-error [control]="f['position']"></app-form-error>
     </div>
   </div>
