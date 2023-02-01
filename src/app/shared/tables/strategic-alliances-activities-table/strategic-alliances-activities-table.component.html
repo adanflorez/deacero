@@ -3,6 +3,11 @@
   (ganar/ganar) para beneficio mutuo. A continuación, enlista por lo menos 5
   actividades específicas que permitan lograrlo.
 </h5>
+<p class="mt-2">
+  <ngb-alert *ngIf="records.length < 5" type="danger" [dismissible]="false">
+    Debe agregar al menos 5 actividades específicas
+  </ngb-alert>
+</p>
 <div class="d-none d-md-flex">
   <table class="table table-light table-bordered">
     <thead>
