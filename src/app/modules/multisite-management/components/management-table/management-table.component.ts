@@ -29,7 +29,7 @@ export class ManagementTableComponent implements OnInit {
     );
     this.sites = [];
     this.currentSite = '';
-    this.page = 0;
+    this.page = 1;
     this.totalSites = 0;
   }
 
@@ -49,7 +49,9 @@ export class ManagementTableComponent implements OnInit {
   }
 
   async sitesList(): Promise<void> {
-    const data = await firstValueFrom(this.multisiteService.get(this.page, 10));
+    const data = await firstValueFrom(
+      this.multisiteService.get(this.page - 1, 10)
+    );
     this.sites = data.sites;
     this.totalSites = data.total;
     this.sites$ = this.filter.valueChanges.pipe(

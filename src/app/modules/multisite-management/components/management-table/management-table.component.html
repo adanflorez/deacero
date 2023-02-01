@@ -30,38 +30,36 @@
       </thead>
       <tbody>
         <ng-container *ngFor="let site of sites$ | async as sites; index as i">
-          <tr>
-            <ng-container *ngIf="sites.length">
-              <td>
-                <ngb-highlight
-                  [result]="site.rfc"
-                  [term]="filter.value"></ngb-highlight>
-              </td>
-              <td>
-                <ngb-highlight
-                  [result]="site.businessName"
-                  [term]="filter.value"></ngb-highlight>
-              </td>
-              <td>
-                <ngb-highlight
-                  [result]="site.siteName"
-                  [term]="filter.value"></ngb-highlight>
-              </td>
-              <td>
-                <button
-                  class="btn btn-primary"
-                  (click)="openCurrentSiteModal(allowMultisiteModal, site.id!)">
-                  Permitir multisede
-                </button>
-              </td>
-            </ng-container>
-            <ng-container *ngIf="!sites.length">
-              <td colspan="4" class="text-center">
-                <p class="p-2 m-0">Sin solicitudes pendientes</p>
-              </td>
-            </ng-container>
+          <tr *ngIf="sites.length">
+            <td>
+              <ngb-highlight
+                [result]="site.rfc"
+                [term]="filter.value"></ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight
+                [result]="site.businessName"
+                [term]="filter.value"></ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight
+                [result]="site.siteName"
+                [term]="filter.value"></ngb-highlight>
+            </td>
+            <td>
+              <button
+                class="btn btn-primary"
+                (click)="openCurrentSiteModal(allowMultisiteModal, site.id!)">
+                Permitir multisede
+              </button>
+            </td>
           </tr>
         </ng-container>
+        <tr *ngIf="!sites.length">
+          <td colspan="4" class="text-center">
+            <p class="p-2 m-0">Sin solicitudes pendientes</p>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -72,48 +70,60 @@
     aria-label="Default pagination"></ngb-pagination>
 </div>
 <div class="d-block d-lg-none">
-  <div
-    class="bg-bright-gray border border-secondary rounded p-3 mb-4"
-    *ngFor="let site of sites$ | async; index as i">
+  <ng-container *ngFor="let site of sites$ | async as sites; index as i">
+    <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+      <table class="table table-striped mobile-table">
+        <tbody>
+          <tr>
+            <th style="width: 200px">RFC</th>
+            <td>
+              <ngb-highlight
+                [result]="site.rfc"
+                [term]="filter.value"></ngb-highlight>
+            </td>
+          </tr>
+          <tr>
+            <th style="width: 200">Razón social de la OSC</th>
+            <td>
+              <ngb-highlight
+                [result]="site.businessName"
+                [term]="filter.value"></ngb-highlight>
+            </td>
+          </tr>
+          <tr>
+            <th>Nombre de la sede</th>
+            <td>
+              <ngb-highlight
+                [result]="site.siteName"
+                [term]="filter.value"></ngb-highlight>
+            </td>
+          </tr>
+          <tr>
+            <th>Acciones</th>
+            <td>
+              <button
+                class="btn btn-primary"
+                (click)="openCurrentSiteModal(allowMultisiteModal, site.id!)">
+                Permitir multisede
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!sites.length">
     <table class="table table-striped mobile-table">
       <tbody>
         <tr>
-          <th style="width: 200px">RFC</th>
-          <td>
-            <ngb-highlight
-              [result]="site.rfc"
-              [term]="filter.value"></ngb-highlight>
-          </td>
-        </tr>
-        <tr>
-          <th style="width: 200">Razón social de la OSC</th>
-          <td>
-            <ngb-highlight
-              [result]="site.businessName"
-              [term]="filter.value"></ngb-highlight>
-          </td>
-        </tr>
-        <tr>
-          <th>Nombre de la sede</th>
-          <td>
-            <ngb-highlight
-              [result]="site.siteName"
-              [term]="filter.value"></ngb-highlight>
-          </td>
-        </tr>
-        <tr>
-          <th>Acciones</th>
-          <td>
-            <button
-              class="btn btn-primary"
-              (click)="openCurrentSiteModal(allowMultisiteModal, site.id!)">
-              Permitir multisede
-            </button>
+          <td colspan="4" class="text-center">
+            <p class="p-2 m-0">Sin solicitudes pendientes</p>
           </td>
         </tr>
       </tbody>
     </table>
-  </div>
+  </ng-container>
+
   <ngb-pagination
     *ngIf="totalSites"
     [collectionSize]="70"
