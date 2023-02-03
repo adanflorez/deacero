@@ -28,8 +28,8 @@ export class RequestTableComponent {
         request.id?.toLowerCase().includes(text.toLowerCase()) ||
         request.callId?.toLowerCase().includes(text.toLowerCase()) ||
         request.businessName?.toLowerCase().includes(text.toLowerCase()) ||
-        request.rfc?.toLowerCase().includes(text.toLowerCase()) ||
-        request.status?.toLowerCase().includes(text.toLowerCase())
+        request.rfc?.toLowerCase().includes(text.toLowerCase())
+        // request.status?.toLowerCase().includes(text.toLowerCase())
       );
     });
   }

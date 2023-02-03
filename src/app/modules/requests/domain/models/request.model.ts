@@ -3,5 +3,5 @@ export interface Request {
   callId: string;
   businessName: string;
   rfc: string;
-  status: string;
+  status: boolean;
 }
