@@ -1,25 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { map, Observable, startWith } from 'rxjs';
+import { firstValueFrom, map, Observable, startWith } from 'rxjs';
 
-import { Request } from '../../domain';
+import { Request, RequestUseCase } from '../../domain';
 
 @Component({
   selector: 'app-request-table',
   templateUrl: './request-table.component.html',
   styleUrls: ['./request-table.component.scss'],
 })
-export class RequestTableComponent {
+export class RequestTableComponent implements OnInit {
   requests$: Observable<Request[]>;
   requests: Request[];
   filter = new FormControl('', { nonNullable: true });
 
-  constructor() {
+  constructor(private requestUseCase: RequestUseCase) {
     this.requests$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))
     );
     this.requests = [];
+  }
+
+  ngOnInit(): void {
+    this.loadRequests();
   }
 
   search(text: string): Request[] {
@@ -32,5 +36,18 @@ export class RequestTableComponent {
         // request.status?.toLowerCase().includes(text.toLowerCase())
       );
     });
+  }
+
+  async loadRequests(): Promise<void> {
+    try {
+      const data = await firstValueFrom(this.requestUseCase.get());
+      this.requests = data;
+      this.requests$ = this.filter.valueChanges.pipe(
+        startWith(''),
+        map(text => this.search(text))
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

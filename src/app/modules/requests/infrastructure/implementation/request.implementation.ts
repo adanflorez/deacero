@@ -19,8 +19,7 @@ export class RequestImplementation extends RequestGateway {
   get(): Observable<Array<Request>> {
     return this.http.get(`${this.apiAdmin}user/application`).pipe(
       map((response: any) => {
-        console.log(response);
-        const requests: Array<RequestEntity> = response.data.multiSite;
+        const requests: Array<RequestEntity> = response.data.calls;
         const mappedRequests: Array<Request> = requests.map(
           this.requestMapper.mapFrom
         );
