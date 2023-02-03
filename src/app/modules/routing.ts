@@ -49,6 +49,12 @@ const Routing: Routes = [
     canActivate: [RoleGuard],
   },
   {
+    path: 'requests',
+    loadChildren: () => import('./requests').then(m => m.RequestsModule),
+    data: { role: 'ADMINISTRATOR' },
+    canActivate: [RoleGuard],
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full',
