@@ -1,5 +1,23 @@
 <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
   <h2 class="mb-3">Solicitudes</h2>
+  <div class="d-flex flex-column flex-md-row justify-content-between">
+    <form>
+      <div class="mb-3 row">
+        <label
+          for="table-filtering-search"
+          class="col-xs-3 col-sm-auto col-form-label"
+          >Filtrar:</label
+        >
+        <div class="col-xs-3 col-sm-auto">
+          <input
+            id="table-filtering-search"
+            class="form-control"
+            type="text"
+            [formControl]="filter" />
+        </div>
+      </div>
+    </form>
+  </div>
   <div class="d-none d-lg-flex">
     <table class="table table-striped">
       <thead>

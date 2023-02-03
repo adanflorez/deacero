@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { RequestTableComponent } from './components';
@@ -8,6 +9,11 @@ import { RequestsComponent } from './requests.component';
 
 @NgModule({
   declarations: [RequestsComponent, RequestTableComponent],
-  imports: [CommonModule, NgbTypeaheadModule, RequestsRoutingModule],
+  imports: [
+    CommonModule,
+    NgbTypeaheadModule,
+    ReactiveFormsModule,
+    RequestsRoutingModule,
+  ],
 })
 export class RequestsModule {}
