@@ -1,1 +1,52 @@
-<p>request-table works!</p>
+<div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  <h2 class="mb-3">Solicitudes</h2>
+  <div class="d-none d-lg-flex">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Id. Solicitud</th>
+          <th scope="col">Id. Convocatoria</th>
+          <th scope="col">Razón social</th>
+          <th scope="col">RFC</th>
+          <th scope="col">Estatus</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container
+          *ngFor="let request of requests$ | async as requests; index as i">
+          <tr *ngIf="requests.length">
+            <td>
+              <ngb-highlight
+                [result]="request.id"
+                [term]="filter.value"></ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight
+                [result]="request.callId"
+                [term]="filter.value"></ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight
+                [result]="request.businessName"
+                [term]="filter.value"></ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight
+                [result]="request.rfc"
+                [term]="filter.value"></ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight
+                [result]="request.status"
+                [term]="filter.value"></ngb-highlight>
+            </td>
+            <td>
+              <button class="btn btn-primary">Permitir fuera de tiempo</button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
