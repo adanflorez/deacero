@@ -1,5 +1,10 @@
 <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
   <h2 class="mb-3">Solicitudes</h2>
+  <p *ngIf="showAlert">
+    <ngb-alert type="danger" [dismissible]="false"
+      >Error con la solicitud
+    </ngb-alert>
+  </p>
   <div class="d-flex flex-column flex-md-row justify-content-between">
     <form>
       <div class="mb-3 row">
@@ -60,7 +65,9 @@
                 [term]="filter.value"></ngb-highlight> -->
             </td>
             <td>
-              <button class="btn btn-primary" (click)="openModal(modal)">
+              <button
+                class="btn btn-primary"
+                (click)="openModal(dateModal, request.callId)">
                 Permitir fuera de tiempo
               </button>
             </td>
@@ -119,7 +126,9 @@
           <tr>
             <th>Acciones</th>
             <td>
-              <button class="btn btn-primary" (click)="openModal(modal)">
+              <button
+                class="btn btn-primary"
+                (click)="openModal(dateModal, request.callId)">
                 Permitir fuera de tiempo
               </button>
             </td>
@@ -129,7 +138,33 @@
     </div>
   </ng-container>
 </div>
-<ng-template #modal let-modal>
+<ng-template #dateModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Fecha</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p>Por favor indica la fecha</p>
+    <input type="date" class="form-control" [(ngModel)]="date" />
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary me-2" (click)="modal.close()">
+      Cancelar
+    </button>
+
+    <button
+      class="btn btn-primary"
+      [disabled]="!date"
+      (click)="modal.dismiss(); openConfirmationModal(confirmationModal)">
+      Siguiente
+    </button>
+  </div>
+</ng-template>
+<ng-template #confirmationModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Confirmación</h4>
     <button
@@ -146,6 +181,6 @@
       Cancelar
     </button>
 
-    <button class="btn btn-primary">Aceptar</button>
+    <button class="btn btn-primary" (click)="save()">Aceptar</button>
   </div>
 </ng-template>

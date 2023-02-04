@@ -9,4 +9,8 @@ export class RequestUseCase {
   get(): Observable<Array<Request>> {
     return this.requestGateway.get();
   }
+
+  update(applicationId: string, timeExtension: string): Observable<void> {
+    return this.requestGateway.update(applicationId, timeExtension);
+  }
 }

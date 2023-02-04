@@ -14,6 +14,9 @@ export class RequestTableComponent implements OnInit {
   requests$: Observable<Request[]>;
   requests: Request[];
   filter = new FormControl('', { nonNullable: true });
+  date: string;
+  currentApplicationId: string;
+  showAlert: boolean;
 
   constructor(
     private requestUseCase: RequestUseCase,
@@ -24,6 +27,9 @@ export class RequestTableComponent implements OnInit {
       map(text => this.search(text))
     );
     this.requests = [];
+    this.date = '';
+    this.currentApplicationId = '';
+    this.showAlert = false;
   }
 
   ngOnInit(): void {
@@ -55,10 +61,41 @@ export class RequestTableComponent implements OnInit {
     }
   }
 
-  openModal(content: unknown): void {
-    this.modalService.open(content, {
-      ariaLabelledBy: 'modal-basic-title',
-      backdrop: 'static',
-    });
+  openModal(content: unknown, applicationId?: string): void {
+    this.currentApplicationId = applicationId as string;
+    this.modalService
+      .open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        backdrop: 'static',
+      })
+      .result.then(() => {
+        this.date = '';
+        this.currentApplicationId = '';
+      });
+  }
+
+  openConfirmationModal(modal: unknown) {
+    setTimeout(() => {
+      this.openModal(modal, this.currentApplicationId);
+    }, 200);
+  }
+
+  async save() {
+    this.showAlert = false;
+    try {
+      await firstValueFrom(
+        this.requestUseCase.update(this.currentApplicationId, this.date)
+      );
+      this.modalService.dismissAll();
+      this.loadRequests();
+      this.date = '';
+      this.currentApplicationId = '';
+    } catch (error) {
+      this.modalService.dismissAll();
+      this.showAlert = true;
+      this.date = '';
+      this.currentApplicationId = '';
+      console.error(error);
+    }
   }
 }
