@@ -60,12 +60,13 @@
                 [term]="filter.value"></ngb-highlight>
             </td>
             <td>
-              <!-- <ngb-highlight
+              <ngb-highlight
                 [result]="request.status"
-                [term]="filter.value"></ngb-highlight> -->
+                [term]="filter.value"></ngb-highlight>
             </td>
             <td>
               <button
+                *ngIf="request.status === STATUS"
                 class="btn btn-primary"
                 (click)="openModal(dateModal, request.applicationId)">
                 Permitir fuera de tiempo
@@ -118,15 +119,16 @@
           <tr>
             <th>Estatus</th>
             <td>
-              <!-- <ngb-highlight
+              <ngb-highlight
                 [result]="request.status"
-                [term]="filter.value"></ngb-highlight> -->
+                [term]="filter.value"></ngb-highlight>
             </td>
           </tr>
           <tr>
             <th>Acciones</th>
             <td>
               <button
+                *ngIf="request.status === STATUS"
                 class="btn btn-primary"
                 (click)="openModal(dateModal, request.applicationId)">
                 Permitir fuera de tiempo

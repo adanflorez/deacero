@@ -17,6 +17,7 @@ export class RequestTableComponent implements OnInit {
   date: string;
   currentApplicationId: number | undefined;
   showAlert: boolean;
+  STATUS = 'Solicitud no enviada';
 
   constructor(
     private requestUseCase: RequestUseCase,

@@ -2,7 +2,7 @@ export interface RequestEntity {
   requestId: string;
   callId: string;
   businessName: string;
-  status: boolean;
+  status: string;
   applicationId: number;
   rfc: string;
 }

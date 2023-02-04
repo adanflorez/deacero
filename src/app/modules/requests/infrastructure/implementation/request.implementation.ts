@@ -29,7 +29,6 @@ export class RequestImplementation extends RequestGateway {
   }
 
   update(applicationId: number, timeExtension: string): Observable<void> {
-    // timeExtension += ' 00:00:00';
     return this.http
       .put(
         `${this.apiAdmin}user/application?applicationId=${applicationId}&timeExtension=${timeExtension}`,

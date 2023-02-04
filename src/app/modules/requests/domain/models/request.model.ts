@@ -4,5 +4,5 @@ export interface Request {
   applicationId: number;
   businessName: string;
   rfc: string;
-  status: boolean;
+  status: string;
 }
