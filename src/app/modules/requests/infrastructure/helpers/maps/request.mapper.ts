@@ -14,6 +14,7 @@ export class RequestImplementationMapper extends Mapper<
       businessName: param.businessName,
       rfc: param.rfc,
       status: param.status,
+      applicationId: param.applicationId,
     };
   }
   override mapTo(param: Request): RequestEntity {

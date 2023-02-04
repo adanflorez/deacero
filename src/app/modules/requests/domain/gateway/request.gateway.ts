@@ -5,7 +5,7 @@ import { Request } from '../models';
 export abstract class RequestGateway {
   abstract get(): Observable<Array<Request>>;
   abstract update(
-    applicationId: string,
+    applicationId: number,
     timeExtension: string
   ): Observable<void>;
 }

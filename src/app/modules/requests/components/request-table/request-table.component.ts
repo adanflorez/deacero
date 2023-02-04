@@ -15,7 +15,7 @@ export class RequestTableComponent implements OnInit {
   requests: Request[];
   filter = new FormControl('', { nonNullable: true });
   date: string;
-  currentApplicationId: string;
+  currentApplicationId: number | undefined;
   showAlert: boolean;
 
   constructor(
@@ -28,7 +28,7 @@ export class RequestTableComponent implements OnInit {
     );
     this.requests = [];
     this.date = '';
-    this.currentApplicationId = '';
+    this.currentApplicationId = undefined;
     this.showAlert = false;
   }
 
@@ -61,8 +61,8 @@ export class RequestTableComponent implements OnInit {
     }
   }
 
-  openModal(content: unknown, applicationId?: string): void {
-    this.currentApplicationId = applicationId as string;
+  openModal(content: unknown, applicationId?: number): void {
+    this.currentApplicationId = applicationId as number;
     this.modalService
       .open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -70,7 +70,7 @@ export class RequestTableComponent implements OnInit {
       })
       .result.then(() => {
         this.date = '';
-        this.currentApplicationId = '';
+        this.currentApplicationId = undefined;
       });
   }
 
@@ -84,17 +84,20 @@ export class RequestTableComponent implements OnInit {
     this.showAlert = false;
     try {
       await firstValueFrom(
-        this.requestUseCase.update(this.currentApplicationId, this.date)
+        this.requestUseCase.update(
+          this.currentApplicationId as number,
+          this.date
+        )
       );
       this.modalService.dismissAll();
       this.loadRequests();
       this.date = '';
-      this.currentApplicationId = '';
+      this.currentApplicationId = undefined;
     } catch (error) {
       this.modalService.dismissAll();
       this.showAlert = true;
       this.date = '';
-      this.currentApplicationId = '';
+      this.currentApplicationId = undefined;
       console.error(error);
     }
   }

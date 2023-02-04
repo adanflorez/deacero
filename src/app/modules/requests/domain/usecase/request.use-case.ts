@@ -10,7 +10,7 @@ export class RequestUseCase {
     return this.requestGateway.get();
   }
 
-  update(applicationId: string, timeExtension: string): Observable<void> {
+  update(applicationId: number, timeExtension: string): Observable<void> {
     return this.requestGateway.update(applicationId, timeExtension);
   }
 }
