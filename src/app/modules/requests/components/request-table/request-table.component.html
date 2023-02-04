@@ -60,7 +60,9 @@
                 [term]="filter.value"></ngb-highlight> -->
             </td>
             <td>
-              <button class="btn btn-primary">Permitir fuera de tiempo</button>
+              <button class="btn btn-primary" (click)="openModal(modal)">
+                Permitir fuera de tiempo
+              </button>
             </td>
           </tr>
         </ng-container>
@@ -117,7 +119,9 @@
           <tr>
             <th>Acciones</th>
             <td>
-              <button class="btn btn-primary">Permitir fuera de tiempo</button>
+              <button class="btn btn-primary" (click)="openModal(modal)">
+                Permitir fuera de tiempo
+              </button>
             </td>
           </tr>
         </tbody>
@@ -125,3 +129,23 @@
     </div>
   </ng-container>
 </div>
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmación</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    ¿Está seguro que desea permitir la entrega fuera de tiempo?
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary me-2" (click)="modal.close()">
+      Cancelar
+    </button>
+
+    <button class="btn btn-primary">Aceptar</button>
+  </div>
+</ng-template>

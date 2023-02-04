@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { firstValueFrom, map, Observable, startWith } from 'rxjs';
 
 import { Request, RequestUseCase } from '../../domain';
@@ -14,7 +15,10 @@ export class RequestTableComponent implements OnInit {
   requests: Request[];
   filter = new FormControl('', { nonNullable: true });
 
-  constructor(private requestUseCase: RequestUseCase) {
+  constructor(
+    private requestUseCase: RequestUseCase,
+    private modalService: NgbModal
+  ) {
     this.requests$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))
@@ -49,5 +53,12 @@ export class RequestTableComponent implements OnInit {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  openModal(content: unknown): void {
+    this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      backdrop: 'static',
+    });
   }
 }
