@@ -15,38 +15,15 @@ export const validateRFC = (
 };
 
 function validRFC(rfc: string, acceptGeneric = true) {
-  const re = RFC_PATTERN;
-  const isValidated = rfc.match(re);
-
-  if (!isValidated) return false;
-
-  // Separate the check digit from the rest of the RFC
-  const digitVerifier = isValidated.pop(),
-    rfcWithoutDigit = isValidated.slice(1).join(''),
-    len = rfcWithoutDigit.length,
-    // Obtain the expected digit
-    dictionary = ALPHABET,
-    index = len + 1;
-  let sum, digitExpected;
-
-  if (len == 12) sum = 0;
-  else sum = 481; // Adjustment for legal entity
-
-  for (let i = 0; i < len; i++)
-    sum += dictionary.indexOf(rfcWithoutDigit.charAt(i)) * (index - i);
-  digitExpected = 11 - (sum % 11);
-  if (digitExpected == 11) digitExpected = 0;
-  else if (digitExpected == 10) digitExpected = 'A';
-
-  // Does the check digit match the expected digit?
-  // or is it a Generic RFC (sales to general public)?
-  if (
-    (digitVerifier != digitExpected &&
-      (!acceptGeneric || rfcWithoutDigit + digitVerifier != 'XAXX010101000')) ||
-    (!acceptGeneric && rfcWithoutDigit + digitVerifier == 'XEXX010101000')
-  )
-    return false;
-  return rfcWithoutDigit + digitVerifier;
+ const  _rfc_pattern_pm = "^(([A-ZÑ&]{3})([0-9]{2})([0][13578]|[1][02])(([0][1-9]|[12][\\d])|[3][01])([A-Z0-9]{3}))|" +
+  "(([A-ZÑ&]{3})([0-9]{2})([0][13456789]|[1][012])(([0][1-9]|[12][\\d])|[3][0])([A-Z0-9]{3}))|" +
+  "(([A-ZÑ&]{3})([02468][048]|[13579][26])[0][2]([0][1-9]|[12][\\d])([A-Z0-9]{3}))|" +
+  "(([A-ZÑ&]{3})([0-9]{2})[0][2]([0][1-9]|[1][0-9]|[2][0-8])([A-Z0-9]{3}))$";
+  const _rfc_pattern_pf = "^(([A-ZÑ&]{4})([0-9]{2})([0][13578]|[1][02])(([0][1-9]|[12][\\d])|[3][01])([A-Z0-9]{3}))|" +
+       "(([A-ZÑ&]{4})([0-9]{2})([0][13456789]|[1][012])(([0][1-9]|[12][\\d])|[3][0])([A-Z0-9]{3}))|" +
+       "(([A-ZÑ&]{4})([02468][048]|[13579][26])[0][2]([0][1-9]|[12][\\d])([A-Z0-9]{3}))|" +
+       "(([A-ZÑ&]{4})([0-9]{2})[0][2]([0][1-9]|[1][0-9]|[2][0-8])([A-Z0-9]{3}))$";
+return rfc.match(_rfc_pattern_pm) || rfc.match(_rfc_pattern_pf);
 }
 
 // DDS1203121S1

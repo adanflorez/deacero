@@ -92,7 +92,7 @@ export class StrategicAlliancesFormComponent
       name: CallSection.STRATEGIC_ALLIANCES,
       valid:
         this.form.valid &&
-        this.products.length > 0 &&
+      //  this.products.length > 0 &&
         (this.f['previousDonations'].value
           ? this.donations.length > 0
           : true) &&
