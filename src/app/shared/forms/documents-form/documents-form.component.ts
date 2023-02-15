@@ -77,10 +77,10 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
         this.defaultValues.officialLetterOfAuthorizationOfDonees,
         Validators.required
       ),
-      updatedCertificate: new FormControl(
-        this.defaultValues.updatedCertificate,
-        Validators.required
-      ),
+      // updatedCertificate: new FormControl(
+      //   this.defaultValues.updatedCertificate,
+      //   Validators.required
+      // ),
       publicationInAnnex14OfTheCurrentRMF: new FormControl(
         this.defaultValues.publicationInAnnex14OfTheCurrentRMF,
         Validators.required
@@ -97,10 +97,10 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
         this.defaultValues.legalRepresentativesId,
         Validators.required
       ),
-      documentRFC: new FormControl(
-        this.defaultValues.documentRFC,
-        Validators.required
-      ),
+      // documentRFC: new FormControl(
+      //   this.defaultValues.documentRFC,
+      //   Validators.required
+      // ),
       oldProofOfAddress: new FormControl(
         this.defaultValues.oldProofOfAddress,
         Validators.required
@@ -152,11 +152,11 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
         name: 'Oficio de autorización de donatarias SAT (vigente)',
         help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
       },
-      {
-        field: 'updatedCertificate',
-        name: 'Constancia actualizada del Registro Federal de Contribuyentes',
-        help: 'PDF legible',
-      },
+      // {
+      //   field: 'updatedCertificate',
+      //   name: 'Constancia actualizada del Registro Federal de Contribuyentes',
+      //   help: 'PDF legible',
+      // },
       {
         field: 'publicationInAnnex14OfTheCurrentRMF',
         name: 'Publicación en el Anexo-14 de la RMF vigente',
@@ -182,11 +182,11 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
         name: 'Identificación oficial del representante legal',
         help: 'PDF legible',
       },
-      {
-        field: 'documentRFC',
-        name: 'Cédula del RFC',
-        help: 'PDF legible',
-      },
+      // {
+      //   field: 'documentRFC',
+      //   name: 'Cédula del RFC',
+      //   help: 'PDF legible',
+      // },
       {
         field: 'oldProofOfAddress',
         name: 'Comprobante de domicilio con antigüedad no mayor a 3 meses (agua, luz, teléfono)',

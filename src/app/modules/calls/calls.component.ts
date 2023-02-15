@@ -52,7 +52,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     // 'Salud mental',
     'Primera infancia', //24
     'Ciencia y tecnología calidad de vida', //25
-    'Emprendimiento',   //26
+    'Emprendimiento', //26
   ];
   rating = RATING;
   locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
@@ -207,7 +207,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       workWithMinors: res?.documents.workWithMinors,
       officialLetterOfAuthorizationOfDonees:
         res?.documents.officialLetterOfAuthorizationOfDonees,
-      updatedCertificate: res?.documents.updatedCertificate,
+      // updatedCertificate: res?.documents.updatedCertificate,
       publicationInAnnex14OfTheCurrentRMF:
         res?.documents.publicationInAnnex14OfTheCurrentRMF,
       constituentAct: res?.documents.constitutiveActOfTheOrganization,
@@ -215,7 +215,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       legalRepresentativesPower: res?.documents.powerOfLegalRepresentative,
       legalRepresentativesId:
         res?.documents.officialIdentificationOfLegalRepresentative,
-      documentRFC: res?.documents.documentRFC,
+      // documentRFC: res?.documents.documentRFC,
       oldProofOfAddress: res?.documents.oldProofOfAddress,
       updatedComplianceOpinion: res?.documents.updatedComplianceOpinion,
       proofOfUpdatedTaxSituation: res?.documents.proofOfUpdatedTaxSituation,
@@ -374,10 +374,10 @@ export class CallsComponent implements OnInit, OnDestroy {
         this.call?.officialLetterOfAuthorizationOfDonees,
         Validators.required
       ),
-      updatedCertificate: new FormControl(
-        this.call?.updatedCertificate,
-        Validators.required
-      ),
+      // updatedCertificate: new FormControl(
+      //   this.call?.updatedCertificate,
+      //   Validators.required
+      // ),
       publicationInAnnex14OfTheCurrentRMF: new FormControl(
         this.call?.publicationInAnnex14OfTheCurrentRMF,
         Validators.required
@@ -394,7 +394,7 @@ export class CallsComponent implements OnInit, OnDestroy {
         this.call?.legalRepresentativesId,
         Validators.required
       ),
-      documentRFC: new FormControl(this.call?.documentRFC, Validators.required),
+      // documentRFC: new FormControl(this.call?.documentRFC, Validators.required),
       oldProofOfAddress: new FormControl(
         this.call?.oldProofOfAddress,
         Validators.required
@@ -448,11 +448,11 @@ export class CallsComponent implements OnInit, OnDestroy {
         name: 'Oficio de autorización de donatarias SAT (vigente)',
         help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
       },
-      {
-        field: 'updatedCertificate',
-        name: 'Constancia actualizada del Registro Federal de Contribuyentes',
-        help: 'PDF legible',
-      },
+      // {
+      //   field: 'updatedCertificate',
+      //   name: 'Constancia actualizada del Registro Federal de Contribuyentes',
+      //   help: 'PDF legible',
+      // },
       {
         field: 'publicationInAnnex14OfTheCurrentRMF',
         name: 'Publicación en el Anexo-14 de la RMF vigente',
@@ -478,11 +478,11 @@ export class CallsComponent implements OnInit, OnDestroy {
         name: 'Identificación oficial del representante legal',
         help: 'PDF legible',
       },
-      {
-        field: 'documentRFC',
-        name: 'Cédula del RFC',
-        help: 'PDF legible',
-      },
+      // {
+      //   field: 'documentRFC',
+      //   name: 'Cédula del RFC',
+      //   help: 'PDF legible',
+      // },
       {
         field: 'oldProofOfAddress',
         name: 'Comprobante de domicilio con antigüedad no mayor a 3 meses (agua, luz, teléfono)',
@@ -526,6 +526,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       case this.categories[19]:
       case this.categories[23]:
       case this.categories[24]:
+      case this.categories[25]:
         this.groups = [
           'livingConditions',
           'lifeQuality',
@@ -535,16 +536,6 @@ export class CallsComponent implements OnInit, OnDestroy {
           'resilienceBuilding',
         ];
         break;
-        case this.categories[25]:
-          this.groups = [
-            'livingConditions',
-            'lifeQuality',
-            'capacityBuilding',
-            'supportType',
-            'supportScope',
-            'resilienceBuilding',
-          ];
-          break;
       case this.categories[26]:
         this.groups = [
           'socialBackwardness',
@@ -794,13 +785,13 @@ export class CallsComponent implements OnInit, OnDestroy {
       timelineActivities,
       workWithMinors,
       officialLetterOfAuthorizationOfDonees,
-      updatedCertificate,
+      // updatedCertificate,
       publicationInAnnex14OfTheCurrentRMF,
       constituentAct,
       mostRecentMeeting,
       legalRepresentativesPower,
       legalRepresentativesId,
-      documentRFC,
+      // documentRFC,
       oldProofOfAddress,
       updatedComplianceOpinion,
       proofOfUpdatedTaxSituation,
@@ -900,14 +891,14 @@ export class CallsComponent implements OnInit, OnDestroy {
         workWithMinors: workWithMinors,
         officialLetterOfAuthorizationOfDonees:
           officialLetterOfAuthorizationOfDonees,
-        updatedCertificate: updatedCertificate,
+        // updatedCertificate: updatedCertificate,
         publicationInAnnex14OfTheCurrentRMF:
           publicationInAnnex14OfTheCurrentRMF,
         constitutiveActOfTheOrganization: constituentAct,
         mostRecentMeetingMinutes: mostRecentMeeting,
         powerOfLegalRepresentative: legalRepresentativesPower,
         officialIdentificationOfLegalRepresentative: legalRepresentativesId,
-        documentRFC: documentRFC,
+        // documentRFC: documentRFC,
         oldProofOfAddress: oldProofOfAddress,
         updatedComplianceOpinion: updatedComplianceOpinion,
         proofOfUpdatedTaxSituation: proofOfUpdatedTaxSituation,
