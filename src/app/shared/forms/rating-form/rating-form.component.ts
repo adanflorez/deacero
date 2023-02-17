@@ -115,38 +115,11 @@ export class RatingFormComponent implements OnChanges {
 
   private changeCategory(category: string) {
     // Reset previous controls
-    // this.resetPreviousRatings();
     switch (category) {
       case this.categories[0]:
-      case this.categories[2]:
-      case this.categories[3]:
-      case this.categories[15]:
-      case this.categories[18]:
-      case this.categories[19]:
-      case this.categories[23]:
-      case this.categories[24]:
-        this.groups = [
-          'livingConditions',
-          'lifeQuality',
-          'capacityBuilding',
-          'supportType',
-          'supportScope',
-          'resilienceBuilding',
-        ];
-        break;
       case this.categories[1]:
+      case this.categories[2]:
       case this.categories[4]:
-      case this.categories[5]:
-      case this.categories[6]:
-      case this.categories[8]:
-      case this.categories[10]:
-      case this.categories[11]:
-      case this.categories[12]:
-      case this.categories[14]:
-      case this.categories[17]:
-      case this.categories[20]:
-      case this.categories[21]:
-      case this.categories[22]:
         this.groups = [
           'socialBackwardness',
           'capacityBuilding',
@@ -154,15 +127,14 @@ export class RatingFormComponent implements OnChanges {
           'sustainabilityProcesses',
         ];
         break;
-      case this.categories[7]:
-      case this.categories[9]:
-      case this.categories[13]:
-      case this.categories[16]:
+      case this.categories[3]:
         this.groups = [
-          'statusImprovement',
-          'urbanDevelopment',
-          'professionalizationProcess',
-          'opportunityGeneration',
+          'livingConditions',
+          'lifeQuality',
+          'capacityBuilding',
+          'supportType',
+          'supportScope',
+          'resilienceBuilding',
         ];
         break;
       default:

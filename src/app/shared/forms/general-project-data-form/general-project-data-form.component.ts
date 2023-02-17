@@ -56,7 +56,7 @@ export class GeneralProjectDataFormComponent implements OnInit {
       // 'Salud mental',
       'Primera infancia', //24
       'Ciencia y tecnología calidad de vida', //25
-      'Emprendimiento',   //26
+      'Emprendimiento', //26
     ];
     this.groups = [];
     this.form = new FormGroup({});
@@ -108,16 +108,19 @@ export class GeneralProjectDataFormComponent implements OnInit {
 
   private changeCategory() {
     // Reset previous controls
-    // this.resetPreviousRatings();
     switch (this.f.category.value) {
       case this.categories[0]:
+      case this.categories[1]:
       case this.categories[2]:
+      case this.categories[4]:
+        this.groups = [
+          'socialBackwardness',
+          'capacityBuilding',
+          'communitySense',
+          'sustainabilityProcesses',
+        ];
+        break;
       case this.categories[3]:
-      case this.categories[15]:
-      case this.categories[18]:
-      case this.categories[19]:
-      case this.categories[23]:
-      case this.categories[24]:
         this.groups = [
           'livingConditions',
           'lifeQuality',
@@ -125,55 +128,6 @@ export class GeneralProjectDataFormComponent implements OnInit {
           'supportType',
           'supportScope',
           'resilienceBuilding',
-        ];
-        break;
-        case this.categories[25]:
-          this.groups = [
-            'livingConditions',
-            'lifeQuality',
-            'capacityBuilding',
-            'supportType',
-            'supportScope',
-            'resilienceBuilding',
-          ];
-          break;
-      case this.categories[26]:
-        this.groups = [
-          'socialBackwardness',
-          'capacityBuilding',
-          'communitySense',
-          'sustainabilityProcesses',
-        ];
-        break;
-      case this.categories[1]:
-      case this.categories[4]:
-      case this.categories[5]:
-      case this.categories[6]:
-      case this.categories[8]:
-      case this.categories[10]:
-      case this.categories[11]:
-      case this.categories[12]:
-      case this.categories[14]:
-      case this.categories[17]:
-      case this.categories[20]:
-      case this.categories[21]:
-      case this.categories[22]:
-        this.groups = [
-          'socialBackwardness',
-          'capacityBuilding',
-          'communitySense',
-          'sustainabilityProcesses',
-        ];
-        break;
-      case this.categories[7]:
-      case this.categories[9]:
-      case this.categories[13]:
-      case this.categories[16]:
-        this.groups = [
-          'statusImprovement',
-          'urbanDevelopment',
-          'professionalizationProcess',
-          'opportunityGeneration',
         ];
         break;
       default:
