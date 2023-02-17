@@ -29,6 +29,7 @@ export class GoverningBodyComponent implements OnInit, OnDestroy, OnChanges {
   ) => void = () => {};
   @Input() defaultValues: GoverningBodyForm;
   @Input() disable: boolean;
+  @Input() allowComment: boolean;
   form: FormGroup;
   members: Member[];
   alertType: AlertType = AlertType.Warning;
@@ -39,6 +40,7 @@ export class GoverningBodyComponent implements OnInit, OnDestroy, OnChanges {
     this.defaultValues = {};
     this.disable = false;
     this.members = [];
+    this.allowComment = true;
   }
 
   ngOnInit(): void {

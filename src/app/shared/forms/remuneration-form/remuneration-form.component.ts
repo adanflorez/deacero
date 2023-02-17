@@ -28,6 +28,7 @@ export class RemunerationFormComponent implements OnInit, OnDestroy, OnChanges {
   ) => void = () => {};
   @Input() defaultValues!: RemunerationForm;
   @Input() disable: boolean;
+  @Input() allowComment: boolean;
   form: FormGroup;
   remunerations: Remuneration[];
   alertType: AlertType = AlertType.Warning;
@@ -38,6 +39,7 @@ export class RemunerationFormComponent implements OnInit, OnDestroy, OnChanges {
     this.remunerations = [];
     this.defaultValues = {};
     this.disable = false;
+    this.allowComment = true;
   }
 
   ngOnInit(): void {

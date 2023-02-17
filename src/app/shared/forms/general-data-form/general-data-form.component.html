@@ -1,6 +1,6 @@
 <h2>Datos generales</h2>
 <app-alert
-  [show]="!!defaultValues.comment"
+  [show]="!!defaultValues.comment && allowComment"
   [message]="defaultValues.comment!"
   [type]="alertType"></app-alert>
 <div class="row" [formGroup]="form">
@@ -79,7 +79,7 @@
         [errors]="{ pattern: 'Correos no válidos' }"></app-form-error>
     </div>
   </div>
- 
+
   <div class="col-12 col-md-6">
     <div class="mb-3">
       <label for="accountBankManager" class="form-label"
@@ -97,8 +97,7 @@
       <app-form-error [control]="f['position']"></app-form-error>
     </div>
   </div>
-  
-   <div class="col-12 col-md-6">
+  <div class="col-12 col-md-6">
     <div class="mb-3">
       <label for="position" class="form-label">Puesto</label>
       <input

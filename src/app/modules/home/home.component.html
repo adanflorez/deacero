@@ -11,41 +11,44 @@
     <app-general-data-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="formData.generalData"></app-general-data-form>
+      [defaultValues]="formData.generalData"
+      [allowComment]="false"></app-general-data-form>
     <hr />
     <app-fund-manager-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="formData.fundManager"></app-fund-manager-form>
+      [defaultValues]="formData.fundManager"
+      [allowComment]="false"></app-fund-manager-form>
     <hr />
     <app-organizational-information-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="
-        formData.organizationalInformation
-      "></app-organizational-information-form>
+      [defaultValues]="formData.organizationalInformation"
+      [allowComment]="false"></app-organizational-information-form>
     <hr />
     <app-strategic-alliances-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="
-        formData.strategicAlliances
-      "></app-strategic-alliances-form>
+      [defaultValues]="formData.strategicAlliances"
+      [allowComment]="false"></app-strategic-alliances-form>
     <hr />
     <app-decent-work-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="formData.decentWork"></app-decent-work-form>
+      [defaultValues]="formData.decentWork"
+      [allowComment]="false"></app-decent-work-form>
     <hr />
     <app-governing-body
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="formData.governingBody"></app-governing-body>
+      [defaultValues]="formData.governingBody"
+      [allowComment]="false"></app-governing-body>
     <hr />
     <app-remuneration-form
       [updateParentModel]="updateData"
       [disable]="(infoSaved$ | async)!"
-      [defaultValues]="formData.remuneration"></app-remuneration-form>
+      [defaultValues]="formData.remuneration"
+      [allowComment]="false"></app-remuneration-form>
 
     <button
       class="btn btn-primary"

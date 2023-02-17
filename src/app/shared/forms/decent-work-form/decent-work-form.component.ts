@@ -27,6 +27,7 @@ export class DecentWorkFormComponent implements OnInit, OnDestroy, OnChanges {
   ) => void = () => {};
   @Input() defaultValues: DecentWorkForm;
   @Input() disable: boolean;
+  @Input() allowComment: boolean;
   form: FormGroup;
   alertType: AlertType = AlertType.Warning;
 
@@ -36,6 +37,7 @@ export class DecentWorkFormComponent implements OnInit, OnDestroy, OnChanges {
     this.form = new FormGroup({});
     this.defaultValues = {};
     this.disable = false;
+    this.allowComment = true;
   }
 
   ngOnInit(): void {

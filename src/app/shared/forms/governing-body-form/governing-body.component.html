@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <h2 class="mb-3">Órgano de gobierno</h2>
   <app-alert
-    [show]="!!defaultValues.comment"
+    [show]="!!defaultValues.comment && allowComment"
     [message]="defaultValues.comment!"
     [type]="alertType"></app-alert>
   <div class="row">

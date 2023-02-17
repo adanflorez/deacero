@@ -31,6 +31,7 @@ export class FundManagerFormComponent implements OnInit, OnDestroy, OnChanges {
   ) => void = () => {};
   @Input() defaultValues: FundManagerForm;
   @Input() disable: boolean;
+  @Input() allowComment: boolean;
   form: FormGroup;
 
   alertType: AlertType = AlertType.Warning;
@@ -41,6 +42,7 @@ export class FundManagerFormComponent implements OnInit, OnDestroy, OnChanges {
     this.defaultValues = {};
     this.form = new FormGroup({});
     this.disable = false;
+    this.allowComment = true;
   }
 
   ngOnInit(): void {
