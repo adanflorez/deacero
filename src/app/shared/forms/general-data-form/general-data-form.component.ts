@@ -37,6 +37,7 @@ export class GeneralDataFormComponent implements OnInit, OnDestroy, OnChanges {
   ) => void = () => {};
   @Input() defaultValues: GeneralDataForm;
   @Input() disable: boolean;
+  @Input() allowComment: boolean;
   form: FormGroup;
 
   alertType: AlertType = AlertType.Warning;
@@ -47,6 +48,7 @@ export class GeneralDataFormComponent implements OnInit, OnDestroy, OnChanges {
     this.form = new FormGroup({});
     this.defaultValues = {};
     this.disable = false;
+    this.allowComment = true;
   }
 
   ngOnInit(): void {

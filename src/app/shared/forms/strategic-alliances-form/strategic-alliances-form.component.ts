@@ -31,6 +31,7 @@ export class StrategicAlliancesFormComponent
   ) => void = () => {};
   @Input() defaultValues: StrategicAlliancesForm;
   @Input() disable: boolean;
+  @Input() allowComment: boolean;
   form: FormGroup;
   alertType: AlertType = AlertType.Warning;
   showDonationsTable: boolean;
@@ -48,6 +49,7 @@ export class StrategicAlliancesFormComponent
     this.defaultValues = {};
     this.disable = false;
     this.strategicAlliancesActivities = [];
+    this.allowComment = true;
   }
 
   ngOnInit(): void {
@@ -92,7 +94,7 @@ export class StrategicAlliancesFormComponent
       name: CallSection.STRATEGIC_ALLIANCES,
       valid:
         this.form.valid &&
-      //  this.products.length > 0 &&
+        //  this.products.length > 0 &&
         (this.f['previousDonations'].value
           ? this.donations.length > 0
           : true) &&

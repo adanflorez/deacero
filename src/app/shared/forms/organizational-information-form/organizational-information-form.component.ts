@@ -30,6 +30,7 @@ export class OrganizationalInformationFormComponent
   ) => void = () => {};
   @Input() defaultValues: OrganizationalInformationForm;
   @Input() disable: boolean;
+  @Input() allowComment: boolean;
   form: FormGroup;
   alertType: AlertType = AlertType.Warning;
 
@@ -39,6 +40,7 @@ export class OrganizationalInformationFormComponent
     this.form = new FormGroup({});
     this.defaultValues = {};
     this.disable = false;
+    this.allowComment = true;
   }
 
   ngOnInit(): void {
