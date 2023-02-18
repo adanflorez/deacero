@@ -89,6 +89,9 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   subscribeToForm() {
+    this.form
+      .get('locationQuestion')
+      ?.setValue(this.defaultValues.locationQuestion);
     const sub = this.form.valueChanges.subscribe(val => {
       setTimeout(() => {
         this.updateParentModel(

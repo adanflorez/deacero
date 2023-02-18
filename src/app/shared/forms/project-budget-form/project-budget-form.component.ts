@@ -31,11 +31,11 @@ export class ProjectBudgetFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.updateDonations(this.defaultValues.donations as ProjectBudget[]);
     this.updateContributions(
       this.defaultValues.contributions as ProjectBudget[]
     );
     this.updateConversions(this.defaultValues.conversions as ProjectBudget[]);
-    this.updateDonations(this.defaultValues.donations as ProjectBudget[]);
   }
 
   updateContributions(contributions: ProjectBudget[]) {
