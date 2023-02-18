@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { RATING } from 'src/app/core/constants';
@@ -26,30 +26,33 @@ export class RatingFormComponent implements OnChanges {
   groups: string[];
 
   categories = [
-    'Alimentación',
-    'Asistencia jurídica',
-    'Asistencia o rehabilitación médica',
-    'Atención a grupos sociales con discapacidad',
+    // 'Alimentación',
+    // 'Asistencia jurídica',
+    // 'Asistencia o rehabilitación médica',
+    // 'Atención a grupos sociales con discapacidad',
     'Becas',
-    'Defensa y promoción de los DH',
-    'Desarrollo comunidades indígenas.',
-    'Desarrollo Institucional',
-    'Desarrollo urbano',
-    'Detonación de oportunidades para la resiliencia económica.',
-    'Ecología',
+    // 'Defensa y promoción de los DH',
+    // 'Desarrollo comunidades indígenas.',
+    // 'Desarrollo Institucional',
+    // 'Desarrollo urbano',
+    // 'Detonación de oportunidades para la resiliencia económica.',
+    // 'Ecología',
     'Educación',
-    'Empoderamiento social',
-    'Equipamiento',
-    'Fomento educativo',
-    'Inclusión',
-    'Infraestructura',
-    'Medio ambiente',
-    'Nutrición',
-    'Orientación social',
-    'Participación ciudadana.',
-    'Promoción y difusión cultural',
-    'Reinserción social',
-    'Salud mental',
+    // 'Empoderamiento social',
+    // 'Equipamiento',
+    // 'Fomento educativo',
+    // 'Inclusión',
+    // 'Infraestructura',
+    // 'Medio ambiente',
+    // 'Nutrición',
+    // 'Orientación social',
+    // 'Participación ciudadana.',
+    // 'Promoción y difusión cultural',
+    // 'Reinserción social',
+    // 'Salud mental',
+    'Primera infancia', //24
+    'Ciencia y tecnología calidad de vida', //25
+    'Emprendimiento', //26
   ];
 
   alertType: AlertType = AlertType.Warning;
@@ -70,9 +73,9 @@ export class RatingFormComponent implements OnChanges {
     };
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.initForm();
-    this.changeCategory(changes.category?.currentValue);
+    this.changeCategory(this.category);
   }
 
   initForm() {
