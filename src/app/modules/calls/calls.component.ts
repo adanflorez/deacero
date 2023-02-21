@@ -200,6 +200,8 @@ export class CallsComponent implements OnInit, OnDestroy {
       twitter: res?.communication.twitter,
       tiktok: res?.communication.tiktok,
       youtube: res?.communication.youtube,
+      webpage: res?.communication.webpage,
+
       // Documents
       ethicalCode: res?.documents.codeOfEthics,
       governanceManual: res?.documents.governanceHandbook,
@@ -360,7 +362,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       youtube: new FormControl(this.call?.youtube, [
         Validators.pattern(URL_PATTERN),
       ]),
-      webpage: new FormControl(this.call?.youtube, [
+      webpage: new FormControl(this.call?.webpage, [
         Validators.pattern(URL_PATTERN),
       ]),
       ethicalCode: new FormControl(this.call?.ethicalCode),
@@ -736,6 +738,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       twitter,
       tiktok,
       youtube,
+      webpage,
       ethicalCode,
       governanceManual,
       timelineActivities,
@@ -839,6 +842,7 @@ export class CallsComponent implements OnInit, OnDestroy {
         twitter: twitter,
         tiktok: tiktok,
         youtube: youtube,
+        webpage: webpage,
       },
       documents: {
         codeOfEthics: ethicalCode,
