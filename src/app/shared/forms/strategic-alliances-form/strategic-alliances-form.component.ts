@@ -114,7 +114,7 @@ export class StrategicAlliancesFormComponent
         { value: this.defaultValues.whichTopics, disabled: true },
         Validators.required
       ),
-      previousDonations: new FormControl(true),
+      previousDonations: new FormControl(this.defaultValues.previousDonations),
     });
     this.subscribeToForm();
     this.subscribeToIssues();
