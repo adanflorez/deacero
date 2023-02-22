@@ -121,6 +121,7 @@ export class StrategicAlliancesFormComponent
     this.subscribeToPreviousDonations();
     this.form.markAllAsTouched();
     this.disable && this.form.disable();
+    this.showDonationsTable = this.defaultValues.previousDonations as boolean;
   }
 
   private subscribeToForm(): void {
