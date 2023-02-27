@@ -218,6 +218,7 @@ export class CallAlertsComponent implements OnInit {
         linkedln: this.formData.communication.linkedin,
         twitter: this.formData.communication.twitter,
         youtube: this.formData.communication.youtube,
+        webpage: this.formData.communication.webpage
       },
       documents: {
         codeOfEthics: this.formData.documents.ethicalCode,
@@ -432,6 +433,7 @@ export class CallAlertsComponent implements OnInit {
           linkedin: res.data.communication.linkedln,
           twitter: res.data.communication.twitter,
           youtube: res.data.communication.youtube,
+          webpage: res.data.communication.webpage
         },
         documents: {
           ethicalCode: res.data.documents.codeOfEthics,
