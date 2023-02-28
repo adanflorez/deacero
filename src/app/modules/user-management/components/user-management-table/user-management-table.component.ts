@@ -110,6 +110,7 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
   search(text: string): UserModel[] {
     return this.users.filter(user => {
       return (
+        user.email?.toLowerCase().includes(text.toLowerCase()) ||
         user.name?.toLowerCase().includes(text.toLowerCase()) ||
         user.rfc?.toLowerCase().includes(text.toLowerCase()) ||
         this.userRolePipe
@@ -198,7 +199,6 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
   }
 
   activateOrDeactivateUser() {
-    console.log(this.emailToActivateOrDeactivate);
     if (!this.emailToActivateOrDeactivate) return;
     this.userService
       .activateOrDeactivateUser(

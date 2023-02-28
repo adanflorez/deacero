@@ -7,7 +7,6 @@ import {
   OBJECTIVES,
   ONLY_NUMBERS_PATTERN,
   RATING,
-  URL_PATTERN,
 } from 'src/app/core/constants';
 import ProjectBudget from 'src/app/core/models/project-budget.model';
 import Response from 'src/app/core/models/response.model';
@@ -344,27 +343,13 @@ export class CallsComponent implements OnInit, OnDestroy {
       ),
       peace: new FormControl(this.call?.peace),
       alliances: new FormControl(this.call?.alliances),
-      facebook: new FormControl(this.call?.facebook, [
-        Validators.pattern(URL_PATTERN),
-      ]),
-      instagram: new FormControl(this.call?.instagram, [
-        Validators.pattern(URL_PATTERN),
-      ]),
-      linkedin: new FormControl(this.call?.linkedin, [
-        Validators.pattern(URL_PATTERN),
-      ]),
-      twitter: new FormControl(this.call?.twitter, [
-        Validators.pattern(URL_PATTERN),
-      ]),
-      tiktok: new FormControl(this.call?.tiktok, [
-        Validators.pattern(URL_PATTERN),
-      ]),
-      youtube: new FormControl(this.call?.youtube, [
-        Validators.pattern(URL_PATTERN),
-      ]),
-      webpage: new FormControl(this.call?.webpage, [
-        Validators.pattern(URL_PATTERN),
-      ]),
+      facebook: new FormControl(this.call?.facebook),
+      instagram: new FormControl(this.call?.instagram),
+      linkedin: new FormControl(this.call?.linkedin),
+      twitter: new FormControl(this.call?.twitter),
+      tiktok: new FormControl(this.call?.tiktok),
+      youtube: new FormControl(this.call?.youtube),
+      webpage: new FormControl(this.call?.webpage),
       ethicalCode: new FormControl(this.call?.ethicalCode),
       governanceManual: new FormControl(this.call?.governanceManual),
       timelineActivities: new FormControl(

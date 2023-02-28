@@ -140,6 +140,8 @@ export class SignupComponent implements OnInit {
     this.showMultisiteField = true;
     this.showMultisiteAlert = false;
     this.signupForm.get('siteName')?.setValidators(Validators.required);
+    this.signupForm.get('siteName')?.updateValueAndValidity();
+    this.signupForm.get('siteName')?.markAsTouched();
     this.signupForm.markAllAsTouched();
   }
 

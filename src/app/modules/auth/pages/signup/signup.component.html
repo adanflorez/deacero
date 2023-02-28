@@ -76,7 +76,8 @@
               placeholder="Nombre de la sede"
               formControlName="siteName"
               [class.is-invalid]="
-                f['siteName'].invalid && f['siteName'].touched
+                f['siteName'].invalid &&
+                (f['siteName'].dirty || f['siteName'].touched)
               " />
             <div class="invalid-feedback">
               <app-form-error [control]="f['siteName']"></app-form-error>
