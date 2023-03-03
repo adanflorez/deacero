@@ -121,7 +121,6 @@ export class RatingFormComponent implements OnChanges {
     switch (category) {
       case this.categories[0]:
       case this.categories[1]:
-      case this.categories[2]:
       case this.categories[4]:
         this.groups = [
           'socialBackwardness',
@@ -130,6 +129,7 @@ export class RatingFormComponent implements OnChanges {
           'sustainabilityProcesses',
         ];
         break;
+      case this.categories[2]:
       case this.categories[3]:
         this.groups = [
           'livingConditions',
