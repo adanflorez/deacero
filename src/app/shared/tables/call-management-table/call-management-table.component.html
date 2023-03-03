@@ -98,6 +98,14 @@
               ">
               Editar
             </button>
+            <button
+              *ngIf="announcement.status === 'En progreso'"
+              class="btn btn-outline-primary"
+              (click)="
+                setForm(announcement); openModal(announcementAction2, 'Edit')
+              ">
+              Finalizar 
+            </button>
           </td>
         </tr>
       </tbody>
@@ -291,6 +299,30 @@
   </div>
 </ng-template>
 
+<ng-template #announcementAction2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Finalizar la convocatoria
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="closeModal(modal)"></button>
+  </div>
+  <div class="modal-body">
+    <div class="d-grid gap-2 mb-3" *ngIf="isEdit || isDelete">
+      <button
+        class="btn btn-danger"
+        type="button"
+        (click)="openModal(confirmDeleteAnnouncement, 'Delete')">
+        Eliminar convocatoria
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+
 <ng-template #confirmCreateAnnouncement let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Confirmación</h4>
@@ -302,6 +334,27 @@
   </div>
   <div class="modal-body">
     {{ modalStructure.confirmationMessage }}
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary me-2" (click)="modal.close()">
+      Cancelar
+    </button>
+    <button class="btn btn-primary" (click)="save()">Aceptar</button>
+  </div>
+</ng-template>
+
+
+<ng-template #confirmDeleteAnnouncement let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmación</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="closeModal(modal)"></button>
+  </div>
+  <div class="modal-body">
+    "Estas seguro de finalizar la convocatoria, recuerda que si la finalizas los usuarios pendientes ya no podran enviar mas solicitudes."
   </div>
   <div class="modal-footer">
     <button class="btn btn-secondary me-2" (click)="modal.close()">
