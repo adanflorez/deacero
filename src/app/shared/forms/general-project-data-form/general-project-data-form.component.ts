@@ -111,7 +111,6 @@ export class GeneralProjectDataFormComponent implements OnInit {
     switch (this.f.category.value) {
       case this.categories[0]:
       case this.categories[1]:
-      case this.categories[2]:
       case this.categories[4]:
         this.groups = [
           'socialBackwardness',
@@ -120,6 +119,7 @@ export class GeneralProjectDataFormComponent implements OnInit {
           'sustainabilityProcesses',
         ];
         break;
+      case this.categories[2]:
       case this.categories[3]:
         this.groups = [
           'livingConditions',
