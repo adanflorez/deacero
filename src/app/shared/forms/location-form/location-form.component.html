@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/eqeqeq -->
 <h2 class="mb-3">Ubicación, ¿Dónde se llevará a cabo?</h2>
 <app-alert
   [show]="!!defaultValues.comment"
@@ -114,7 +115,9 @@
     </div>
   </div>
   <div class="col-12 col-md-6">
-    <app-opening-hours-table [readOnly]="disable" [records]="defaultValues.daysAndHours!" ></app-opening-hours-table>
+    <app-opening-hours-table
+      [readOnly]="disable"
+      [records]="defaultValues.daysAndHours!"></app-opening-hours-table>
   </div>
   <div class="col-12 col-md-6">
     <div class="mb-3">
@@ -136,7 +139,7 @@
     </div>
   </div>
   <div class="col-12 col-md-6">
-    <div *ngIf="f['aboutCall'].value === 'Otro'" class="mb-3">
+    <div *ngIf="f['aboutCall'].value == 'Otro'" class="mb-3">
       <label for="whichMedia" class="form-label">¿Cuál medio?</label>
       <input
         type="text"

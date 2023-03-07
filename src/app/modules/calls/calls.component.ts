@@ -563,11 +563,13 @@ export class CallsComponent implements OnInit, OnDestroy {
         if (!res) {
           this.locationFields.forEach(field => {
             this.form.get(field)?.setValidators(Validators.required);
-            this.form.get(field)?.reset();
+            this.form.updateValueAndValidity();
+            // this.form.get(field)?.reset();
           });
         } else {
           this.locationFields.forEach(field => {
             this.form.get(field)?.clearValidators();
+            this.form.updateValueAndValidity();
           });
         }
       });
@@ -576,7 +578,7 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   private handleAboutCall() {
     const sub = this.form.get('aboutCall')?.valueChanges.subscribe(res => {
-      if (res == 3) {
+      if (res == 'Otro') {
         this.form.get('whichMedia')?.setValidators(Validators.required);
       } else {
         this.form.get('whichMedia')?.clearValidators();

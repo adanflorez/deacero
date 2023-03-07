@@ -86,6 +86,22 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
     });
     this.handleLocation();
     this.subscribeToForm();
+    this.updateOpeningHours(
+      this.defaultValues.daysAndHours as Array<OpeningHours>
+    );
+    this.validateAboutCall();
+  }
+
+  validateAboutCall() {
+    this.form.get('aboutCall')?.value == 'Otro' &&
+      this.form.get('whichMedia')?.setValidators(Validators.required);
+    this.form.updateValueAndValidity();
+    this.form.get('aboutCall')?.valueChanges.subscribe(val => {
+      if (val == 'Otro') {
+        this.form.get('whichMedia')?.setValidators(Validators.required);
+        this.form.updateValueAndValidity();
+      }
+    });
   }
 
   subscribeToForm() {
@@ -131,7 +147,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
     this.unsubscribe.push(locationQuestionSub as Subscription);
   }
 
-  updateOpeningHours(openingHours: Array<OpeningHours>): void {
+  private updateOpeningHours(openingHours: Array<OpeningHours>): void {
     this.openingHours = openingHours || [];
     const data = {
       ...this.form.value,
