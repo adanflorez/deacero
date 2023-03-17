@@ -156,7 +156,7 @@ export class CallAlertsComponent implements OnInit {
         municipality: this.formData.location.town,
         postalCode: this.formData.location.postalCode,
         urlProyect: this.formData.location.video,
-        howDidYouFindOutAboutTheCall: this.formData.location.aboutCall,
+        howDidYouFindOutAboutTheCall: [this.formData.location.aboutCall],
         locationIsVirtual: this.formData.location.locationQuestion,
         whichMeans: this.formData.location.whichMedia,
       },
