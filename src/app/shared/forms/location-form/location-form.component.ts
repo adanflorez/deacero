@@ -147,7 +147,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
     this.unsubscribe.push(locationQuestionSub as Subscription);
   }
 
-  private updateOpeningHours(openingHours: Array<OpeningHours>): void {
+  public updateOpeningHours(openingHours: Array<OpeningHours>): void {
     this.openingHours = openingHours || [];
     const data = {
       ...this.form.value,
