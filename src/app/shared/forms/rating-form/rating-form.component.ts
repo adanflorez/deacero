@@ -1,7 +1,7 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { RATING } from 'src/app/core/constants';
+import { CATEGORIES, RATING } from 'src/app/core/constants';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
 import { AlertType } from 'src/app/shared/alert';
@@ -25,35 +25,7 @@ export class RatingFormComponent implements OnChanges {
   rating = RATING;
   groups: string[];
 
-  categories = [
-    // 'Alimentación',
-    // 'Asistencia jurídica',
-    // 'Asistencia o rehabilitación médica',
-    // 'Atención a grupos sociales con discapacidad',
-    'Becas',
-    // 'Defensa y promoción de los DH',
-    // 'Desarrollo comunidades indígenas.',
-    // 'Desarrollo Institucional',
-    // 'Desarrollo urbano',
-    // 'Detonación de oportunidades para la resiliencia económica.',
-    // 'Ecología',
-    'Educación',
-    // 'Empoderamiento social',
-    // 'Equipamiento',
-    // 'Fomento educativo',
-    // 'Inclusión',
-    // 'Infraestructura',
-    // 'Medio ambiente',
-    // 'Nutrición',
-    // 'Orientación social',
-    // 'Participación ciudadana.',
-    // 'Promoción y difusión cultural',
-    // 'Reinserción social',
-    // 'Salud mental',
-    'Primera infancia', //24
-    'Ciencia y tecnología calidad de vida', //25
-    'Emprendimiento', //26
-  ];
+  categories = CATEGORIES;
 
   alertType: AlertType = AlertType.Warning;
 
@@ -73,9 +45,12 @@ export class RatingFormComponent implements OnChanges {
     };
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    const { category } = changes;
     this.initForm();
-    this.changeCategory(this.category);
+    if (category?.currentValue) {
+      this.changeCategory(this.category);
+    }
   }
 
   initForm() {
@@ -109,9 +84,9 @@ export class RatingFormComponent implements OnChanges {
 
   subscribeToForm() {
     const sub = this.form.valueChanges.subscribe(val => {
-      setTimeout(() => {
-        this.updateParentModel(val, this.isValidForm);
-      }, 500);
+      if (this.form.valid) {
+        this.updateParentModel({ ...val }, this.isValidForm);
+      }
     });
     this.unsubscribe.push(sub);
   }
@@ -153,6 +128,12 @@ export class RatingFormComponent implements OnChanges {
       this.form.get(group)?.setValidators(Validators.required);
     });
     this.form.updateValueAndValidity();
-    this.updateParentModel({}, this.isValidForm);
+    this.updateParentModel(
+      {},
+      {
+        name: CallSection.RATING,
+        valid: false,
+      }
+    );
   }
 }
