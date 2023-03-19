@@ -101,3 +101,33 @@ export const OBJECTIVES = [
   '16. Paz, Justicia e instituciones solidas',
   '17. Alianzas para lograr objetivos',
 ];
+
+export const CATEGORIES = [
+  // 'Alimentación',
+  // 'Asistencia jurídica',
+  // 'Asistencia o rehabilitación médica',
+  // 'Atención a grupos sociales con discapacidad',
+  'Becas',
+  // 'Defensa y promoción de los DH',
+  // 'Desarrollo comunidades indígenas.',
+  // 'Desarrollo Institucional',
+  // 'Desarrollo urbano',
+  // 'Detonación de oportunidades para la resiliencia económica.',
+  // 'Ecología',
+  'Educación',
+  // 'Empoderamiento social',
+  // 'Equipamiento',
+  // 'Fomento educativo',
+  // 'Inclusión',
+  // 'Infraestructura',
+  // 'Medio ambiente',
+  // 'Nutrición',
+  // 'Orientación social',
+  // 'Participación ciudadana.',
+  // 'Promoción y difusión cultural',
+  // 'Reinserción social',
+  // 'Salud mental',
+  'Primera infancia', //24
+  'Ciencia y tecnología calidad de vida', //25
+  'Emprendimiento', //26
+];

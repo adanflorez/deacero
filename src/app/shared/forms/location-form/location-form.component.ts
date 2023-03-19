@@ -143,6 +143,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
             this.form.updateValueAndValidity();
           });
         }
+        this.form.markAllAsTouched();
       });
     this.unsubscribe.push(locationQuestionSub as Subscription);
   }
