@@ -35,7 +35,6 @@ export class RatingFormComponent implements OnChanges {
     this.defaultValues = {};
     this.category = '';
     this.groups = [];
-    this.initForm();
   }
 
   get isValidForm(): FormValid {
@@ -125,15 +124,11 @@ export class RatingFormComponent implements OnChanges {
 
   private setValidatorsToRating() {
     this.groups.forEach(group => {
-      this.form.get(group)?.setValidators(Validators.required);
+      this.form.controls[group]?.setValidators(Validators.required);
+      this.form.controls[group]?.updateValueAndValidity();
     });
+    this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
-    this.updateParentModel(
-      {},
-      {
-        name: CallSection.RATING,
-        valid: false,
-      }
-    );
+    this.updateParentModel({}, this.isValidForm);
   }
 }
