@@ -24,7 +24,6 @@
         <tr>
           <th scope="col">RFC</th>
           <th scope="col">Razón social de la OSC</th>
-          <th scope="col">Nombre de la sede</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
@@ -39,11 +38,6 @@
             <td>
               <ngb-highlight
                 [result]="site.businessName"
-                [term]="filter.value"></ngb-highlight>
-            </td>
-            <td>
-              <ngb-highlight
-                [result]="site.siteName"
                 [term]="filter.value"></ngb-highlight>
             </td>
             <td>
@@ -63,11 +57,6 @@
       </tbody>
     </table>
   </div>
-  <ngb-pagination
-    *ngIf="totalSites"
-    [collectionSize]="totalSites"
-    [(page)]="page"
-    aria-label="Default pagination"></ngb-pagination>
 </div>
 <div class="d-block d-lg-none">
   <ng-container *ngFor="let site of sites$ | async as sites; index as i">
@@ -87,14 +76,6 @@
             <td>
               <ngb-highlight
                 [result]="site.businessName"
-                [term]="filter.value"></ngb-highlight>
-            </td>
-          </tr>
-          <tr>
-            <th>Nombre de la sede</th>
-            <td>
-              <ngb-highlight
-                [result]="site.siteName"
                 [term]="filter.value"></ngb-highlight>
             </td>
           </tr>
@@ -126,7 +107,7 @@
 
   <ngb-pagination
     *ngIf="totalSites"
-    [collectionSize]="70"
+    [collectionSize]="totalSites"
     [(page)]="page"
     aria-label="Default pagination"></ngb-pagination>
 </div>

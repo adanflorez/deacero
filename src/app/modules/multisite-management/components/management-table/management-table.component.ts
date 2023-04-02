@@ -52,6 +52,7 @@ export class ManagementTableComponent implements OnInit {
     const data = await firstValueFrom(
       this.multisiteService.get(this.page - 1, 10)
     );
+    console.log(data);
     this.sites = data.sites;
     this.totalSites = data.total;
     this.sites$ = this.filter.valueChanges.pipe(
@@ -66,7 +67,6 @@ export class ManagementTableComponent implements OnInit {
   }
 
   setCurrentSite(siteId: string) {
-    console.log(siteId);
     this.currentSite = siteId;
   }
 
