@@ -57,6 +57,12 @@
       </tbody>
     </table>
   </div>
+  <ngb-pagination
+    class="d-none d-lg-flex"
+    *ngIf="totalSites"
+    [collectionSize]="totalSites"
+    [(page)]="page"
+    aria-label="Default pagination"></ngb-pagination>
 </div>
 <div class="d-block d-lg-none">
   <ng-container *ngFor="let site of sites$ | async as sites; index as i">
