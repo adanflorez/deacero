@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertModule } from 'src/app/shared/alert';
 
 import { ChangePasswordGateway, ChangePasswordUseCase } from './domain';
 import {
@@ -13,7 +14,7 @@ import { UserComponent } from './user.component';
 
 @NgModule({
   declarations: [ChangePasswordComponent, UserComponent],
-  imports: [CommonModule, UserRoutingModule, ReactiveFormsModule],
+  imports: [CommonModule, UserRoutingModule, ReactiveFormsModule, AlertModule],
   providers: [
     ChangePasswordService,
     {

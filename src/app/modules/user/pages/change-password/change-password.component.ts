@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PASSWORD_PATERN } from 'src/app/core/constants';
 import { CustomValidators } from 'src/app/core/helpers/custom-validators';
+import { AlertType } from 'src/app/shared/alert';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare let window: any;
@@ -19,6 +20,9 @@ export class ChangePasswordComponent implements OnInit {
   public oldPasswordButonnIcon: string;
   public confirmPasswordFieldType: string;
   public confirmPasswordButonnIcon: string;
+  public showAlert: boolean;
+  public alertType: AlertType;
+  public alertMessage: string;
 
   constructor() {
     this.changePasswordForm = this.initForm();
@@ -28,6 +32,9 @@ export class ChangePasswordComponent implements OnInit {
     this.passwordButonnIcon = 'lock';
     this.confirmPasswordFieldType = 'password';
     this.confirmPasswordButonnIcon = 'lock';
+    this.showAlert = false;
+    this.alertType = AlertType.Danger;
+    this.alertMessage = '';
   }
   ngOnInit(): void {
     const tooltipTriggerList = [].slice.call(
