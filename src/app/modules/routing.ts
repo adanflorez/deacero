@@ -55,6 +55,10 @@ const Routing: Routes = [
     canActivate: [RoleGuard],
   },
   {
+    path: 'user',
+    loadChildren: () => import('./user').then(m => m.UserModule),
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full',
