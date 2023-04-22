@@ -4,6 +4,8 @@ import { PASSWORD_PATERN } from 'src/app/core/constants';
 import { CustomValidators } from 'src/app/core/helpers/custom-validators';
 import { AlertType } from 'src/app/shared/alert';
 
+import { ChangePasswordUseCase } from '../../domain';
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare let window: any;
 
@@ -24,7 +26,7 @@ export class ChangePasswordComponent implements OnInit {
   public alertType: AlertType;
   public alertMessage: string;
 
-  constructor() {
+  constructor(private readonly changePasswordService: ChangePasswordUseCase) {
     this.changePasswordForm = this.initForm();
     this.oldPasswordFieldType = 'password';
     this.oldPasswordButtonIcon = 'lock';
@@ -36,6 +38,7 @@ export class ChangePasswordComponent implements OnInit {
     this.alertType = AlertType.Danger;
     this.alertMessage = '';
   }
+
   ngOnInit(): void {
     const tooltipTriggerList = [].slice.call(
       document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -95,6 +98,25 @@ export class ChangePasswordComponent implements OnInit {
       }
       this.confirmPasswordFieldType = 'password';
       this.confirmPasswordButtonIcon = 'lock';
+    }
+  }
+
+  public onSubmit() {
+    if (this.changePasswordForm.valid) {
+      const { oldPassword, password } = this.changePasswordForm.value;
+      this.changePasswordService.update(oldPassword, password).subscribe({
+        next: () => {
+          this.showAlert = true;
+          this.alertType = AlertType.Success;
+          this.alertMessage = 'Contraseña actualizada';
+          this.changePasswordForm.reset();
+        },
+        error: () => {
+          this.showAlert = true;
+          this.alertType = AlertType.Danger;
+          this.alertMessage = 'Error al actualizar la contraseña';
+        },
+      });
     }
   }
 }
