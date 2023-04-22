@@ -6,7 +6,10 @@ import { ChangePassword } from '../models';
 export class ChangePasswordUseCase {
   constructor(private changePasswordGateway: ChangePasswordGateway) {}
 
-  update(): Observable<ChangePassword> {
-    return this.changePasswordGateway.update();
+  update(
+    currentPassword: string,
+    newPassword: string
+  ): Observable<ChangePassword> {
+    return this.changePasswordGateway.update(currentPassword, newPassword);
   }
 }
