@@ -1,6 +1,6 @@
 import { UserModel } from 'src/app/domain/models/user.model';
 import { Mapper } from 'src/app/base/utils/mapper';
-import { UserEntity } from '../../driven-adapters/entities/user-entity';
+import { UserEntity } from '../../driven-adapters';
 export class UserImplementationMapper extends Mapper<UserEntity, UserModel> {
   mapFrom(param: UserEntity): UserModel {
     return {

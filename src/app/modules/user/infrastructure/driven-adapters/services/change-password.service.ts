@@ -7,7 +7,10 @@ import { ChangePassword, ChangePasswordUseCase } from '../../../domain';
 export class ChangePasswordService {
   constructor(private changePasswordUseCase: ChangePasswordUseCase) {}
 
-  update(): Observable<ChangePassword> {
-    return this.changePasswordUseCase.update();
+  update(
+    currentPassword: string,
+    newPassword: string
+  ): Observable<ChangePassword> {
+    return this.changePasswordUseCase.update(currentPassword, newPassword);
   }
 }
