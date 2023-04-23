@@ -4,8 +4,8 @@ import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Announcement, AnnouncementGateway } from '../../domain';
-import { AnnouncementEntity } from './../driven-adapters/entities/announcement-entity';
-import { AnnouncementImplementationMapper } from './../helpers/maps/announcement-mapper';
+import { AnnouncementEntity } from './../driven-adapters';
+import { AnnouncementImplementationMapper } from './../helpers';
 
 @Injectable()
 export class AnnouncementImplementation extends AnnouncementGateway {
@@ -16,17 +16,25 @@ export class AnnouncementImplementation extends AnnouncementGateway {
     super();
   }
 
-  get(): Observable<Announcement[]> {
-    return this.http.get(this.apiAnnouncement).pipe(
-      map((response: any) => {
-        const announcements: Array<AnnouncementEntity> =
-          response.data.announcements;
-        const mappedAnnouncement: Array<Announcement> = announcements.map(
-          this.announcementMapper.mapFrom
-        );
-        return mappedAnnouncement;
-      })
-    );
+  get(
+    page: number,
+    perPage: number
+  ): Observable<{ announcements: Announcement[]; size: number }> {
+    return this.http
+      .get(`${this.apiAnnouncement}?page=${page}&size=${perPage}`)
+      .pipe(
+        map((response: any) => {
+          const announcements: Array<AnnouncementEntity> =
+            response.data.announcements;
+          const mappedAnnouncement: Array<Announcement> = announcements.map(
+            this.announcementMapper.mapFrom
+          );
+          return {
+            announcements: mappedAnnouncement,
+            size: response.data.size,
+          };
+        })
+      );
   }
 
   create(startDate: string, endDate: string, type: 1 | 2): Observable<void> {

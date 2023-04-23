@@ -28,6 +28,10 @@ export class CallManagementTableComponent implements OnInit {
   alertMessage: string;
   currentAnnouncementId: string;
 
+  public totalSites: number;
+  public page: number;
+  public pageSize: number;
+
   constructor(
     private announcementService: AnnouncementService,
     private datePipe: DatePipe,
@@ -45,6 +49,9 @@ export class CallManagementTableComponent implements OnInit {
     this.alertType = AlertType.Success;
     this.alertMessage = '';
     this.currentAnnouncementId = '';
+    this.totalSites = 0;
+    this.page = 1;
+    this.pageSize = 10;
   }
 
   ngOnInit(): void {
@@ -53,8 +60,11 @@ export class CallManagementTableComponent implements OnInit {
   }
 
   async announcementManagementList(): Promise<void> {
-    const data = await firstValueFrom(this.announcementService.get());
-    this.announcements = data;
+    const data = await firstValueFrom(
+      this.announcementService.get(this.page - 1, this.pageSize)
+    );
+    this.announcements = data.announcements;
+    this.totalSites = data.size;
     this.announcements$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))
@@ -76,7 +86,6 @@ export class CallManagementTableComponent implements OnInit {
           .transform(announcement.endRegisterDate, 'YYYY-MM-dd')
           ?.toLowerCase()
           .includes(text.toLowerCase()) ||
-        // announcement.bases?.toLowerCase().includes(text.toLowerCase()) ||
         announcement.status?.toLowerCase().includes(text.toLowerCase())
       );
     });

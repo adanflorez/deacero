@@ -104,13 +104,21 @@
               (click)="
                 setForm(announcement); openModal(announcementAction2, 'Edit')
               ">
-              Finalizar 
+              Finalizar
             </button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <ngb-pagination
+    class="d-none d-lg-flex"
+    *ngIf="totalSites"
+    [collectionSize]="totalSites"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    aria-label="Default pagination"
+    (pageChange)="announcementManagementList()"></ngb-pagination>
 </div>
 <div class="d-block d-lg-none">
   <div
@@ -200,6 +208,13 @@
       </tbody>
     </table>
   </div>
+  <ngb-pagination
+    *ngIf="totalSites"
+    [collectionSize]="totalSites"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    aria-label="Default pagination"
+    (pageChange)="announcementManagementList()"></ngb-pagination>
 </div>
 <ng-template #announcementAction let-modal>
   <div class="modal-header">
@@ -322,7 +337,6 @@
   </div>
 </ng-template>
 
-
 <ng-template #confirmCreateAnnouncement let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Confirmación</h4>
@@ -343,7 +357,6 @@
   </div>
 </ng-template>
 
-
 <ng-template #confirmDeleteAnnouncement let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Confirmación</h4>
@@ -354,7 +367,8 @@
       (click)="closeModal(modal)"></button>
   </div>
   <div class="modal-body">
-    "Estas seguro de finalizar la convocatoria, recuerda que si la finalizas los usuarios pendientes ya no podran enviar mas solicitudes."
+    "Estas seguro de finalizar la convocatoria, recuerda que si la finalizas los
+    usuarios pendientes ya no podran enviar mas solicitudes."
   </div>
   <div class="modal-footer">
     <button class="btn btn-secondary me-2" (click)="modal.close()">

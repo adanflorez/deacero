@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbPaginationModule,
+  NgbTypeaheadModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { AlertModule } from 'src/app/shared/alert/alert.module';
 import { FormErrorModule } from 'src/app/shared/form-error/form-error.module';
 
@@ -17,6 +20,7 @@ import {
   imports: [
     CommonModule,
     NgbTypeaheadModule,
+    NgbPaginationModule,
     ReactiveFormsModule,
     FormErrorModule,
     AlertModule,
