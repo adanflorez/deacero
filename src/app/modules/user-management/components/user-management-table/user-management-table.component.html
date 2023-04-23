@@ -71,6 +71,14 @@
       </tbody>
     </table>
   </div>
+  <ngb-pagination
+    class="d-none d-lg-flex"
+    *ngIf="totalSites"
+    [collectionSize]="totalSites"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    aria-label="Default pagination"
+    (pageChange)="userManagementList()"></ngb-pagination>
 </div>
 <div class="d-block d-lg-none">
   <div
@@ -123,6 +131,13 @@
       </tbody>
     </table>
   </div>
+  <ngb-pagination
+    *ngIf="totalSites"
+    [collectionSize]="totalSites"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    aria-label="Default pagination"
+    (pageChange)="userManagementList()"></ngb-pagination>
 </div>
 
 <ng-template #activateDeactivateBtns let-user>

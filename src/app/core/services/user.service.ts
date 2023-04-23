@@ -27,7 +27,10 @@ export class UserService {
     );
   }
 
-  userManagementList(page: number, perPage: number): Observable<UserModel[]> {
+  userManagementList(
+    page: number,
+    perPage: number
+  ): Observable<{ users: UserModel[]; size: number }> {
     return this.getUserUseCases.list(page, perPage);
   }
 

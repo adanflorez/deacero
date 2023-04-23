@@ -44,7 +44,8 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
   statusToActivateOrDeactivate: boolean;
 
   public page: number;
-  public perPage: number;
+  public totalSites: number;
+  public pageSize: number;
 
   constructor(
     private userStatusPipe: UserStatusPipe,
@@ -70,7 +71,8 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
     this.emailToActivateOrDeactivate = '';
     this.statusToActivateOrDeactivate = false;
     this.page = 1;
-    this.perPage = 10;
+    this.pageSize = 10;
+    this.totalSites = 0;
   }
 
   ngAfterViewInit(): void {
@@ -196,9 +198,10 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
 
   async userManagementList(): Promise<void> {
     const data = await firstValueFrom(
-      this.userService.userManagementList(this.page - 1, this.perPage)
+      this.userService.userManagementList(this.page - 1, this.pageSize)
     );
-    this.users = data;
+    this.users = data.users;
+    this.totalSites = data.size;
     this.users$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))

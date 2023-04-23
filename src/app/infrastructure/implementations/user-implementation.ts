@@ -18,7 +18,10 @@ export class UserImplementation extends UserGateway {
     super();
   }
 
-  list(page: number, perPage: number): Observable<UserModel[]> {
+  list(
+    page: number,
+    perPage: number
+  ): Observable<{ users: UserModel[]; size: number }> {
     return this.http
       .get(`${this.apiAdmin}user?page=${page}&size=${perPage}`)
       .pipe(
@@ -27,7 +30,7 @@ export class UserImplementation extends UserGateway {
           const userMapped: UserModel[] = users.map(user =>
             this.userMapper.mapFrom(user)
           );
-          return userMapped;
+          return { users: userMapped, size: response.data.size };
         })
       );
   }
