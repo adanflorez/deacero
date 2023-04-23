@@ -29,7 +29,7 @@ export class CallManagementTableComponent implements OnInit {
   alertMessage: string;
   currentAnnouncementId: string;
 
-  public totalSites: number;
+  public totalItems: number;
   public page: number;
   public pageSize: number;
 
@@ -51,7 +51,7 @@ export class CallManagementTableComponent implements OnInit {
     this.alertMessage = '';
     this.currentAnnouncementId = '';
     this.page = PAGINATION.PAGE;
-    this.totalSites = PAGINATION.TOTAL;
+    this.totalItems = PAGINATION.TOTAL;
     this.pageSize = PAGINATION.PER_PAGE;
   }
 
@@ -65,7 +65,7 @@ export class CallManagementTableComponent implements OnInit {
       this.announcementService.get(this.page - 1, this.pageSize)
     );
     this.announcements = data.announcements;
-    this.totalSites = data.size;
+    this.totalItems = data.size;
     this.announcements$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))

@@ -113,8 +113,8 @@
   </div>
   <ngb-pagination
     class="d-none d-lg-flex"
-    *ngIf="totalSites"
-    [collectionSize]="totalSites"
+    *ngIf="totalItems"
+    [collectionSize]="totalItems"
     [(page)]="page"
     [pageSize]="pageSize"
     aria-label="Default pagination"
@@ -209,8 +209,8 @@
     </table>
   </div>
   <ngb-pagination
-    *ngIf="totalSites"
-    [collectionSize]="totalSites"
+    *ngIf="totalItems"
+    [collectionSize]="totalItems"
     [(page)]="page"
     [pageSize]="pageSize"
     aria-label="Default pagination"

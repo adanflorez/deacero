@@ -18,7 +18,7 @@ export class ManagementTableComponent implements OnInit {
   filter = new FormControl('', { nonNullable: true });
   currentSite: string;
   page: number;
-  totalSites: number;
+  totalItems: number;
   pageSize: number;
 
   constructor(
@@ -32,7 +32,7 @@ export class ManagementTableComponent implements OnInit {
     this.sites = [];
     this.currentSite = '';
     this.page = PAGINATION.PAGE;
-    this.totalSites = PAGINATION.TOTAL;
+    this.totalItems = PAGINATION.TOTAL;
     this.pageSize = PAGINATION.PER_PAGE;
   }
 
@@ -57,7 +57,7 @@ export class ManagementTableComponent implements OnInit {
     );
     console.log(data);
     this.sites = data.sites;
-    this.totalSites = data.total;
+    this.totalItems = data.total;
     this.sites$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))

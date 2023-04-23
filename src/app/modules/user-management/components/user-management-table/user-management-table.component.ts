@@ -44,7 +44,7 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
   statusToActivateOrDeactivate: boolean;
 
   public page: number;
-  public totalSites: number;
+  public totalItems: number;
   public pageSize: number;
 
   constructor(
@@ -71,7 +71,7 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
     this.emailToActivateOrDeactivate = '';
     this.statusToActivateOrDeactivate = false;
     this.page = PAGINATION.PAGE;
-    this.totalSites = PAGINATION.TOTAL;
+    this.totalItems = PAGINATION.TOTAL;
     this.pageSize = PAGINATION.PER_PAGE;
   }
 
@@ -201,7 +201,7 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
       this.userService.userManagementList(this.page - 1, this.pageSize)
     );
     this.users = data.users;
-    this.totalSites = data.size;
+    this.totalItems = data.size;
     this.users$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))

@@ -20,7 +20,7 @@ export class RequestTableComponent implements OnInit {
   public showAlert: boolean;
   public STATUS: string;
   public page: number;
-  public totalSites: number;
+  public totalItems: number;
   public pageSize: number;
 
   constructor(
@@ -36,7 +36,7 @@ export class RequestTableComponent implements OnInit {
     this.currentApplicationId = undefined;
     this.showAlert = false;
     this.page = PAGINATION.PAGE;
-    this.totalSites = PAGINATION.TOTAL;
+    this.totalItems = PAGINATION.TOTAL;
     this.pageSize = PAGINATION.PER_PAGE;
     this.STATUS = 'Solicitud no enviada';
   }
@@ -63,7 +63,7 @@ export class RequestTableComponent implements OnInit {
         this.requestUseCase.get(this.page - 1, this.pageSize)
       );
       this.requests = data.requests;
-      this.totalSites = data.size;
+      this.totalItems = data.size;
       this.requests$ = this.filter.valueChanges.pipe(
         startWith(''),
         map(text => this.search(text))
