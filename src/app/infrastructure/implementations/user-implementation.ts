@@ -18,15 +18,17 @@ export class UserImplementation extends UserGateway {
     super();
   }
 
-  list(): Observable<UserModel[]> {
-    return this.http.get(`${this.apiAdmin}user`).pipe(
-      map((response: any) => {
-        const users: Array<UserEntity> = response.data.users;
-        const userMapped: UserModel[] = users.map(user =>
-          this.userMapper.mapFrom(user)
-        );
-        return userMapped;
-      })
-    );
+  list(page: number, perPage: number): Observable<UserModel[]> {
+    return this.http
+      .get(`${this.apiAdmin}user?page=${page}&size=${perPage}`)
+      .pipe(
+        map((response: any) => {
+          const users: Array<UserEntity> = response.data.users;
+          const userMapped: UserModel[] = users.map(user =>
+            this.userMapper.mapFrom(user)
+          );
+          return userMapped;
+        })
+      );
   }
 }
