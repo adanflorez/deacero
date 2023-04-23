@@ -77,6 +77,14 @@
       </tbody>
     </table>
   </div>
+  <ngb-pagination
+    class="d-none d-lg-flex"
+    *ngIf="totalSites"
+    [collectionSize]="totalSites"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    aria-label="Default pagination"
+    (pageChange)="loadRequests()"></ngb-pagination>
 </div>
 <div class="d-block d-lg-none">
   <ng-container
@@ -139,6 +147,13 @@
       </table>
     </div>
   </ng-container>
+  <ngb-pagination
+    *ngIf="totalSites"
+    [collectionSize]="totalSites"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    aria-label="Default pagination"
+    (pageChange)="loadRequests()"></ngb-pagination>
 </div>
 <ng-template #dateModal let-modal>
   <div class="modal-header">

@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbAlertModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbAlertModule,
+  NgbPaginationModule,
+  NgbTypeaheadModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 import { RequestTableComponent } from './components';
 import { RequestGateway, RequestUseCase } from './domain';
@@ -18,6 +22,7 @@ import { RequestsComponent } from './requests.component';
     RequestsRoutingModule,
     NgbTypeaheadModule,
     NgbAlertModule,
+    NgbPaginationModule,
   ],
   providers: [
     RequestService,
