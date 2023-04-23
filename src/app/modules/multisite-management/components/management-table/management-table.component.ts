@@ -18,9 +18,10 @@ export class ManagementTableComponent implements OnInit {
   currentSite: string;
   page: number;
   totalSites: number;
+  pageSize: number;
 
   constructor(
-    private multisiteService: MultisiteService,
+    private multiSiteService: MultisiteService,
     private modalService: NgbModal
   ) {
     this.sites$ = this.filter.valueChanges.pipe(
@@ -31,6 +32,7 @@ export class ManagementTableComponent implements OnInit {
     this.currentSite = '';
     this.page = 1;
     this.totalSites = 0;
+    this.pageSize = 10;
   }
 
   ngOnInit(): void {
@@ -50,7 +52,7 @@ export class ManagementTableComponent implements OnInit {
 
   async sitesList(): Promise<void> {
     const data = await firstValueFrom(
-      this.multisiteService.get(this.page - 1, 10)
+      this.multiSiteService.get(this.page - 1, this.pageSize)
     );
     console.log(data);
     this.sites = data.sites;
@@ -82,7 +84,7 @@ export class ManagementTableComponent implements OnInit {
   }
 
   async allowMultisite(siteId: string, allow: boolean): Promise<void> {
-    await firstValueFrom(this.multisiteService.allowMultisite(siteId, allow));
+    await firstValueFrom(this.multiSiteService.allowMultisite(siteId, allow));
     this.sitesList();
   }
 }

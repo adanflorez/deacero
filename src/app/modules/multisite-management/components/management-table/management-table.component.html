@@ -62,7 +62,9 @@
     *ngIf="totalSites"
     [collectionSize]="totalSites"
     [(page)]="page"
-    aria-label="Default pagination"></ngb-pagination>
+    [pageSize]="pageSize"
+    aria-label="Default pagination"
+    (pageChange)="sitesList()"></ngb-pagination>
 </div>
 <div class="d-block d-lg-none">
   <ng-container *ngFor="let site of sites$ | async as sites; index as i">
@@ -115,7 +117,9 @@
     *ngIf="totalSites"
     [collectionSize]="totalSites"
     [(page)]="page"
-    aria-label="Default pagination"></ngb-pagination>
+    [pageSize]="pageSize"
+    aria-label="Default pagination"
+    (pageChange)="sitesList()"></ngb-pagination>
 </div>
 
 <ng-template #allowMultisiteModal let-modal>
