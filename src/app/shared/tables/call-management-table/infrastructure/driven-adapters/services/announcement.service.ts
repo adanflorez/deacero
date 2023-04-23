@@ -7,8 +7,11 @@ import { Announcement, AnnouncementUseCase } from '../../../domain';
 export class AnnouncementService {
   constructor(private announcementUseCase: AnnouncementUseCase) {}
 
-  get(): Observable<Array<Announcement>> {
-    return this.announcementUseCase.get();
+  get(
+    page: number,
+    perPage: number
+  ): Observable<{ announcements: Announcement[]; size: number }> {
+    return this.announcementUseCase.get(page, perPage);
   }
 
   create(startDate: string, endDate: string, type: 1 | 2): Observable<void> {

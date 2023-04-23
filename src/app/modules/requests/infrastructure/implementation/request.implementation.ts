@@ -16,16 +16,21 @@ export class RequestImplementation extends RequestGateway {
     super();
   }
 
-  get(): Observable<Array<Request>> {
-    return this.http.get(`${this.apiAdmin}user/application`).pipe(
-      map((response: any) => {
-        const requests: Array<RequestEntity> = response.data.calls;
-        const mappedRequests: Array<Request> = requests.map(
-          this.requestMapper.mapFrom
-        );
-        return mappedRequests;
-      })
-    );
+  get(
+    page: number,
+    perPage: number
+  ): Observable<{ requests: Request[]; size: number }> {
+    return this.http
+      .get(`${this.apiAdmin}user/application?page=${page}&size=${perPage}`)
+      .pipe(
+        map((response: any) => {
+          const requests: Array<RequestEntity> = response.data.calls;
+          const mappedRequests: Array<Request> = requests.map(
+            this.requestMapper.mapFrom
+          );
+          return { requests: mappedRequests, size: response.data.size };
+        })
+      );
   }
 
   update(applicationId: number, timeExtension: string): Observable<void> {

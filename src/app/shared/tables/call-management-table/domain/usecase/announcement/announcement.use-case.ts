@@ -6,8 +6,11 @@ import { Announcement } from '../../models';
 export class AnnouncementUseCase {
   constructor(private announcementGateway: AnnouncementGateway) {}
 
-  get(): Observable<Array<Announcement>> {
-    return this.announcementGateway.get();
+  get(
+    page: number,
+    perPage: number
+  ): Observable<{ announcements: Announcement[]; size: number }> {
+    return this.announcementGateway.get(page, perPage);
   }
 
   create(startDate: string, endDate: string, type: 1 | 2): Observable<void> {

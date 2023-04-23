@@ -1,18 +1,19 @@
-import { ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-
-import { UserManagementRoutingModule } from './user-management-routing.module';
-import { UserManagementComponent } from './user-management.component';
-import { UserManagementTableComponent } from './components/user-management-table/user-management-table.component';
-
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  NgbPaginationModule,
+  NgbTypeaheadModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import { UserRolePipe } from 'src/app/core/pipes/user-role.pipe';
+import { UserStatusPipe } from 'src/app/core/pipes/user-status.pipe';
+import { AlertModule } from 'src/app/shared/alert/alert.module';
 import { FormErrorModule } from 'src/app/shared/form-error/form-error.module';
 import { ModalModule } from 'src/app/shared/modal/modal.module';
-import { AlertModule } from 'src/app/shared/alert/alert.module';
 
-import { UserStatusPipe } from 'src/app/core/pipes/user-status.pipe';
-import { UserRolePipe } from 'src/app/core/pipes/user-role.pipe';
+import { UserManagementTableComponent } from './components';
+import { UserManagementRoutingModule } from './user-management-routing.module';
+import { UserManagementComponent } from './user-management.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { UserRolePipe } from 'src/app/core/pipes/user-role.pipe';
     CommonModule,
     UserManagementRoutingModule,
     NgbTypeaheadModule,
+    NgbPaginationModule,
     AlertModule,
     ReactiveFormsModule,
     ModalModule,

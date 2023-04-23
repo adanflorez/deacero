@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { firstValueFrom, map, Observable, startWith } from 'rxjs';
+import { PAGINATION } from 'src/app/core/constants';
 
 import { Request, RequestUseCase } from '../../domain';
 
@@ -11,13 +12,16 @@ import { Request, RequestUseCase } from '../../domain';
   styleUrls: ['./request-table.component.scss'],
 })
 export class RequestTableComponent implements OnInit {
-  requests$: Observable<Request[]>;
-  requests: Request[];
-  filter = new FormControl('', { nonNullable: true });
-  date: string;
-  currentApplicationId: number | undefined;
-  showAlert: boolean;
-  STATUS = 'Solicitud no enviada';
+  public requests$: Observable<Request[]>;
+  public requests: Request[];
+  public filter = new FormControl('', { nonNullable: true });
+  public date: string;
+  public currentApplicationId: number | undefined;
+  public showAlert: boolean;
+  public STATUS: string;
+  public page: number;
+  public totalItems: number;
+  public pageSize: number;
 
   constructor(
     private requestUseCase: RequestUseCase,
@@ -31,13 +35,17 @@ export class RequestTableComponent implements OnInit {
     this.date = '';
     this.currentApplicationId = undefined;
     this.showAlert = false;
+    this.page = PAGINATION.PAGE;
+    this.totalItems = PAGINATION.TOTAL;
+    this.pageSize = PAGINATION.PER_PAGE;
+    this.STATUS = 'Solicitud no enviada';
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loadRequests();
   }
 
-  search(text: string): Request[] {
+  protected search(text: string): Request[] {
     return this.requests.filter(request => {
       return (
         request.id?.toLowerCase().includes(text.toLowerCase()) ||
@@ -49,10 +57,13 @@ export class RequestTableComponent implements OnInit {
     });
   }
 
-  async loadRequests(): Promise<void> {
+  protected async loadRequests(): Promise<void> {
     try {
-      const data = await firstValueFrom(this.requestUseCase.get());
-      this.requests = data;
+      const data = await firstValueFrom(
+        this.requestUseCase.get(this.page - 1, this.pageSize)
+      );
+      this.requests = data.requests;
+      this.totalItems = data.size;
       this.requests$ = this.filter.valueChanges.pipe(
         startWith(''),
         map(text => this.search(text))
@@ -62,7 +73,7 @@ export class RequestTableComponent implements OnInit {
     }
   }
 
-  openModal(content: unknown, applicationId?: number): void {
+  protected openModal(content: unknown, applicationId?: number): void {
     this.currentApplicationId = applicationId as number;
     this.modalService
       .open(content, {
@@ -75,13 +86,13 @@ export class RequestTableComponent implements OnInit {
       });
   }
 
-  openConfirmationModal(modal: unknown) {
+  protected openConfirmationModal(modal: unknown) {
     setTimeout(() => {
       this.openModal(modal, this.currentApplicationId);
     }, 200);
   }
 
-  async save() {
+  protected async save() {
     this.showAlert = false;
     try {
       await firstValueFrom(

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { firstValueFrom, map, Observable, startWith } from 'rxjs';
+import { PAGINATION } from 'src/app/core/constants';
 import { AlertType } from 'src/app/shared/alert';
 
 import { Announcement } from './domain';
@@ -28,6 +29,10 @@ export class CallManagementTableComponent implements OnInit {
   alertMessage: string;
   currentAnnouncementId: string;
 
+  public totalItems: number;
+  public page: number;
+  public pageSize: number;
+
   constructor(
     private announcementService: AnnouncementService,
     private datePipe: DatePipe,
@@ -45,6 +50,9 @@ export class CallManagementTableComponent implements OnInit {
     this.alertType = AlertType.Success;
     this.alertMessage = '';
     this.currentAnnouncementId = '';
+    this.page = PAGINATION.PAGE;
+    this.totalItems = PAGINATION.TOTAL;
+    this.pageSize = PAGINATION.PER_PAGE;
   }
 
   ngOnInit(): void {
@@ -53,8 +61,11 @@ export class CallManagementTableComponent implements OnInit {
   }
 
   async announcementManagementList(): Promise<void> {
-    const data = await firstValueFrom(this.announcementService.get());
-    this.announcements = data;
+    const data = await firstValueFrom(
+      this.announcementService.get(this.page - 1, this.pageSize)
+    );
+    this.announcements = data.announcements;
+    this.totalItems = data.size;
     this.announcements$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))
@@ -76,7 +87,6 @@ export class CallManagementTableComponent implements OnInit {
           .transform(announcement.endRegisterDate, 'YYYY-MM-dd')
           ?.toLowerCase()
           .includes(text.toLowerCase()) ||
-        // announcement.bases?.toLowerCase().includes(text.toLowerCase()) ||
         announcement.status?.toLowerCase().includes(text.toLowerCase())
       );
     });

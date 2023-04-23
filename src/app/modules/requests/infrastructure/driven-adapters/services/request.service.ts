@@ -6,7 +6,10 @@ import { Observable } from 'rxjs';
 export class RequestService {
   constructor(private requestUseCase: RequestUseCase) {}
 
-  get(): Observable<Array<Request>> {
-    return this.requestUseCase.get();
+  get(
+    page: number,
+    perPage: number
+  ): Observable<{ requests: Request[]; size: number }> {
+    return this.requestUseCase.get(page, perPage);
   }
 }

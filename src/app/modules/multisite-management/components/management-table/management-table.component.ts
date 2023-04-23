@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { firstValueFrom, map, Observable, startWith } from 'rxjs';
+import { PAGINATION } from 'src/app/core/constants';
 import { Multisite } from 'src/app/modules/multisite-management/domain';
 
 import { MultisiteService } from '../../infrastructure';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-management-table',
@@ -17,10 +18,11 @@ export class ManagementTableComponent implements OnInit {
   filter = new FormControl('', { nonNullable: true });
   currentSite: string;
   page: number;
-  totalSites: number;
+  totalItems: number;
+  pageSize: number;
 
   constructor(
-    private multisiteService: MultisiteService,
+    private multiSiteService: MultisiteService,
     private modalService: NgbModal
   ) {
     this.sites$ = this.filter.valueChanges.pipe(
@@ -29,8 +31,9 @@ export class ManagementTableComponent implements OnInit {
     );
     this.sites = [];
     this.currentSite = '';
-    this.page = 1;
-    this.totalSites = 0;
+    this.page = PAGINATION.PAGE;
+    this.totalItems = PAGINATION.TOTAL;
+    this.pageSize = PAGINATION.PER_PAGE;
   }
 
   ngOnInit(): void {
@@ -50,11 +53,11 @@ export class ManagementTableComponent implements OnInit {
 
   async sitesList(): Promise<void> {
     const data = await firstValueFrom(
-      this.multisiteService.get(this.page - 1, 10)
+      this.multiSiteService.get(this.page - 1, this.pageSize)
     );
     console.log(data);
     this.sites = data.sites;
-    this.totalSites = data.total;
+    this.totalItems = data.total;
     this.sites$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))
@@ -82,7 +85,7 @@ export class ManagementTableComponent implements OnInit {
   }
 
   async allowMultisite(siteId: string, allow: boolean): Promise<void> {
-    await firstValueFrom(this.multisiteService.allowMultisite(siteId, allow));
+    await firstValueFrom(this.multiSiteService.allowMultisite(siteId, allow));
     this.sitesList();
   }
 }

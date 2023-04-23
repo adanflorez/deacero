@@ -6,8 +6,11 @@ import { Request } from '../models';
 export class RequestUseCase {
   constructor(private requestGateway: RequestGateway) {}
 
-  get(): Observable<Array<Request>> {
-    return this.requestGateway.get();
+  get(
+    page: number,
+    perPage: number
+  ): Observable<{ requests: Request[]; size: number }> {
+    return this.requestGateway.get(page, perPage);
   }
 
   update(applicationId: number, timeExtension: string): Observable<void> {

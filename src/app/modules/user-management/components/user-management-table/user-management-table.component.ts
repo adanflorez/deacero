@@ -8,7 +8,7 @@ import {
   startWith,
   throwError,
 } from 'rxjs';
-import { PASSWORD_PATERN } from 'src/app/core/constants';
+import { PAGINATION, PASSWORD_PATERN } from 'src/app/core/constants';
 import { CustomValidators } from 'src/app/core/helpers/custom-validators';
 import { UserRolePipe } from 'src/app/core/pipes/user-role.pipe';
 import { UserStatusPipe } from 'src/app/core/pipes/user-status.pipe';
@@ -43,6 +43,10 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
   emailToActivateOrDeactivate: string;
   statusToActivateOrDeactivate: boolean;
 
+  public page: number;
+  public totalItems: number;
+  public pageSize: number;
+
   constructor(
     private userStatusPipe: UserStatusPipe,
     private userRolePipe: UserRolePipe,
@@ -66,6 +70,9 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
     this.alertType = AlertType.Danger;
     this.emailToActivateOrDeactivate = '';
     this.statusToActivateOrDeactivate = false;
+    this.page = PAGINATION.PAGE;
+    this.totalItems = PAGINATION.TOTAL;
+    this.pageSize = PAGINATION.PER_PAGE;
   }
 
   ngAfterViewInit(): void {
@@ -190,8 +197,11 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
   }
 
   async userManagementList(): Promise<void> {
-    const data = await firstValueFrom(this.userService.userManagementList());
-    this.users = data;
+    const data = await firstValueFrom(
+      this.userService.userManagementList(this.page - 1, this.pageSize)
+    );
+    this.users = data.users;
+    this.totalItems = data.size;
     this.users$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))
