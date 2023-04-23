@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   catchError,
-  firstValueFrom,
   map,
   Observable,
   startWith,
+  Subject,
+  takeUntil,
   throwError,
 } from 'rxjs';
 import { PAGINATION, PASSWORD_PATERN } from 'src/app/core/constants';
@@ -25,27 +26,29 @@ declare let window: any;
   styleUrls: ['./user-management-table.component.scss'],
   providers: [UserStatusPipe, UserRolePipe],
 })
-export class UserManagementTableComponent implements OnInit, AfterViewInit {
-  users$: Observable<UserModel[]>;
-  users: UserModel[];
-  filter = new FormControl('', { nonNullable: true });
-  showModal: boolean;
-  activateDeactivateMessage: string;
-  createUserForm: FormGroup;
-  showCreateUserModal: boolean;
-  passwordFieldType: string;
-  confirmPasswordFieldType: string;
-  passwordButonnIcon: string;
-  confirmPasswordButonnIcon: string;
-  showAlert: boolean;
-  alertMessage: string;
-  alertType: AlertType;
-  emailToActivateOrDeactivate: string;
-  statusToActivateOrDeactivate: boolean;
-
+export class UserManagementTableComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
+  public users$: Observable<UserModel[]>;
+  public users: UserModel[];
+  public filter = new FormControl('', { nonNullable: true });
+  public showModal: boolean;
+  public activateDeactivateMessage: string;
+  public createUserForm: FormGroup;
+  public showCreateUserModal: boolean;
+  public passwordFieldType: string;
+  public confirmPasswordFieldType: string;
+  public passwordButonnIcon: string;
+  public confirmPasswordButonnIcon: string;
+  public showAlert: boolean;
+  public alertMessage: string;
+  public alertType: AlertType;
+  public emailToActivateOrDeactivate: string;
+  public statusToActivateOrDeactivate: boolean;
   public page: number;
   public totalItems: number;
   public pageSize: number;
+  private unSubscribe$: Subject<unknown>;
 
   constructor(
     private userStatusPipe: UserStatusPipe,
@@ -73,6 +76,12 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
     this.page = PAGINATION.PAGE;
     this.totalItems = PAGINATION.TOTAL;
     this.pageSize = PAGINATION.PER_PAGE;
+    this.unSubscribe$ = new Subject();
+  }
+
+  ngOnDestroy(): void {
+    this.unSubscribe$.next(undefined);
+    this.unSubscribe$.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -196,16 +205,20 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
     }
   }
 
-  async userManagementList(): Promise<void> {
-    const data = await firstValueFrom(
-      this.userService.userManagementList(this.page - 1, this.pageSize)
-    );
-    this.users = data.users;
-    this.totalItems = data.size;
-    this.users$ = this.filter.valueChanges.pipe(
-      startWith(''),
-      map(text => this.search(text))
-    );
+  userManagementList(): void {
+    this.userService
+      .userManagementList(this.page - 1, this.pageSize)
+      .pipe(takeUntil(this.unSubscribe$))
+      .subscribe({
+        next: data => {
+          this.users = data.users;
+          this.totalItems = data.size;
+          this.users$ = this.filter.valueChanges.pipe(
+            startWith(''),
+            map(text => this.search(text))
+          );
+        },
+      });
   }
 
   activateOrDeactivateUser() {

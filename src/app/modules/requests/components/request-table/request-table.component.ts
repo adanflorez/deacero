@@ -1,7 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { firstValueFrom, map, Observable, startWith } from 'rxjs';
+import {
+  firstValueFrom,
+  map,
+  Observable,
+  startWith,
+  Subject,
+  takeUntil,
+} from 'rxjs';
 import { PAGINATION } from 'src/app/core/constants';
 
 import { Request, RequestUseCase } from '../../domain';
@@ -11,7 +18,7 @@ import { Request, RequestUseCase } from '../../domain';
   templateUrl: './request-table.component.html',
   styleUrls: ['./request-table.component.scss'],
 })
-export class RequestTableComponent implements OnInit {
+export class RequestTableComponent implements OnInit, OnDestroy {
   public requests$: Observable<Request[]>;
   public requests: Request[];
   public filter = new FormControl('', { nonNullable: true });
@@ -22,6 +29,7 @@ export class RequestTableComponent implements OnInit {
   public page: number;
   public totalItems: number;
   public pageSize: number;
+  private unSubscribe$: Subject<unknown>;
 
   constructor(
     private requestUseCase: RequestUseCase,
@@ -39,10 +47,15 @@ export class RequestTableComponent implements OnInit {
     this.totalItems = PAGINATION.TOTAL;
     this.pageSize = PAGINATION.PER_PAGE;
     this.STATUS = 'Solicitud no enviada';
+    this.unSubscribe$ = new Subject();
   }
 
   public ngOnInit(): void {
     this.loadRequests();
+  }
+  ngOnDestroy(): void {
+    this.unSubscribe$.next(undefined);
+    this.unSubscribe$.unsubscribe();
   }
 
   protected search(text: string): Request[] {
@@ -57,20 +70,20 @@ export class RequestTableComponent implements OnInit {
     });
   }
 
-  protected async loadRequests(): Promise<void> {
-    try {
-      const data = await firstValueFrom(
-        this.requestUseCase.get(this.page - 1, this.pageSize)
-      );
-      this.requests = data.requests;
-      this.totalItems = data.size;
-      this.requests$ = this.filter.valueChanges.pipe(
-        startWith(''),
-        map(text => this.search(text))
-      );
-    } catch (error) {
-      console.error(error);
-    }
+  protected loadRequests(): void {
+    this.requestUseCase
+      .get(this.page - 1, this.pageSize)
+      .pipe(takeUntil(this.unSubscribe$))
+      .subscribe({
+        next: data => {
+          this.requests = data.requests;
+          this.totalItems = data.size;
+          this.requests$ = this.filter.valueChanges.pipe(
+            startWith(''),
+            map(text => this.search(text))
+          );
+        },
+      });
   }
 
   protected openModal(content: unknown, applicationId?: number): void {
