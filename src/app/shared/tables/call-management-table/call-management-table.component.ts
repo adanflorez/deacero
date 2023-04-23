@@ -1,8 +1,8 @@
 import { DatePipe, formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { firstValueFrom, map, Observable, startWith } from 'rxjs';
+import { map, Observable, startWith, Subject, takeUntil } from 'rxjs';
 import { PAGINATION } from 'src/app/core/constants';
 import { AlertType } from 'src/app/shared/alert';
 
@@ -17,21 +17,21 @@ type AnnouncementAction = 'Create' | 'Edit' | 'Delete' | 'Confirm';
   styleUrls: ['./call-management-table.component.scss'],
   providers: [DatePipe],
 })
-export class CallManagementTableComponent implements OnInit {
-  announcements$: Observable<Announcement[]>;
-  announcements: Announcement[];
-  filter = new FormControl('', { nonNullable: true });
-  modalType: AnnouncementAction;
-  announcementForm: FormGroup;
-  currentAnnouncement: Announcement;
-  showAlert: boolean;
-  alertType: AlertType;
-  alertMessage: string;
-  currentAnnouncementId: string;
-
+export class CallManagementTableComponent implements OnInit, OnDestroy {
+  public announcements$: Observable<Announcement[]>;
+  public announcements: Announcement[];
+  public filter = new FormControl('', { nonNullable: true });
+  public modalType: AnnouncementAction;
+  public announcementForm: FormGroup;
+  public currentAnnouncement: Announcement;
+  public showAlert: boolean;
+  public alertType: AlertType;
+  public alertMessage: string;
+  public currentAnnouncementId: string;
   public totalItems: number;
   public page: number;
   public pageSize: number;
+  private unSubscribe$: Subject<unknown>;
 
   constructor(
     private announcementService: AnnouncementService,
@@ -53,23 +53,32 @@ export class CallManagementTableComponent implements OnInit {
     this.page = PAGINATION.PAGE;
     this.totalItems = PAGINATION.TOTAL;
     this.pageSize = PAGINATION.PER_PAGE;
+    this.unSubscribe$ = new Subject();
   }
 
   ngOnInit(): void {
     this.announcementManagementList();
     this.initAnnouncementForm();
   }
+  ngOnDestroy(): void {
+    this.unSubscribe$.next(undefined);
+    this.unSubscribe$.unsubscribe();
+  }
 
-  async announcementManagementList(): Promise<void> {
-    const data = await firstValueFrom(
-      this.announcementService.get(this.page - 1, this.pageSize)
-    );
-    this.announcements = data.announcements;
-    this.totalItems = data.size;
-    this.announcements$ = this.filter.valueChanges.pipe(
-      startWith(''),
-      map(text => this.search(text))
-    );
+  announcementManagementList(): void {
+    this.announcementService
+      .get(this.page - 1, this.pageSize)
+      .pipe(takeUntil(this.unSubscribe$))
+      .subscribe({
+        next: data => {
+          this.announcements = data.announcements;
+          this.totalItems = data.size;
+          this.announcements$ = this.filter.valueChanges.pipe(
+            startWith(''),
+            map(text => this.search(text))
+          );
+        },
+      });
   }
 
   search(text: string): Announcement[] {
