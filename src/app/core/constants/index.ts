@@ -131,3 +131,9 @@ export const CATEGORIES = [
   'Ciencia y tecnología calidad de vida', //25
   'Emprendimiento', //26
 ];
+
+export const PAGINATION = {
+  PAGE: 1,
+  TOTAL: 0,
+  PER_PAGE: 10,
+};

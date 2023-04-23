@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { firstValueFrom, map, Observable, startWith } from 'rxjs';
+import { PAGINATION } from 'src/app/core/constants';
 import { AlertType } from 'src/app/shared/alert';
 
 import { Announcement } from './domain';
@@ -49,9 +50,9 @@ export class CallManagementTableComponent implements OnInit {
     this.alertType = AlertType.Success;
     this.alertMessage = '';
     this.currentAnnouncementId = '';
-    this.totalSites = 0;
-    this.page = 1;
-    this.pageSize = 10;
+    this.page = PAGINATION.PAGE;
+    this.totalSites = PAGINATION.TOTAL;
+    this.pageSize = PAGINATION.PER_PAGE;
   }
 
   ngOnInit(): void {

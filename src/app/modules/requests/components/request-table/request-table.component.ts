@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { firstValueFrom, map, Observable, startWith } from 'rxjs';
+import { PAGINATION } from 'src/app/core/constants';
 
 import { Request, RequestUseCase } from '../../domain';
 
@@ -34,9 +35,9 @@ export class RequestTableComponent implements OnInit {
     this.date = '';
     this.currentApplicationId = undefined;
     this.showAlert = false;
-    this.page = 1;
-    this.totalSites = 0;
-    this.pageSize = 10;
+    this.page = PAGINATION.PAGE;
+    this.totalSites = PAGINATION.TOTAL;
+    this.pageSize = PAGINATION.PER_PAGE;
     this.STATUS = 'Solicitud no enviada';
   }
 

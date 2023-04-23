@@ -8,7 +8,7 @@ import {
   startWith,
   throwError,
 } from 'rxjs';
-import { PASSWORD_PATERN } from 'src/app/core/constants';
+import { PAGINATION, PASSWORD_PATERN } from 'src/app/core/constants';
 import { CustomValidators } from 'src/app/core/helpers/custom-validators';
 import { UserRolePipe } from 'src/app/core/pipes/user-role.pipe';
 import { UserStatusPipe } from 'src/app/core/pipes/user-status.pipe';
@@ -70,9 +70,9 @@ export class UserManagementTableComponent implements OnInit, AfterViewInit {
     this.alertType = AlertType.Danger;
     this.emailToActivateOrDeactivate = '';
     this.statusToActivateOrDeactivate = false;
-    this.page = 1;
-    this.pageSize = 10;
-    this.totalSites = 0;
+    this.page = PAGINATION.PAGE;
+    this.totalSites = PAGINATION.TOTAL;
+    this.pageSize = PAGINATION.PER_PAGE;
   }
 
   ngAfterViewInit(): void {
