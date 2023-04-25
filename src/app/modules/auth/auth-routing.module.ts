@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthComponent } from './auth.component';
 import { ValidateComponent } from './validate/validate.component';
+import { AnnouncementComponent } from './pages';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
       {
         path: 'validate',
         component: ValidateComponent,
+      },
+      {
+        path: 'announcement',
+        component: AnnouncementComponent,
       },
     ],
   },

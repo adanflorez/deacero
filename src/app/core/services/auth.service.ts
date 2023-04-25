@@ -12,6 +12,8 @@ export class AuthService {
   private apiLogin = environment.apiLogin;
   private apiUser = environment.apiUser;
   private apiRegister = environment.apiRegister;
+  private apiAnnouncement = environment.apiAnnouncement;
+  private apiApplication = environment.apiApplication;
 
   protected readonly byPASS = {
     context: new HttpContext().set(BYPASS_AUTH, true),
@@ -66,5 +68,13 @@ export class AuthService {
           return res.data as boolean;
         })
       );
+  }
+
+  announcementIsAvailable(): Observable<any> {
+    return this.http.get(`${this.apiAnnouncement}available`);
+  }
+
+  public applyToAnnouncement(): Observable<any> {
+    return this.http.post(`${this.apiApplication}create`, {});
   }
 }
