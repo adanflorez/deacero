@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 import { AuthComponent } from './auth.component';
-import { ValidateComponent } from './validate/validate.component';
 import { AnnouncementComponent } from './pages';
+import { ValidateComponent } from './validate/validate.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
       {
         path: 'announcement',
         component: AnnouncementComponent,
+        canActivate: [AuthGuard],
       },
     ],
   },
