@@ -74,6 +74,7 @@
   <ngb-pagination
     class="d-none d-lg-flex"
     *ngIf="totalItems"
+    [maxSize]="5"
     [collectionSize]="totalItems"
     [(page)]="page"
     [pageSize]="pageSize"
@@ -133,6 +134,7 @@
   </div>
   <ngb-pagination
     *ngIf="totalItems"
+    [maxSize]="5"
     [collectionSize]="totalItems"
     [(page)]="page"
     [pageSize]="pageSize"
