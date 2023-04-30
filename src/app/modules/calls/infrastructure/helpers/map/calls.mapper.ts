@@ -7,7 +7,9 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
   mapFrom(param: CallsEntity): CallsForm {
     return {
       generalProjectData: {
-        category: param.generalProjectData.category[0],
+        category: param.generalProjectData.category
+          ? param.generalProjectData.category[0]
+          : '',
         comment: param.generalProjectData.comments,
         projectName: param.generalProjectData.projectName,
       },

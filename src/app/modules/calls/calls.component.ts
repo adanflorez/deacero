@@ -485,9 +485,10 @@ export class CallsComponent implements OnInit, OnDestroy {
       .get()
       .pipe(catchError(error => throwError(() => Error(error))))
       .subscribe({
-        next: (fomsData: CallsForm) => {
-          this.formData = fomsData;
+        next: (formsData: CallsForm) => {
+          this.formData = formsData;
         },
+        error: error => console.error(error),
       });
   }
 
