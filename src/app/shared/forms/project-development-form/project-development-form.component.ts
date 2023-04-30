@@ -85,6 +85,7 @@ export class ProjectDevelopmentFormComponent implements OnInit, OnDestroy {
       ),
     });
     this.subscribeToForm();
+    this.form.markAllAsTouched();
   }
 
   subscribeToForm() {
