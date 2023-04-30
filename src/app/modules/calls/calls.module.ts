@@ -7,6 +7,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import {
   GeneralProjectDataFormModule,
   LocationFormModule,
+  ProjectManagerFormModule,
 } from 'src/app/shared/forms';
 
 import { FormErrorModule } from '../../shared/form-error/form-error.module';
@@ -39,6 +40,7 @@ import { CallsImplementation } from './infrastructure/implementations';
     OpeningHoursTableModule,
     GeneralProjectDataFormModule,
     LocationFormModule,
+    ProjectManagerFormModule,
   ],
   providers: [
     CallsService,

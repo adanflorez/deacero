@@ -104,6 +104,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.formData = {
       generalProjectData: {},
       location: {},
+      projectManager: {},
     };
     this.loading = false;
   }

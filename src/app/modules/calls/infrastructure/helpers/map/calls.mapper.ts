@@ -28,6 +28,11 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         whichMedia: param.location.whichMeans,
         daysAndHours: param.location.daysAndHoursOfAttention,
       },
+      projectManager: {
+        responsibleName: param.projectManager.responsibleName,
+        emails: param.projectManager.emailOfTheProjectManager,
+        phone: param.projectManager.cellPhoneOfTheProjectManager,
+      },
     };
   }
 
@@ -50,6 +55,12 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         howDidYouFindOutAboutTheCall: param.location.aboutCall as string,
         whichMeans: param.location.whichMedia as string,
         comments: param.location.comment as string,
+      },
+      projectManager: {
+        responsibleName: param.projectManager.responsibleName as string,
+        emailOfTheProjectManager: param.projectManager.emails as string,
+        cellPhoneOfTheProjectManager: param.projectManager.phone as string,
+        comments: param.projectManager.comment as string,
       },
     };
   }
