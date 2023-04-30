@@ -90,6 +90,7 @@ export class GeneralProjectDataFormComponent implements OnInit {
     });
     this.subscribeToForm();
     this.handleCategory();
+    this.form.markAllAsTouched();
   }
 
   subscribeToForm() {
