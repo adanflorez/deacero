@@ -4,7 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMaskModule } from 'ngx-mask';
-import { GeneralProjectDataFormModule } from 'src/app/shared/forms/general-project-data-form';
+import {
+  GeneralProjectDataFormModule,
+  LocationFormModule,
+} from 'src/app/shared/forms';
 
 import { FormErrorModule } from '../../shared/form-error/form-error.module';
 import { OpeningHoursTableModule } from './../../shared/tables/opening-hours-table/opening-hours-table.module';
@@ -35,6 +38,7 @@ import { CallsImplementation } from './infrastructure/implementations';
     NgbAlertModule,
     OpeningHoursTableModule,
     GeneralProjectDataFormModule,
+    LocationFormModule,
   ],
   providers: [
     CallsService,

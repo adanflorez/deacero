@@ -103,6 +103,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.formsStatus = [];
     this.formData = {
       generalProjectData: {},
+      location: {},
     };
     this.loading = false;
   }
@@ -486,6 +487,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       .pipe(catchError(error => throwError(() => Error(error))))
       .subscribe({
         next: (formsData: CallsForm) => {
+          console.log(formsData);
           this.formData = formsData;
         },
         error: error => console.error(error),
