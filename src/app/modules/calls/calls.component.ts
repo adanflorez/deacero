@@ -1,19 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import {
-  MULTIPLE_EMAIL_PATTERN,
-  OBJECTIVES,
-  ONLY_NUMBERS_PATTERN,
-  RATING,
-} from 'src/app/core/constants';
+import { BehaviorSubject, catchError, Subscription, throwError } from 'rxjs';
+import { OBJECTIVES, RATING } from 'src/app/core/constants';
+import FormValid from 'src/app/core/models/form-valid.model';
 import ProjectBudget from 'src/app/core/models/project-budget.model';
-import Response from 'src/app/core/models/response.model';
 import { CallService } from 'src/app/core/services/call.service';
-import { MultimediaService } from 'src/app/core/services/multimedia.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { OpeningHours } from 'src/app/shared/tables/opening-hours-table';
+
+import { CallsForm, CallsUseCase } from './domain';
 
 @Component({
   selector: 'app-calls',
@@ -90,42 +86,38 @@ export class CallsComponent implements OnInit, OnDestroy {
   );
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  // Refactor
+  public formData: CallsForm;
+  public formsStatus: FormValid[];
+  public loading: boolean;
+
   constructor(
-    private multimediaService: MultimediaService,
     private modalService: NgbModal,
     private callService: CallService,
-    private userService: UserService
+    private userService: UserService,
+    // Refactor
+    private readonly callsService: CallsUseCase
   ) {
     this.closeResult = '';
+    // Refactor
+    this.formsStatus = [];
+    this.formData = {
+      generalProjectData: {},
+    };
+    this.loading = false;
   }
 
   ngOnInit(): void {
     this.userService.OSCstatus().subscribe({
       next: res => {
         if (res.data) {
-          this.loadApplication();
+          this.getApplication();
         } else {
           this.hideForm$.next(true);
         }
       },
       error: error => console.error(error),
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      complete: () => {},
     });
-  }
-
-  get f() {
-    return this.form.controls;
-  }
-
-  get isValidForm(): boolean {
-    return (
-      this.form.valid &&
-      this.contributions.length > 0 &&
-      this.conversions.length > 0 &&
-      this.donations.length > 0 &&
-      this.openingHours.length > 0
-    );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -238,408 +230,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       professionalizationProcess: res?.selfAppraisal.professionalizationProcess,
       opportunityGeneration: res?.selfAppraisal.generationOfOpportunities,
     };
-  }
-
-  private initForm() {
-    this.form = new FormGroup({
-      projectName: new FormControl(this.call?.projectName, [
-        Validators.required,
-      ]),
-      category: new FormControl(this.call?.category, Validators.required),
-      livingConditions: new FormControl(this.call?.livingConditions),
-      lifeQuality: new FormControl(this.call?.lifeQuality),
-      capacityBuilding: new FormControl(this.call?.capacityBuilding),
-      supportType: new FormControl(this.call?.supportType),
-      supportScope: new FormControl(this.call?.supportScope),
-      resilienceBuilding: new FormControl(this.call?.resilienceBuilding),
-      socialBackwardness: new FormControl(this.call?.socialBackwardness),
-      communitySense: new FormControl(this.call?.communitySense),
-      sustainabilityProcesses: new FormControl(
-        this.call?.sustainabilityProcesses
-      ),
-      statusImprovement: new FormControl(this.call?.statusImprovement),
-      urbanDevelopment: new FormControl(this.call?.urbanDevelopment),
-      professionalizationProcess: new FormControl(
-        this.call?.professionalizationProcess
-      ),
-      opportunityGeneration: new FormControl(this.call?.opportunityGeneration),
-      locationQuestion: new FormControl(
-        this.call?.locationQuestion == null ? true : this.call?.locationQuestion
-      ),
-      street: new FormControl(this.call?.street, Validators.required),
-      colony: new FormControl(this.call?.colony, Validators.required),
-      town: new FormControl(this.call?.town, Validators.required),
-      state: new FormControl(this.call?.state, Validators.required),
-      postalCode: new FormControl(this.call?.postalCode, Validators.required),
-      video: new FormControl(this.call?.video, Validators.required),
-      aboutCall: new FormControl(this.call?.aboutCall, Validators.required),
-      whichMedia: new FormControl(this.call?.whichMedia),
-      responsibleName: new FormControl(
-        this.call?.responsibleName,
-        Validators.required
-      ),
-      emails: new FormControl(this.call?.emails, [
-        Validators.required,
-        Validators.pattern(MULTIPLE_EMAIL_PATTERN),
-      ]),
-      phone: new FormControl(this.call?.phone, [
-        Validators.required,
-        Validators.pattern(ONLY_NUMBERS_PATTERN),
-        Validators.maxLength(12),
-      ]),
-      whichProblem: new FormControl(
-        this.call?.whichProblem,
-        Validators.required
-      ),
-      generalObjective: new FormControl(
-        this.call?.generalObjective,
-        Validators.required
-      ),
-      numberOfBeneficiaries: new FormControl(this.call?.numberOfBeneficiaries, [
-        Validators.required,
-        Validators.pattern(ONLY_NUMBERS_PATTERN),
-      ]),
-      collaborationWithOtherOrganizations: new FormControl(
-        this.call?.collaborationWithOtherOrganizations
-      ),
-      collaboratorsAnswer: new FormControl(
-        this.call?.collaboratorsAnswer,
-        Validators.required
-      ),
-      populationsConditionsBefore: new FormControl(
-        this.call?.populationsConditionsBefore,
-        Validators.required
-      ),
-      populationsConditionsAfter: new FormControl(
-        this.call?.populationsConditionsAfter,
-        Validators.required
-      ),
-      promoteSocialImprovement: new FormControl(
-        this.call?.promoteSocialImprovement,
-        Validators.required
-      ),
-      startDate: new FormControl(this.call?.startDate, Validators.required),
-      endDate: new FormControl(this.call?.endDate, Validators.required),
-      objectives: new FormControl(
-        this.call?.objectives || '',
-        Validators.required
-      ),
-      povertyEnd: new FormControl(this.call?.povertyEnd),
-      zeroHunger: new FormControl(this.call?.zeroHunger),
-      healthAndWellness: new FormControl(this.call?.healthAndWellness),
-      qualityEducation: new FormControl(this.call?.qualityEducation),
-      genderEquality: new FormControl(this.call?.genderEquality),
-      cleanWater: new FormControl(this.call?.cleanWater),
-      affordableEnergy: new FormControl(this.call?.affordableEnergy),
-      decentWork: new FormControl(this.call?.decentWork),
-      industry: new FormControl(this.call?.industry),
-      reducingInequalities: new FormControl(this.call?.reducingInequalities),
-      cities: new FormControl(this.call?.cities),
-      production: new FormControl(this.call?.production),
-      climateAction: new FormControl(this.call?.climateAction),
-      underwaterLife: new FormControl(this.call?.underwaterLife),
-      terrestrialEcosystemLife: new FormControl(
-        this.call?.terrestrialEcosystemLife
-      ),
-      peace: new FormControl(this.call?.peace),
-      alliances: new FormControl(this.call?.alliances),
-      facebook: new FormControl(this.call?.facebook),
-      instagram: new FormControl(this.call?.instagram),
-      linkedin: new FormControl(this.call?.linkedin),
-      twitter: new FormControl(this.call?.twitter),
-      tiktok: new FormControl(this.call?.tiktok),
-      youtube: new FormControl(this.call?.youtube),
-      webpage: new FormControl(this.call?.webpage),
-      ethicalCode: new FormControl(this.call?.ethicalCode),
-      governanceManual: new FormControl(this.call?.governanceManual),
-      timelineActivities: new FormControl(
-        this.call?.timelineActivities,
-        Validators.required
-      ),
-      workWithMinors: new FormControl(this.call?.workWithMinors),
-      officialLetterOfAuthorizationOfDonees: new FormControl(
-        this.call?.officialLetterOfAuthorizationOfDonees,
-        Validators.required
-      ),
-      // updatedCertificate: new FormControl(
-      //   this.call?.updatedCertificate,
-      //   Validators.required
-      // ),
-      publicationInAnnex14OfTheCurrentRMF: new FormControl(
-        this.call?.publicationInAnnex14OfTheCurrentRMF,
-        Validators.required
-      ),
-      constituentAct: new FormControl(
-        this.call?.constituentAct,
-        Validators.required
-      ),
-      mostRecentMeeting: new FormControl(this.call?.mostRecentMeeting),
-      legalRepresentativesPower: new FormControl(
-        this.call?.legalRepresentativesPower
-      ),
-      legalRepresentativesId: new FormControl(
-        this.call?.legalRepresentativesId,
-        Validators.required
-      ),
-      // documentRFC: new FormControl(this.call?.documentRFC, Validators.required),
-      oldProofOfAddress: new FormControl(
-        this.call?.oldProofOfAddress,
-        Validators.required
-      ),
-      updatedComplianceOpinion: new FormControl(
-        this.call?.updatedComplianceOpinion,
-        Validators.required
-      ),
-      proofOfUpdatedTaxSituation: new FormControl(
-        this.call?.proofOfUpdatedTaxSituation,
-        Validators.required
-      ),
-      logo: new FormControl(this.call?.logo, Validators.required),
-      subscribe: new FormControl(this.call?.subscribe),
-    });
-
-    this.handleCategory();
-    this.handleLocation();
-    this.handleAboutCall();
-    this.handleObjectives();
-    this.initDocuments();
-    this.changeCategory();
-    this.form.markAllAsTouched();
-    this.validateFormCompleted();
-  }
-
-  initDocuments() {
-    this.documentsFields = [
-      {
-        field: 'ethicalCode',
-        name: 'Código de ética',
-        help: 'PDF legible',
-      },
-      {
-        field: 'governanceManual',
-        name: 'Manual de gobernanza',
-        help: 'PDF legible',
-      },
-      {
-        field: 'timelineActivities',
-        name: 'Cronograma de actividades',
-        help: 'PDF legible',
-      },
-      {
-        field: 'workWithMinors',
-        name: 'En caso de trabajar con menores de edad, adjuntar las políticas, normas, reglamentos o protocolos que aseguren su bienestar',
-        help: 'PDF legible',
-      },
-      {
-        field: 'officialLetterOfAuthorizationOfDonees',
-        name: 'Oficio de autorización de donatarias SAT (vigente)',
-        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
-      },
-      // {
-      //   field: 'updatedCertificate',
-      //   name: 'Constancia actualizada del Registro Federal de Contribuyentes',
-      //   help: 'PDF legible',
-      // },
-      {
-        field: 'publicationInAnnex14OfTheCurrentRMF',
-        name: 'Publicación en el Anexo-14 de la RMF vigente',
-        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
-      },
-      {
-        field: 'constituentAct',
-        name: 'Acta constitutiva de la organización',
-        help: 'PDF legible',
-      },
-      {
-        field: 'mostRecentMeeting',
-        name: 'Acta de asamblea más reciente',
-        help: 'PDF legible',
-      },
-      {
-        field: 'legalRepresentativesPower',
-        name: 'Poder del (los) representante(s) legal(es)',
-        help: 'PDF legible',
-      },
-      {
-        field: 'legalRepresentativesId',
-        name: 'Identificación oficial del representante legal',
-        help: 'PDF legible',
-      },
-      // {
-      //   field: 'documentRFC',
-      //   name: 'Cédula del RFC',
-      //   help: 'PDF legible',
-      // },
-      {
-        field: 'oldProofOfAddress',
-        name: 'Comprobante de domicilio con antigüedad no mayor a 3 meses (agua, luz, teléfono)',
-        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
-      },
-      {
-        field: 'updatedComplianceOpinion',
-        name: 'Opinión de cumplimiento actualizada',
-        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
-      },
-      {
-        field: 'proofOfUpdatedTaxSituation',
-        name: 'Constancia de situación fiscal actualizada',
-        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
-      },
-    ];
-  }
-
-  private validateFormCompleted(): void {
-    setTimeout(() => {
-      if (this.form.valid) {
-        this.callService.status().subscribe((res: unknown) => {
-          if ((res as Response<unknown>).data) {
-            this.form.disable();
-            this.infoSaved$.next(true);
-          }
-        });
-      }
-    }, 500);
-  }
-
-  private changeCategory() {
-    // Reset previous controls
-    switch (this.f.category.value) {
-      case this.categories[0]:
-      case this.categories[1]:
-      case this.categories[2]:
-      case this.categories[4]:
-        this.groups = [
-          'socialBackwardness',
-          'capacityBuilding',
-          'communitySense',
-          'sustainabilityProcesses',
-        ];
-        break;
-      case this.categories[3]:
-        this.groups = [
-          'livingConditions',
-          'lifeQuality',
-          'capacityBuilding',
-          'supportType',
-          'supportScope',
-          'resilienceBuilding',
-        ];
-        break;
-      default:
-        this.groups = [];
-        break;
-    }
-    // Set validators to current controls
-    this.setValidatorsToRating();
-  }
-
-  private setValidatorsToRating() {
-    this.groups.forEach(group => {
-      this.form.get(group)?.setValidators(Validators.required);
-    });
-  }
-
-  private handleCategory() {
-    const sub = this.form
-      .get('category')
-      ?.valueChanges.subscribe(() => this.changeCategory());
-    this.unsubscribe.push(sub as Subscription);
-  }
-
-  private handleLocation() {
-    if (!this.f.locationQuestion.value) {
-      this.locationFields.forEach(field => {
-        this.form.get(field)?.setValidators(Validators.required);
-        // this.form.get(field)?.reset();
-      });
-    } else {
-      this.locationFields.forEach(field => {
-        this.form.get(field)?.clearValidators();
-      });
-    }
-    const locationQuestionSub = this.form
-      .get('locationQuestion')
-      ?.valueChanges.subscribe(res => {
-        if (!res) {
-          this.locationFields.forEach(field => {
-            this.form.get(field)?.setValidators(Validators.required);
-            this.form.updateValueAndValidity();
-            // this.form.get(field)?.reset();
-          });
-        } else {
-          this.locationFields.forEach(field => {
-            this.form.get(field)?.clearValidators();
-            this.form.updateValueAndValidity();
-          });
-        }
-      });
-    this.unsubscribe.push(locationQuestionSub as Subscription);
-  }
-
-  private handleAboutCall() {
-    const sub = this.form.get('aboutCall')?.valueChanges.subscribe(res => {
-      if (res == 'Otro') {
-        this.form.get('whichMedia')?.setValidators(Validators.required);
-      } else {
-        this.form.get('whichMedia')?.clearValidators();
-        this.form.get('whichMedia')?.reset();
-      }
-    });
-    this.unsubscribe.push(sub as Subscription);
-  }
-
-  private handleObjectives() {
-    const sub = this.form.get('objectives')?.valueChanges.subscribe(val => {
-      this.objectivesOptions.forEach((_, index) => {
-        if (val.includes(this.objectivesOptions[index])) {
-          this.form
-            .get(this.objectivesFields[index])
-            ?.setValidators(Validators.required);
-        } else {
-          this.form.get(this.objectivesFields[index])?.clearValidators();
-          this.form.get(this.objectivesFields[index])?.reset();
-        }
-      });
-    });
-    this.unsubscribe.push(sub as Subscription);
-  }
-
-  uploadDocument(e: Event, control: string, isImage = false) {
-    if (!this.fileValidation(control, isImage)) return;
-    const formData = new FormData();
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    formData.append('file', (e.target as HTMLInputElement).files![0]);
-    this.multimediaService.upload(formData).subscribe({
-      next: (res: unknown) => {
-        this.tempDocumentUrl.next((res as Response<unknown>).data as string);
-      },
-      error: error => console.error(error),
-      complete: () => {
-        const sub = this.tempDocumentUrl.asObservable().subscribe(res => {
-          if (!this.f[control].value) {
-            this.f[control].setValue(res);
-          }
-        });
-        sub.unsubscribe();
-      },
-    });
-  }
-
-  private fileValidation(inputId: string, isImage?: boolean): boolean {
-    let allowedExtensions = /(\.pdf)$/i;
-    let message = 'El archivo debe ser de extension .pdf';
-    if (isImage) {
-      allowedExtensions = /(\.png|\.ai|\.svg|\.pdf|\.jpg|\.jpeg)$/i;
-      message = 'El archivo debe ser de extension .jpg, .pdf, .png, .ai o .svg';
-    }
-    const fileInput = document.getElementById(inputId) as HTMLInputElement;
-    const filePath = fileInput?.value;
-    if (!allowedExtensions.exec(filePath)) {
-      alert(message);
-      fileInput.value = '';
-      return false;
-    }
-    return true;
   }
 
   ngOnDestroy(): void {
@@ -866,20 +456,9 @@ export class CallsComponent implements OnInit, OnDestroy {
           },
           complete: () => {
             this.open(modal);
-            this.loadApplication();
           },
         });
-      } else {
-        this.loadApplication();
       }
-    });
-    this.unsubscribe.push(sub);
-  }
-
-  loadApplication() {
-    const sub = this.callService.application().subscribe((res: unknown) => {
-      this.parseResponse((res as Response<unknown>).data);
-      this.initForm();
     });
     this.unsubscribe.push(sub);
   }
@@ -889,5 +468,54 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.save();
     const sub = this.callService.saveInFlokzu();
     return sub;
+  }
+  /**
+   * Refactor
+   */
+
+  protected get validateIfFormDataIsEmpty(): boolean {
+    for (const form in this.formData) {
+      return Object.keys(this.formData[form as keyof CallsForm]).length !== 0;
+    }
+    return false;
+  }
+
+  getApplication() {
+    this.callsService
+      .get()
+      .pipe(catchError(error => throwError(() => Error(error))))
+      .subscribe({
+        next: (fomsData: CallsForm) => {
+          this.formData = fomsData;
+        },
+      });
+  }
+
+  updateData = <T>(form: T, isFormValid: FormValid) => {
+    const sectionName = isFormValid.name as keyof CallsForm;
+    const sectionBody = {
+      ...this.formData[sectionName],
+      ...form,
+    } as any;
+    this.formData[sectionName] = sectionBody;
+    this.updateFormStatus(isFormValid);
+  };
+
+  private updateFormStatus(formValid: FormValid): void {
+    const index = this.formsStatus.findIndex(
+      item => item.name === formValid.name
+    );
+    if (index === -1) {
+      this.formsStatus.push(formValid);
+    } else {
+      this.formsStatus.splice(index, 1);
+      this.formsStatus.push(formValid);
+    }
+  }
+
+  get isInvalidForm(): boolean {
+    return this.formsStatus.length > 0
+      ? this.formsStatus.some(form => !form.valid)
+      : true;
   }
 }

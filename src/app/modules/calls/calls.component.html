@@ -7,41 +7,16 @@
     </ngb-alert>
   </p>
 </ng-container>
-<ng-container *ngIf="call">
+<ng-container *ngIf="validateIfFormDataIsEmpty">
   <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
-    <form [formGroup]="form">
-      <h2 class="mb-3">Datos generales del proyecto</h2>
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <div class="mb-3">
-            <label for="projectName" class="form-label"
-              >Nombre del proyecto</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="projectName"
-              placeholder="Nombre del proyecto"
-              formControlName="projectName"
-              [class.is-invalid]="
-                f['projectName'].invalid && f['projectName'].touched
-              " />
-            <app-form-error [control]="f['projectName']"></app-form-error>
-          </div>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="category" class="form-label">Categoría</label>
-          <ng-select #category labelForId="category" formControlName="category">
-            <ng-option value="">Click para seleccionar</ng-option>
-            <ng-option [value]="category" *ngFor="let category of categories">{{
-              category
-            }}</ng-option>
-          </ng-select>
-          <app-form-error [control]="f['category']"></app-form-error>
-        </div>
-      </div>
-      <hr />
-      <h2 class="mb-3">Ubicación, ¿Dónde se llevará a cabo?</h2>
+    <app-general-project-data-form
+      [updateParentModel]="updateData"
+      [defaultValues]="
+        formData.generalProjectData
+      "></app-general-project-data-form>
+    <hr />
+
+    <!-- <h2 class="mb-3">Ubicación, ¿Dónde se llevará a cabo?</h2>
       <div class="row">
         <div class="col-12">
           <div class="mb-3">
@@ -259,6 +234,7 @@
         </div>
       </div>
       <hr />
+
       <h2 class="mb-3">Desarrollo del proyecto</h2>
       <div class="row">
         <div class="col-12 col-md-4">
@@ -410,6 +386,7 @@
         </div>
       </div>
       <hr />
+
       <h2 class="mb-3">
         Vigencia (Período durante el cual se hará uso del donativo)
       </h2>
@@ -443,6 +420,7 @@
         </div>
       </div>
       <hr />
+
       <h2 class="mb-3">Objetivos y metas ODS</h2>
       <div class="row">
         <div class="col-12 col-md-6">
@@ -2051,8 +2029,8 @@
           </div>
         </div>
       </div>
-
       <hr />
+
       <h2 class="mb-3">Presupuesto del proyecto</h2>
       <h6>Contribución de la organización</h6>
       <app-budget-table
@@ -2060,23 +2038,25 @@
         [readOnly]="infoSaved$ | async"
         (recordChange)="contributions = $event"></app-budget-table>
       <hr />
-      <h6>Coinversión</h6>
+
+      <h6>Conversión</h6>
       <app-budget-table
         [records]="conversions"
         [readOnly]="infoSaved$ | async"
         (recordChange)="conversions = $event"></app-budget-table>
       <hr />
+
       <h6>Donativo Fundación DEACERO</h6>
       <app-budget-table
         [records]="donations"
         [readOnly]="infoSaved$ | async"
         (recordChange)="donations = $event"></app-budget-table>
       <hr />
+
       <h2 *ngIf="f['category'].value" class="mb-3">
         Con la implementación del proyecto, ¿Cual consideras que será el
         beneficio para la comunidad en...
       </h2>
-
       <ng-container *ngFor="let rate of rating">
         <ng-container *ngIf="groups.includes(rate.group)">
           <div class="border p-2 mb-3">
@@ -2220,6 +2200,7 @@
         </div>
       </div>
       <hr />
+
       <h2 class="mb-3">Documentos</h2>
       <div class="row">
         <ng-container *ngFor="let doc of documentsFields">
@@ -2342,25 +2323,24 @@
             </label>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <ng-container *ngIf="(infoSaved$ | async) === false">
-        <button
-          class="btn btn-outline-primary me-3"
-          type="button"
-          (click)="save()">
-          Guardar borrador
-        </button>
+    <ng-container *ngIf="(infoSaved$ | async) === false">
+      <button
+        class="btn btn-outline-primary me-3"
+        type="button"
+        (click)="save()">
+        Guardar borrador
+      </button>
 
-        <button
-          class="btn btn-primary"
-          type="button"
-          [disabled]="!isValidForm"
-          (click)="open(modal)">
-          Enviar
-        </button>
-      </ng-container>
-    </form>
+      <button
+        class="btn btn-primary"
+        type="button"
+        [disabled]="isInvalidForm"
+        (click)="open(modal)">
+        Enviar
+      </button>
+    </ng-container>
   </div>
 </ng-container>
 
