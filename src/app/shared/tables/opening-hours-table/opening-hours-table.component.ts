@@ -113,6 +113,6 @@ export class OpeningHoursTableComponent
   }
 
   get isMaximumRecords(): boolean {
-    return this.records.length === this.daysQuantity;
+    return this.records?.length === this.daysQuantity;
   }
 }
