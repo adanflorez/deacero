@@ -105,6 +105,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       generalProjectData: {},
       location: {},
       projectManager: {},
+      projectDevelopment: {},
     };
     this.loading = false;
   }
@@ -129,27 +130,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.donations = res?.projectBudget.donationDeaceroFoundation || [];
     this.openingHours = res?.location.daysAndHoursOfAttention || [];
     this.call = {
-      // General project data
-      projectName: res?.generalProjectData.projectName,
-      category: res?.generalProjectData.category
-        ? res?.generalProjectData.category[0]
-        : '',
-      // Location
-      locationQuestion: res?.location.locationIsVirtual,
-      street: res?.location.streetAndNumber,
-      colony: res?.location.colony,
-      town: res?.location.municipality,
-      state: res?.location.status,
-      postalCode: res?.location.postalCode,
-      video: res?.location.urlProyect,
-      aboutCall: res?.location.howDidYouFindOutAboutTheCall
-        ? res?.location.howDidYouFindOutAboutTheCall[0]
-        : '',
-      whichMedia: res?.location.whichMeans,
-      // Responsible
-      responsibleName: res?.projectManager.responsibleName,
-      emails: res?.projectManager.emailOfTheProjectManager,
-      phone: res?.projectManager.cellPhoneOfTheProjectManager,
       // Development
       whichProblem: res?.projectDevelopment.socialProblem,
       generalObjective: res?.projectDevelopment.generalObjective,

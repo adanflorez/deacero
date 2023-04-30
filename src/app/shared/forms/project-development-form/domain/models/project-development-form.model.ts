@@ -2,7 +2,7 @@ export interface ProjectDevelopmentForm {
   whichProblem?: string;
   generalObjective?: string;
   numberOfBeneficiaries?: string;
-  collaborationWithOtherOrganizations?: string;
+  collaborationWithOtherOrganizations?: boolean;
   collaboratorsAnswer?: string;
   populationsConditionsBefore?: string;
   populationsConditionsAfter?: string;

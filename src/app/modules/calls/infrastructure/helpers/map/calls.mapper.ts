@@ -33,6 +33,20 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         emails: param.projectManager.emailOfTheProjectManager,
         phone: param.projectManager.cellPhoneOfTheProjectManager,
       },
+      projectDevelopment: {
+        whichProblem: param.projectDevelopment.socialProblem,
+        generalObjective: param.projectDevelopment.generalObjective,
+        numberOfBeneficiaries: param.projectDevelopment.numberOfBeneficiaries,
+        collaborationWithOtherOrganizations:
+          param.projectDevelopment.receiveCollaboration == null
+            ? false
+            : param.projectDevelopment.receiveCollaboration,
+        collaboratorsAnswer: param.projectDevelopment.which,
+        populationsConditionsBefore: param.projectDevelopment.currentPopulation,
+        populationsConditionsAfter:
+          param.projectDevelopment.conditionsAfterTheIntervention,
+        promoteSocialImprovement: param.projectDevelopment.socialBetterment,
+      },
     };
   }
 
@@ -61,6 +75,22 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         emailOfTheProjectManager: param.projectManager.emails as string,
         cellPhoneOfTheProjectManager: param.projectManager.phone as string,
         comments: param.projectManager.comment as string,
+      },
+      projectDevelopment: {
+        socialProblem: param.projectDevelopment.whichProblem as string,
+        generalObjective: param.projectDevelopment.generalObjective as string,
+        numberOfBeneficiaries: param.projectDevelopment
+          .numberOfBeneficiaries as string,
+        receiveCollaboration: param.projectDevelopment
+          .collaborationWithOtherOrganizations as boolean,
+        which: param.projectDevelopment.collaboratorsAnswer as string,
+        currentPopulation: param.projectDevelopment
+          .populationsConditionsBefore as string,
+        conditionsAfterTheIntervention: param.projectDevelopment
+          .populationsConditionsAfter as string,
+        socialBetterment: param.projectDevelopment
+          .promoteSocialImprovement as string,
+        comments: param.projectDevelopment.comment as string,
       },
     };
   }
