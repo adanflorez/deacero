@@ -48,39 +48,14 @@
       [defaultValues]="formData.projectBudget"></app-project-budget-form>
     <hr />
 
-    <!--  <h2 *ngIf="f['category'].value" class="mb-3">
-        Con la implementación del proyecto, ¿Cual consideras que será el
-        beneficio para la comunidad en...
-      </h2>
-      <ng-container *ngFor="let rate of rating">
-        <ng-container *ngIf="groups.includes(rate.group)">
-          <div class="border p-2 mb-3">
-            <h6>
-              {{ rate.title }}
-            </h6>
-            <div class="row">
-              <ng-container *ngFor="let item of rate.items">
-                <div class="col-md-1 my-3">
-                  <div class="d-flex flex-column align-items-center">
-                    <label class="form-check-label" [for]="rate.group">{{
-                      item
-                    }}</label>
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      [name]="rate.group"
-                      [id]="rate.group"
-                      [value]="'0' + item"
-                      [formControlName]="rate.group" />
-                  </div>
-                </div>
-              </ng-container>
-            </div>
-          </div>
-        </ng-container>
-      </ng-container>
+    <ng-container *ngIf="formData.generalProjectData.category">
+      <app-rating-form
+        [updateParentModel]="updateData"
+        [defaultValues]="formData.rating"
+        [category]="formData.generalProjectData.category!"></app-rating-form>
+    </ng-container>
 
-      <h2 class="mb-3">Comunicación</h2>
+    <!-- <h2 class="mb-3">Comunicación</h2>
       <div class="row">
         <div class="col-12 col-md-6">
           <div class="mb-3">

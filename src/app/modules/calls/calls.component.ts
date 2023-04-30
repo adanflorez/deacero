@@ -2,12 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, catchError, Subscription, throwError } from 'rxjs';
-import { OBJECTIVES, RATING } from 'src/app/core/constants';
+import { RATING } from 'src/app/core/constants';
 import FormValid from 'src/app/core/models/form-valid.model';
-import ProjectBudget from 'src/app/core/models/project-budget.model';
 import { CallService } from 'src/app/core/services/call.service';
 import { UserService } from 'src/app/core/services/user.service';
-import { OpeningHours } from 'src/app/shared/tables/opening-hours-table';
 
 import { CallsForm, CallsUseCase } from './domain';
 
@@ -19,64 +17,6 @@ import { CallsForm, CallsUseCase } from './domain';
 export class CallsComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
   form!: FormGroup;
-  groups: string[] = [];
-  categories = [
-    // 'Alimentación',
-    // 'Asistencia jurídica',
-    // 'Asistencia o rehabilitación médica',
-    // 'Atención a grupos sociales con discapacidad',
-    'Becas',
-    // 'Defensa y promoción de los DH',
-    // 'Desarrollo comunidades indígenas.',
-    // 'Desarrollo Institucional',
-    // 'Desarrollo urbano',
-    // 'Detonación de oportunidades para la resiliencia económica.',
-    // 'Ecología',
-    'Educación',
-    // 'Empoderamiento social',
-    // 'Equipamiento',
-    // 'Fomento educativo',
-    // 'Inclusión',
-    // 'Infraestructura',
-    // 'Medio ambiente',
-    // 'Nutrición',
-    // 'Orientación social',
-    // 'Participación ciudadana.',
-    // 'Promoción y difusión cultural',
-    // 'Reinserción social',
-    // 'Salud mental',
-    'Primera infancia', //24
-    'Ciencia y tecnología calidad de vida', //25
-    'Emprendimiento', //26
-  ];
-  rating = RATING;
-  locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
-  objectivesOptions = OBJECTIVES;
-  objectivesFields = [
-    'povertyEnd',
-    'zeroHunger',
-    'healthAndWellness',
-    'qualityEducation',
-    'genderEquality',
-    'cleanWater',
-    'affordableEnergy',
-    'decentWork',
-    'industry',
-    'reducingInequalities',
-    'cities',
-    'production',
-    'climateAction',
-    'underwaterLife',
-    'terrestrialEcosystemLife',
-    'peace',
-    'alliances',
-  ];
-  documentsFields!: Array<{ field: string; name: string; help: string }>;
-  contributions: ProjectBudget[] = [];
-  conversions: ProjectBudget[] = [];
-  donations: ProjectBudget[] = [];
-  openingHours: Array<OpeningHours> = [];
-  tempDocumentUrl: BehaviorSubject<string> = new BehaviorSubject<string>('');
   closeResult: string;
   hideForm$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -109,6 +49,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       period: {},
       objectives: {},
       projectBudget: {},
+      rating: {},
     };
     this.loading = false;
   }
@@ -128,10 +69,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private parseResponse(res: any) {
-    this.contributions = res?.projectBudget.organizationContribution || [];
-    this.conversions = res?.projectBudget.jointVenture || [];
-    this.donations = res?.projectBudget.donationDeaceroFoundation || [];
-    this.openingHours = res?.location.daysAndHoursOfAttention || [];
     this.call = {
       // Communication
       facebook: res?.communication.facebook,
@@ -165,19 +102,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       logo: res?.documents.logo,
       livingConditions: res?.selfAppraisal.improveLivingConditions,
       lifeQuality: res?.selfAppraisal.improvementInQualityOfLife,
-      // Rating
-      capacityBuilding: res?.selfAppraisal.selfManagementSkills,
-      supportType: res?.selfAppraisal.supportType,
-      supportScope: res?.selfAppraisal.scopeOfSupport,
-      resilienceBuilding: res?.selfAppraisal.resilienceBuilding,
-      socialBackwardness: res?.selfAppraisal.socialLag,
-      communitySense: res?.selfAppraisal.developmentOfSenseOfCommunity,
-      sustainabilityProcesses: res?.selfAppraisal.sustainabilityProcess,
-      statusImprovement:
-        res?.selfAppraisal.improvementInTheStateOfTheOrganization,
-      urbanDevelopment: res?.selfAppraisal.urbanDevelopment,
-      professionalizationProcess: res?.selfAppraisal.professionalizationProcess,
-      opportunityGeneration: res?.selfAppraisal.generationOfOpportunities,
     };
   }
 
@@ -203,19 +127,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   save(modal?: unknown, updateAndSave?: boolean) {
     const {
-      livingConditions,
-      lifeQuality,
-      capacityBuilding,
-      supportType,
-      supportScope,
-      resilienceBuilding,
-      socialBackwardness,
-      communitySense,
-      sustainabilityProcesses,
-      statusImprovement,
-      urbanDevelopment,
-      professionalizationProcess,
-      opportunityGeneration,
       facebook,
       instagram,
       linkedin,
@@ -243,27 +154,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     } = this.form.value;
 
     const body = {
-      projectBudget: {
-        organizationContribution: this.contributions,
-        jointVenture: this.conversions,
-        donationDeaceroFoundation: this.donations,
-      },
-      selfAppraisal: {
-        improveLivingConditions: livingConditions,
-        improvementInQualityOfLife: lifeQuality,
-        selfManagementSkills: capacityBuilding,
-        supportType: supportType,
-        scopeOfSupport: supportScope,
-        resilienceBuilding: resilienceBuilding,
-        socialLag: socialBackwardness,
-        developmentOfCapacitiesForSelfManagement: capacityBuilding,
-        developmentOfSenseOfCommunity: communitySense,
-        sustainabilityProcess: sustainabilityProcesses,
-        improvementInTheStateOfTheOrganization: statusImprovement,
-        urbanDevelopment: urbanDevelopment,
-        professionalizationProcess: professionalizationProcess,
-        generationOfOpportunities: opportunityGeneration,
-      },
       communication: {
         facebook: facebook,
         instagram: instagram,
@@ -324,7 +214,6 @@ export class CallsComponent implements OnInit, OnDestroy {
   /**
    * Refactor
    */
-
   protected get validateIfFormDataIsEmpty(): boolean {
     for (const form in this.formData) {
       return Object.keys(this.formData[form as keyof CallsForm]).length !== 0;

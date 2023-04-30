@@ -81,6 +81,21 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         donations: param.projectBudget.donationDeaceroFoundation,
         conversions: param.projectBudget.jointVenture,
       },
+      rating: {
+        capacityBuilding: param.selfAppraisal.selfManagementSkills,
+        supportType: param.selfAppraisal.supportType,
+        supportScope: param.selfAppraisal.scopeOfSupport,
+        resilienceBuilding: param.selfAppraisal.resilienceBuilding,
+        socialBackwardness: param.selfAppraisal.socialLag,
+        communitySense: param.selfAppraisal.developmentOfSenseOfCommunity,
+        sustainabilityProcesses: param.selfAppraisal.sustainabilityProcess,
+        statusImprovement:
+          param.selfAppraisal.improvementInTheStateOfTheOrganization,
+        urbanDevelopment: param.selfAppraisal.urbanDevelopment,
+        professionalizationProcess:
+          param.selfAppraisal.professionalizationProcess,
+        opportunityGeneration: param.selfAppraisal.generationOfOpportunities,
+      },
     };
   }
 
@@ -163,6 +178,26 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         jointVenture: param.projectBudget.conversions as ProjectBudget[],
         organizationContribution: param.projectBudget
           .contributions as ProjectBudget[],
+      },
+      selfAppraisal: {
+        improveLivingConditions: param.rating.livingConditions as string,
+        improvementInQualityOfLife: param.rating.lifeQuality as string,
+        selfManagementSkills: param.rating.capacityBuilding as string,
+        supportType: param.rating.supportType as string,
+        scopeOfSupport: param.rating.supportScope as string,
+        resilienceBuilding: param.rating.resilienceBuilding as string,
+        socialLag: param.rating.socialBackwardness as string,
+        developmentOfCapacitiesForSelfManagement: param.rating
+          .capacityBuilding as string,
+        developmentOfSenseOfCommunity: param.rating.communitySense as string,
+        sustainabilityProcess: param.rating.sustainabilityProcesses as string,
+        improvementInTheStateOfTheOrganization: param.rating
+          .statusImprovement as string,
+        urbanDevelopment: param.rating.urbanDevelopment as string,
+        professionalizationProcess: param.rating
+          .professionalizationProcess as string,
+        generationOfOpportunities: param.rating.opportunityGeneration as string,
+        comments: param.rating.comment as string,
       },
     };
   }

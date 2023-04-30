@@ -10,6 +10,7 @@ export * from './period.entity';
 export * from './project-budget.entity';
 export * from './project-development.entity';
 export * from './project-manager.entity';
+export * from './rating.entity';
 export * from './remuneration-entity';
 export * from './strategic-alliances-entity';
 export * from './user-entity';

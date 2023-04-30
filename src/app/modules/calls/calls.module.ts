@@ -12,6 +12,7 @@ import {
   ProjectBudgetFormModule,
   ProjectDevelopmentFormModule,
   ProjectManagerFormModule,
+  RatingFormModule,
 } from 'src/app/shared/forms';
 
 import { FormErrorModule } from '../../shared/form-error/form-error.module';
@@ -49,6 +50,7 @@ import { CallsImplementation } from './infrastructure/implementations';
     PeriodFormModule,
     ObjectivesFormModule,
     ProjectBudgetFormModule,
+    RatingFormModule,
   ],
   providers: [
     CallsService,
