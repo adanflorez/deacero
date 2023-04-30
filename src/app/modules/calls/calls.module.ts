@@ -9,6 +9,7 @@ import {
   LocationFormModule,
   ObjectivesFormModule,
   PeriodFormModule,
+  ProjectBudgetFormModule,
   ProjectDevelopmentFormModule,
   ProjectManagerFormModule,
 } from 'src/app/shared/forms';
@@ -47,6 +48,7 @@ import { CallsImplementation } from './infrastructure/implementations';
     ProjectDevelopmentFormModule,
     PeriodFormModule,
     ObjectivesFormModule,
+    ProjectBudgetFormModule,
   ],
   providers: [
     CallsService,

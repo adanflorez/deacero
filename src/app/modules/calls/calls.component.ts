@@ -108,6 +108,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       projectDevelopment: {},
       period: {},
       objectives: {},
+      projectBudget: {},
     };
     this.loading = false;
   }
@@ -202,24 +203,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   save(modal?: unknown, updateAndSave?: boolean) {
     const {
-      objectives,
-      povertyEnd,
-      zeroHunger,
-      healthAndWellness,
-      qualityEducation,
-      genderEquality,
-      cleanWater,
-      affordableEnergy,
-      decentWork,
-      industry,
-      reducingInequalities,
-      cities,
-      production,
-      climateAction,
-      underwaterLife,
-      terrestrialEcosystemLife,
-      peace,
-      alliances,
       livingConditions,
       lifeQuality,
       capacityBuilding,

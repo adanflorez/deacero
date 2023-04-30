@@ -3,6 +3,7 @@ import {
   LocationEntity,
   ObjectivesEntity,
   PeriodEntity,
+  ProjectBudgetEntity,
   ProjectDevelopmentEntity,
   ProjectManagerEntity,
 } from 'src/app/infrastructure';
@@ -14,4 +15,5 @@ export interface CallsEntity {
   projectDevelopment: ProjectDevelopmentEntity;
   validity: PeriodEntity;
   objectivesAndGoals: ObjectivesEntity;
+  projectBudget: ProjectBudgetEntity;
 }

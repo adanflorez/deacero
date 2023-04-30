@@ -5,6 +5,7 @@ import {
   ProjectDevelopmentForm,
   PeriodForm,
   ObjectivesForm,
+  ProjectBudgetForm,
 } from 'src/app/shared/forms';
 
 export interface CallsForm {
@@ -14,4 +15,5 @@ export interface CallsForm {
   projectDevelopment: ProjectDevelopmentForm;
   period: PeriodForm;
   objectives: ObjectivesForm;
+  projectBudget: ProjectBudgetForm;
 }

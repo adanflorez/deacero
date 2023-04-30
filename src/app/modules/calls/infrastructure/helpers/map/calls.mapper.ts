@@ -3,6 +3,7 @@ import { Mapper } from 'src/app/base/utils/mapper';
 import { CallsForm } from '../../../domain';
 import { CallsEntity } from '../../driven-adapters';
 import { OpeningHours } from 'src/app/shared/tables/opening-hours-table';
+import ProjectBudget from 'src/app/core/models/project-budget.model';
 
 export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
   mapFrom(param: CallsEntity): CallsForm {
@@ -73,6 +74,12 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
           param.objectivesAndGoals.lifeOfTerrestrialEcosystems,
         peace: param.objectivesAndGoals.peaceAndJustice,
         alliances: param.objectivesAndGoals.alliancesToAchieveObjectives,
+      },
+      projectBudget: {
+        comment: param.projectBudget.comments,
+        contributions: param.projectBudget.organizationContribution,
+        donations: param.projectBudget.donationDeaceroFoundation,
+        conversions: param.projectBudget.jointVenture,
       },
     };
   }
@@ -148,6 +155,14 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         peaceAndJustice: param.objectives.peace as string,
         alliancesToAchieveObjectives: param.objectives.alliances as string,
         comments: param.objectives.comment as string,
+      },
+      projectBudget: {
+        donationDeaceroFoundation: param.projectBudget
+          .donations as ProjectBudget[],
+        comments: param.projectBudget.comment as string,
+        jointVenture: param.projectBudget.conversions as ProjectBudget[],
+        organizationContribution: param.projectBudget
+          .contributions as ProjectBudget[],
       },
     };
   }
