@@ -47,6 +47,11 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
           param.projectDevelopment.conditionsAfterTheIntervention,
         promoteSocialImprovement: param.projectDevelopment.socialBetterment,
       },
+      period: {
+        startDate: param.validity.startDate,
+        endDate: param.validity.endDate,
+        comment: param.validity.comments,
+      },
     };
   }
 
@@ -91,6 +96,11 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         socialBetterment: param.projectDevelopment
           .promoteSocialImprovement as string,
         comments: param.projectDevelopment.comment as string,
+      },
+      validity: {
+        comments: param.period.comment as string,
+        endDate: param.period.endDate as string,
+        startDate: param.period.startDate as string,
       },
     };
   }

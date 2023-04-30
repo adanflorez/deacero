@@ -5,6 +5,7 @@ export * from './general-project-data.entity';
 export * from './governing-body-entity';
 export * from './location.entity';
 export * from './organizational-information-entity';
+export * from './period.entity';
 export * from './project-development.entity';
 export * from './project-manager.entity';
 export * from './remuneration-entity';

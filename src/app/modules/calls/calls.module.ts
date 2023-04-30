@@ -7,6 +7,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import {
   GeneralProjectDataFormModule,
   LocationFormModule,
+  PeriodFormModule,
   ProjectDevelopmentFormModule,
   ProjectManagerFormModule,
 } from 'src/app/shared/forms';
@@ -43,6 +44,7 @@ import { CallsImplementation } from './infrastructure/implementations';
     LocationFormModule,
     ProjectManagerFormModule,
     ProjectDevelopmentFormModule,
+    PeriodFormModule,
   ],
   providers: [
     CallsService,

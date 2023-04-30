@@ -106,6 +106,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       location: {},
       projectManager: {},
       projectDevelopment: {},
+      period: {},
     };
     this.loading = false;
   }
@@ -130,22 +131,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.donations = res?.projectBudget.donationDeaceroFoundation || [];
     this.openingHours = res?.location.daysAndHoursOfAttention || [];
     this.call = {
-      // Development
-      whichProblem: res?.projectDevelopment.socialProblem,
-      generalObjective: res?.projectDevelopment.generalObjective,
-      numberOfBeneficiaries: res?.projectDevelopment.numberOfBeneficiaries,
-      collaborationWithOtherOrganizations:
-        res?.projectDevelopment.receiveCollaboration == null
-          ? false
-          : res?.projectDevelopment.receiveCollaboration,
-      collaboratorsAnswer: res?.projectDevelopment.which,
-      populationsConditionsBefore: res?.projectDevelopment.currentPopulation,
-      populationsConditionsAfter:
-        res?.projectDevelopment.conditionsAfterTheIntervention,
-      promoteSocialImprovement: res?.projectDevelopment.socialBetterment,
-      // Validity
-      startDate: res?.validity.startDate,
-      endDate: res?.validity.endDate,
       // Objectives
       objectives: res?.objectivesAndGoals.sustainableDevelopmentGoals,
       povertyEnd: res?.objectivesAndGoals.endOfPoverty,
@@ -236,30 +221,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   save(modal?: unknown, updateAndSave?: boolean) {
     const {
-      projectName,
-      category,
-      locationQuestion,
-      street,
-      colony,
-      town,
-      state,
-      postalCode,
-      video,
-      aboutCall,
-      whichMedia,
-      responsibleName,
-      emails,
-      phone,
-      whichProblem,
-      generalObjective,
-      numberOfBeneficiaries,
-      collaborationWithOtherOrganizations,
-      collaboratorsAnswer,
-      populationsConditionsBefore,
-      populationsConditionsAfter,
-      promoteSocialImprovement,
-      startDate,
-      endDate,
       objectives,
       povertyEnd,
       zeroHunger,
@@ -318,41 +279,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     } = this.form.value;
 
     const body = {
-      generalProjectData: {
-        projectName: projectName,
-        category: [category],
-      },
-      location: {
-        locationIsVirtual: locationQuestion,
-        streetAndNumber: street,
-        colony: colony,
-        municipality: town,
-        status: state,
-        postalCode: postalCode,
-        urlProyect: video,
-        daysAndHoursOfAttention: this.openingHours,
-        howDidYouFindOutAboutTheCall: [aboutCall],
-        whichMeans: whichMedia,
-      },
-      projectManager: {
-        responsibleName: responsibleName,
-        emailOfTheProjectManager: emails,
-        cellPhoneOfTheProjectManager: phone,
-      },
-      projectDevelopment: {
-        socialProblem: whichProblem,
-        generalObjective: generalObjective,
-        numberOfBeneficiaries: numberOfBeneficiaries,
-        receiveCollaboration: collaborationWithOtherOrganizations,
-        which: collaboratorsAnswer,
-        currentPopulation: populationsConditionsBefore,
-        conditionsAfterTheIntervention: populationsConditionsAfter,
-        socialBetterment: promoteSocialImprovement,
-      },
-      validity: {
-        startDate,
-        endDate,
-      },
       objectivesAndGoals: {
         sustainableDevelopmentGoals: objectives === '' ? null : objectives,
         endOfPoverty: povertyEnd,
