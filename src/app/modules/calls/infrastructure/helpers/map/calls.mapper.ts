@@ -52,6 +52,28 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         endDate: param.validity.endDate,
         comment: param.validity.comments,
       },
+      objectives: {
+        objectives: param.objectivesAndGoals.sustainableDevelopmentGoals,
+        povertyEnd: param.objectivesAndGoals.endOfPoverty,
+        zeroHunger: param.objectivesAndGoals.zeroHunger,
+        healthAndWellness: param.objectivesAndGoals.healthAndWellness,
+        qualityEducation: param.objectivesAndGoals.qualityEducation,
+        genderEquality: param.objectivesAndGoals.genderEquality,
+        cleanWater: param.objectivesAndGoals.cleanWaterAndSanitation,
+        affordableEnergy: param.objectivesAndGoals.affordableEnergy,
+        decentWork: param.objectivesAndGoals.decentWorkAndEconomicGrowth,
+        industry: param.objectivesAndGoals.industry,
+        reducingInequalities: param.objectivesAndGoals.reductionOfInequality,
+        cities: param.objectivesAndGoals.sustainableCitiesandCommunities,
+        production:
+          param.objectivesAndGoals.responsibleProductionAndConsumption,
+        climateAction: param.objectivesAndGoals.climateAction,
+        underwaterLife: param.objectivesAndGoals.submarineLife,
+        terrestrialEcosystemLife:
+          param.objectivesAndGoals.lifeOfTerrestrialEcosystems,
+        peace: param.objectivesAndGoals.peaceAndJustice,
+        alliances: param.objectivesAndGoals.alliancesToAchieveObjectives,
+      },
     };
   }
 
@@ -101,6 +123,31 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         comments: param.period.comment as string,
         endDate: param.period.endDate as string,
         startDate: param.period.startDate as string,
+      },
+      objectivesAndGoals: {
+        sustainableDevelopmentGoals: (param.objectives.objectives === ''
+          ? null
+          : param.objectives.objectives) as string,
+        endOfPoverty: param.objectives.povertyEnd as string,
+        zeroHunger: param.objectives.zeroHunger as string,
+        healthAndWellness: param.objectives.healthAndWellness as string,
+        qualityEducation: param.objectives.qualityEducation as string,
+        genderEquality: param.objectives.genderEquality as string,
+        cleanWaterAndSanitation: param.objectives.cleanWater as string,
+        affordableEnergy: param.objectives.affordableEnergy as string,
+        decentWorkAndEconomicGrowth: param.objectives.decentWork as string,
+        industry: param.objectives.industry as string,
+        reductionOfInequality: param.objectives.reducingInequalities as string,
+        sustainableCitiesandCommunities: param.objectives.cities as string,
+        responsibleProductionAndConsumption: param.objectives
+          .production as string,
+        climateAction: param.objectives.climateAction as string,
+        submarineLife: param.objectives.underwaterLife as string,
+        lifeOfTerrestrialEcosystems: param.objectives
+          .terrestrialEcosystemLife as string,
+        peaceAndJustice: param.objectives.peace as string,
+        alliancesToAchieveObjectives: param.objectives.alliances as string,
+        comments: param.objectives.comment as string,
       },
     };
   }

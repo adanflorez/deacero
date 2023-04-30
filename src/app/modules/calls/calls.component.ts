@@ -107,6 +107,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       projectManager: {},
       projectDevelopment: {},
       period: {},
+      objectives: {},
     };
     this.loading = false;
   }
@@ -131,26 +132,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     this.donations = res?.projectBudget.donationDeaceroFoundation || [];
     this.openingHours = res?.location.daysAndHoursOfAttention || [];
     this.call = {
-      // Objectives
-      objectives: res?.objectivesAndGoals.sustainableDevelopmentGoals,
-      povertyEnd: res?.objectivesAndGoals.endOfPoverty,
-      zeroHunger: res?.objectivesAndGoals.zeroHunger,
-      healthAndWellness: res?.objectivesAndGoals.healthAndWellness,
-      qualityEducation: res?.objectivesAndGoals.qualityEducation,
-      genderEquality: res?.objectivesAndGoals.genderEquality,
-      cleanWater: res?.objectivesAndGoals.cleanWaterAndSanitation,
-      affordableEnergy: res?.objectivesAndGoals.affordableEnergy,
-      decentWork: res?.objectivesAndGoals.decentWorkAndEconomicGrowth,
-      industry: res?.objectivesAndGoals.industry,
-      reducingInequalities: res?.objectivesAndGoals.reductionOfInequality,
-      cities: res?.objectivesAndGoals.sustainableCitiesandCommunities,
-      production: res?.objectivesAndGoals.responsibleProductionAndConsumption,
-      climateAction: res?.objectivesAndGoals.climateAction,
-      underwaterLife: res?.objectivesAndGoals.submarineLife,
-      terrestrialEcosystemLife:
-        res?.objectivesAndGoals.lifeOfTerrestrialEcosystems,
-      peace: res?.objectivesAndGoals.peaceAndJustice,
-      alliances: res?.objectivesAndGoals.alliancesToAchieveObjectives,
       // Communication
       facebook: res?.communication.facebook,
       instagram: res?.communication.instagram,
@@ -279,26 +260,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     } = this.form.value;
 
     const body = {
-      objectivesAndGoals: {
-        sustainableDevelopmentGoals: objectives === '' ? null : objectives,
-        endOfPoverty: povertyEnd,
-        zeroHunger: zeroHunger,
-        healthAndWellness: healthAndWellness,
-        qualityEducation: qualityEducation,
-        genderEquality: genderEquality,
-        cleanWaterAndSanitation: cleanWater,
-        affordableEnergy: affordableEnergy,
-        decentWorkAndEconomicGrowth: decentWork,
-        industry: industry,
-        reductionOfInequality: reducingInequalities,
-        sustainableCitiesandCommunities: cities,
-        responsibleProductionAndConsumption: production,
-        climateAction: climateAction,
-        submarineLife: underwaterLife,
-        lifeOfTerrestrialEcosystems: terrestrialEcosystemLife,
-        peaceAndJustice: peace,
-        alliancesToAchieveObjectives: alliances,
-      },
       projectBudget: {
         organizationContribution: this.contributions,
         jointVenture: this.conversions,

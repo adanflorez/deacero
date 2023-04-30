@@ -1,6 +1,7 @@
 import {
   GeneralProjectDataEntity,
   LocationEntity,
+  ObjectivesEntity,
   PeriodEntity,
   ProjectDevelopmentEntity,
   ProjectManagerEntity,
@@ -12,4 +13,5 @@ export interface CallsEntity {
   projectManager: ProjectManagerEntity;
   projectDevelopment: ProjectDevelopmentEntity;
   validity: PeriodEntity;
+  objectivesAndGoals: ObjectivesEntity;
 }
