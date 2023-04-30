@@ -53,125 +53,15 @@
         [updateParentModel]="updateData"
         [defaultValues]="formData.rating"
         [category]="formData.generalProjectData.category!"></app-rating-form>
+      <hr />
     </ng-container>
 
-    <!-- <h2 class="mb-3">Comunicación</h2>
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <div class="mb-3">
-            <label for="facebook" class="form-label">Facebook</label>
-            <input
-              type="text"
-              class="form-control"
-              id="facebook"
-              placeholder="https://..."
-              formControlName="facebook"
-              [class.is-invalid]="
-                f['facebook'].invalid && f['facebook'].touched
-              " />
-            <app-form-error
-              [control]="f['facebook']"
-              [errors]="{ pattern: 'Url no válida' }"></app-form-error>
-          </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <div class="mb-3">
-            <label for="instagram" class="form-label">Instagram</label>
-            <input
-              type="text"
-              class="form-control"
-              id="instagram"
-              placeholder="https://..."
-              formControlName="instagram"
-              [class.is-invalid]="
-                f['instagram'].invalid && f['instagram'].touched
-              " />
-            <app-form-error
-              [control]="f['instagram']"
-              [errors]="{ pattern: 'Url no válida' }"></app-form-error>
-          </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <div class="mb-3">
-            <label for="linkedin" class="form-label">LinkedIn</label>
-            <input
-              type="text"
-              class="form-control"
-              id="linkedin"
-              placeholder="https://..."
-              formControlName="linkedin"
-              [class.is-invalid]="
-                f['linkedin'].invalid && f['linkedin'].touched
-              " />
-            <app-form-error
-              [control]="f['linkedin']"
-              [errors]="{ pattern: 'Url no válida' }"></app-form-error>
-          </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <div class="mb-3">
-            <label for="twitter" class="form-label">Twitter</label>
-            <input
-              type="text"
-              class="form-control"
-              id="twitter"
-              placeholder="https://..."
-              formControlName="twitter"
-              [class.is-invalid]="
-                f['twitter'].invalid && f['twitter'].touched
-              " />
-            <app-form-error
-              [control]="f['twitter']"
-              [errors]="{ pattern: 'Url no válida' }"></app-form-error>
-          </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <div class="mb-3">
-            <label for="tiktok" class="form-label">Tik Tok</label>
-            <input
-              type="text"
-              class="form-control"
-              id="tiktok"
-              placeholder="https://..."
-              formControlName="tiktok"
-              [class.is-invalid]="f['tiktok'].invalid && f['tiktok'].touched" />
-            <app-form-error
-              [control]="f['tiktok']"
-              [errors]="{ pattern: 'Url no válida' }"></app-form-error>
-          </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <div class="mb-3">
-            <label for="youtube" class="form-label">Youtube</label>
-            <input
-              type="text"
-              class="form-control"
-              id="youtube"
-              placeholder="https://..."
-              formControlName="youtube"
-              [class.is-invalid]="
-                f['youtube'].invalid && f['youtube'].touched
-              " />
-            <app-form-error
-              [control]="f['youtube']"
-              [errors]="{ pattern: 'Url no válida' }"></app-form-error>
-          </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <div class="mb-3">
-            <label for="webpage" class="form-label">Página web</label>
-            <input
-              type="text"
-              class="form-control"
-              id="webpage"
-              placeholder="https://..."
-              formControlName="webpage" />
-          </div>
-        </div>
-      </div>
-      <hr />
+    <app-communication-form
+      [updateParentModel]="updateData"
+      [defaultValues]="formData.communication"></app-communication-form>
+    <hr />
 
-      <h2 class="mb-3">Documentos</h2>
+    <!-- <h2 class="mb-3">Documentos</h2>
       <div class="row">
         <ng-container *ngFor="let doc of documentsFields">
           <div class="col-md-12">

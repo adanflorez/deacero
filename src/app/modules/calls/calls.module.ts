@@ -5,6 +5,7 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMaskModule } from 'ngx-mask';
 import {
+  CommunicationFormModule,
   GeneralProjectDataFormModule,
   LocationFormModule,
   ObjectivesFormModule,
@@ -51,6 +52,7 @@ import { CallsImplementation } from './infrastructure/implementations';
     ObjectivesFormModule,
     ProjectBudgetFormModule,
     RatingFormModule,
+    CommunicationFormModule,
   ],
   providers: [
     CallsService,

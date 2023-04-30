@@ -50,6 +50,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       objectives: {},
       projectBudget: {},
       rating: {},
+      communication: {},
     };
     this.loading = false;
   }
@@ -70,15 +71,6 @@ export class CallsComponent implements OnInit, OnDestroy {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private parseResponse(res: any) {
     this.call = {
-      // Communication
-      facebook: res?.communication.facebook,
-      instagram: res?.communication.instagram,
-      linkedin: res?.communication.linkedln,
-      twitter: res?.communication.twitter,
-      tiktok: res?.communication.tiktok,
-      youtube: res?.communication.youtube,
-      webpage: res?.communication.webpage,
-
       // Documents
       ethicalCode: res?.documents.codeOfEthics,
       governanceManual: res?.documents.governanceHandbook,
@@ -127,13 +119,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   save(modal?: unknown, updateAndSave?: boolean) {
     const {
-      facebook,
-      instagram,
-      linkedin,
-      twitter,
-      tiktok,
-      youtube,
-      webpage,
       ethicalCode,
       governanceManual,
       timelineActivities,
@@ -154,15 +139,6 @@ export class CallsComponent implements OnInit, OnDestroy {
     } = this.form.value;
 
     const body = {
-      communication: {
-        facebook: facebook,
-        instagram: instagram,
-        linkedln: linkedin,
-        twitter: twitter,
-        tiktok: tiktok,
-        youtube: youtube,
-        webpage: webpage,
-      },
       documents: {
         codeOfEthics: ethicalCode,
         governanceHandbook: governanceManual,

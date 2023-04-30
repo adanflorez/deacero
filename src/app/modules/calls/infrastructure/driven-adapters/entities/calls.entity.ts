@@ -7,6 +7,7 @@ import {
   ProjectDevelopmentEntity,
   ProjectManagerEntity,
   RatingEntity,
+  SocialMediaEntity,
 } from 'src/app/infrastructure';
 
 export interface CallsEntity {
@@ -18,4 +19,5 @@ export interface CallsEntity {
   objectivesAndGoals: ObjectivesEntity;
   projectBudget: ProjectBudgetEntity;
   selfAppraisal: RatingEntity;
+  communication: SocialMediaEntity;
 }

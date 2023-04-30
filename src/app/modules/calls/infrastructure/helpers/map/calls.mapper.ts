@@ -96,6 +96,15 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
           param.selfAppraisal.professionalizationProcess,
         opportunityGeneration: param.selfAppraisal.generationOfOpportunities,
       },
+      communication: {
+        facebook: param.communication.facebook,
+        instagram: param.communication.instagram,
+        linkedin: param.communication.linkedln,
+        twitter: param.communication.twitter,
+        tiktok: param.communication.tiktok,
+        youtube: param.communication.youtube,
+        webpage: param.communication.webpage,
+      },
     };
   }
 
@@ -198,6 +207,16 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
           .professionalizationProcess as string,
         generationOfOpportunities: param.rating.opportunityGeneration as string,
         comments: param.rating.comment as string,
+      },
+      communication: {
+        facebook: param.communication.facebook as string,
+        instagram: param.communication.instagram as string,
+        linkedln: param.communication.linkedin as string,
+        twitter: param.communication.twitter as string,
+        tiktok: param.communication.tiktok as string,
+        youtube: param.communication.youtube as string,
+        webpage: param.communication.webpage as string,
+        comments: param.communication.comment as string,
       },
     };
   }
