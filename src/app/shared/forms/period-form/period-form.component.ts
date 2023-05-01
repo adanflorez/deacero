@@ -58,6 +58,7 @@ export class PeriodFormComponent implements OnInit, OnDestroy {
       endDate: new FormControl(this.defaultValues.endDate, Validators.required),
     });
     this.subscribeToForm();
+    this.form.markAllAsTouched();
   }
 
   subscribeToForm() {

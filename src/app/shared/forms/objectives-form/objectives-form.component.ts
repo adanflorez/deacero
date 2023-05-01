@@ -100,6 +100,7 @@ export class ObjectivesFormComponent implements OnInit, OnDestroy {
     });
     this.subscribeToForm();
     this.handleObjectives();
+    this.form.markAllAsTouched();
   }
 
   subscribeToForm() {

@@ -32,6 +32,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
   locationFields = ['street', 'colony', 'town', 'state', 'postalCode'];
   alertType: AlertType = AlertType.Warning;
   openingHours: Array<OpeningHours>;
+  public firstChange: boolean;
 
   private unsubscribe: Subscription[] = [];
 
@@ -40,6 +41,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
     this.defaultValues = {};
     this.disable = false;
     this.openingHours = [];
+    this.firstChange = true;
   }
 
   ngOnInit(): void {
@@ -48,10 +50,11 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const { disable } = changes;
+    const { disable, defaultValues } = changes;
     if (disable?.currentValue) {
       this.form.disable();
     }
+    this.firstChange = defaultValues?.firstChange;
   }
 
   ngOnDestroy(): void {
@@ -133,13 +136,13 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
         if (!res) {
           this.locationFields.forEach(field => {
             this.form.get(field)?.setValidators(Validators.required);
-            this.form.get(field)?.reset();
+            !this.firstChange && this.form.get(field)?.reset();
             this.form.updateValueAndValidity();
           });
         } else {
           this.locationFields.forEach(field => {
             this.form.get(field)?.clearValidators();
-            this.form.get(field)?.reset();
+            !this.firstChange && this.form.get(field)?.reset();
             this.form.updateValueAndValidity();
           });
         }
