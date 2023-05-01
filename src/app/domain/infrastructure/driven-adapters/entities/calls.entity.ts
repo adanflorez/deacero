@@ -22,4 +22,5 @@ export interface CallsEntity {
   selfAppraisal: RatingEntity;
   communication: SocialMediaEntity;
   documents: DocumentsEntity;
+  portalStatusCode?: number;
 }

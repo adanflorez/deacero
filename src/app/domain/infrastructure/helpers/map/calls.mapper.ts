@@ -123,6 +123,7 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         proofOfUpdatedTaxSituation: param.documents.proofOfUpdatedTaxSituation,
         logo: param.documents.logo,
       },
+      status: param.portalStatusCode as number,
     };
   }
 

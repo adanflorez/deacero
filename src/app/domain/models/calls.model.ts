@@ -22,4 +22,5 @@ export interface CallsForm {
   rating: RatingForm;
   communication: SocialMediaForm;
   documents: DocumentsForm;
+  status: number;
 }

@@ -7,7 +7,7 @@
     </ngb-alert>
   </p>
 </ng-container>
-<ng-container *ngIf="validateIfFormDataIsEmpty">
+<ng-container *ngIf="validateIfFormDataIsEmpty && formData.status !== 5">
   <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
     <app-general-project-data-form
       [updateParentModel]="updateData"
