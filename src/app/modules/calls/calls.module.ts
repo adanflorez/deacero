@@ -6,6 +6,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMaskModule } from 'ngx-mask';
 import {
   CommunicationFormModule,
+  DocumentsFormModule,
   GeneralProjectDataFormModule,
   LocationFormModule,
   ObjectivesFormModule,
@@ -53,6 +54,7 @@ import { CallsImplementation } from './infrastructure/implementations';
     ProjectBudgetFormModule,
     RatingFormModule,
     CommunicationFormModule,
+    DocumentsFormModule,
   ],
   providers: [
     CallsService,

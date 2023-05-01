@@ -105,6 +105,27 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         youtube: param.communication.youtube,
         webpage: param.communication.webpage,
       },
+      documents: {
+        ethicalCode: param.documents.codeOfEthics,
+        governanceManual: param.documents.governanceHandbook,
+        timelineActivities: param.documents.scheduleOfActivities,
+        workWithMinors: param.documents.workWithMinors,
+        officialLetterOfAuthorizationOfDonees:
+          param.documents.officialLetterOfAuthorizationOfDonees,
+        // updatedCertificate: param.documents.updatedCertificate,
+        publicationInAnnex14OfTheCurrentRMF:
+          param.documents.publicationInAnnex14OfTheCurrentRMF,
+        constituentAct: param.documents.constitutiveActOfTheOrganization,
+        mostRecentMeeting: param.documents.mostRecentMeetingMinutes,
+        legalRepresentativesPower: param.documents.powerOfLegalRepresentative,
+        legalRepresentativesId:
+          param.documents.officialIdentificationOfLegalRepresentative,
+        // documentRFC: param.documents.documentRFC,
+        oldProofOfAddress: param.documents.oldProofOfAddress,
+        updatedComplianceOpinion: param.documents.updatedComplianceOpinion,
+        proofOfUpdatedTaxSituation: param.documents.proofOfUpdatedTaxSituation,
+        logo: param.documents.logo,
+      },
     };
   }
 
@@ -217,6 +238,31 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         youtube: param.communication.youtube as string,
         webpage: param.communication.webpage as string,
         comments: param.communication.comment as string,
+      },
+      documents: {
+        codeOfEthics: param.documents.ethicalCode as string,
+        governanceHandbook: param.documents.governanceManual as string,
+        scheduleOfActivities: param.documents.timelineActivities as string,
+        workWithMinors: param.documents.workWithMinors as string,
+        officialLetterOfAuthorizationOfDonees: param.documents
+          .officialLetterOfAuthorizationOfDonees as string,
+        // updatedCertificate: updatedCertificate,
+        publicationInAnnex14OfTheCurrentRMF: param.documents
+          .publicationInAnnex14OfTheCurrentRMF as string,
+        constitutiveActOfTheOrganization: param.documents
+          .constituentAct as string,
+        mostRecentMeetingMinutes: param.documents.mostRecentMeeting as string,
+        powerOfLegalRepresentative: param.documents
+          .legalRepresentativesPower as string,
+        officialIdentificationOfLegalRepresentative: param.documents
+          .legalRepresentativesId as string,
+        // documentRFC: documentRFC,
+        oldProofOfAddress: param.documents.oldProofOfAddress as string,
+        updatedComplianceOpinion: param.documents
+          .updatedComplianceOpinion as string,
+        proofOfUpdatedTaxSituation: param.documents
+          .proofOfUpdatedTaxSituation as string,
+        logo: param.documents.logo as string,
       },
     };
   }

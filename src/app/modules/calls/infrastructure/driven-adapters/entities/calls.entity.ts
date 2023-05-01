@@ -1,4 +1,5 @@
 import {
+  DocumentsEntity,
   GeneralProjectDataEntity,
   LocationEntity,
   ObjectivesEntity,
@@ -20,4 +21,5 @@ export interface CallsEntity {
   projectBudget: ProjectBudgetEntity;
   selfAppraisal: RatingEntity;
   communication: SocialMediaEntity;
+  documents: DocumentsEntity;
 }

@@ -8,6 +8,7 @@ import {
   ProjectBudgetForm,
   RatingForm,
   SocialMediaForm,
+  DocumentsForm,
 } from 'src/app/shared/forms';
 
 export interface CallsForm {
@@ -20,4 +21,5 @@ export interface CallsForm {
   projectBudget: ProjectBudgetForm;
   rating: RatingForm;
   communication: SocialMediaForm;
+  documents: DocumentsForm;
 }

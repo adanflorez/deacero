@@ -51,6 +51,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       projectBudget: {},
       rating: {},
       communication: {},
+      documents: {},
     };
     this.loading = false;
   }
@@ -118,50 +119,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   save(modal?: unknown, updateAndSave?: boolean) {
-    const {
-      ethicalCode,
-      governanceManual,
-      timelineActivities,
-      workWithMinors,
-      officialLetterOfAuthorizationOfDonees,
-      // updatedCertificate,
-      publicationInAnnex14OfTheCurrentRMF,
-      constituentAct,
-      mostRecentMeeting,
-      legalRepresentativesPower,
-      legalRepresentativesId,
-      // documentRFC,
-      oldProofOfAddress,
-      updatedComplianceOpinion,
-      proofOfUpdatedTaxSituation,
-      logo,
-      subscribe,
-    } = this.form.value;
-
-    const body = {
-      documents: {
-        codeOfEthics: ethicalCode,
-        governanceHandbook: governanceManual,
-        scheduleOfActivities: timelineActivities,
-        workWithMinors: workWithMinors,
-        officialLetterOfAuthorizationOfDonees:
-          officialLetterOfAuthorizationOfDonees,
-        // updatedCertificate: updatedCertificate,
-        publicationInAnnex14OfTheCurrentRMF:
-          publicationInAnnex14OfTheCurrentRMF,
-        constitutiveActOfTheOrganization: constituentAct,
-        mostRecentMeetingMinutes: mostRecentMeeting,
-        powerOfLegalRepresentative: legalRepresentativesPower,
-        officialIdentificationOfLegalRepresentative: legalRepresentativesId,
-        // documentRFC: documentRFC,
-        oldProofOfAddress: oldProofOfAddress,
-        updatedComplianceOpinion: updatedComplianceOpinion,
-        proofOfUpdatedTaxSituation: proofOfUpdatedTaxSituation,
-        logo: logo,
-        doYouWanToSubscribe: subscribe,
-      },
-    };
-    const sub = this.callService.applicateToCall(body).subscribe(() => {
+    const sub = this.callService.applicateToCall({}).subscribe(() => {
       if (updateAndSave) {
         this.saveInFlokzu()?.subscribe({
           next: () => {

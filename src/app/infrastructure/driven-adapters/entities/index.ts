@@ -1,4 +1,5 @@
 export * from './decent-work-entity';
+export * from './documents.entity';
 export * from './fund-manager-entity';
 export * from './general-data-entity';
 export * from './general-project-data.entity';
