@@ -1,7 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { URL_PATTERN } from 'src/app/core/constants';
 import { CallSection } from 'src/app/core/enums/sections.enum';
 import FormValid from 'src/app/core/models/form-valid.model';
 import { AlertType } from 'src/app/shared/alert';
@@ -45,27 +44,13 @@ export class CommunicationFormComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.form = new FormGroup({
-      facebook: new FormControl(this.defaultValues.facebook, [
-        Validators.pattern(URL_PATTERN),
-      ]),
-      instagram: new FormControl(this.defaultValues.instagram, [
-        Validators.pattern(URL_PATTERN),
-      ]),
-      linkedin: new FormControl(this.defaultValues.linkedin, [
-        Validators.pattern(URL_PATTERN),
-      ]),
-      twitter: new FormControl(this.defaultValues.twitter, [
-        Validators.pattern(URL_PATTERN),
-      ]),
-      tiktok: new FormControl(this.defaultValues.tiktok, [
-        Validators.pattern(URL_PATTERN),
-      ]),
-      youtube: new FormControl(this.defaultValues.youtube, [
-        Validators.pattern(URL_PATTERN),
-      ]),
-      webpage: new FormControl(this.defaultValues.webpage, [
-        Validators.pattern(URL_PATTERN),
-      ]),
+      facebook: new FormControl(this.defaultValues.facebook),
+      instagram: new FormControl(this.defaultValues.instagram),
+      linkedin: new FormControl(this.defaultValues.linkedin),
+      twitter: new FormControl(this.defaultValues.twitter),
+      tiktok: new FormControl(this.defaultValues.tiktok),
+      youtube: new FormControl(this.defaultValues.youtube),
+      webpage: new FormControl(this.defaultValues.webpage),
     });
     this.subscribeToForm();
   }
