@@ -37,8 +37,11 @@ export class CallsImplementation extends CallsGateway {
       .pipe(map(() => undefined));
   }
 
-  applyCall(data: unknown): Observable<any> {
-    return this.http.post(`${this.apiApplication}`, data);
+  applyCall(data: CallsForm): Observable<any> {
+    return this.http.post(
+      `${this.apiApplication}`,
+      this.callsMapper.mapTo(data)
+    );
   }
 
   application() {

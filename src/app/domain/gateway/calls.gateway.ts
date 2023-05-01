@@ -5,7 +5,7 @@ export abstract class CallsGateway {
   abstract get(): Observable<CallsForm>;
   abstract update(form: CallsForm): Observable<void>;
   abstract feedbackStatus(): Observable<any>;
-  abstract applyCall(data: unknown): Observable<any>;
+  abstract applyCall(data: CallsForm): Observable<any>;
   abstract saveInFlokzu(): Observable<any>;
   abstract status(): Observable<any>;
   abstract feedback(): Observable<any>;

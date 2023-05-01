@@ -10,6 +10,6 @@ export interface LocationEntity {
   postalCode: string;
   urlProyect: string;
   daysAndHoursOfAttention: Array<OpeningHours>;
-  howDidYouFindOutAboutTheCall: string;
+  howDidYouFindOutAboutTheCall: string[];
   whichMeans: string;
 }

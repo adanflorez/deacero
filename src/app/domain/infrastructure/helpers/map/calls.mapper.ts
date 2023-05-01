@@ -12,7 +12,6 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         category: param.generalProjectData.category
           ? param.generalProjectData.category[0]
           : '',
-        comment: param.generalProjectData.comments,
         projectName: param.generalProjectData.projectName,
       },
       location: {
@@ -51,7 +50,6 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
       period: {
         startDate: param.validity.startDate,
         endDate: param.validity.endDate,
-        comment: param.validity.comments,
       },
       objectives: {
         objectives: param.objectivesAndGoals.sustainableDevelopmentGoals,
@@ -76,7 +74,6 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         alliances: param.objectivesAndGoals.alliancesToAchieveObjectives,
       },
       projectBudget: {
-        comment: param.projectBudget.comments,
         contributions: param.projectBudget.organizationContribution,
         donations: param.projectBudget.donationDeaceroFoundation,
         conversions: param.projectBudget.jointVenture,
@@ -145,7 +142,7 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         postalCode: param.location.postalCode as string,
         urlProyect: param.location.video as string,
         daysAndHoursOfAttention: param.location.daysAndHours as OpeningHours[],
-        howDidYouFindOutAboutTheCall: param.location.aboutCall as string,
+        howDidYouFindOutAboutTheCall: [param.location.aboutCall] as string[],
         whichMeans: param.location.whichMedia as string,
         comments: param.location.comment as string,
       },

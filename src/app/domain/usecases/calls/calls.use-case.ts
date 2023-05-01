@@ -18,7 +18,7 @@ export class CallsUseCase {
     return this.callsGateway.feedbackStatus();
   }
 
-  applyCall(data: unknown): Observable<any> {
+  applyCall(data: CallsForm): Observable<any> {
     return this.callsGateway.applyCall(data);
   }
 
