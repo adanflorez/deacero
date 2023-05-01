@@ -21,6 +21,7 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: DocumentsForm;
+  @Input() allowComments: boolean;
   form: FormGroup;
   documentsFields!: Array<{
     field: string;
@@ -37,6 +38,7 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
 
   constructor(private multimediaService: MultimediaService) {
     this.defaultValues = {};
+    this.allowComments = false;
     this.form = new FormGroup({});
     this.atLeastOneComment = false;
     this.initDocuments();
@@ -61,6 +63,12 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
       name: CallSection.DOCUMENTS,
       valid: this.form.valid,
     };
+  }
+
+  get keepInCountComments(): boolean {
+    return this.allowComments
+      ? this.atLeastOneComment || !!this.defaultValues.logoComment
+      : true;
   }
 
   initForm() {
