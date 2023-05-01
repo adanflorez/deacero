@@ -9,7 +9,7 @@ import {
   ProjectManagerEntity,
   RatingEntity,
   SocialMediaEntity,
-} from 'src/app/infrastructure';
+} from 'src/app/domain';
 
 export interface CallsEntity {
   generalProjectData: GeneralProjectDataEntity;

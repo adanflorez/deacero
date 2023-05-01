@@ -4,7 +4,7 @@ import { BehaviorSubject, catchError, throwError } from 'rxjs';
 import { validateRFC } from 'src/app/core/helpers/rfc-validator';
 import FormValid from 'src/app/core/models/form-valid.model';
 import Response from 'src/app/core/models/response.model';
-import { CallService } from 'src/app/core/services/call.service';
+import { CallsUseCase } from 'src/app/domain';
 import { AlertType } from 'src/app/shared/alert';
 
 import { HomeForm } from './domain';
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   formsStatus: FormValid[];
 
   constructor(
-    private callService: CallService,
+    private readonly callsService: CallsUseCase,
     private homeService: HomeService
   ) {
     this.formsStatus = [];
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
   getCallStatus(): void {
     setTimeout(() => {
       if (!this.isInvalidForm) {
-        this.callService.status().subscribe((res: unknown) => {
+        this.callsService.status().subscribe((res: unknown) => {
           if ((res as Response<unknown>).data) {
             this.infoSaved$.next(true);
           }

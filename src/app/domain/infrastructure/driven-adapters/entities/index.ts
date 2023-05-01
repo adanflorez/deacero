@@ -1,3 +1,4 @@
+export * from './calls.entity';
 export * from './decent-work-entity';
 export * from './documents.entity';
 export * from './fund-manager-entity';

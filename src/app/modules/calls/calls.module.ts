@@ -24,9 +24,6 @@ import { CallsComponent } from './calls.component';
 import { BudgetTableComponent } from './components/budget-table/budget-table.component';
 import { MembersComponent } from './components/members/members.component';
 import { RemunerationTableComponent } from './components/remuneration-table/remuneration-table.component';
-import { CallsGateway, CallsUseCase } from './domain';
-import { CallsService } from './infrastructure';
-import { CallsImplementation } from './infrastructure/implementations';
 
 @NgModule({
   declarations: [
@@ -55,19 +52,6 @@ import { CallsImplementation } from './infrastructure/implementations';
     RatingFormModule,
     CommunicationFormModule,
     DocumentsFormModule,
-  ],
-  providers: [
-    CallsService,
-    {
-      provide: CallsUseCase,
-      useFactory: (callsGateway: CallsGateway) =>
-        new CallsUseCase(callsGateway),
-      deps: [CallsGateway],
-    },
-    {
-      provide: CallsGateway,
-      useClass: CallsImplementation,
-    },
   ],
 })
 export class CallsModule {}

@@ -1,8 +1,8 @@
-import { RoleService } from 'src/app/core/services/role.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable, firstValueFrom } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { LayoutService } from 'src/app/core/services/layout.service';
-import { CallService } from 'src/app/core/services/call.service';
+import { RoleService } from 'src/app/core/services/role.service';
+import { CallsUseCase } from 'src/app/domain';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     layout: LayoutService,
-    private callService: CallService,
+    private callsService: CallsUseCase,
     private roleService: RoleService
   ) {
     this.show = false;
@@ -32,7 +32,7 @@ export class SidebarComponent implements OnInit {
   }
 
   async validateMenu(): Promise<void> {
-    const res = await firstValueFrom(this.callService.feedbackStatus());
+    const res = await firstValueFrom(this.callsService.feedbackStatus());
     this.showAdministrationOption = res.data as boolean;
   }
 
