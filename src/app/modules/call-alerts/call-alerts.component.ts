@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import CallForm from 'src/app/core/models/call-form.model';
 import FormValid from 'src/app/core/models/form-valid.model';
-import { CallService } from 'src/app/core/services/call.service';
+import { CallsUseCase } from 'src/app/domain';
 import { AlertType } from 'src/app/shared/alert';
 
 @Component({
@@ -20,7 +20,10 @@ export class CallAlertsComponent implements OnInit {
   alertMessage: string;
   showModal: boolean;
 
-  constructor(private callService: CallService, private router: Router) {
+  constructor(
+    private readonly callsService: CallsUseCase,
+    private router: Router
+  ) {
     this.formsStatus = [];
     this.formData = {
       generalData: {},
@@ -264,8 +267,8 @@ export class CallAlertsComponent implements OnInit {
       },
     };
     try {
-      await firstValueFrom(this.callService.updateFeedback(form));
-      await firstValueFrom(this.callService.saveInFlokzu());
+      await firstValueFrom(this.callsService.updateFeedback(form));
+      await firstValueFrom(this.callsService.saveInFlokzu());
       this.showModal = true;
       this.alertMessage = 'Solicitud enviada correctamente';
     } catch (error) {
@@ -277,7 +280,7 @@ export class CallAlertsComponent implements OnInit {
   }
 
   loadFeedback(): void {
-    this.callService.feedback().subscribe((res: any) => {
+    this.callsService.feedback().subscribe((res: any) => {
       this.formData = {
         generalData: {
           comment: res.data.generalData.comments,

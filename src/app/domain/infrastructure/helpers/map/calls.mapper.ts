@@ -1,9 +1,9 @@
 import { Mapper } from 'src/app/base/utils/mapper';
 
-import { CallsForm } from '../../../domain';
 import { CallsEntity } from '../../driven-adapters';
 import { OpeningHours } from 'src/app/shared/tables/opening-hours-table';
 import ProjectBudget from 'src/app/core/models/project-budget.model';
+import { CallsForm } from 'src/app/domain';
 
 export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
   mapFrom(param: CallsEntity): CallsForm {

@@ -3,13 +3,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
-import { GetUserUseCases, UserGateway } from 'src/app/domain';
+import {
+  GetUserUseCases,
+  UserGateway,
+  UserImplementation,
+} from 'src/app/domain';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
-import { UserImplementation } from './infrastructure/implementations/user-implementation';
 import { NavbarModule } from './shared/navbar/navbar.module';
 
 @NgModule({

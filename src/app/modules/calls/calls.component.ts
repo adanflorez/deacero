@@ -2,10 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, catchError, Subscription, throwError } from 'rxjs';
 import FormValid from 'src/app/core/models/form-valid.model';
-import { CallService } from 'src/app/core/services/call.service';
 import { UserService } from 'src/app/core/services/user.service';
-
-import { CallsForm, CallsUseCase } from './domain';
+import { CallsForm, CallsUseCase } from 'src/app/domain';
 
 @Component({
   selector: 'app-calls',
@@ -28,7 +26,6 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   constructor(
     private modalService: NgbModal,
-    private callService: CallService,
     private userService: UserService,
     // Refactor
     private readonly callsService: CallsUseCase
@@ -86,32 +83,29 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   protected save(modal?: unknown, updateAndSave?: boolean) {
-    const sub = this.callService
-      .applicateToCall(this.formData)
-      .subscribe(() => {
-        if (updateAndSave) {
-          this.saveInFlokzu()?.subscribe({
-            next: () => {
-              this.infoSubmitted$.next(true);
-            },
-            error: error => {
-              this.infoSubmitted$.next(true);
-              this.open(modal);
-              console.error(error);
-            },
-            complete: () => {
-              this.open(modal);
-            },
-          });
-        }
-      });
+    const sub = this.callsService.applyCall(this.formData).subscribe(() => {
+      if (updateAndSave) {
+        this.saveInFlokzu()?.subscribe({
+          next: () => {
+            this.infoSubmitted$.next(true);
+          },
+          error: () => {
+            this.infoSubmitted$.next(true);
+            this.open(modal);
+          },
+          complete: () => {
+            this.open(modal);
+          },
+        });
+      }
+    });
     this.unsubscribe.push(sub);
   }
 
   private saveInFlokzu() {
     if (this.isInvalidForm) return;
     this.save();
-    const sub = this.callService.saveInFlokzu();
+    const sub = this.callsService.saveInFlokzu();
     return sub;
   }
   /**

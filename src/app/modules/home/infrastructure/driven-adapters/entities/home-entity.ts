@@ -1,12 +1,12 @@
 import {
-  DecentWorkEntity,
-  FundManagerEntity,
-  GeneralDataEntity,
   GoverningBodyEntity,
-  OrganizationalInformationEntity,
   RemunerationEntity,
+  GeneralDataEntity,
+  FundManagerEntity,
+  OrganizationalInformationEntity,
   StrategicAlliancesEntity,
-} from 'src/app/infrastructure';
+  DecentWorkEntity,
+} from 'src/app/domain';
 
 export interface HomeEntity {
   governingBody: GoverningBodyEntity;
