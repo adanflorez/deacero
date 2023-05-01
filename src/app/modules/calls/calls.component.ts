@@ -86,23 +86,25 @@ export class CallsComponent implements OnInit, OnDestroy {
   }
 
   protected save(modal?: unknown, updateAndSave?: boolean) {
-    const sub = this.callService.applicateToCall({}).subscribe(() => {
-      if (updateAndSave) {
-        this.saveInFlokzu()?.subscribe({
-          next: () => {
-            this.infoSubmitted$.next(true);
-          },
-          error: error => {
-            this.infoSubmitted$.next(true);
-            this.open(modal);
-            console.error(error);
-          },
-          complete: () => {
-            this.open(modal);
-          },
-        });
-      }
-    });
+    const sub = this.callService
+      .applicateToCall(this.formData)
+      .subscribe(() => {
+        if (updateAndSave) {
+          this.saveInFlokzu()?.subscribe({
+            next: () => {
+              this.infoSubmitted$.next(true);
+            },
+            error: error => {
+              this.infoSubmitted$.next(true);
+              this.open(modal);
+              console.error(error);
+            },
+            complete: () => {
+              this.open(modal);
+            },
+          });
+        }
+      });
     this.unsubscribe.push(sub);
   }
 
