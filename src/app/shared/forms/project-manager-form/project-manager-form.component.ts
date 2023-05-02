@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {
@@ -16,13 +23,16 @@ import { ProjectManagerForm } from './domain';
   templateUrl: './project-manager-form.component.html',
   styleUrls: ['./project-manager-form.component.scss'],
 })
-export class ProjectManagerFormComponent implements OnInit, OnDestroy {
+export class ProjectManagerFormComponent
+  implements OnInit, OnDestroy, OnChanges
+{
   @Input() updateParentModel: (
     part: ProjectManagerForm,
     formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: ProjectManagerForm;
+  @Input() disable: boolean;
   form: FormGroup;
   alertType: AlertType = AlertType.Warning;
 
@@ -31,9 +41,15 @@ export class ProjectManagerFormComponent implements OnInit, OnDestroy {
   constructor() {
     this.form = new FormGroup({});
     this.defaultValues = {};
+    this.disable = false;
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    this.initForm(disable?.currentValue);
+  }
+
   ngOnInit(): void {
-    this.initForm();
     this.updateParentModel({}, this.isValidForm);
   }
 
@@ -52,7 +68,7 @@ export class ProjectManagerFormComponent implements OnInit, OnDestroy {
     };
   }
 
-  initForm() {
+  initForm(disable?: boolean) {
     this.form = new FormGroup({
       responsibleName: new FormControl(
         this.defaultValues.responsibleName,
@@ -70,6 +86,7 @@ export class ProjectManagerFormComponent implements OnInit, OnDestroy {
     });
     this.subscribeToForm();
     this.form.markAllAsTouched();
+    disable && this.form.disable();
   }
 
   subscribeToForm() {

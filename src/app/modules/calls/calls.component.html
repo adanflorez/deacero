@@ -23,14 +23,14 @@
 
     <app-project-manager-form
       [updateParentModel]="updateData"
-      [defaultValues]="formData.projectManager"></app-project-manager-form>
+      [defaultValues]="formData.projectManager"
+      [disable]="formDisable"></app-project-manager-form>
     <hr />
 
     <app-project-development-form
       [updateParentModel]="updateData"
-      [defaultValues]="
-        formData.projectDevelopment
-      "></app-project-development-form>
+      [defaultValues]="formData.projectDevelopment"
+      [disable]="formDisable"></app-project-development-form>
     <hr />
 
     <app-period-form
