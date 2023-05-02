@@ -45,15 +45,12 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
-    this.initForm();
     this.updateParentModel({}, this.isValidForm);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     const { disable, defaultValues } = changes;
-    if (disable?.currentValue) {
-      this.form.disable();
-    }
+    this.initForm(disable?.currentValue);
     this.firstChange = defaultValues?.firstChange;
   }
 
@@ -65,7 +62,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
     return this.form.controls;
   }
 
-  initForm() {
+  initForm(disable?: boolean) {
     this.form = new FormGroup({
       locationQuestion: new FormControl(
         this.defaultValues.locationQuestion == null
@@ -93,6 +90,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
       this.defaultValues.daysAndHours as Array<OpeningHours>
     );
     this.validateAboutCall();
+    disable && this.form.disable();
   }
 
   validateAboutCall() {

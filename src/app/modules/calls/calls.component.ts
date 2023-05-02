@@ -23,6 +23,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   public formData: CallsForm;
   public formsStatus: FormValid[];
   public loading: boolean;
+  public formDisable: boolean;
 
   constructor(
     private modalService: NgbModal,
@@ -47,6 +48,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       status: 0,
     };
     this.loading = false;
+    this.formDisable = true;
   }
 
   public ngOnInit(): void {

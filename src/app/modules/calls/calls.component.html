@@ -11,14 +11,14 @@
   <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
     <app-general-project-data-form
       [updateParentModel]="updateData"
-      [defaultValues]="
-        formData.generalProjectData
-      "></app-general-project-data-form>
+      [defaultValues]="formData.generalProjectData"
+      [disable]="formDisable"></app-general-project-data-form>
     <hr />
 
     <app-location-form
       [updateParentModel]="updateData"
-      [defaultValues]="formData.location"></app-location-form>
+      [defaultValues]="formData.location"
+      [disable]="formDisable"></app-location-form>
     <hr />
 
     <app-project-manager-form
