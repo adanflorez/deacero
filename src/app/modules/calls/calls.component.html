@@ -47,7 +47,8 @@
 
     <app-project-budget-form
       [updateParentModel]="updateData"
-      [defaultValues]="formData.projectBudget"></app-project-budget-form>
+      [defaultValues]="formData.projectBudget"
+      [disable]="formDisable"></app-project-budget-form>
     <hr />
 
     <ng-container *ngIf="formData.generalProjectData.category">
