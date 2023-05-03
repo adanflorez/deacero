@@ -9,6 +9,7 @@ export * from './location-form';
 export * from './modules';
 export * from './objectives-form';
 export * from './organizational-information-form';
+export * from './other-documents-form';
 export * from './period-form';
 export * from './project-budget-form';
 export * from './project-development-form';

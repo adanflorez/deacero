@@ -7,8 +7,12 @@
     </ngb-alert>
   </p>
 </ng-container>
-<ng-container *ngIf="validateIfFormDataIsEmpty && formData.status !== 5">
-  <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+<div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  <ng-container
+    *ngIf="
+      validateIfFormDataIsEmpty && formData.status !== 1;
+      else otherDocuments
+    ">
     <app-general-project-data-form
       [updateParentModel]="updateData"
       [defaultValues]="formData.generalProjectData"
@@ -70,25 +74,26 @@
       [updateParentModel]="updateData"
       [defaultValues]="formData.documents"
       [disable]="formDisable"></app-documents-form>
+  </ng-container>
 
-    <ng-container *ngIf="(infoSaved$ | async) === false">
-      <button
-        class="btn btn-outline-primary me-3"
-        type="button"
-        (click)="save()">
-        Guardar borrador
-      </button>
+  <ng-template #otherDocuments>
+    <app-other-documents-form></app-other-documents-form>
+  </ng-template>
 
-      <button
-        class="btn btn-primary"
-        type="button"
-        [disabled]="isInvalidForm"
-        (click)="open(modal)">
-        Enviar
-      </button>
-    </ng-container>
-  </div>
-</ng-container>
+  <ng-container *ngIf="(infoSaved$ | async) === false">
+    <button class="btn btn-outline-primary me-3" type="button" (click)="save()">
+      Guardar borrador
+    </button>
+
+    <button
+      class="btn btn-primary"
+      type="button"
+      [disabled]="isInvalidForm"
+      (click)="open(modal)">
+      Enviar
+    </button>
+  </ng-container>
+</div>
 
 <ng-template #modal let-modal>
   <div class="modal-header">
