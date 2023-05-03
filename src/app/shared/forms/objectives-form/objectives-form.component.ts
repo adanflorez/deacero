@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { OBJECTIVES } from 'src/app/core/constants';
@@ -13,13 +20,14 @@ import { ObjectivesForm } from './domain';
   templateUrl: './objectives-form.component.html',
   styleUrls: ['./objectives-form.component.scss'],
 })
-export class ObjectivesFormComponent implements OnInit, OnDestroy {
+export class ObjectivesFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() updateParentModel: (
     part: ObjectivesForm,
     formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: ObjectivesForm;
+  @Input() disable: boolean;
   form: FormGroup;
   objectivesOptions = OBJECTIVES;
   objectivesFields = [
@@ -48,6 +56,7 @@ export class ObjectivesFormComponent implements OnInit, OnDestroy {
   constructor() {
     this.defaultValues = {};
     this.form = new FormGroup({});
+    this.disable = false;
   }
 
   get f() {
@@ -59,6 +68,13 @@ export class ObjectivesFormComponent implements OnInit, OnDestroy {
       name: CallSection.OBJECTIVES,
       valid: this.form.valid,
     };
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable?.currentValue) {
+      this.initForm();
+    }
   }
 
   ngOnInit(): void {
@@ -101,6 +117,7 @@ export class ObjectivesFormComponent implements OnInit, OnDestroy {
     this.subscribeToForm();
     this.handleObjectives();
     this.form.markAllAsTouched();
+    this.disable && this.form.disable();
   }
 
   subscribeToForm() {
