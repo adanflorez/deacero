@@ -21,6 +21,7 @@ export class RatingFormComponent implements OnChanges {
   ) => void = () => {};
   @Input() defaultValues: RatingForm;
   @Input() category: string;
+  @Input() disable: boolean;
   form!: FormGroup;
   rating = RATING;
   groups: string[];
@@ -34,6 +35,7 @@ export class RatingFormComponent implements OnChanges {
   constructor() {
     this.defaultValues = {};
     this.category = '';
+    this.disable = false;
     this.groups = [];
   }
 
@@ -45,10 +47,13 @@ export class RatingFormComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const { category } = changes;
+    const { category, disable } = changes;
     this.initForm();
     if (category?.currentValue) {
       this.changeCategory(this.category);
+    }
+    if (disable?.currentValue) {
+      this.initForm();
     }
   }
 
@@ -79,6 +84,7 @@ export class RatingFormComponent implements OnChanges {
       ),
     });
     this.subscribeToForm();
+    this.disable && this.form.disable();
   }
 
   subscribeToForm() {
