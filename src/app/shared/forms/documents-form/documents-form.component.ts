@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { CallSection } from 'src/app/core/enums/sections.enum';
@@ -14,7 +21,7 @@ import { DocumentsForm } from './domain';
   templateUrl: './documents-form.component.html',
   styleUrls: ['./documents-form.component.scss'],
 })
-export class DocumentsFormComponent implements OnInit, OnDestroy {
+export class DocumentsFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() updateParentModel: (
     part: DocumentsForm,
     formValid: FormValid
@@ -22,6 +29,7 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
   ) => void = () => {};
   @Input() defaultValues: DocumentsForm;
   @Input() allowComments: boolean;
+  @Input() disable: boolean;
   form: FormGroup;
   documentsFields!: Array<{
     field: string;
@@ -41,8 +49,16 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
     this.allowComments = false;
     this.form = new FormGroup({});
     this.atLeastOneComment = false;
+    this.disable = false;
     this.initDocuments();
     this.initForm();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable?.currentValue) {
+      this.initForm();
+    }
   }
 
   ngOnInit(): void {
@@ -116,6 +132,7 @@ export class DocumentsFormComponent implements OnInit, OnDestroy {
       logo: new FormControl(this.defaultValues.logo, Validators.required),
     });
     this.subscribeToForm();
+    this.disable && this.form.disable();
   }
 
   subscribeToForm() {

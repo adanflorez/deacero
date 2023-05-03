@@ -62,12 +62,14 @@
 
     <app-communication-form
       [updateParentModel]="updateData"
-      [defaultValues]="formData.communication"></app-communication-form>
+      [defaultValues]="formData.communication"
+      [disable]="formDisable"></app-communication-form>
     <hr />
 
     <app-documents-form
       [updateParentModel]="updateData"
-      [defaultValues]="formData.documents"></app-documents-form>
+      [defaultValues]="formData.documents"
+      [disable]="formDisable"></app-documents-form>
 
     <ng-container *ngIf="(infoSaved$ | async) === false">
       <button
