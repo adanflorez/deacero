@@ -50,7 +50,9 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const { disable, defaultValues } = changes;
-    this.initForm(disable?.currentValue);
+    if (disable?.currentValue) {
+      this.initForm(disable?.currentValue);
+    }
     this.firstChange = defaultValues?.firstChange;
   }
 
@@ -84,7 +86,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
       ),
       whichMedia: new FormControl(this.defaultValues.whichMedia),
     });
-    this.handleLocation();
+    // this.handleLocation();
     this.subscribeToForm();
     this.updateOpeningHours(
       this.defaultValues.daysAndHours as Array<OpeningHours>
@@ -131,6 +133,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
     const locationQuestionSub = this.form
       .get('locationQuestion')
       ?.valueChanges.subscribe(res => {
+        console.log(res);
         if (!res) {
           this.locationFields.forEach(field => {
             this.form.get(field)?.setValidators(Validators.required);
@@ -150,6 +153,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   public updateOpeningHours(openingHours: Array<OpeningHours>): void {
+    console.log('updateOpeningHours');
     this.openingHours = openingHours || [];
     const data = {
       ...this.form.value,

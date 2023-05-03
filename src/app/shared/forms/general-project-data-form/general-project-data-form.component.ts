@@ -71,12 +71,15 @@ export class GeneralProjectDataFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.initForm();
     this.updateParentModel({}, this.isValid);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     const { disable } = changes;
-    this.initForm(disable?.currentValue);
+    if (disable?.currentValue) {
+      this.initForm();
+    }
   }
 
   get f() {
@@ -90,7 +93,7 @@ export class GeneralProjectDataFormComponent implements OnInit, OnChanges {
     };
   }
 
-  initForm(disable?: boolean) {
+  initForm() {
     this.form = new FormGroup({
       projectName: new FormControl(this.defaultValues.projectName, [
         Validators.required,
@@ -103,7 +106,7 @@ export class GeneralProjectDataFormComponent implements OnInit, OnChanges {
     this.subscribeToForm();
     this.handleCategory();
     this.form.markAllAsTouched();
-    disable && this.form.disable();
+    this.disable && this.form.disable();
   }
 
   subscribeToForm() {
