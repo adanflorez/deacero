@@ -46,10 +46,13 @@ export class ProjectManagerFormComponent
 
   ngOnChanges(changes: SimpleChanges): void {
     const { disable } = changes;
-    this.initForm(disable?.currentValue);
+    if (disable?.currentValue) {
+      this.initForm();
+    }
   }
 
   ngOnInit(): void {
+    this.initForm();
     this.updateParentModel({}, this.isValidForm);
   }
 
@@ -68,7 +71,7 @@ export class ProjectManagerFormComponent
     };
   }
 
-  initForm(disable?: boolean) {
+  initForm() {
     this.form = new FormGroup({
       responsibleName: new FormControl(
         this.defaultValues.responsibleName,
@@ -86,7 +89,7 @@ export class ProjectManagerFormComponent
     });
     this.subscribeToForm();
     this.form.markAllAsTouched();
-    disable && this.form.disable();
+    this.disable && this.form.disable();
   }
 
   subscribeToForm() {
