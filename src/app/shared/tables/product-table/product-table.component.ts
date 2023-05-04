@@ -18,7 +18,6 @@ export class ProductTableComponent {
   @Input() readOnly: boolean | null = false;
   @Output() productsList = new EventEmitter();
   form: FormGroup;
-  validForm = false;
   productToEdit!: Product;
   isEditMode = false;
   closeResult = '';
@@ -40,18 +39,10 @@ export class ProductTableComponent {
       season: new FormControl('', Validators.required),
       photo: new FormControl('', Validators.required),
     });
-    this.form.valueChanges.subscribe(values => {
-      const { description, price, available, season, photo } = values;
-      if (description || price || available || season || photo) {
-        this.validForm = this.form.valid && true;
-        return;
-      }
-      this.validForm = false;
-    });
   }
 
   addProduct() {
-    if (!this.validForm) return;
+    if (this.form.invalid) return;
     this.products.push({
       id: uuidv4(),
       ...this.form.value,
