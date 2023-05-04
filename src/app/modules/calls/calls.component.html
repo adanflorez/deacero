@@ -7,82 +7,91 @@
     </ngb-alert>
   </p>
 </ng-container>
-<ng-container *ngIf="validateIfFormDataIsEmpty">
-  <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+<div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
+  <ng-container *ngIf="validateIfFormDataIsEmpty && this.formData.status !== 5">
     <app-general-project-data-form
       [updateParentModel]="updateData"
-      [defaultValues]="
-        formData.generalProjectData
-      "></app-general-project-data-form>
+      [defaultValues]="formData.generalProjectData"
+      [disable]="formDisable"></app-general-project-data-form>
     <hr />
 
     <app-location-form
       [updateParentModel]="updateData"
-      [defaultValues]="formData.location"></app-location-form>
+      [defaultValues]="formData.location"
+      [disable]="formDisable"></app-location-form>
     <hr />
 
     <app-project-manager-form
       [updateParentModel]="updateData"
-      [defaultValues]="formData.projectManager"></app-project-manager-form>
+      [defaultValues]="formData.projectManager"
+      [disable]="formDisable"></app-project-manager-form>
     <hr />
 
     <app-project-development-form
       [updateParentModel]="updateData"
-      [defaultValues]="
-        formData.projectDevelopment
-      "></app-project-development-form>
+      [defaultValues]="formData.projectDevelopment"
+      [disable]="formDisable"></app-project-development-form>
     <hr />
 
     <app-period-form
       [updateParentModel]="updateData"
-      [defaultValues]="formData.period"></app-period-form>
+      [defaultValues]="formData.period"
+      [disable]="formDisable"></app-period-form>
     <hr />
 
     <app-objectives-form
       [updateParentModel]="updateData"
-      [defaultValues]="formData.objectives"></app-objectives-form>
+      [defaultValues]="formData.objectives"
+      [disable]="formDisable"></app-objectives-form>
     <hr />
 
     <app-project-budget-form
       [updateParentModel]="updateData"
-      [defaultValues]="formData.projectBudget"></app-project-budget-form>
+      [defaultValues]="formData.projectBudget"
+      [disable]="formDisable"></app-project-budget-form>
     <hr />
 
     <ng-container *ngIf="formData.generalProjectData.category">
       <app-rating-form
         [updateParentModel]="updateData"
         [defaultValues]="formData.rating"
-        [category]="formData.generalProjectData.category!"></app-rating-form>
+        [category]="formData.generalProjectData.category!"
+        [disable]="formDisable"></app-rating-form>
       <hr />
     </ng-container>
 
     <app-communication-form
       [updateParentModel]="updateData"
-      [defaultValues]="formData.communication"></app-communication-form>
+      [defaultValues]="formData.communication"
+      [disable]="formDisable"></app-communication-form>
     <hr />
 
     <app-documents-form
       [updateParentModel]="updateData"
-      [defaultValues]="formData.documents"></app-documents-form>
+      [defaultValues]="formData.documents"
+      [disable]="formDisable"></app-documents-form>
+  </ng-container>
 
-    <ng-container *ngIf="(infoSaved$ | async) === false">
-      <button
-        class="btn btn-outline-primary me-3"
-        type="button"
-        (click)="save()">
-        Guardar borrador
-      </button>
+  <app-other-documents-form
+    *ngIf="this.formData.status === 5 || this.formData.status === 6"
+    [updateParentModel]="updateData"
+    [defaultValues]="formData.otherDocuments"
+    [disable]="this.formData.status === 6"></app-other-documents-form>
 
-      <button
-        class="btn btn-primary"
-        type="button"
-        [disabled]="isInvalidForm"
-        (click)="open(modal)">
-        Enviar
-      </button>
-    </ng-container>
-  </div>
-</ng-container>
+  <ng-container *ngIf="(infoSaved$ | async) === false">
+    <button class="btn btn-outline-primary me-3" type="button" (click)="save()">
+      Guardar borrador
+    </button>
+
+    <button
+      class="btn btn-primary"
+      type="button"
+      [disabled]="isInvalidForm"
+      (click)="open(modal)">
+      Enviar
+    </button>
+  </ng-container>
+</div>
 
 <ng-template #modal let-modal>
   <div class="modal-header">

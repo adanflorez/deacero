@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CallSection } from 'src/app/core/enums/sections.enum';
@@ -12,13 +19,16 @@ import { SocialMediaForm } from './domain';
   templateUrl: './communication-form.component.html',
   styleUrls: ['./communication-form.component.scss'],
 })
-export class CommunicationFormComponent implements OnInit, OnDestroy {
+export class CommunicationFormComponent
+  implements OnInit, OnChanges, OnDestroy
+{
   @Input() updateParentModel: (
     part: SocialMediaForm,
     formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: SocialMediaForm;
+  @Input() disable: boolean;
   form: FormGroup;
   alertType: AlertType = AlertType.Warning;
 
@@ -27,6 +37,14 @@ export class CommunicationFormComponent implements OnInit, OnDestroy {
   constructor() {
     this.form = new FormGroup({});
     this.defaultValues = {};
+    this.disable = false;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable?.currentValue) {
+      this.initForm();
+    }
   }
 
   ngOnInit(): void {
@@ -53,6 +71,7 @@ export class CommunicationFormComponent implements OnInit, OnDestroy {
       webpage: new FormControl(this.defaultValues.webpage),
     });
     this.subscribeToForm();
+    this.disable && this.form.disable();
   }
 
   subscribeToForm() {

@@ -6,17 +6,17 @@
   [type]="alertType"></app-alert>
 <app-budget-table
   [records]="contributions"
-  [readOnly]="false"
+  [readOnly]="disable"
   (recordChange)="updateContributions($event)"></app-budget-table>
 <hr />
 <h6>Conversión</h6>
 <app-budget-table
   [records]="conversions"
-  [readOnly]="false"
+  [readOnly]="disable"
   (recordChange)="updateConversions($event)"></app-budget-table>
 <hr />
 <h6>Donativo Fundación DEACERO</h6>
 <app-budget-table
   [records]="donations"
-  [readOnly]="false"
+  [readOnly]="disable"
   (recordChange)="updateDonations($event)"></app-budget-table>

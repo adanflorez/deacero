@@ -14,20 +14,22 @@ import Response from 'src/app/core/models/response.model';
 import { MultimediaService } from 'src/app/core/services/multimedia.service';
 import { AlertType } from 'src/app/shared/alert';
 
-import { DocumentsForm } from './domain';
+import { OtherDocumentsForm } from './domain';
 
 @Component({
-  selector: 'app-documents-form',
-  templateUrl: './documents-form.component.html',
-  styleUrls: ['./documents-form.component.scss'],
+  selector: 'app-other-documents-form',
+  templateUrl: './other-documents-form.component.html',
+  styleUrls: ['./other-documents-form.component.scss'],
 })
-export class DocumentsFormComponent implements OnInit, OnChanges, OnDestroy {
+export class OtherDocumentsFormComponent
+  implements OnInit, OnChanges, OnDestroy
+{
   @Input() updateParentModel: (
-    part: DocumentsForm,
+    part: OtherDocumentsForm,
     formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
-  @Input() defaultValues: DocumentsForm;
+  @Input() defaultValues: OtherDocumentsForm;
   @Input() allowComments: boolean;
   @Input() disable: boolean;
   form: FormGroup;
@@ -76,60 +78,38 @@ export class DocumentsFormComponent implements OnInit, OnChanges, OnDestroy {
 
   get isValidForm(): FormValid {
     return {
-      name: CallSection.DOCUMENTS,
+      name: CallSection.OTHER_DOCUMENTS,
       valid: this.form.valid,
     };
   }
 
   get keepInCountComments(): boolean {
-    return this.allowComments
-      ? this.atLeastOneComment || !!this.defaultValues.logoComment
-      : true;
+    return this.allowComments ? this.atLeastOneComment : true;
   }
 
   initForm() {
     this.updateDocuments();
     this.form = new FormGroup({
-      ethicalCode: new FormControl(this.defaultValues.ethicalCode),
-      governanceManual: new FormControl(this.defaultValues.governanceManual),
-      timelineActivities: new FormControl(
-        this.defaultValues.timelineActivities,
+      updatedComplianceOpinionDoc: new FormControl(
+        this.defaultValues.updatedComplianceOpinionDoc,
         Validators.required
       ),
-      workWithMinors: new FormControl(this.defaultValues.workWithMinors),
-      officialLetterOfAuthorizationOfDonees: new FormControl(
-        this.defaultValues.officialLetterOfAuthorizationOfDonees,
+      proofOfUpdatedTaxSituationDoc: new FormControl(
+        this.defaultValues.proofOfUpdatedTaxSituationDoc,
         Validators.required
       ),
-      publicationInAnnex14OfTheCurrentRMF: new FormControl(
-        this.defaultValues.publicationInAnnex14OfTheCurrentRMF,
+      bankStatementCoverPageDoc: new FormControl(
+        this.defaultValues.bankStatementCoverPageDoc,
         Validators.required
       ),
-      constituentAct: new FormControl(
-        this.defaultValues.constituentAct,
+      letterheadIndicatingTheFullNameDoc: new FormControl(
+        this.defaultValues.letterheadIndicatingTheFullNameDoc,
         Validators.required
       ),
-      mostRecentMeeting: new FormControl(this.defaultValues.mostRecentMeeting),
-      legalRepresentativesPower: new FormControl(
-        this.defaultValues.legalRepresentativesPower
-      ),
-      legalRepresentativesId: new FormControl(
-        this.defaultValues.legalRepresentativesId,
+      proofOfAdmissionToThePublicRegistryDoc: new FormControl(
+        this.defaultValues.proofOfAdmissionToThePublicRegistryDoc,
         Validators.required
       ),
-      oldProofOfAddress: new FormControl(
-        this.defaultValues.oldProofOfAddress,
-        Validators.required
-      ),
-      updatedComplianceOpinion: new FormControl(
-        this.defaultValues.updatedComplianceOpinion,
-        Validators.required
-      ),
-      proofOfUpdatedTaxSituation: new FormControl(
-        this.defaultValues.proofOfUpdatedTaxSituation,
-        Validators.required
-      ),
-      logo: new FormControl(this.defaultValues.logo, Validators.required),
     });
     this.subscribeToForm();
     this.disable && this.form.disable();
@@ -145,69 +125,29 @@ export class DocumentsFormComponent implements OnInit, OnChanges, OnDestroy {
   initDocuments() {
     this.documentsFields = [
       {
-        field: 'ethicalCode',
-        name: 'Código de ética',
-        help: 'PDF legible',
-      },
-      {
-        field: 'governanceManual',
-        name: 'Manual de gobernanza',
-        help: 'PDF legible',
-      },
-      {
-        field: 'timelineActivities',
-        name: 'Cronograma de actividades',
-        help: 'PDF legible',
-      },
-      {
-        field: 'workWithMinors',
-        name: 'En caso de trabajar con menores de edad, adjuntar las políticas, normas, reglamentos o protocolos que aseguren su bienestar',
-        help: 'PDF legible',
-      },
-      {
-        field: 'officialLetterOfAuthorizationOfDonees',
-        name: 'Oficio de autorización de donatarias SAT (vigente)',
-        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
-      },
-      {
-        field: 'publicationInAnnex14OfTheCurrentRMF',
-        name: 'Publicación en el Anexo-14 de la RMF vigente',
-        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
-      },
-      {
-        field: 'constituentAct',
-        name: 'Acta constitutiva de la organización',
-        help: 'PDF legible',
-      },
-      {
-        field: 'mostRecentMeeting',
-        name: 'Acta de asamblea más reciente',
-        help: 'PDF legible',
-      },
-      {
-        field: 'legalRepresentativesPower',
-        name: 'Poder del (los) representante(s) legal(es)',
-        help: 'PDF legible',
-      },
-      {
-        field: 'legalRepresentativesId',
-        name: 'Identificación oficial del representante legal',
-        help: 'PDF legible',
-      },
-      {
-        field: 'oldProofOfAddress',
-        name: 'Comprobante de domicilio con antigüedad no mayor a 3 meses (agua, luz, teléfono)',
-        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
-      },
-      {
-        field: 'updatedComplianceOpinion',
+        field: 'updatedComplianceOpinionDoc',
         name: 'Opinión de cumplimiento actualizada',
-        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
+        help: 'PDF legible',
       },
       {
-        field: 'proofOfUpdatedTaxSituation',
+        field: 'proofOfUpdatedTaxSituationDoc',
         name: 'Constancia de situación fiscal actualizada',
         help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
+      },
+      {
+        field: 'bankStatementCoverPageDoc',
+        name: 'Carátula del estado de cuenta bancaria',
+        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
+      },
+      {
+        field: 'letterheadIndicatingTheFullNameDoc',
+        name: 'Carta membretada que señale el nombre completo y puesto de la persona responsable de administrar la cuenta bancaria en la OSC (no el ejecutivo bancario).',
+        help: 'PDF legible',
+      },
+      {
+        field: 'proofOfAdmissionToThePublicRegistryDoc',
+        name: 'Comprobante de ingreso al registro público o bien, el acta ya protocolizada con las reformas fiscales vigentes.',
+        help: 'PDF legible',
       },
     ];
   }
@@ -216,10 +156,10 @@ export class DocumentsFormComponent implements OnInit, OnChanges, OnDestroy {
     Object.keys(this.defaultValues).forEach((key: string) => {
       this.documentsFields.forEach(doc => {
         if (doc.field === key) {
-          const keyComment = key as keyof DocumentsForm;
+          const keyComment = key as keyof OtherDocumentsForm;
           doc.comment =
             this.defaultValues[
-              (keyComment + 'Comment') as keyof DocumentsForm
+              (keyComment + 'Comment') as keyof OtherDocumentsForm
             ] || '';
           if (doc.comment !== '' && doc.comment !== null) {
             this.atLeastOneComment = true;

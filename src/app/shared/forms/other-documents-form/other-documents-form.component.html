@@ -1,0 +1,47 @@
+<ng-container *ngIf="keepInCountComments">
+  <h2 class="mb-3">Otros documentos</h2>
+  <div class="row" [formGroup]="form">
+    <ng-container *ngFor="let doc of documentsFields">
+      <div class="col-md-12" *ngIf="allowComments ? doc.comment : true">
+        <div class="mb-3">
+          <label class="form-label" [for]="doc.field">{{ doc.name }}</label>
+          <ng-container *ngIf="!f[doc.field].value">
+            <input
+              class="form-control"
+              type="file"
+              [id]="doc.field"
+              (change)="uploadDocument($event, doc.field)"
+              accept="application/pdf"
+              [class.is-invalid]="
+                f[doc.field].invalid && f[doc.field].touched
+              " />
+          </ng-container>
+          <ng-container *ngIf="f[doc.field].value">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                [id]="doc.field"
+                placeholder="https://..."
+                [formControlName]="doc.field"
+                readonly />
+              <button
+                class="btn btn-secondary p-1"
+                (click)="f[doc.field].setValue('')"
+                [disabled]="false">
+                <img height="18" src="/assets/icons/trash.png" alt="trash" />
+              </button>
+            </div>
+          </ng-container>
+          <app-form-error [control]="f[doc.field]"></app-form-error>
+          <div class="small">- {{ doc.help }}</div>
+        </div>
+        <app-alert
+          [show]="!!doc.comment"
+          [message]="doc.comment!"
+          [type]="alertType"></app-alert>
+        <hr />
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

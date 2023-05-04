@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CallSection } from 'src/app/core/enums/sections.enum';
@@ -12,13 +19,14 @@ import { PeriodForm } from './domain';
   templateUrl: './period-form.component.html',
   styleUrls: ['./period-form.component.scss'],
 })
-export class PeriodFormComponent implements OnInit, OnDestroy {
+export class PeriodFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() updateParentModel: (
     part: PeriodForm,
     formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: PeriodForm;
+  @Input() disable: boolean;
   form: FormGroup;
   alertType: AlertType = AlertType.Warning;
 
@@ -27,6 +35,7 @@ export class PeriodFormComponent implements OnInit, OnDestroy {
   constructor() {
     this.form = new FormGroup({});
     this.defaultValues = {};
+    this.disable = false;
   }
 
   get f() {
@@ -38,6 +47,13 @@ export class PeriodFormComponent implements OnInit, OnDestroy {
       name: CallSection.PERIOD,
       valid: this.form.valid,
     };
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable?.currentValue) {
+      this.initForm();
+    }
   }
 
   ngOnInit(): void {
@@ -59,6 +75,7 @@ export class PeriodFormComponent implements OnInit, OnDestroy {
     });
     this.subscribeToForm();
     this.form.markAllAsTouched();
+    this.disable && this.form.disable();
   }
 
   subscribeToForm() {

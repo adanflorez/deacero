@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ONLY_NUMBERS_PATTERN } from 'src/app/core/constants';
@@ -13,13 +20,16 @@ import { ProjectDevelopmentForm } from './domain';
   templateUrl: './project-development-form.component.html',
   styleUrls: ['./project-development-form.component.scss'],
 })
-export class ProjectDevelopmentFormComponent implements OnInit, OnDestroy {
+export class ProjectDevelopmentFormComponent
+  implements OnInit, OnChanges, OnDestroy
+{
   @Input() updateParentModel: (
     part: ProjectDevelopmentForm,
     formValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: ProjectDevelopmentForm;
+  @Input() disable: boolean;
   form: FormGroup;
   alertType: AlertType = AlertType.Warning;
 
@@ -28,6 +38,14 @@ export class ProjectDevelopmentFormComponent implements OnInit, OnDestroy {
   constructor() {
     this.form = new FormGroup({});
     this.defaultValues = {};
+    this.disable = false;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable?.currentValue) {
+      this.initForm();
+    }
   }
 
   ngOnInit(): void {
@@ -86,6 +104,7 @@ export class ProjectDevelopmentFormComponent implements OnInit, OnDestroy {
     });
     this.subscribeToForm();
     this.form.markAllAsTouched();
+    this.disable && this.form.disable();
   }
 
   subscribeToForm() {

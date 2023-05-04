@@ -23,6 +23,7 @@ export class CallsComponent implements OnInit, OnDestroy {
   public formData: CallsForm;
   public formsStatus: FormValid[];
   public loading: boolean;
+  public formDisable: boolean;
 
   constructor(
     private modalService: NgbModal,
@@ -44,8 +45,11 @@ export class CallsComponent implements OnInit, OnDestroy {
       rating: {},
       communication: {},
       documents: {},
+      otherDocuments: {},
+      status: 0,
     };
     this.loading = false;
+    this.formDisable = true;
   }
 
   public ngOnInit(): void {
@@ -133,12 +137,14 @@ export class CallsComponent implements OnInit, OnDestroy {
 
   protected updateData = <T>(form: T, isFormValid: FormValid) => {
     const sectionName = isFormValid.name as keyof CallsForm;
-    const sectionBody = {
-      ...this.formData[sectionName],
-      ...form,
-    } as any;
-    this.formData[sectionName] = sectionBody;
-    this.updateFormStatus(isFormValid);
+    if (sectionName !== 'status') {
+      const sectionBody = {
+        ...this.formData[sectionName],
+        ...form,
+      } as any;
+      this.formData[sectionName] = sectionBody;
+      this.updateFormStatus(isFormValid);
+    }
   };
 
   private updateFormStatus(formValid: FormValid): void {

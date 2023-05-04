@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CallSection } from 'src/app/core/enums/sections.enum';
@@ -12,13 +18,14 @@ import { GeneralProjectDataForm } from './domain';
   templateUrl: './general-project-data-form.component.html',
   styleUrls: ['./general-project-data-form.component.scss'],
 })
-export class GeneralProjectDataFormComponent implements OnInit {
+export class GeneralProjectDataFormComponent implements OnInit, OnChanges {
   @Input() updateParentModel: (
     part: GeneralProjectDataForm,
     isFormValid: FormValid
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) => void = () => {};
   @Input() defaultValues: GeneralProjectDataForm;
+  @Input() disable: boolean;
   form: FormGroup;
 
   categories: string[] = [];
@@ -60,11 +67,19 @@ export class GeneralProjectDataFormComponent implements OnInit {
     ];
     this.groups = [];
     this.form = new FormGroup({});
+    this.disable = false;
   }
 
   ngOnInit(): void {
     this.initForm();
     this.updateParentModel({}, this.isValid);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const { disable } = changes;
+    if (disable?.currentValue) {
+      this.initForm();
+    }
   }
 
   get f() {
@@ -91,6 +106,7 @@ export class GeneralProjectDataFormComponent implements OnInit {
     this.subscribeToForm();
     this.handleCategory();
     this.form.markAllAsTouched();
+    this.disable && this.form.disable();
   }
 
   subscribeToForm() {

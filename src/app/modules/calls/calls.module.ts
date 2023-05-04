@@ -10,6 +10,7 @@ import {
   GeneralProjectDataFormModule,
   LocationFormModule,
   ObjectivesFormModule,
+  OtherDocumentsFormModule,
   PeriodFormModule,
   ProjectBudgetFormModule,
   ProjectDevelopmentFormModule,
@@ -52,6 +53,7 @@ import { RemunerationTableComponent } from './components/remuneration-table/remu
     RatingFormModule,
     CommunicationFormModule,
     DocumentsFormModule,
+    OtherDocumentsFormModule,
   ],
 })
 export class CallsModule {}

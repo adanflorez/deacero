@@ -14,6 +14,7 @@ export enum CallSection {
   SOCIAL_MEDIA = 'communication',
   BUDGET_PROJECT = 'projectBudget',
   DOCUMENTS = 'documents',
+  OTHER_DOCUMENTS = 'otherDocuments',
   OBJECTIVES = 'objectives',
   RATING = 'rating',
 }

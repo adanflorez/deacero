@@ -21,7 +21,11 @@
   </div>
   <div class="form-group col-md-6">
     <label for="category" class="form-label">Categoría</label>
-    <ng-select #category labelForId="category" formControlName="category">
+    <ng-select
+      #category
+      labelForId="category"
+      formControlName="category"
+      [class.is-invalid]="f['category'].invalid && f['category'].touched">
       <ng-option value="">Click para seleccionar</ng-option>
       <ng-option [value]="category" *ngFor="let category of categories">{{
         category
