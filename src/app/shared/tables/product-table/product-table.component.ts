@@ -31,11 +31,14 @@ export class ProductTableComponent {
     private multimediaService: MultimediaService
   ) {
     this.form = new FormGroup({
-      description: new FormControl(''),
-      price: new FormControl('', Validators.pattern(ONLY_NUMBERS_PATTERN)),
-      available: new FormControl(null),
-      season: new FormControl(''),
-      photo: new FormControl(''),
+      description: new FormControl('', Validators.required),
+      price: new FormControl('', [
+        Validators.pattern(ONLY_NUMBERS_PATTERN),
+        Validators.required,
+      ]),
+      available: new FormControl(null, Validators.required),
+      season: new FormControl('', Validators.required),
+      photo: new FormControl('', Validators.required),
     });
     this.form.valueChanges.subscribe(values => {
       const { description, price, available, season, photo } = values;

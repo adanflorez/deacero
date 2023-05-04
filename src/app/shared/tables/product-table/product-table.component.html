@@ -113,41 +113,60 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="form" class="px-4">
-      <label class="form-label" for="description">Descripción</label>
-      <input
-        type="text"
-        class="form-control mb-4"
-        id="description"
-        placeholder="Descripción"
-        formControlName="description" />
-      <label class="form-label" for="price">Precio</label>
-      <input
-        type="text"
-        class="form-control mb-4"
-        id="price"
-        placeholder="Precio"
-        formControlName="price"
-        [class.is-invalid]="f['price'].invalid && f['price'].touched"
-        mask="separator.2"
-        thousandSeparator=","
-        prefix="MX$ " />
-      <label class="form-label" for="available">Disponibilidad</label>
-      <select
-        class="form-select mb-4"
-        formControlName="available"
-        id="available">
-        <option selected>Click para seleccionar</option>
-        <option value="Permanente">Permanente</option>
-        <option value="De temporada">De temporada</option>
-        <option value="Días festivos">Días festivos</option>
-      </select>
-      <label class="form-label" for="season">Temporada</label>
-      <input
-        type="text"
-        class="form-control mb-4"
-        id="season"
-        placeholder="Temporada"
-        formControlName="season" />
+      <div class="col-12 mb-4">
+        <label class="form-label" for="description">Descripción</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          placeholder="Descripción"
+          formControlName="description"
+          [class.is-invalid]="
+            f['description'].invalid && f['description'].touched
+          " />
+        <app-form-error [control]="f['description']"></app-form-error>
+      </div>
+      <div class="col-12 mb-4">
+        <label class="form-label" for="price">Precio</label>
+        <input
+          type="text"
+          class="form-control"
+          id="price"
+          placeholder="Precio"
+          formControlName="price"
+          [class.is-invalid]="f['price'].invalid && f['price'].touched"
+          mask="separator.2"
+          thousandSeparator=","
+          prefix="MX$ " />
+        <app-form-error
+          [control]="f['price']"
+          [errors]="{ pattern: 'Solo números' }"></app-form-error>
+      </div>
+      <div class="col-12 mb-4">
+        <label class="form-label" for="available">Disponibilidad</label>
+        <select
+          class="form-select"
+          formControlName="available"
+          id="available"
+          [class.is-invalid]="f['available'].invalid && f['available'].touched">
+          <option selected>Click para seleccionar</option>
+          <option value="Permanente">Permanente</option>
+          <option value="De temporada">De temporada</option>
+          <option value="Días festivos">Días festivos</option>
+        </select>
+        <app-form-error [control]="f['available']"></app-form-error>
+      </div>
+      <div class="col-12 mb-4">
+        <label class="form-label" for="season">Temporada</label>
+        <input
+          type="text"
+          class="form-control"
+          id="season"
+          placeholder="Temporada"
+          formControlName="season"
+          [class.is-invalid]="f['season'].invalid && f['season'].touched" />
+        <app-form-error [control]="f['season']"></app-form-error>
+      </div>
       <div class="mb-3">
         <label class="form-label" for="photo">Fotografía del producto</label>
         <ng-container *ngIf="(photoUrl | async) === undefined; else photo">
@@ -155,7 +174,9 @@
             class="form-control"
             type="file"
             id="photo"
-            (change)="uploadPhoto($event)" />
+            formControlName="photo"
+            (change)="uploadPhoto($event)"
+            [class.is-invalid]="f['photo'].invalid && f['photo'].touched" />
         </ng-container>
         <ng-template #photo>
           <div class="input-group mb-4">
@@ -173,6 +194,7 @@
             </button>
           </div>
         </ng-template>
+        <app-form-error [control]="f['photo']"></app-form-error>
       </div>
     </form>
   </div>
