@@ -49,7 +49,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       status: 0,
     };
     this.loading = false;
-    this.formDisable = true;
+    this.formDisable = false;
   }
 
   public ngOnInit(): void {
@@ -128,8 +128,8 @@ export class CallsComponent implements OnInit, OnDestroy {
       .pipe(catchError(error => throwError(() => Error(error))))
       .subscribe({
         next: (formsData: CallsForm) => {
-          console.log(formsData);
           this.formData = formsData;
+          this.formDisable = this.formData.status === 5;
         },
         error: error => console.error(error),
       });
