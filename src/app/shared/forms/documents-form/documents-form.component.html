@@ -27,8 +27,8 @@
                 readonly />
               <button
                 class="btn btn-secondary p-1"
-                (click)="f[doc.field].setValue('')"
-                [disabled]="false">
+                (click)="!disable && f[doc.field].setValue('')"
+                [disabled]="disable">
                 <img height="18" src="/assets/icons/trash.png" alt="trash" />
               </button>
             </div>
@@ -66,7 +66,8 @@
               readonly />
             <button
               class="btn btn-secondary p-1"
-              (click)="f['logo'].setValue('')">
+              (click)="!disable && f['logo'].setValue('')"
+              [disabled]="disable">
               <img height="18" src="/assets/icons/trash.png" alt="trash" />
             </button>
           </div>
