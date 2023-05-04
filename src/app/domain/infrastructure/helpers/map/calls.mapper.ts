@@ -123,6 +123,20 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         proofOfUpdatedTaxSituation: param.documents.proofOfUpdatedTaxSituation,
         logo: param.documents.logo,
       },
+      otherDocuments: {
+        bankStatementCoverPageDoc:
+          param.loadingDocumentStage?.bankStatementCoverPageDoc || null,
+        updatedComplianceOpinionDoc:
+          param.loadingDocumentStage?.updatedComplianceOpinionDoc || null,
+        proofOfUpdatedTaxSituationDoc:
+          param.loadingDocumentStage?.proofOfUpdatedTaxSituationDoc || null,
+        letterheadIndicatingTheFullNameDoc:
+          param.loadingDocumentStage?.letterheadIndicatingTheFullNameDoc ||
+          null,
+        proofOfAdmissionToThePublicRegistryDoc:
+          param.loadingDocumentStage?.proofOfAdmissionToThePublicRegistryDoc ||
+          null,
+      },
       status: param.portalStatusCode as number,
     };
   }
@@ -261,6 +275,19 @@ export class CallsImplementationMapper extends Mapper<CallsEntity, CallsForm> {
         proofOfUpdatedTaxSituation: param.documents
           .proofOfUpdatedTaxSituation as string,
         logo: param.documents.logo as string,
+      },
+      loadingDocumentStage: {
+        bankStatementCoverPageDoc:
+          param.otherDocuments.bankStatementCoverPageDoc,
+        updatedComplianceOpinionDoc:
+          param.otherDocuments.updatedComplianceOpinionDoc,
+        proofOfUpdatedTaxSituationDoc:
+          param.otherDocuments.proofOfUpdatedTaxSituationDoc,
+        letterheadIndicatingTheFullNameDoc:
+          param.otherDocuments.letterheadIndicatingTheFullNameDoc,
+        proofOfAdmissionToThePublicRegistryDoc:
+          param.otherDocuments.proofOfAdmissionToThePublicRegistryDoc,
+        comments: param.otherDocuments.comment,
       },
     };
   }

@@ -8,11 +8,7 @@
   </p>
 </ng-container>
 <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
-  <ng-container
-    *ngIf="
-      validateIfFormDataIsEmpty && formData.status !== 1;
-      else otherDocuments
-    ">
+  <ng-container *ngIf="validateIfFormDataIsEmpty && this.formData.status !== 5">
     <app-general-project-data-form
       [updateParentModel]="updateData"
       [defaultValues]="formData.generalProjectData"
@@ -76,9 +72,11 @@
       [disable]="formDisable"></app-documents-form>
   </ng-container>
 
-  <ng-template #otherDocuments>
-    <app-other-documents-form></app-other-documents-form>
-  </ng-template>
+  <app-other-documents-form
+    *ngIf="this.formData.status === 5 || this.formData.status === 6"
+    [updateParentModel]="updateData"
+    [defaultValues]="formData.otherDocuments"
+    [disable]="this.formData.status === 6"></app-other-documents-form>
 
   <ng-container *ngIf="(infoSaved$ | async) === false">
     <button class="btn btn-outline-primary me-3" type="button" (click)="save()">

@@ -78,7 +78,7 @@ export class OtherDocumentsFormComponent
 
   get isValidForm(): FormValid {
     return {
-      name: CallSection.DOCUMENTS,
+      name: CallSection.OTHER_DOCUMENTS,
       valid: this.form.valid,
     };
   }
@@ -91,17 +91,20 @@ export class OtherDocumentsFormComponent
     this.updateDocuments();
     this.form = new FormGroup({
       updatedComplianceOpinionDoc: new FormControl(
-        this.defaultValues.updatedComplianceOpinionDoc
+        this.defaultValues.updatedComplianceOpinionDoc,
+        Validators.required
       ),
       proofOfUpdatedTaxSituationDoc: new FormControl(
-        this.defaultValues.proofOfUpdatedTaxSituationDoc
+        this.defaultValues.proofOfUpdatedTaxSituationDoc,
+        Validators.required
       ),
       bankStatementCoverPageDoc: new FormControl(
         this.defaultValues.bankStatementCoverPageDoc,
         Validators.required
       ),
       letterheadIndicatingTheFullNameDoc: new FormControl(
-        this.defaultValues.letterheadIndicatingTheFullNameDoc
+        this.defaultValues.letterheadIndicatingTheFullNameDoc,
+        Validators.required
       ),
       proofOfAdmissionToThePublicRegistryDoc: new FormControl(
         this.defaultValues.proofOfAdmissionToThePublicRegistryDoc,
@@ -129,12 +132,12 @@ export class OtherDocumentsFormComponent
       {
         field: 'proofOfUpdatedTaxSituationDoc',
         name: 'Constancia de situación fiscal actualizada',
-        help: 'PDF legible',
+        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
       },
       {
         field: 'bankStatementCoverPageDoc',
         name: 'Carátula del estado de cuenta bancaria',
-        help: 'PDF legible',
+        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
       },
       {
         field: 'letterheadIndicatingTheFullNameDoc',
@@ -144,7 +147,7 @@ export class OtherDocumentsFormComponent
       {
         field: 'proofOfAdmissionToThePublicRegistryDoc',
         name: 'Comprobante de ingreso al registro público o bien, el acta ya protocolizada con las reformas fiscales vigentes.',
-        help: 'PDF legible (preferentemente el documento digital descargado, no escaneado)',
+        help: 'PDF legible',
       },
     ];
   }

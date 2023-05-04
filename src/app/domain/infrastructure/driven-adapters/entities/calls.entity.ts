@@ -3,6 +3,7 @@ import {
   GeneralProjectDataEntity,
   LocationEntity,
   ObjectivesEntity,
+  OtherDocumentsEntity,
   PeriodEntity,
   ProjectBudgetEntity,
   ProjectDevelopmentEntity,
@@ -22,5 +23,6 @@ export interface CallsEntity {
   selfAppraisal: RatingEntity;
   communication: SocialMediaEntity;
   documents: DocumentsEntity;
+  loadingDocumentStage: OtherDocumentsEntity;
   portalStatusCode?: number;
 }

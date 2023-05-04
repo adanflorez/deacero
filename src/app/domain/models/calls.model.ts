@@ -9,6 +9,7 @@ import {
   RatingForm,
   SocialMediaForm,
   DocumentsForm,
+  OtherDocumentsForm,
 } from 'src/app/shared/forms';
 
 export interface CallsForm {
@@ -22,5 +23,6 @@ export interface CallsForm {
   rating: RatingForm;
   communication: SocialMediaForm;
   documents: DocumentsForm;
+  otherDocuments: OtherDocumentsForm;
   status: number;
 }

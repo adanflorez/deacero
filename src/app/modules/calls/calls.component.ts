@@ -45,6 +45,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       rating: {},
       communication: {},
       documents: {},
+      otherDocuments: {},
       status: 0,
     };
     this.loading = false;

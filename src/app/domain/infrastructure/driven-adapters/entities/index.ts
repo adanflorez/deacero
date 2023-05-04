@@ -8,6 +8,7 @@ export * from './governing-body-entity';
 export * from './location.entity';
 export * from './objectives.entity';
 export * from './organizational-information-entity';
+export * from './other-documents.entity';
 export * from './period.entity';
 export * from './project-budget.entity';
 export * from './project-development.entity';
