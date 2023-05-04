@@ -92,37 +92,54 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="form" class="px-4">
-      <label class="form-label" for="day">Día</label>
-      <select class="form-select mb-4" formControlName="day" id="day">
-        <option selected value="">Click para seleccionar</option>
-        <option value="Lunes">Lunes</option>
-        <option value="Martes">Martes</option>
-        <option value="Miercoles">Miercoles</option>
-        <option value="Jueves">Jueves</option>
-        <option value="Viernes">Viernes</option>
-        <option value="Sabado">Sabado</option>
-        <option value="Domingo">Domingo</option>
-      </select>
-      <label class="form-label" for="entryTime">Hora entrada</label>
-      <select
-        class="form-select mb-4"
-        formControlName="entryTime"
-        id="entryTime">
-        <option selected value="">Click para seleccionar</option>
-        <option *ngFor="let hour of hours" [value]="hour.value">
-          {{ hour.label }}
-        </option>
-      </select>
-      <label class="form-label" for="departureTime">Hora salida</label>
-      <select
-        class="form-select mb-4"
-        formControlName="departureTime"
-        id="departureTime">
-        <option selected value="">Click para seleccionar</option>
-        <option *ngFor="let hour of hours" [value]="hour.value">
-          {{ hour.label }}
-        </option>
-      </select>
+      <div class="col-12 mb-4">
+        <label class="form-label" for="day">Día</label>
+        <select
+          class="form-select"
+          formControlName="day"
+          id="day"
+          [class.is-invalid]="f['day'].invalid && f['day'].touched">
+          <option selected value="">Click para seleccionar</option>
+          <option value="Lunes">Lunes</option>
+          <option value="Martes">Martes</option>
+          <option value="Miercoles">Miercoles</option>
+          <option value="Jueves">Jueves</option>
+          <option value="Viernes">Viernes</option>
+          <option value="Sabado">Sabado</option>
+          <option value="Domingo">Domingo</option>
+        </select>
+        <app-form-error [control]="f['day']"></app-form-error>
+      </div>
+      <div class="col-12 mb-4">
+        <label class="form-label" for="entryTime">Hora entrada</label>
+        <select
+          class="form-select"
+          formControlName="entryTime"
+          id="entryTime"
+          [class.is-invalid]="f['entryTime'].invalid && f['entryTime'].touched">
+          <option selected value="">Click para seleccionar</option>
+          <option *ngFor="let hour of hours" [value]="hour.value">
+            {{ hour.label }}
+          </option>
+        </select>
+        <app-form-error [control]="f['entryTime']"></app-form-error>
+      </div>
+      <div class="col-12 mb-4">
+        <label class="form-label" for="departureTime">Hora salida</label>
+        <select
+          class="form-select"
+          formControlName="departureTime"
+          id="departureTime"
+          [class.is-invalid]="
+            f['departureTime'].invalid && f['departureTime'].touched
+          ">
+          <option selected value="">Click para seleccionar</option>
+          <option *ngFor="let hour of hours" [value]="hour.value">
+            {{ hour.label }}
+          </option>
+        </select>
+        <app-form-error [control]="f['departureTime']"></app-form-error>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
