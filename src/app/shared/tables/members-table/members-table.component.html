@@ -86,22 +86,28 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="form" class="px-4">
-      <label for="name" class="form-label">Nombre</label>
-      <input
-        type="text"
-        class="form-control mb-4"
-        id="name"
-        placeholder="Nombre"
-        formControlName="name"
-        [class.is-invalid]="f['name'].invalid && f['name'].touched" />
-      <label for="position" class="form-label">Puesto</label>
-      <input
-        type="text"
-        class="form-control mb-4"
-        id="position"
-        placeholder="Puesto"
-        formControlName="position"
-        [class.is-invalid]="f['position'].invalid && f['position'].touched" />
+      <div class="col-12 mb-4">
+        <label for="name" class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Nombre"
+          formControlName="name"
+          [class.is-invalid]="f['name'].invalid && f['name'].touched" />
+        <app-form-error [control]="f['name']"></app-form-error>
+      </div>
+      <div class="col-12 mb-4">
+        <label for="position" class="form-label">Puesto</label>
+        <input
+          type="text"
+          class="form-control"
+          id="position"
+          placeholder="Puesto"
+          formControlName="position"
+          [class.is-invalid]="f['position'].invalid && f['position'].touched" />
+        <app-form-error [control]="f['position']"></app-form-error>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
@@ -114,7 +120,7 @@
       <button
         class="btn btn-primary"
         (click)="editRecord(); modal.close()"
-        [disabled]="!validForm">
+        [disabled]="form.invalid">
         Editar
       </button>
     </ng-container>
@@ -123,7 +129,7 @@
         *ngIf="!isEditMode"
         class="btn btn-primary"
         (click)="addRecord(); modal.close()"
-        [disabled]="!validForm">
+        [disabled]="form.invalid">
         Guardar
       </button>
     </ng-template>
