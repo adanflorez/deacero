@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TableComponent } from 'src/app/core/models/table.model';
 import { v4 as uuidv4 } from 'uuid';
@@ -29,27 +29,18 @@ export class OpeningHoursTableComponent
   constructor(private modalService: NgbModal) {
     this.records = [];
     this.form = new FormGroup({
-      day: new FormControl(''),
-      entryTime: new FormControl(''),
-      departureTime: new FormControl(''),
+      day: new FormControl('', Validators.required),
+      entryTime: new FormControl('', Validators.required),
+      departureTime: new FormControl('', Validators.required),
     });
-    this.validForm = false;
     this.closeResult = '';
     this.isEditMode = false;
     this.daysQuantity = 7;
-
-    this.form.valueChanges.subscribe(values => {
-      const { day, entryTime, departureTime } = values;
-      if (day && entryTime && departureTime) {
-        this.validForm = this.form.valid && true;
-        return;
-      }
-      this.validForm = false;
-    });
+    this.validForm = false;
   }
 
   addRecord(): void {
-    if (!this.validForm) return;
+    if (this.form.invalid) return;
     this.records.push({
       id: uuidv4(),
       ...this.form.value,
@@ -108,8 +99,8 @@ export class OpeningHoursTableComponent
     this.form.reset();
   }
 
-  get f(): unknown {
-    throw new Error('Method not implemented.');
+  get f() {
+    return this.form.controls;
   }
 
   get isMaximumRecords(): boolean {

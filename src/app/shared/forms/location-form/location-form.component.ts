@@ -45,6 +45,7 @@ export class LocationFormComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
+    this.initForm();
     this.updateParentModel({}, this.isValidForm);
   }
 
