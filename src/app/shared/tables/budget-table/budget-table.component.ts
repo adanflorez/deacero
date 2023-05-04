@@ -1,6 +1,6 @@
 import { TableComponent } from 'src/app/core/models/table.model';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import ProjectBudget from 'src/app/core/models/project-budget.model';
@@ -25,27 +25,18 @@ export class BudgetTableComponent implements TableComponent<ProjectBudget> {
     this.closeResult = '';
     this.isEditMode = false;
     this.form = new FormGroup({
-      activity: new FormControl(''),
-      amount: new FormControl(''),
-      expenseType: new FormControl(''),
-    });
-
-    this.form.valueChanges.subscribe(values => {
-      const { activity, amount, expenseType } = values;
-      if (activity || amount || expenseType) {
-        this.validForm = this.form.valid && true;
-        return;
-      }
-      this.validForm = false;
+      activity: new FormControl('', Validators.required),
+      amount: new FormControl('', Validators.required),
+      expenseType: new FormControl('', Validators.required),
     });
   }
 
-  get f(): unknown {
+  get f() {
     return this.form.controls;
   }
 
   addRecord(): void {
-    if (!this.validForm) return;
+    if (this.form.invalid) return;
     this.records.push({
       id: uuidv4(),
       ...this.form.value,

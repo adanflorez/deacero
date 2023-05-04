@@ -91,41 +91,53 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="form" class="px-4">
-      <label for="activity" class="form-label">Actividad</label>
-      <input
-        type="text"
-        class="form-control mb-4"
-        id="activity"
-        placeholder="Actividad"
-        formControlName="activity" />
-
-      <label for="amount" class="form-label">Monto</label>
-      <input
-        type="text"
-        class="form-control mb-4"
-        id="amount"
-        placeholder="Monto"
-        formControlName="amount"
-        mask="separator.2"
-        thousandSeparator=","
-        prefix="MX$ " />
-
-      <label class="form-label" for="expenseType">Tipo de gasto</label>
-      <select
-        class="form-select mb-4"
-        formControlName="expenseType"
-        id="expenseType">
-        <option selected value="">Click para seleccionar</option>
-        <option value="Construcción y equipamiento">
-          Construcción y equipamiento
-        </option>
-        <option value="Insumos y materiales">Insumos y materiales</option>
-        <option value="Remuneración personal">Remuneración personal</option>
-        <option value="Gastos operativos">Gastos operativos</option>
-        <option value="Gastos del objeto social">
-          Gastos del objeto social
-        </option>
-      </select>
+      <div class="col-12 mb-4">
+        <label for="activity" class="form-label">Actividad</label>
+        <input
+          type="text"
+          class="form-control"
+          id="activity"
+          placeholder="Actividad"
+          formControlName="activity"
+          [class.is-invalid]="f['activity'].invalid && f['activity'].touched" />
+        <app-form-error [control]="f['activity']"></app-form-error>
+      </div>
+      <div class="col-12 mb-4">
+        <label for="amount" class="form-label">Monto</label>
+        <input
+          type="text"
+          class="form-control"
+          id="amount"
+          placeholder="Monto"
+          formControlName="amount"
+          mask="separator.2"
+          thousandSeparator=","
+          prefix="MX$ "
+          [class.is-invalid]="f['amount'].invalid && f['amount'].touched" />
+        <app-form-error [control]="f['amount']"></app-form-error>
+      </div>
+      <div class="col-12 mb-4">
+        <label class="form-label" for="expenseType">Tipo de gasto</label>
+        <select
+          class="form-select"
+          formControlName="expenseType"
+          id="expenseType"
+          [class.is-invalid]="
+            f['expenseType'].invalid && f['expenseType'].touched
+          ">
+          <option selected value="">Click para seleccionar</option>
+          <option value="Construcción y equipamiento">
+            Construcción y equipamiento
+          </option>
+          <option value="Insumos y materiales">Insumos y materiales</option>
+          <option value="Remuneración personal">Remuneración personal</option>
+          <option value="Gastos operativos">Gastos operativos</option>
+          <option value="Gastos del objeto social">
+            Gastos del objeto social
+          </option>
+        </select>
+        <app-form-error [control]="f['expenseType']"></app-form-error>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
@@ -138,7 +150,7 @@
       <button
         class="btn btn-primary"
         (click)="editRecord(); modal.close()"
-        [disabled]="!validForm">
+        [disabled]="form.invalid">
         Editar
       </button>
     </ng-container>
@@ -147,7 +159,7 @@
         *ngIf="!isEditMode"
         class="btn btn-primary"
         (click)="addRecord(); modal.close()"
-        [disabled]="!validForm">
+        [disabled]="form.invalid">
         Guardar
       </button>
     </ng-template>
