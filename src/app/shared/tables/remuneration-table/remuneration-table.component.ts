@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Remuneration } from 'src/app/core/models';
 import { TableComponent } from 'src/app/core/models/table.model';
@@ -27,18 +27,9 @@ export class RemunerationTableComponent
     this.closeResult = '';
     this.isEditMode = false;
     this.form = new FormGroup({
-      position: new FormControl(''),
-      schema: new FormControl(''),
-      financialRemuneration: new FormControl(''),
-    });
-
-    this.form.valueChanges.subscribe(values => {
-      const { schema, position, financialRemuneration } = values;
-      if (schema || position || financialRemuneration) {
-        this.validForm = this.form.valid && true;
-        return;
-      }
-      this.validForm = false;
+      position: new FormControl('', Validators.required),
+      schema: new FormControl('', Validators.required),
+      financialRemuneration: new FormControl('', Validators.required),
     });
   }
 
@@ -47,7 +38,7 @@ export class RemunerationTableComponent
   }
 
   addRecord(): void {
-    if (!this.validForm) return;
+    if (this.form.invalid) return;
     this.records.push({
       id: uuidv4(),
       ...this.form.value,

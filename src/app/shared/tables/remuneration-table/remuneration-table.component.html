@@ -91,33 +91,51 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="form" class="px-4">
-      <label for="position" class="form-label">Puesto</label>
-      <input
-        type="text"
-        class="form-control mb-4"
-        id="position"
-        placeholder="Puesto"
-        formControlName="position" />
-      <label class="form-label" for="schema">Esquema</label>
-      <select class="form-select mb-4" formControlName="schema" id="schema">
-        <option selected value="">Click para seleccionar</option>
-        <option value="Sueldos y salarios">Sueldos y salarios</option>
-        <option value="Asalariados">Asalariados</option>
-        <option value="Honorarios">Honorarios</option>
-        <option value="Mixtos">Mixtos</option>
-      </select>
-      <label for="financialRemuneration" class="form-label"
-        >Remuneración económica</label
-      >
-      <input
-        type="text"
-        class="form-control mb-4"
-        id="financialRemuneration"
-        placeholder="Remuneración económica"
-        formControlName="financialRemuneration"
-        mask="separator.2"
-        thousandSeparator=","
-        prefix="MX$ " />
+      <div class="col-12 mb-4">
+        <label for="position" class="form-label">Puesto</label>
+        <input
+          type="text"
+          class="form-control"
+          id="position"
+          placeholder="Puesto"
+          formControlName="position"
+          [class.is-invalid]="f['position'].invalid && f['position'].touched" />
+        <app-form-error [control]="f['position']"></app-form-error>
+      </div>
+      <div class="col-12 mb-4">
+        <label class="form-label" for="schema">Esquema</label>
+        <select
+          class="form-select"
+          formControlName="schema"
+          id="schema"
+          [class.is-invalid]="f['schema'].invalid && f['schema'].touched">
+          <option selected value="">Click para seleccionar</option>
+          <option value="Sueldos y salarios">Sueldos y salarios</option>
+          <option value="Asalariados">Asalariados</option>
+          <option value="Honorarios">Honorarios</option>
+          <option value="Mixtos">Mixtos</option>
+        </select>
+        <app-form-error [control]="f['schema']"></app-form-error>
+      </div>
+      <div class="col-12 mb-4">
+        <label for="financialRemuneration" class="form-label"
+          >Remuneración económica</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="financialRemuneration"
+          placeholder="Remuneración económica"
+          formControlName="financialRemuneration"
+          mask="separator.2"
+          thousandSeparator=","
+          prefix="MX$ "
+          [class.is-invalid]="
+            f['financialRemuneration'].invalid &&
+            f['financialRemuneration'].touched
+          " />
+        <app-form-error [control]="f['financialRemuneration']"></app-form-error>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
