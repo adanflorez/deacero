@@ -15,13 +15,11 @@ export class BudgetTableComponent implements TableComponent<ProjectBudget> {
   @Input() readOnly: boolean | null = false;
   @Output() recordChange: EventEmitter<ProjectBudget[]> = new EventEmitter();
   form: FormGroup;
-  validForm: boolean;
   closeResult: string;
   isEditMode: boolean;
   recordToEdit!: ProjectBudget;
 
   constructor(private modalService: NgbModal) {
-    this.validForm = false;
     this.closeResult = '';
     this.isEditMode = false;
     this.form = new FormGroup({

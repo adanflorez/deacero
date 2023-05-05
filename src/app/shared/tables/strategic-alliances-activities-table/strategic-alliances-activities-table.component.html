@@ -97,7 +97,9 @@
         class="form-control mb-4"
         id="activity"
         placeholder="Actividad"
-        formControlName="activity" />
+        formControlName="activity"
+        [class.is-invalid]="f['activity'].invalid && f['activity'].touched" />
+      <app-form-error [control]="f['activity']"></app-form-error>
     </form>
   </div>
   <div class="modal-footer">
@@ -110,7 +112,7 @@
       <button
         class="btn btn-primary"
         (click)="editRecord(); modal.close()"
-        [disabled]="!validForm">
+        [disabled]="form.invalid">
         Editar
       </button>
     </ng-container>
@@ -119,7 +121,7 @@
         *ngIf="!isEditMode"
         class="btn btn-primary"
         (click)="addRecord(); modal.close()"
-        [disabled]="!validForm">
+        [disabled]="form.invalid">
         Guardar
       </button>
     </ng-template>

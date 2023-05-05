@@ -22,17 +22,9 @@ import { FormErrorModule } from '../../shared/form-error/form-error.module';
 import { OpeningHoursTableModule } from './../../shared/tables/opening-hours-table/opening-hours-table.module';
 import { CallsRoutingModule } from './calls-routing.module';
 import { CallsComponent } from './calls.component';
-import { BudgetTableComponent } from './components/budget-table/budget-table.component';
-import { MembersComponent } from './components/members/members.component';
-import { RemunerationTableComponent } from './components/remuneration-table/remuneration-table.component';
 
 @NgModule({
-  declarations: [
-    CallsComponent,
-    MembersComponent,
-    RemunerationTableComponent,
-    BudgetTableComponent,
-  ],
+  declarations: [CallsComponent],
   imports: [
     CommonModule,
     CallsRoutingModule,

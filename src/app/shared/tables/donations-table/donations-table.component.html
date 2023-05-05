@@ -95,14 +95,17 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="form" class="px-4">
-      <label for="year" class="form-label">Año</label>
-      <input
-        type="text"
-        class="form-control mb-4"
-        id="year"
-        placeholder="Año"
-        formControlName="year"
-        [class.is-invalid]="f['year'].invalid && f['year'].touched" />
+      <div class="col-12 mb-4">
+        <label for="year" class="form-label">Año</label>
+        <input
+          type="text"
+          class="form-control"
+          id="year"
+          placeholder="Año"
+          formControlName="year"
+          [class.is-invalid]="f['year'].invalid && f['year'].touched" />
+        <app-form-error [control]="f['year']"></app-form-error>
+      </div>
       <label for="year" class="form-label">Monto</label>
       <input
         type="text"
@@ -114,13 +117,18 @@
         mask="separator.2"
         thousandSeparator=","
         prefix="MX$ " />
+      <app-form-error [control]="f['amount']"></app-form-error>
       <label for="year" class="form-label">Proyecto</label>
       <input
         type="text"
         class="form-control"
         id="proyectName"
         placeholder="Proyecto"
-        formControlName="proyectName" />
+        formControlName="proyectName"
+        [class.is-invalid]="
+          f['proyectName'].invalid && f['proyectName'].touched
+        " />
+      <app-form-error [control]="f['proyectName']"></app-form-error>
     </form>
   </div>
   <div class="modal-footer">
@@ -133,7 +141,7 @@
       <button
         class="btn btn-primary"
         (click)="editDonation(); modal.close()"
-        [disabled]="!validForm">
+        [disabled]="form.invalid">
         Editar
       </button>
     </ng-container>
@@ -142,7 +150,7 @@
         *ngIf="!isEditMode"
         class="btn btn-primary"
         (click)="addDonation(); modal.close()"
-        [disabled]="!validForm">
+        [disabled]="form.invalid">
         Guardar
       </button>
     </ng-template>

@@ -15,7 +15,6 @@ export class MembersTableComponent implements TableComponent<Member> {
   @Input() readOnly: boolean | null = false;
   @Output() recordsList = new EventEmitter();
   form: FormGroup;
-  validForm = false;
   closeResult = '';
   isEditMode = false;
   recordToEdit!: Member;

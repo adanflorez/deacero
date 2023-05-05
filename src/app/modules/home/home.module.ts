@@ -18,15 +18,13 @@ import {
   StrategicAlliancesFormModule,
 } from 'src/app/shared/forms';
 
-import { DonationsTableComponent } from './components/donations-table/donations-table.component';
-import { ProductTableComponent } from './components/product-table/product-table.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { HomeService } from './infrastructure';
 import { HomeApplicationGateway } from './domain';
 
 @NgModule({
-  declarations: [HomeComponent, ProductTableComponent, DonationsTableComponent],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

@@ -17,13 +17,11 @@ export class RemunerationTableComponent
   @Input() readOnly: boolean | null = false;
   @Output() recordChange: EventEmitter<Remuneration[]> = new EventEmitter();
   form: FormGroup;
-  validForm: boolean;
   closeResult: string;
   isEditMode: boolean;
   recordToEdit!: Remuneration;
 
   constructor(private modalService: NgbModal) {
-    this.validForm = false;
     this.closeResult = '';
     this.isEditMode = false;
     this.form = new FormGroup({

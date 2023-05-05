@@ -16,7 +16,6 @@ export class DonationsTableComponent {
   @Input() readOnly: boolean | null = false;
   @Output() donationsList = new EventEmitter();
   form: FormGroup;
-  validForm = false;
   donationToEdit!: Donation;
   isEditMode = false;
   closeResult = '';
@@ -24,25 +23,21 @@ export class DonationsTableComponent {
   constructor(private modalService: NgbModal) {
     this.form = new FormGroup({
       year: new FormControl('', [
+        Validators.required,
         Validators.pattern(ONLY_NUMBERS_PATTERN),
         Validators.maxLength(4),
         CustomValidators.MaxDate(),
       ]),
-      amount: new FormControl('', Validators.pattern(ONLY_NUMBERS_PATTERN)),
-      proyectName: new FormControl(''),
-    });
-    this.form.valueChanges.subscribe(values => {
-      const { year, amount, proyectName } = values;
-      if (year || amount || proyectName) {
-        this.validForm = this.form.valid && true;
-        return;
-      }
-      this.validForm = false;
+      amount: new FormControl('', [
+        Validators.required,
+        Validators.pattern(ONLY_NUMBERS_PATTERN),
+      ]),
+      proyectName: new FormControl('', Validators.required),
     });
   }
 
   addDonation() {
-    if (!this.validForm) return;
+    if (this.form.invalid) return;
     this.donations.push({
       id: uuidv4(),
       ...this.form.value,
