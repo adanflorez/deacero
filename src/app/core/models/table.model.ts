@@ -2,7 +2,6 @@ import { FormGroup } from '@angular/forms';
 
 export declare interface TableComponent<T> {
   form: FormGroup;
-  validForm: boolean;
   closeResult: string;
   isEditMode: boolean;
   recordToEdit: T;

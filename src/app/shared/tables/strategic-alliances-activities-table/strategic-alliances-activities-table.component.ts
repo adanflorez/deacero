@@ -17,7 +17,6 @@ export class StrategicAlliancesActivitiesTableComponent
   @Input() readOnly: boolean | null;
   @Output() recordChange: EventEmitter<StrategicAllianceActivity[]>;
   form: FormGroup<any>;
-  validForm: boolean;
   closeResult: string;
   isEditMode: boolean;
   recordToEdit!: StrategicAllianceActivity;
@@ -29,22 +28,12 @@ export class StrategicAlliancesActivitiesTableComponent
     this.form = new FormGroup({
       activity: new FormControl('', Validators.required),
     });
-    this.validForm = false;
     this.closeResult = '';
     this.isEditMode = false;
-
-    this.form.valueChanges.subscribe(values => {
-      const { activity } = values;
-      if (activity) {
-        this.validForm = this.form.valid && true;
-        return;
-      }
-      this.validForm = false;
-    });
   }
 
   addRecord(): void {
-    if (!this.validForm) return;
+    if (this.form.invalid) return;
     this.records.push({
       id: uuidv4(),
       ...this.form.value,
@@ -100,7 +89,7 @@ export class StrategicAlliancesActivitiesTableComponent
     this.form.reset();
   }
 
-  get f(): unknown {
+  get f() {
     return this.form.controls;
   }
 }

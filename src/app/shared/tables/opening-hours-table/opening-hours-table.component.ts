@@ -19,7 +19,6 @@ export class OpeningHoursTableComponent
   @Output() recordChange: EventEmitter<Array<OpeningHours>> =
     new EventEmitter();
   form: FormGroup<any>;
-  validForm: boolean;
   closeResult: string;
   isEditMode: boolean;
   recordToEdit!: OpeningHours;
@@ -36,7 +35,6 @@ export class OpeningHoursTableComponent
     this.closeResult = '';
     this.isEditMode = false;
     this.daysQuantity = 7;
-    this.validForm = false;
   }
 
   addRecord(): void {

@@ -152,7 +152,7 @@
       <button
         class="btn btn-primary"
         (click)="editRecord(); modal.close()"
-        [disabled]="!validForm">
+        [disabled]="form.invalid">
         Editar
       </button>
     </ng-container>
@@ -161,7 +161,7 @@
         *ngIf="!isEditMode"
         class="btn btn-primary"
         (click)="addRecord(); modal.close()"
-        [disabled]="!validForm">
+        [disabled]="form.invalid">
         Guardar
       </button>
     </ng-template>
