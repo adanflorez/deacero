@@ -141,8 +141,8 @@ export class CallsComponent implements OnInit, OnDestroy {
       if (!this.isInvalidForm) {
         this.callsService.status().subscribe({
           next: res => {
-            this.formDisabled = true;
             if (res.data) {
+              this.formDisabled = true;
               this.infoSaved$.next(true);
             }
           },
