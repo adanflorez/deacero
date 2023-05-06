@@ -10,6 +10,7 @@
               class="form-control"
               type="file"
               [id]="doc.field"
+              [formControlName]="doc.field"
               (change)="uploadDocument($event, doc.field)"
               accept="application/pdf"
               [class.is-invalid]="
