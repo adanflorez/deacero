@@ -133,6 +133,7 @@ export class DocumentsFormComponent implements OnInit, OnChanges, OnDestroy {
     });
     this.subscribeToForm();
     this.disable && this.form.disable();
+    this.form.markAllAsTouched();
   }
 
   subscribeToForm() {

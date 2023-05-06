@@ -12,6 +12,7 @@
               [id]="doc.field"
               (change)="uploadDocument($event, doc.field)"
               accept="application/pdf"
+              [formControlName]="doc.field"
               [class.is-invalid]="
                 f[doc.field].invalid && f[doc.field].touched
               " />

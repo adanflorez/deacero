@@ -8,47 +8,57 @@
   </p>
 </ng-container>
 <div class="bg-bright-gray border border-secondary rounded p-3 mb-4">
-  <ng-container *ngIf="validateIfFormDataIsEmpty && this.formData.status !== 5">
+  <ng-container *ngIf="validateIfFormDataIsEmpty && !firstFormCompleted">
     <app-general-project-data-form
       [updateParentModel]="updateData"
       [defaultValues]="formData.generalProjectData"
-      [disable]="formDisable"></app-general-project-data-form>
+      [disable]="
+        firstFormCompleted || bothFormsCompleted
+      "></app-general-project-data-form>
     <hr />
 
     <app-location-form
       [updateParentModel]="updateData"
       [defaultValues]="formData.location"
-      [disable]="formDisable"></app-location-form>
+      [disable]="firstFormCompleted || bothFormsCompleted"></app-location-form>
     <hr />
 
     <app-project-manager-form
       [updateParentModel]="updateData"
       [defaultValues]="formData.projectManager"
-      [disable]="formDisable"></app-project-manager-form>
+      [disable]="
+        firstFormCompleted || bothFormsCompleted
+      "></app-project-manager-form>
     <hr />
 
     <app-project-development-form
       [updateParentModel]="updateData"
       [defaultValues]="formData.projectDevelopment"
-      [disable]="formDisable"></app-project-development-form>
+      [disable]="
+        firstFormCompleted || bothFormsCompleted
+      "></app-project-development-form>
     <hr />
 
     <app-period-form
       [updateParentModel]="updateData"
       [defaultValues]="formData.period"
-      [disable]="formDisable"></app-period-form>
+      [disable]="firstFormCompleted || bothFormsCompleted"></app-period-form>
     <hr />
 
     <app-objectives-form
       [updateParentModel]="updateData"
       [defaultValues]="formData.objectives"
-      [disable]="formDisable"></app-objectives-form>
+      [disable]="
+        firstFormCompleted || bothFormsCompleted
+      "></app-objectives-form>
     <hr />
 
     <app-project-budget-form
       [updateParentModel]="updateData"
       [defaultValues]="formData.projectBudget"
-      [disable]="formDisable"></app-project-budget-form>
+      [disable]="
+        firstFormCompleted || bothFormsCompleted
+      "></app-project-budget-form>
     <hr />
 
     <ng-container *ngIf="formData.generalProjectData.category">
@@ -56,27 +66,29 @@
         [updateParentModel]="updateData"
         [defaultValues]="formData.rating"
         [category]="formData.generalProjectData.category!"
-        [disable]="formDisable"></app-rating-form>
+        [disable]="firstFormCompleted || bothFormsCompleted"></app-rating-form>
       <hr />
     </ng-container>
 
     <app-communication-form
       [updateParentModel]="updateData"
       [defaultValues]="formData.communication"
-      [disable]="formDisable"></app-communication-form>
+      [disable]="
+        firstFormCompleted || bothFormsCompleted
+      "></app-communication-form>
     <hr />
 
     <app-documents-form
       [updateParentModel]="updateData"
       [defaultValues]="formData.documents"
-      [disable]="formDisable"></app-documents-form>
+      [disable]="firstFormCompleted || bothFormsCompleted"></app-documents-form>
   </ng-container>
 
   <app-other-documents-form
-    *ngIf="this.formData.status === 5 || this.formData.status === 6"
+    *ngIf="firstFormCompleted || bothFormsCompleted"
     [updateParentModel]="updateData"
     [defaultValues]="formData.otherDocuments"
-    [disable]="this.formData.status === 6"></app-other-documents-form>
+    [disable]="bothFormsCompleted"></app-other-documents-form>
 
   <ng-container *ngIf="(infoSaved$ | async) === false">
     <button class="btn btn-outline-primary me-3" type="button" (click)="save()">
