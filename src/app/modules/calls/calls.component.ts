@@ -57,7 +57,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       next: res => {
         if (res.data) {
           this.getApplication();
-          this.validateFormCompleted();
         } else {
           this.hideForm$.next(true);
         }
@@ -131,18 +130,17 @@ export class CallsComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (formsData: CallsForm) => {
           this.formData = formsData;
+          this.validateFormCompleted();
         },
         error: error => console.error(error),
       });
   }
 
   private validateFormCompleted(): void {
-    console.log('acaaa');
     setTimeout(() => {
       if (!this.isInvalidForm) {
         this.callsService.status().subscribe({
           next: res => {
-            console.log(res);
             this.formDisabled = true;
             if (res.data) {
               this.infoSaved$.next(true);
