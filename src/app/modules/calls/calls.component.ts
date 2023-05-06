@@ -23,7 +23,6 @@ export class CallsComponent implements OnInit, OnDestroy {
   public formData: CallsForm;
   public formsStatus: FormValid[];
   public loading: boolean;
-  public formDisable: boolean;
 
   constructor(
     private modalService: NgbModal,
@@ -49,7 +48,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       status: 0,
     };
     this.loading = false;
-    this.formDisable = false;
   }
 
   public ngOnInit(): void {
@@ -99,6 +97,7 @@ export class CallsComponent implements OnInit, OnDestroy {
           },
           complete: () => {
             this.open(modal);
+            this.getApplication();
           },
         });
       }
@@ -129,7 +128,6 @@ export class CallsComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (formsData: CallsForm) => {
           this.formData = formsData;
-          this.formDisable = this.formData.status === 5;
         },
         error: error => console.error(error),
       });
@@ -163,5 +161,13 @@ export class CallsComponent implements OnInit, OnDestroy {
     return this.formsStatus.length > 0
       ? this.formsStatus.some(form => !form.valid)
       : true;
+  }
+
+  protected get firstFormCompleted(): boolean {
+    return this.formData.status === 5;
+  }
+
+  protected get bothFormsCompleted(): boolean {
+    return this.formData.status === 6;
   }
 }
