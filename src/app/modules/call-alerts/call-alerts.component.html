@@ -247,7 +247,7 @@
       }"></app-communication-form>
     <hr />
   </ng-container>
-  <ng-container *ngIf="!emptyDocuments">
+  <ng-container *ngIf="!emptyDocuments(formData.documents)">
     <app-documents-form
       [updateParentModel]="updateData"
       [defaultValues]="{
@@ -292,6 +292,12 @@
         logoComment: formData.documents.logoComment
       }"
       [allowComments]="true"></app-documents-form>
+  </ng-container>
+  <ng-container *ngIf="!emptyDocuments(formData.otherDocuments)">
+    <app-other-documents-form
+      [defaultValues]="formData.otherDocuments"
+      [updateParentModel]="updateData"
+      [allowComments]="true"></app-other-documents-form>
   </ng-container>
 
   <button

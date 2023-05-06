@@ -8,6 +8,7 @@ import {
   LocationForm,
   ObjectivesForm,
   OrganizationalInformationForm,
+  OtherDocumentsForm,
   PeriodForm,
   ProjectBudgetForm,
   ProjectDevelopmentForm,
@@ -36,4 +37,5 @@ export default interface CallForm {
   objectives: ObjectivesForm;
   documents: DocumentsForm;
   rating: RatingForm;
+  otherDocuments: OtherDocumentsForm;
 }

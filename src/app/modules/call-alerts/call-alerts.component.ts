@@ -43,6 +43,7 @@ export class CallAlertsComponent implements OnInit {
       communication: {},
       documents: {},
       rating: {},
+      otherDocuments: {},
     };
     this.showAlert = false;
     this.alertType = AlertType.Danger;
@@ -82,8 +83,8 @@ export class CallAlertsComponent implements OnInit {
       : true;
   }
 
-  get emptyDocuments(): boolean {
-    return JSON.stringify(this.formData.documents) === '{}';
+  protected emptyDocuments(item: object): boolean {
+    return JSON.stringify(item) === '{}';
   }
 
   async save() {
@@ -511,6 +512,31 @@ export class CallAlertsComponent implements OnInit {
             res.data.selfAppraisal.professionalizationProcess,
           opportunityGeneration:
             res.data.selfAppraisal.generationOfOpportunities,
+        },
+        otherDocuments: {
+          bankStatementCoverPageDoc:
+            res.data.loadingDocumentStage.bankStatementCoverPageDoc,
+          bankStatementCoverPageDocComment:
+            res.data.loadingDocumentStage.bankStatementCoverPageDocComment,
+          letterheadIndicatingTheFullNameDoc:
+            res.data.loadingDocumentStage.letterheadIndicatingTheFullNameDoc,
+          letterheadIndicatingTheFullNameDocComment:
+            res.data.loadingDocumentStage
+              .letterheadIndicatingTheFullNameDocComment,
+          proofOfAdmissionToThePublicRegistryDoc:
+            res.data.loadingDocumentStage
+              .proofOfAdmissionToThePublicRegistryDoc,
+          proofOfAdmissionToThePublicRegistryDocComment:
+            res.data.loadingDocumentStage
+              .proofOfAdmissionToThePublicRegistryDocComment,
+          proofOfUpdatedTaxSituationDoc:
+            res.data.loadingDocumentStage.proofOfUpdatedTaxSituationDoc,
+          proofOfUpdatedTaxSituationDocComment:
+            res.data.loadingDocumentStage.proofOfUpdatedTaxSituationDocComment,
+          updatedComplianceOpinionDoc:
+            res.data.loadingDocumentStage.updatedComplianceOpinionDoc,
+          updatedComplianceOpinionDocComment:
+            res.data.loadingDocumentStage.updatedComplianceOpinionDocComment,
         },
       };
     });

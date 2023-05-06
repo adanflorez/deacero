@@ -3,6 +3,10 @@
   <div class="row" [formGroup]="form">
     <ng-container *ngFor="let doc of documentsFields">
       <div class="col-md-12" *ngIf="allowComments ? doc.comment : true">
+        <app-alert
+          [show]="!!doc.comment"
+          [message]="doc.comment!"
+          [type]="alertType"></app-alert>
         <div class="mb-3">
           <label class="form-label" [for]="doc.field">{{ doc.name }}</label>
           <ng-container *ngIf="!f[doc.field].value">
@@ -37,10 +41,6 @@
           <app-form-error [control]="f[doc.field]"></app-form-error>
           <div class="small">- {{ doc.help }}</div>
         </div>
-        <app-alert
-          [show]="!!doc.comment"
-          [message]="doc.comment!"
-          [type]="alertType"></app-alert>
         <hr />
       </div>
     </ng-container>
