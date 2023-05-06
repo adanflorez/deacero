@@ -18,6 +18,7 @@ export class CallsComponent implements OnInit, OnDestroy {
     false
   );
   infoSaved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public formDisabled: boolean;
 
   // Refactor
   public formData: CallsForm;
@@ -48,6 +49,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       status: 0,
     };
     this.loading = false;
+    this.formDisabled = false;
   }
 
   public ngOnInit(): void {
@@ -55,6 +57,7 @@ export class CallsComponent implements OnInit, OnDestroy {
       next: res => {
         if (res.data) {
           this.getApplication();
+          this.validateFormCompleted();
         } else {
           this.hideForm$.next(true);
         }
@@ -92,7 +95,7 @@ export class CallsComponent implements OnInit, OnDestroy {
             this.infoSubmitted$.next(true);
           },
           error: () => {
-            this.infoSubmitted$.next(true);
+            this.infoSubmitted$.next(false);
             this.open(modal);
           },
           complete: () => {
@@ -131,6 +134,23 @@ export class CallsComponent implements OnInit, OnDestroy {
         },
         error: error => console.error(error),
       });
+  }
+
+  private validateFormCompleted(): void {
+    console.log('acaaa');
+    setTimeout(() => {
+      if (!this.isInvalidForm) {
+        this.callsService.status().subscribe({
+          next: res => {
+            console.log(res);
+            this.formDisabled = true;
+            if (res.data) {
+              this.infoSaved$.next(true);
+            }
+          },
+        });
+      }
+    }, 500);
   }
 
   protected updateData = <T>(form: T, isFormValid: FormValid) => {
